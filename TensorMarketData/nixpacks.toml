@@ -1,9 +1,15 @@
-[nixpacks]
+[package]
 name = "TensorMarketData"
-description = "B2B data marketplace for AI agents"
+buildCommand = "pip install -r requirements.txt"
+startCommand = "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
 
-[build]
-command = "pip install -r requirements.txt"
+[dependencies]
+python = "3.11"
 
-[start]
-command = "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"
+[build.apt]
+packages = ["curl", "gnupg", "ca-certificates"]
+
+[deploy]
+healthcheckPath = "/"
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 10
