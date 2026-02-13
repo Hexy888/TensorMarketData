@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - TensorMarketData</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <style>
+    .dashboard { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+    .dashboard-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    .api-key-display { background: var(--dark); color: white; padding: 1rem; border-radius: 8px; font-family: monospace; margin: 1rem 0; display: flex; justify-content: space-between; align-items: center; }
+    .api-key-display button { background: rgba(255,255,255,0.2); border: none; color: white; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; }
+    .api-key-display button:hover { background: rgba(255,255,255,0.3); }
+    .tabs { display: flex; gap: 1rem; margin-bottom: 2rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 1rem; }
+    .tab { padding: 0.5rem 1rem; cursor: pointer; color: var(--gray); border-radius: 4px; }
+    .tab:hover { color: var(--primary); }
+    .tab.active { background: var(--primary); color: white; }
+    .user-menu { display: flex; align-items: center; gap: 1rem; }
+    .user-info { text-align: right; }
+    .user-name { font-weight: 600; }
+    .user-email { font-size: 0.875rem; color: var(--gray); }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">Tensor<span>MarketData</span></a>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/docs">Documentation</a></li>
+      <li><a href="/pricing">Pricing</a></li>
+      <li><a href="/dashboard" class="active">Dashboard</a></li>
+      <li><a href="/explorer">API Explorer</a></li>
+    </ul>
+    <div class="user-menu" id="userMenu">
+      <a href="/login" class="btn btn-primary" style="padding: 0.5rem 1rem;">Sign In</a>
+    </div>
+  </nav>
+
+  <div class="dashboard" id="dashboardContent" style="display: none;">
+    <div class="dashboard-header">
+      <div>
+        <h1>Dashboard</h1>
+        <p style="color: var(--gray);">Welcome back! Here's your account overview.</p>
+      </div>
+      <div style="display: flex; gap: 1rem; align-items: center;">
+        <button class="btn btn-primary" onclick="generateKey()">+ New API Key</button>
+        <button class="btn btn-secondary" style="color: var(--dark); background: #e2e8f0;" onclick="logout()">Sign Out</button>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="label">Credits Remaining</div>
+        <div class="value" id="creditsValue">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">API Calls This Month</div>
+        <div class="value">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Active Keys</div>
+        <div class="value" id="keysCount">1</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Plan</div>
+        <div class="value" style="font-size: 1.5rem;">Developer</div>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active">API Keys</div>
+      <div class="tab">Usage</div>
+      <div class="tab">Settings</div>
+    </div>
+
+    <h2 style="margin-bottom: 1rem;">Your API Keys</h2>
+    <div class="api-key-display">
+      <span id="apiKeyValue">tmd_xxxxxxxxxxxxxxxx</span>
+      <div style="display: flex; gap: 0.5rem;">
+        <button onclick="copyKey()">Copy</button>
+      </div>
+    </div>
+    <p style="color: var(--gray); font-size: 0.875rem;">Keep this key safe. It won't be shown again.</p>
+
+    <h2 style="margin: 2rem 0 1rem;">Quick Actions</h2>
+    <div class="features" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+      <a href="/explorer" class="feature-card" style="text-decoration: none; color: inherit;">
+        <div class="icon">🧪</div>
+        <h3>Test the API</h3>
+        <p>Try out API calls in our interactive explorer</p>
+      </a>
+      <a href="/docs" class="feature-card" style="text-decoration: none; color: inherit;">
+        <div class="icon">📚</div>
+        <h3>Read Docs</h3>
+        <p>Learn how to integrate with your application</p>
+      </a>
+      <a href="/pricing" class="feature-card" style="text-decoration: none; color: inherit;">
+        <div class="icon">💳</div>
+        <h3>Upgrade Plan</h3>
+        <p>Get more credits and features</p>
+      </a>
+    </div>
+  </div>
+
+  <div id="loginPrompt" class="dashboard" style="display: none; text-align: center; padding: 4rem;">
+    <h1>Sign In to Your Account</h1>
+    <p style="color: var(--gray); margin: 1rem 0 2rem;">Access your dashboard, API keys, and submissions</p>
+    <div style="display: flex; gap: 1rem; justify-content: center;">
+      <a href="/login" class="btn btn-primary">Sign In</a>
+      <a href="/signup" class="btn btn-secondary" style="color: var(--dark); background: #e2e8f0;">Create Account</a>
+    </div>
+  </div>
+
+  <script>
+    // Check auth state
+    const token = localStorage.getItem('tmd_token');
+    const userData = localStorage.getItem('tmd_user');
+    const userMenu = document.getElementById('userMenu');
+    const dashboardContent = document.getElementById('dashboardContent');
+    const loginPrompt = document.getElementById('loginPrompt');
+
+    function updateUI() {
+      if (token && userData) {
+        const user = JSON.parse(userData);
+        userMenu.innerHTML = `
+          <div class="user-info">
+            <div class="user-name">${user.name || 'User'}</div>
+            <div class="user-email">${user.email}</div>
+          </div>
+        `;
+        dashboardContent.style.display = 'block';
+        loginPrompt.style.display = 'none';
+        
+        // Update stats
+        document.getElementById('creditsValue').textContent = user.credits || 0;
+        document.getElementById('apiKeyValue').textContent = localStorage.getItem('tmd_api_key') || 'tmd_xxxxxxxxxxxx';
+      } else {
+        userMenu.innerHTML = '<a href="/login" class="btn btn-primary" style="padding: 0.5rem 1rem;">Sign In</a>';
+        dashboardContent.style.display = 'none';
+        loginPrompt.style.display = 'block';
+      }
+    }
+
+    function copyKey() {
+      const key = document.getElementById('apiKeyValue').textContent;
+      navigator.clipboard.writeText(key).then(() => {
+        alert('API key copied to clipboard!');
+      });
+    }
+
+    function generateKey() {
+      alert('API key generation coming soon! For now, use your existing key.');
+    }
+
+    function logout() {
+      localStorage.removeItem('tmd_token');
+      localStorage.removeItem('tmd_user');
+      localStorage.removeItem('tmd_api_key');
+      updateUI();
+    }
+
+    // Initialize
+    updateUI();
+  </script>
+
+  <footer>
+    <p>&copy; 2026 TensorMarketData. All rights reserved.</p>
+  </footer>
+</body>
+</html>

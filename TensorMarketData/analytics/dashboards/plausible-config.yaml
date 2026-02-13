@@ -1,0 +1,60 @@
+# TensorMarketData Plausible Configuration
+
+## Setup
+
+**Site ID**: `tensormarketdata.com`
+
+**API Key**: `{{PLAUSIBLE_API_KEY}}`
+
+## Dashboard URL
+https://plausible.io/tensormarketdata.com
+
+## Tracked Pages
+
+| Path | Name | Purpose |
+|------|------|---------|
+| `/` | Homepage | Landing page performance |
+| `/pricing` | Pricing | Conversion intent |
+| `/docs` | Documentation | Developer engagement |
+| `/signup` | Signup | Conversion funnel entry |
+| `/dashboard` | Dashboard | Product usage |
+| `/api-explorer` | API Explorer | Developer tool usage |
+
+## Custom Events
+
+```javascript
+// Signup button clicks
+plausible('Signup Click', { props: { source: 'homepage' }})
+
+// API key generated
+plausible('API Key Generated', { props: { tier: 'free' }})
+
+// First query completed
+plausible('First Query', { props: { endpoint: 'search' }})
+
+// Plan upgrade
+plausible('Upgrade', { props: { from: 'free', to: 'starter' }})
+```
+
+## UTM Parameters for Campaign Tracking
+
+| Parameter | Values | Purpose |
+|-----------|--------|---------|
+| `utm_source` | google, linkedin, twitter, newsletter | Channel |
+| `utm_medium` | cpc, email, social, referral | Medium |
+| `utm_campaign` | q1-growth, product-launch | Campaign |
+| `utm_content` | hero-cta, pricing-table | Content variant |
+| `utm_term` | [keyword] | Search keywords |
+
+## Goals (Conversion Funnel)
+
+1. **Pricing Page View** → `event:pageview` on `/pricing`
+2. **Signup Start** → `event:pageview` on `/signup`
+3. **Signup Complete** → `event:Signup Click` + goal conversion
+4. **API Key Created** → `event:API Key Generated`
+5. **First Query** → `event:First Query`
+
+## Excluded Paths
+- `/static/*` - Static assets
+- `/health` - Health check endpoints
+- `/api/v1/internal/*` - Internal API calls

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Explorer - TensorMarketData</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <style>
+    .explorer-container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+    .explorer-form { display: flex; gap: 1rem; margin-bottom: 2rem; }
+    .explorer-form input { flex: 1; padding: 1rem; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 1rem; }
+    .explorer-form button { padding: 1rem 2rem; background: var(--primary); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
+    .explorer-form button:hover { background: var(--primary-dark); }
+    .response-area { background: var(--dark); border-radius: 8px; padding: 1.5rem; color: #e2e8f0; font-family: monospace; overflow-x: auto; min-height: 200px; }
+    .response-area pre { margin: 0; white-space: pre-wrap; }
+    .endpoints-list { display: grid; gap: 1rem; margin-bottom: 2rem; }
+    .endpoint-item { background: white; padding: 1rem; border-radius: 8px; cursor: pointer; transition: all 0.2s; border: 2px solid transparent; }
+    .endpoint-item:hover, .endpoint-item.active { border-color: var(--primary); }
+    .endpoint-item .method { display: inline-block; padding: 0.25rem 0.5rem; border-radius: 4px; font-weight: 700; font-size: 0.75rem; margin-right: 0.5rem; }
+    .endpoint-item .method.get { background: var(--success); color: white; }
+    .endpoint-item .method.post { background: var(--primary); color: white; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">Tensor<span>MarketData</span></a>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/docs">Documentation</a></li>
+      <li><a href="/pricing">Pricing</a></li>
+      <li><a href="/dashboard">Dashboard</a></li>
+      <li><a href="/submit">Submit Data</a></li>
+      <li><a href="/providers">Providers</a></li>
+      <li><a href="/explorer" class="active">API Explorer</a></li>
+    </ul>
+  </nav>
+
+  <div class="explorer-container">
+    <h1 style="margin-bottom: 0.5rem;">API Explorer</h1>
+    <p style="color: var(--gray); margin-bottom: 2rem;">Test the API directly from your browser</p>
+
+    <div class="endpoints-list">
+      <div class="endpoint-item active" onclick="selectEndpoint('search')">
+        <span class="method get">GET</span>
+        <strong>/v1/search</strong> - Search suppliers
+      </div>
+      <div class="endpoint-item" onclick="selectEndpoint('inventory')">
+        <span class="method get">GET</span>
+        <strong>/v1/supplier/{id}/inventory</strong> - Get supplier inventory
+      </div>
+      <div class="endpoint-item" onclick="selectEndpoint('supplier')">
+        <span class="method get">GET</span>
+        <strong>/v1/supplier/{id}</strong> - Get supplier details
+      </div>
+      <div class="endpoint-item" onclick="selectEndpoint('health')">
+        <span class="method get">GET</span>
+        <strong>/v1/health</strong> - Health check
+      </div>
+    </div>
+
+    <div class="explorer-form">
+      <input type="text" id="apiKey" placeholder="Enter your API Key (X-API-Key)" value="tmd_033c80865da66391dc97">
+      <input type="text" id="queryInput" placeholder="Enter query (e.g., software companies)">
+      <button onclick="makeRequest()">Send Request</button>
+    </div>
+
+    <h3 style="margin-bottom: 1rem;">Response</h3>
+    <div class="response-area">
+      <pre id="responseOutput">// Response will appear here...</pre>
+    </div>
+
+    <div style="margin-top: 2rem;">
+      <h3 style="margin-bottom: 1rem;">cURL Command</h3>
+      <div class="response-area">
+        <pre id="curlOutput">// cURL command will appear here...</pre>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentEndpoint = 'search';
+
+    const endpoints = {
+      search: {
+        method: 'GET',
+        path: '/v1/search',
+        params: ['q'],
+        example: 'software companies'
+      },
+      inventory: {
+        method: 'GET',
+        path: '/v1/supplier/',
+        params: ['id'],
+        example: '68310974-c1e5-4fae-a3ca-35f56e3cd76f'
+      },
+      supplier: {
+        method: 'GET',
+        path: '/v1/supplier/',
+        params: ['id'],
+        example: '68310974-c1e5-4fae-a3ca-35f56e3cd76f'
+      },
+      health: {
+        method: 'GET',
+        path: '/v1/health',
+        params: [],
+        example: ''
+      }
+    };
+
+    function selectEndpoint(name) {
+      currentEndpoint = name;
+      document.querySelectorAll('.endpoint-item').forEach(el => el.classList.remove('active'));
+      event.target.closest('.endpoint-item').classList.add('active');
+      
+      const endpoint = endpoints[name];
+      document.getElementById('queryInput').placeholder = endpoint.example;
+      updateCurl();
+    }
+
+    function updateCurl() {
+      const apiKey = document.getElementById('apiKey').value;
+      const query = document.getElementById('queryInput').value;
+      const endpoint = endpoints[currentEndpoint];
+      
+      let url = 'http://localhost:8000' + endpoint.path;
+      if (endpoint.params.includes('q') && query) {
+        url += '?q=' + encodeURIComponent(query);
+      } else if (endpoint.params.includes('id') && query) {
+        url += query;
+      }
+      
+      const curl = `curl -X ${endpoint.method} "${url}" \\
+  -H "X-API-Key: ${apiKey}"`;
+      
+      document.getElementById('curlOutput').textContent = curl;
+    }
+
+    document.getElementById('queryInput').addEventListener('input', updateCurl);
+    document.getElementById('apiKey').addEventListener('input', updateCurl);
+
+    async function makeRequest() {
+      const apiKey = document.getElementById('apiKey').value;
+      const query = document.getElementById('queryInput').value;
+      const endpoint = endpoints[currentEndpoint];
+      
+      let url = 'http://localhost:8000' + endpoint.path;
+      if (endpoint.params.includes('q') && query) {
+        url += '?q=' + encodeURIComponent(query);
+      } else if (endpoint.params.includes('id') && query) {
+        url += query;
+      }
+      
+      document.getElementById('responseOutput').textContent = 'Loading...';
+      
+      try {
+        const response = await fetch(url, {
+          method: endpoint.method,
+          headers: {
+            'X-API-Key': apiKey,
+            'Content-Type': 'application/json'
+          }
+        });
+        
+        const data = await response.json();
+        document.getElementById('responseOutput').textContent = JSON.stringify(data, null, 2);
+      } catch (error) {
+        document.getElementById('responseOutput').textContent = 'Error: ' + error.message;
+      }
+    }
+
+    // Initialize
+    updateCurl();
+  </script>
+
+  <footer>
+    <p>&copy; 2026 TensorMarketData. All rights reserved.</p>
+  </footer>
+</body>
+</html>

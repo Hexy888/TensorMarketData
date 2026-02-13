@@ -1,0 +1,38 @@
+# TensorMarketData Development Docker Compose
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: tensormarketdata-app-dev
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - ENV=development
+      - DEBUG=true
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+
+  # Optional: Local Supabase (if not using cloud)
+  # supabase:
+  #   image: supabase/postgres:latest
+  #   ports:
+  #     - "5432:5432"
+  #   environment:
+  #     - POSTGRES_PASSWORD=your-password
+  #   volumes:
+  #     - supabase_data:/var/lib/postgresql/data
+
+volumes:
+  # supabase_data:

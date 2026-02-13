@@ -1,0 +1,229 @@
+# TensorMarketData - CRM Contact Lists
+
+## CSV Format for CRM Import
+
+Use the following columns for CRM import (Salesforce, HubSpot, Copper, etc.):
+```
+Company Name | First Name | Last Name | Title | Email | Phone | LinkedIn URL | Company Website | Contact Type | Industry | Priority | Notes | Status
+```
+
+---
+
+## Data Provider Contacts - Priority 1
+
+### Enterprise Data Providers
+
+| Company | Contact Name | Title | Email | Priority | Notes |
+|---------|--------------|-------|-------|----------|-------|
+| Dun & Bradstreet | [Research] | VP Data Partnerships | partnerships@dnb.com | P1 | Major enterprise data |
+| Experian | [Research] | Head of Data Monetization | business@experian.com | P1 | Commercial data |
+| Equifax | [Research] | Enterprise Data Sales | business@equifax.com | P1 | Credit/risk data |
+| ZoomInfo | [Research] | Revenue Operations | sales@zoominfo.com | P1 | Intent data provider |
+| Apollo.io | [Research] | Partnerships | partners@apollo.io | P1 | Sales intelligence |
+| Clearbit | [Research] | API Partnerships | api@clearbit.com | P1 | Data enrichment |
+| FullContact | [Research] | Enterprise Sales | enterprise@fullcontact.com | P1 | Identity resolution |
+| Crunchbase | [Research] | Enterprise Team | enterprise@crunchbase.com | P1 | Startup funding data |
+| PitchBook | [Research] | Institutional Sales | sales@pitchbook.com | P1 | Private market data |
+| CB Insights | [Research] | Enterprise Sales | enterprise@cbinsights.com | P1 | Tech intelligence |
+
+### Data Aggregators & Marketplaces
+
+| Company | Contact Name | Title | Email | Priority | Notes |
+|---------|--------------|-------|-------|----------|-------|
+| AWS Data Exchange | [Research] | Partner Team | aws-partners@amazon.com | P1 | Cloud marketplace |
+| Snowflake Marketplace | [Research] | Partner Network | partners@snowflake.com | P1 | Data marketplace |
+| Google Cloud | [Research] | Marketplace Team | cloud-partners@google.com | P1 | Enterprise cloud |
+| Microsoft Azure | [Research] | Partner Center | partners@microsoft.com | P1 | Enterprise cloud |
+
+---
+
+## Enterprise AI Customer Contacts - Priority 1
+
+### AI Agent Companies
+
+| Company | Contact Name | Title | Email | Priority | Notes |
+|---------|--------------|-------|-------|----------|-------|
+| LangChain | [Research] | Business Development | business@langchain.com | P1 | Agent framework |
+| CrewAI | [Research] | Growth Team | hello@crewai.com | P1 | Multi-agent platform |
+| Hugging Face | [Research] | Enterprise Team | enterprise@huggingface.co | P1 | ML models |
+| OpenAI | [Research] | Enterprise Sales | enterprise@openai.com | P1 | LLM provider |
+| Anthropic | [Research] | Business Development | business@anthropic.com | P1 | Claude AI |
+| ServiceNow | [Research] | AI Platform Team | sales@servicenow.com | P1 | Enterprise workflow |
+| UiPath | [Research] | Enterprise Sales | sales@uipath.com | P1 | RPA + AI agents |
+| Automation Anywhere | [Research] | Partner Team | partners@automationanywhere.com | P1 | RPA/AI automation |
+
+### Vertical AI Companies
+
+| Company | Contact Name | Title | Email | Priority | Notes |
+|---------|--------------|-------|-------|----------|-------|
+| Harvey | [Research] | Enterprise Sales | sales@harvey.ai | P1 | Legal AI agents |
+| Casetext | [Research] | Legal Tech Team | partnerships@casetext.com | P1 | Legal research AI |
+| Deepgram | [Research] | Developer Relations | hello@deepgram.com | P1 | Speech-to-text API |
+| AssemblyAI | [Research] | API Partnerships | partners@assemblyai.com | P1 | Speech AI |
+| Writer | [Research] | Enterprise Team | sales@writer.com | P1 | Enterprise writing AI |
+
+### AI Infrastructure
+
+| Company | Contact Name | Title | Email | Priority | Notes |
+|---------|--------------|-------|-------|----------|-------|
+| Arize AI | [Research] | Enterprise Sales | sales@arize.com | P1 | ML observability |
+| LangSmith | [Research] | Product Team | team@langchain.com | P1 | Agent observability |
+| WhyLabs | [Research] | Partnership Team | hello@whylabs.ai | P1 | Data monitoring |
+| Helicone | [Research] | Growth Team | founders@helicone.ai | P1 | Agent observability |
+
+---
+
+## Enterprise Procurement Contacts - Priority 2
+
+### Target Industries for Outreach
+
+| Industry | Target Companies | Contact Type | Priority |
+|----------|------------------|--------------|----------|
+| Financial Services | Banks, Insurance, Fintech | VP Procurement, CDO | P2 |
+| Healthcare | Providers, Payers, Pharma | VP Data, Procurement | P2 |
+| Technology | SaaS, Enterprise Software | CTO, VP Engineering | P2 |
+| Retail | E-commerce, Brick-and-mortar | CDO, Head of Analytics | P2 |
+| Manufacturing | Industrial, Supply Chain | VP Digital, CIO | P2 |
+| Professional Services | Consulting, Legal | Managing Partner, COO | P2 |
+
+### Specific Companies to Target
+
+| Company | Industry | Contact Type | Priority |
+|---------|----------|--------------|----------|
+| JPMorgan Chase | Finance | AI/Data Leadership | P2 |
+| Goldman Sachs | Finance | Technology Leadership | P2 |
+| Walmart | Retail | Data & Analytics | P2 |
+| Amazon | Tech/Retail | AWS Data Team | P1 |
+| McKinsey | Consulting | Digital Transformation | P2 |
+| Deloitte | Consulting | AI Practice | P2 |
+| Cigna | Healthcare | Data & Analytics | P2 |
+| Pfizer | Healthcare | Digital Health | P2 |
+
+---
+
+## Sales Automation Company Contacts - Priority 2
+
+### Sales Tech Companies
+
+| Company | Contact Name | Title | Email | Priority | Notes |
+|---------|--------------|-------|-------|----------|-------|
+| Salesforce | [Research] | Einstein AI Team | sales@salesforce.com | P2 | CRM AI |
+| HubSpot | [Research] | Data Partnerships | partnerships@hubspot.com | P2 | Marketing/Sales SaaS |
+| Gong | [Research] | Enterprise Sales | sales@gong.io | P2 | Revenue intelligence |
+| Clari | [Research] | Revenue Team | sales@clari.com | P2 | Revenue operations |
+| ZoomInfo | [Research] | Product Team | product@zoominfo.com | P2 | Sales intelligence |
+| Outreach | [Research] | Partnerships | partners@outreach.io | P2 | Sales automation |
+| Salesloft | [Research] | Enterprise Sales | sales@salesloft.com | P2 | Sales engagement |
+| Apollo.io | [Research] | Product Team | product@apollo.io | P2 | Sales intelligence |
+
+---
+
+## Research Required - To Follow Up
+
+### Tier 3 Companies (Research Required)
+
+| Company | Website | Research Needed | Priority |
+|---------|---------|-----------------|----------|
+| Oracle Data Cloud | oracle.com | Data cloud contacts | P3 |
+| Acxiom | acxiom.com | Enterprise data contacts | P3 |
+| LiveRamp | liveramp.com | Partner ecosystem | P3 |
+| Bloomberg | bloomberg.com | Enterprise sales | P3 |
+| LexisNexis | lexisnexis.com | Data partnerships | P3 |
+| Thomson Reuters | thomsonreuters.com | Partner network | P3 |
+| Workato | workato.com | Integration team | P3 |
+| Blue Prism | bluesprm.com | Partner team | P3 |
+| Datanyze | datanyze.com | Sales team | P3 |
+| BuiltWith | builtwith.com | Business development | P3 |
+
+---
+
+## Contact Research Process
+
+### For Each Target Company:
+
+1. **LinkedIn Search**
+   - Search: `[Company Name] + "Head of Data" + "Partnerships"`
+   - Look for: VP Data, CDO, Head of Partnerships, BD Director
+   - Check company page for leadership team
+
+2. **Hunter/FindEmails**
+   - Use email finder tools
+   - Pattern: `first.last@company.com`
+   - Verify with email verification tools
+
+3. **Company Website**
+   - About/Leadership page
+   - Careers page (to identify growing teams)
+   - Press releases (for partnership news)
+   - Product pages (for integration opportunities)
+
+4. **Recent News**
+   - Google News search for company name
+   - Look for: funding, product launches, partnerships
+   - Identify spokespersons and quotes
+
+5. **Conference Speakers**
+   - Search recent event lineups
+   - Identify AI/data leadership speaking
+   - Note conference appearances
+
+---
+
+## CRM Field Mapping
+
+### Recommended CRM Fields
+
+| Field | Salesforce | HubSpot | Notes |
+|-------|------------|---------|-------|
+| Company Name | Account Name | Company | Standard |
+| First Name | First Name | First Name | Standard |
+| Last Name | Last Name | Last Name | Standard |
+| Title | Title | Job Title | Standard |
+| Email | Email | Email | Standard |
+| Phone | Phone | Phone | Standard |
+| LinkedIn URL | Custom Field | Custom Field | Import separately |
+| Contact Type | Type | Contact Type | Provider/Customer/Partner |
+| Industry | Industry | Industry | Standard |
+| Priority | Rating | Priority | P1/P2/P3 |
+| Notes | Description | Notes | Important context |
+| Status | Status | Lifecycle Stage | Lead/Customer/Partner |
+| Source | Lead Source | Original Source | How discovered |
+| Last Contacted | Last Activity Date | Last Contacted Date | Track engagement |
+
+---
+
+## Import Instructions
+
+### HubSpot Import
+1. Go to Contacts → Import
+2. Upload CSV file
+3. Map fields (shown above)
+4. Set properties
+5. Import
+
+### Salesforce Import
+1. Go to Setup → Data Management → Data Import Wizard
+2. Select "Add new records"
+3. Map fields
+4. Start import
+5. Verify results
+
+### Generic CSV Format
+```
+Company,FirstName,LastName,Title,Email,Phone,LinkedIn,Type,Industry,Priority,Notes,Status,Source
+Dun & Bradstreet,Jane,Doe,VP Data Partnerships,jane.doe@dnb.com,555-0100,linkedin.com/in/janedoe,Provider,Enterprise Data,P1,Key target - major data provider,New Lead,Web Research
+LangChain,John,Smith,BD Lead,john.smith@langchain.com,555-0200,linkedin.com/in/johnsmith,Customer,AI Framework,P1,Framework partner opportunity,New Lead,Web Research
+```
+
+---
+
+## Weekly Outreach Goals
+
+| Target Type | Week 1 | Week 2 | Week 3 | Week 4 | Monthly Total |
+|-------------|--------|--------|--------|--------|---------------|
+| Data Providers P1 | 20 | 20 | 15 | 15 | 70 |
+| AI Customers P1 | 15 | 15 | 15 | 15 | 60 |
+| Enterprise P2 | 10 | 10 | 15 | 15 | 50 |
+| Sales Tech P2 | 10 | 10 | 10 | 10 | 40 |
+| **Total Emails** | **55** | **55** | **55** | **55** | **220** |
+| Meetings Booked | 5 | 8 | 10 | 12 | 35 |

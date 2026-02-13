@@ -1,0 +1,163 @@
+# TensorMarketData Conversion Funnel Configuration
+
+## Funnel Stages
+
+### Stage 1: Visitor → Signup
+```yaml
+funnel_name: "Visitor to Signup"
+stage: 1
+trigger: "Visit homepage"
+completion: "Account created"
+properties_required:
+  - utm_source
+  - utm_medium
+  - utm_campaign
+  - referrer
+conversion_target: "15% of visitors sign up within 7 days"
+```
+
+### Stage 2: Signup → API Key
+```yaml
+funnel_name: "Activation"
+stage: 2
+trigger: "Signup complete"
+completion: "First API key generated"
+properties_required:
+  - plan_tier
+  - use_case
+conversion_target: "60% of signups create API key within 7 days"
+```
+
+### Stage 3: API Key → First Query
+```yaml
+funnel_name: "First Query"
+stage: 3
+trigger: "API key created"
+completion: "First successful query executed"
+properties_required:
+  - endpoint
+  - query_type
+  - dataset_accessed
+conversion_target: "50% of API key holders query within 3 days"
+```
+
+### Stage 4: First Query → Second Query
+```yaml
+funnel_name: "Engagement"
+stage: 4
+trigger: "First query complete"
+completion: "Second query executed"
+properties_required:
+  - days_between_queries
+  - query_category
+conversion_target: "40% of first-time queriers return within 7 days"
+```
+
+### Stage 5: Engagement → Paid
+```yaml
+funnel_name: "Monetization"
+stage: 5
+trigger: "3 queries completed"
+completion: "Plan upgraded to paid"
+properties_required:
+  - previous_plan
+  - new_plan
+  - upgrade_reason
+conversion_target: "5% of engaged users upgrade within 30 days"
+```
+
+## Conversion Time Windows
+
+| Funnel | Day 1 | Day 3 | Day 7 | Day 14 | Day 30 |
+|--------|-------|-------|-------|--------|--------|
+| Signup → API Key | 25% | 40% | 50% | 55% | 60% |
+| API Key → Query | 30% | 45% | 50% | 52% | 55% |
+| Query → Paid | 1% | 2% | 3% | 4% | 5% |
+
+## Cohort Analysis Schema
+
+```sql
+-- Weekly signup cohorts with conversion rates
+WITH cohorts AS (
+  SELECT 
+    user_id,
+    DATE_TRUNC('week', signup_date) AS cohort_week,
+    plan_tier,
+    signup_source
+  FROM users
+),
+
+funnel_events AS (
+  SELECT 
+    c.user_id,
+    c.cohort_week,
+    c.plan_tier,
+    c.signup_source,
+    CASE WHEN e.api_key_created IS NOT NULL THEN 1 ELSE 0 END AS has_api_key,
+    CASE WHEN e.first_query_date IS NOT NULL THEN 1 ELSE 0 END AS has_query,
+    CASE WHEN p.upgrade_date IS NOT NULL THEN 1 ELSE 0 END AS converted
+  FROM cohorts c
+  LEFT JOIN (
+    SELECT user_id, MIN(created_at) AS api_key_created
+    FROM api_keys GROUP BY user_id
+  ) e ON c.user_id = e.user_id
+  LEFT JOIN (
+    SELECT user_id, MIN(upgraded_at) AS upgrade_date
+    FROM subscriptions GROUP BY user_id
+  ) p ON c.user_id = p.user_id
+)
+
+SELECT 
+  cohort_week,
+  plan_tier,
+  signup_source,
+  COUNT(*) AS users,
+  SUM(has_api_key) / COUNT(*) AS api_key_rate,
+  SUM(has_query) / COUNT(*) AS query_rate,
+  SUM(converted) / COUNT(*) AS paid_rate
+FROM funnel_events
+GROUP BY 1, 2, 3
+ORDER BY cohort_week DESC
+```
+
+## Attribution Model
+
+**Multi-touch attribution** (first touch + linear):
+
+1. **First Touch**: Credit signup source that first brought user
+2. **Linear**: Spread credit across all touchpoints
+3. **Time Decay**: More credit to recent interactions
+
+```python
+attribution_weights = {
+    'first_touch': 0.4,
+    'linear_middle': 0.2,
+    'last_touch': 0.4
+}
+```
+
+## Funnel Visualization (Mixpanel)
+
+```
+Visitor (100%)
+  ↓ 15%
+Signup (15)
+  ↓ 60%
+API Key (9)
+  ↓ 50%
+First Query (4.5)
+  ↓ 5%
+Paid Upgrade (0.23)
+
+Overall: 0.23% of visitors → paid customers
+```
+
+## Drop-off Analysis
+
+| Stage | Users | Drop-off | Reason |
+|-------|-------|----------|--------|
+| Visitor | 10,000 | - | - |
+| Signup | 1,500 (15%) | 85% | Friction at form, trust issues |
+| API Key | 900 (60%) | 40% | Technical barrier, lack of docs |
+| First Query | 450 (50%) | 50% | No use case, poor DX |
+| Paid | 22.5 (5%) | 95% | Price, sufficient free tier |

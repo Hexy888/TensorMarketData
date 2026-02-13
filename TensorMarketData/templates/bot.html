@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@TensorMarketBot - TensorMarketData</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <style>
+    .bot-profile { max-width: 800px; margin: 0 auto; padding: 2rem; }
+    .bot-header { text-align: center; padding: 3rem 0; }
+    .bot-avatar { 
+      width: 120px; 
+      height: 120px; 
+      border-radius: 50%; 
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+    .bot-name { font-size: 2rem; margin-bottom: 0.5rem; }
+    .bot-username { color: var(--gray); margin-bottom: 1rem; }
+    .bot-description { color: var(--gray); max-width: 500px; margin: 0 auto; }
+    .stats-row { display: flex; justify-content: center; gap: 3rem; padding: 2rem 0; }
+    .stat { text-align: center; }
+    .stat-value { font-size: 2rem; font-weight: 700; color: var(--primary); }
+    .stat-label { color: var(--gray); font-size: 0.875rem; }
+    .features-section { padding: 2rem 0; }
+    .feature { 
+      background: white; 
+      padding: 1.5rem; 
+      border-radius: 12px; 
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .feature-icon { font-size: 1.5rem; }
+    .feature-content h3 { margin-bottom: 0.5rem; }
+    .feature-content p { color: var(--gray); font-size: 0.875rem; }
+    .code-block { background: var(--dark); color: #e2e8f0; padding: 1rem; border-radius: 8px; margin: 1rem 0; font-family: monospace; font-size: 0.875rem; }
+    .cta-section { text-align: center; padding: 3rem 0; }
+    .telegram-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #229ED9;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      margin: 1rem 0;
+    }
+    .telegram-button:hover { background: #1e8bc4; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">Tensor<span>MarketData</span></a>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/docs">Documentation</a></li>
+      <li><a href="/pricing">Pricing</a></li>
+      <li><a href="/dashboard">Dashboard</a></li>
+    </ul>
+  </nav>
+
+  <div class="bot-profile">
+    <div class="bot-header">
+      <div class="bot-avatar">🤖</div>
+      <h1 class="bot-name">TensorMarketBot</h1>
+      <p class="bot-username">@TensorMarketBot</p>
+      <p class="bot-description">
+        Your AI agent for B2B data marketplace. Find suppliers, check inventory, 
+        and automate procurement with natural language.
+      </p>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-value">10K+</div>
+        <div class="stat-label">Active Users</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">50K+</div>
+        <div class="stat-label">Queries/Day</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">99.9%</div>
+        <div class="stat-label">Uptime</div>
+      </div>
+    </div>
+
+    <div class="features-section">
+      <h2 style="margin-bottom: 1.5rem;">What the Bot Can Do</h2>
+      
+      <div class="feature">
+        <div class="feature-icon">🔍</div>
+        <div class="feature-content">
+          <h3>Smart Search</h3>
+          <p>Find suppliers using natural language. "Find manufacturing companies in Ohio with 100+ employees"</p>
+        </div>
+      </div>
+      
+      <div class="feature">
+        <div class="feature-icon">📊</div>
+        <div class="feature-content">
+          <h3>Inventory Checks</h3>
+          <p>Real-time stock and pricing checks across thousands of suppliers.</p>
+        </div>
+      </div>
+      
+      <div class="feature">
+        <div class="feature-icon">🤝</div>
+        <div class="feature-content">
+          <h3>Automated Procurement</h3>
+          <p>Negotiate prices and place orders automatically on your behalf.</p>
+        </div>
+      </div>
+      
+      <div class="feature">
+        <div class="feature-icon">📈</div>
+        <div class="feature-content">
+          <h3>Market Intelligence</h3>
+          <p>Get alerts on competitor pricing and supplier changes.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="features-section">
+      <h2 style="margin-bottom: 1.5rem;">For Developers</h2>
+      <p style="color: var(--gray); margin-bottom: 1rem;">
+        Integrate the TensorMarketData API directly into your AI agents.
+      </p>
+      
+      <h3>Python SDK</h3>
+      <div class="code-block">
+pip install tensormarketdata</div>
+      
+      <h3>Quick Start</h3>
+      <div class="code-block">
+from tensormarket import TensorMarket
+
+bot = TensorMarket(api_key="your-key")
+
+# Natural language search
+results = bot.search("software companies in california")
+
+# Check inventory
+inventory = bot.get_inventory(supplier_id="uuid")
+
+# Subscribe to updates
+bot.webhooks.subscribe(
+    url="https://your-agent.com/webhook",
+    events=["supplier.updated", "product.new"]
+)</div>
+      
+      <h3>API Endpoints</h3>
+      <div class="code-block">
+GET /v1/search?q={query}
+GET /v1/supplier/{id}/inventory
+POST /v1/webhooks/subscribe</div>
+    </div>
+
+    <div class="cta-section">
+      <h2>Ready to Automate Your Procurement?</h2>
+      <p style="color: var(--gray); margin: 1rem 0;">
+        Add @TensorMarketBot to your Telegram and start searching today.
+      </p>
+      <a href="https://t.me/TensorMarketBot" class="telegram-button">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.696.064-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+        </svg>
+        Start Chatting on Telegram
+      </a>
+    </div>
+
+    <div class="features-section">
+      <h2 style="margin-bottom: 1.5rem;">Security & Privacy</h2>
+      <div class="feature">
+        <div class="feature-icon">🔒</div>
+        <div class="feature-content">
+          <h3>Enterprise Security</h3>
+          <p>SOC 2 compliant, encrypted data storage, and GDPR compliant.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">✅</div>
+        <div class="feature-content">
+          <h3>Verified Data</h3>
+          <p>All supplier data is verified and scored for quality.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 TensorMarketData. All rights reserved.</p>
+  </footer>
+</body>
+</html>

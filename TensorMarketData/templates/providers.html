@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Provider Dashboard - TensorMarketData</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <style>
+    .provider-dashboard { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+    .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+    .stat-card { background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .stat-card .label { color: var(--gray); font-size: 0.875rem; margin-bottom: 0.5rem; }
+    .stat-card .value { font-size: 2rem; font-weight: 700; color: var(--dark); }
+    .stat-card .trend { font-size: 0.875rem; color: var(--success); margin-top: 0.25rem; }
+    .section { background: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .section h3 { margin-bottom: 1rem; }
+    .data-table { width: 100%; }
+    .status-badge { padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+    .status-badge.pending { background: #fef3c7; color: #92400e; }
+    .status-badge.approved { background: #dcfce7; color: #166534; }
+    .status-badge.rejected { background: #fee2e2; color: #991b1b; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">Tensor<span>MarketData</span></a>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/docs">Documentation</a></li>
+      <li><a href="/submit">Submit Data</a></li>
+      <li><a href="/providers" class="active">Providers</a></li>
+    </ul>
+  </nav>
+
+  <div class="provider-dashboard">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+      <div>
+        <h1>Provider Dashboard</h1>
+        <p style="color: var(--gray);">Manage your data submissions and track earnings</p>
+      </div>
+      <a href="/submit" class="btn btn-primary">+ New Submission</a>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="label">Total Submissions</div>
+        <div class="value">3</div>
+        <div class="trend">+2 this week</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Approved</div>
+        <div class="value">1</div>
+        <div class="trend">1 pending review</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Credits Earned</div>
+        <div class="value">10</div>
+        <div class="trend">$1 value</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">API Queries</div>
+        <div class="value">0</div>
+        <div class="trend">Your data not queried yet</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Recent Submissions</h3>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Company</th>
+            <th>Submitted</th>
+            <th>Status</th>
+            <th>Credits</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>TechVenture Inc</td>
+            <td>Feb 11, 2026</td>
+            <td><span class="status-badge approved">Approved</span></td>
+            <td>+10</td>
+            <td><a href="#" style="color: var(--primary);">View</a></td>
+          </tr>
+          <tr>
+            <td>DataFlow Systems</td>
+            <td>Feb 11, 2026</td>
+            <td><span class="status-badge pending">Pending</span></td>
+            <td>-</td>
+            <td><a href="#" style="color: var(--primary);">View</a></td>
+          </tr>
+          <tr>
+            <td>CloudScale AI</td>
+            <td>Feb 10, 2026</td>
+            <td><span class="status-badge rejected">Rejected</span></td>
+            <td>-</td>
+            <td><a href="#" style="color: var(--primary);">View</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h3>Earnings Overview</h3>
+      <p style="color: var(--gray); margin-bottom: 1rem;">Track your data monetization</p>
+      <div style="background: #f1f5f9; padding: 1rem; border-radius: 8px;">
+        <p><strong>Current Balance:</strong> 10 credits ($1.00 value)</p>
+        <p style="color: var(--gray); font-size: 0.875rem;">Credits can be used for API calls or redeemed for cash at 10 credits = $1</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>API Access</h3>
+      <p style="color: var(--gray); margin-bottom: 1rem;">Use your API key to access and manage your data</p>
+      <div class="api-key-display">
+        <span id="apiKey">tmd_prov_xxxxxxxxxxxx</span>
+        <button onclick="copyKey()">Copy</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Quick Actions</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+        <a href="/submit" class="feature-card" style="text-decoration: none;">
+          <div class="icon">📤</div>
+          <h4>Submit Data</h4>
+          <p>Add new supplier information</p>
+        </a>
+        <a href="/explorer" class="feature-card" style="text-decoration: none;">
+          <div class="icon">🔍</div>
+          <h4>Search Data</h4>
+          <p>Browse marketplace data</p>
+        </a>
+        <a href="/docs" class="feature-card" style="text-decoration: none;">
+          <div class="icon">📚</div>
+          <h4>Read Docs</h4>
+          <p>Learn about API usage</p>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function copyKey() {
+      const key = document.getElementById('apiKey').textContent;
+      navigator.clipboard.writeText(key).then(() => {
+        alert('API key copied!');
+      });
+    }
+  </script>
+
+  <footer>
+    <p>&copy; 2026 TensorMarketData. All rights reserved.</p>
+  </footer>
+</body>
+</html>

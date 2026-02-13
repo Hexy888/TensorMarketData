@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - TensorMarketData</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <style>
+    .auth-container { max-width: 400px; margin: 0 auto; padding: 3rem 2rem; }
+    .auth-form { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+    .form-group input { width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 1rem; }
+    .form-group input:focus { outline: none; border-color: var(--primary); }
+    .divider { display: flex; align-items: center; margin: 1.5rem 0; color: var(--gray); font-size: 0.875rem; }
+    .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: #e2e8f0; }
+    .divider span { padding: 0 1rem; }
+    .alert { padding: 1rem; border-radius: 8px; margin-bottom: 1rem; display: none; }
+    .alert.error { background: #fee2e2; color: #991b1b; }
+    .alert.success { background: #dcfce7; color: #166534; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">Tensor<span>MarketData</span></a>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/docs">Documentation</a></li>
+      <li><a href="/pricing">Pricing</a></li>
+    </ul>
+  </nav>
+
+  <div class="auth-container">
+    <h1 style="text-align: center; margin-bottom: 0.5rem;">Create Account</h1>
+    <p style="text-align: center; color: var(--gray); margin-bottom: 2rem;">Start your 14-day free trial</p>
+    
+    <div id="alert" class="alert"></div>
+    
+    <div class="auth-form">
+      <form id="signupForm">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" required placeholder="John Doe">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required placeholder="you@company.com">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required placeholder="Min 8 characters" minlength="8">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;" id="submitBtn">Create Account</button>
+      </form>
+      
+      <div class="divider"><span>or continue with</span></div>
+      
+      <button class="btn btn-secondary" style="width: 100%; color: var(--dark); background: #e2e8f0;" onclick="alert('GitHub OAuth coming soon!')">
+        GitHub
+      </button>
+      
+      <p style="text-align: center; margin-top: 1.5rem; color: var(--gray); font-size: 0.875rem;">
+        Already have an account? <a href="/login" style="color: var(--primary);">Sign in</a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // Check if already logged in
+    const token = localStorage.getItem('tmd_token');
+    if (token) {
+      window.location.href = '/dashboard';
+    }
+
+    const alert = document.getElementById('alert');
+    const form = document.getElementById('signupForm');
+    const submitBtn = document.getElementById('submitBtn');
+
+    function showAlert(message, type) {
+      alert.textContent = message;
+      alert.className = 'alert ' + type;
+      alert.style.display = 'block';
+    }
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Creating account...';
+      
+      try {
+        const response = await fetch('/v1/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, password })
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+          showAlert(data.detail?.detail || data.detail || 'Registration failed', 'error');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Create Account';
+          return;
+        }
+        
+        // Store session
+        localStorage.setItem('tmd_token', data.session_token);
+        localStorage.setItem('tmd_user', JSON.stringify({
+          id: data.user_id,
+          email: data.email,
+          name: data.name,
+          credits: data.credits
+        }));
+        
+        showAlert('Account created! Redirecting...', 'success');
+        
+        setTimeout(() => {
+          window.location.href = '/dashboard';
+        }, 1000);
+        
+      } catch (error) {
+        showAlert('An error occurred. Please try again.', 'error');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Create Account';
+      }
+    });
+  </script>
+
+  <footer>
+    <p>&copy; 2026 TensorMarketData. All rights reserved.</p>
+  </footer>
+</body>
+</html>
