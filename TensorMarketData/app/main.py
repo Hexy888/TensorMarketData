@@ -55,10 +55,11 @@ app.add_middleware(
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 
-@app.get("/")
+@app.get("/", response_class=HTMLResponse)
 async def root():
-    """Root endpoint - health check"""
-    return {"status": "healthy", "app": "TensorMarketData", "version": "0.1.0"}
+    """Root endpoint - serve home page"""
+    with open(os.path.join(TEMPLATES_DIR, "index.html"), "r") as f:
+        return f.read()
 
 
 @app.get("/health")
