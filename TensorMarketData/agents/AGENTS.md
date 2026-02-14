@@ -3,6 +3,13 @@
 ## Overview
 All agents operate autonomously in isolated sessions. They report back to main agent.
 
+## Apollo Integration
+All agents have access to Apollo.io (4,000 credits/mo):
+- **Company Enrichment:** Get employee counts, revenue, tech stack
+- **People Search:** 220M+ contacts for lead generation
+- **Company Search:** 30M+ companies searchable
+- **Guide:** See `APOLLO_GUIDE.md`
+
 ---
 
 ## Agent 1: Research Agent

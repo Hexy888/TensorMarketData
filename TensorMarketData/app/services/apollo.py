@@ -22,10 +22,10 @@ async def enrich_company(domain: str) -> Optional[Dict[str, Any]]:
     Returns:
         Company data dict or None if not found
     """
-    url = f"{APOLLO_BASE_URL}/enrich company"
+    url = f"{APOLLO_BASE_URL}/organizations/enrich"
     headers = {
         "Content-Type": "application/json",
-        "Api-Key": APOLLO_API_KEY
+        "x-api-key": APOLLO_API_KEY
     }
     payload = {"domain": domain}
     
@@ -34,8 +34,8 @@ async def enrich_company(domain: str) -> Optional[Dict[str, Any]]:
             resp = await client.post(url, json=payload, headers=headers, timeout=30.0)
             if resp.status_code == 200:
                 data = resp.json()
-                if data.get("company"):
-                    return data["company"]
+                if data.get("organization"):
+                    return data["organization"]
     except Exception as e:
         print(f"Apollo enrich error for {domain}: {e}")
     
@@ -59,7 +59,7 @@ async def search_companies(
     url = f"{APOLLO_BASE_URL}/mixed_companies/search"
     headers = {
         "Content-Type": "application/json",
-        "Api-Key": APOLLO_API_KEY
+        "x-api-key": APOLLO_API_KEY
     }
     payload = {
         "query": query,
@@ -79,27 +79,27 @@ async def search_companies(
     return []
 
 
-async def get_company_contacts(
-    company_id: str,
+async def search_people(
+    query: str,
     limit: int = 10
 ) -> List[Dict[str, Any]]:
     """
-    Get contacts for a company using Apollo API.
+    Search for people using Apollo People Search API.
     
     Args:
-        company_id: Apollo company ID
+        query: Search query (job title, company, etc.)
         limit: Max results
     
     Returns:
-        List of contact dicts
+        List of person dicts
     """
-    url = f"{APOLLO_BASE_URL}/mixed_companies/search"
+    url = f"{APOLLO_BASE_URL}/mixed_people/api_search"
     headers = {
         "Content-Type": "application/json",
-        "Api-Key": APOLLO_API_KEY
+        "x-api-key": APOLLO_API_KEY
     }
     payload = {
-        "company_ids": [company_id],
+        "q": query,
         "page": 1,
         "per_page": limit
     }
@@ -109,8 +109,8 @@ async def get_company_contacts(
             resp = await client.post(url, json=payload, headers=headers, timeout=30.0)
             if resp.status_code == 200:
                 data = resp.json()
-                return data.get("contacts", [])
+                return data.get("persons", [])
     except Exception as e:
-        print(f"Apollo contacts error: {e}")
+        print(f"Apollo people search error: {e}")
     
     return []
