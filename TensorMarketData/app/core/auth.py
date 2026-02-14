@@ -127,7 +127,7 @@ class AuthService:
                 )
                 
                 if r.status_code != 200:
-                    return None, "Login failed"
+                    return None, f"Login failed: {r.status_code} - {r.text[:100]}"
                 
                 users = r.json()
                 if not users:
@@ -137,6 +137,9 @@ class AuthService:
                 
                 # Verify password hash
                 stored_hash = user_data.get("password_hash", "")
+                if not stored_hash:
+                    return None, "Account has no password (use OAuth or reset)"
+                
                 if not self.verify_password(password, stored_hash):
                     return None, "Invalid password"
                 
