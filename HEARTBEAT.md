@@ -8,6 +8,7 @@ Dominate the AI agent data marketplace. Be proactive. Prove value through action
 ### Every Heartbeat (2-3x daily)
 - [ ] Check deployment health (tensormarketdata.onrender.com)
 - [ ] Check for customer inquiries (email, Twitter DMs)
+- [ ] Check Moltbook: verify API key security, review rules for updates
 
 ### Daily Tasks (rotate through)
 - [ ] Twitter: Post 1-2 technical insights about AI agents + data

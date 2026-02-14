@@ -59,6 +59,16 @@
         GitHub
       </button>
       
+      <button class="btn btn-secondary" style="width: 100%; margin-top: 0.5rem; color: #4285f4; background: white; border: 1px solid #ddd;" onclick="alert('Google OAuth coming soon!')">
+        Google
+      </button>
+      
+      <div class="divider" style="margin-top: 1.5rem;"><span>for AI agents</span></div>
+      
+      <button class="btn btn-secondary" style="width: 100%; color: var(--dark); background: #10b981; color: white;" onclick="generateApiKey()">
+        🚀 Generate API Key (No Account)
+      </button>
+      
       <p style="text-align: center; margin-top: 1.5rem; color: var(--gray); font-size: 0.875rem;">
         Already have an account? <a href="/login" style="color: var(--primary);">Sign in</a>
       </p>
@@ -129,6 +139,37 @@
         submitBtn.textContent = 'Create Account';
       }
     });
+    
+    // Generate API Key for agents (no account needed)
+    async function generateApiKey() {
+      try {
+        const response = await fetch('/v1/auth/api-key', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+          showAlert(data.detail || 'Failed to generate API key', 'error');
+          return;
+        }
+        
+        // Store the API key
+        localStorage.setItem('tmd_api_key', data.api_key);
+        localStorage.setItem('tmd_user', JSON.stringify({
+          id: data.user_id,
+          email: data.email || 'agent@tensormarketdata.com',
+          name: 'API Agent',
+          credits: data.credits
+        }));
+        
+        showAlert('API Key generated! Redirecting to dashboard...', 'success');
+        setTimeout(() => window.location.href = '/dashboard', 1000);
+      } catch (err) {
+        showAlert('Error generating API key', 'error');
+      }
+    }
   </script>
 
   <footer>

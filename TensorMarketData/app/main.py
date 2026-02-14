@@ -146,6 +146,14 @@ async def submit():
         return f.read()
 
 
+@app.get("/blog/ai-agents-b2b-data-programmatic-access", response_class=HTMLResponse)
+async def blog_post():
+    """SEO blog post"""
+    blog_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "marketing", "ai-agents-b2b-data-programmatic-access.html")
+    with open(blog_path, "r") as f:
+        return f.read()
+
+
 @app.get("/providers", response_class=HTMLResponse)
 async def providers():
     """Data provider dashboard"""

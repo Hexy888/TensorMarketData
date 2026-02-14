@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "skills": {
+    "lead-generation": {
+      "version": "2.2.0",
+      "installedAt": 1771052373653
+    },
+    "data-enricher": {
+      "version": "1.0.0",
+      "installedAt": 1771052379372
+    }
+  }
+}
