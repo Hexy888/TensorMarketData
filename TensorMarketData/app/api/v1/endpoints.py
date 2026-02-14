@@ -24,6 +24,14 @@ from app.models.schemas import (
     ErrorResponse,
 )
 
+# Import data sources
+try:
+    from app.services.data_sources import SAMPLE_COMPANIES, get_company_info, search_companies
+    DATA_SOURCES_AVAILABLE = True
+except ImportError:
+    DATA_SOURCES_AVAILABLE = False
+    SAMPLE_COMPANIES = []
+
 logger = logging.getLogger(__name__)
 from app.core.config import settings
 from app.core.supabase import supabase, check_health
@@ -276,3 +284,89 @@ async def get_supplier(
                 code="DB_UNAVAILABLE",
             ).model_dump(),
         )
+
+
+# Company Data Endpoints (Free Data Sources)
+@router.get(
+    "/companies/sample",
+    response_model=SearchResponse,
+    tags=["Data"],
+    summary="Get sample company data",
+)
+async def get_sample_companies(
+    q: Optional[str] = Query(None, description="Filter by sector or name"),
+    api_key: APIKey = Depends(validate_api_key),
+) -> SearchResponse:
+    """
+    Get sample company data - free demo data.
+    Use this to test the API while we integrate real data sources.
+    """
+    companies = SAMPLE_COMPANIES
+    
+    if q:
+        companies = [c for c in companies if q.lower() in (c.get("name", "") + c.get("sector", "")).lower()]
+    
+    results = [
+        SearchResult(
+            supplier=SupplierResponse(
+                id=c.get("ticker", ""),
+                name=c.get("name", ""),
+                industry_vector=c.get("sector", ""),
+                contact={},
+                verification_score=1.0 if c.get("verified") else 0.0,
+                last_verified_at=None,
+                created_at="2026-01-01T00:00:00Z",
+                updated_at="2026-01-01T00:00:00Z",
+            ),
+            match_score=1.0,
+            credits_used=0,
+        )
+        for c in companies
+    ]
+    
+    return SearchResponse(
+        query=q or "all companies",
+        total_results=len(results),
+        results=results,
+        credits_used=0,
+    )
+
+
+@router.get(
+    "/companies/{ticker}",
+    response_model=SupplierResponse,
+    tags=["Data"],
+    summary="Get company by ticker",
+)
+async def get_company_by_ticker(
+    ticker: str,
+    api_key: APIKey = Depends(validate_api_key),
+) -> SupplierResponse:
+    """
+    Get company info by stock ticker (e.g., AAPL, GOOGL).
+    Uses free Yahoo Finance data.
+    """
+    if not DATA_SOURCES_AVAILABLE:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Data sources not available",
+        )
+    
+    info = await get_company_info(ticker.upper())
+    
+    if not info:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Company {ticker} not found",
+        )
+    
+    return SupplierResponse(
+        id=ticker.upper(),
+        name=info.get("name", ""),
+        industry_vector=info.get("sector", ""),
+        contact=info,
+        verification_score=0.8,
+        last_verified_at="2026-02-14T00:00:00Z",
+        created_at="2026-02-14T00:00:00Z",
+        updated_at="2026-02-14T00:00:00Z",
+    )
