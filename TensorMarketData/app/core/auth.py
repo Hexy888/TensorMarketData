@@ -24,12 +24,14 @@ class User:
         name: str,
         created_at: str = None,
         credits: int = 0,
+        password_hash: str = None,
     ):
         self.id = id
         self.email = email
         self.name = name
         self.created_at = created_at or datetime.utcnow().isoformat()
         self.credits = credits
+        self.password_hash = password_hash
 
 
 class AuthService:
@@ -85,11 +87,15 @@ class AuthService:
                 data = r.json()
                 user_id = data.get("id")
                 
+                # Hash the password for local storage
+                password_hash = self.hash_password(password)
+                
                 # Create user profile in our table
                 profile = {
                     "id": user_id,
                     "email": email,
                     "name": name,
+                    "password_hash": password_hash,
                     "credits": 100,  # Free credits on signup
                     "created_at": datetime.utcnow().isoformat(),
                 }
@@ -129,8 +135,11 @@ class AuthService:
                 
                 user_data = users[0]
                 
-                # Note: In production, would use Supabase Auth session
-                # For simplicity, we're trusting the email match
+                # Verify password hash
+                stored_hash = user_data.get("password_hash", "")
+                if not self.verify_password(password, stored_hash):
+                    return None, "Invalid password"
+                
                 return User(**user_data), None
                 
         except Exception as e:
