@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tensormarketdata.com/sitemap.xml
+
+# Disallow admin/private areas
+Disallow: /dashboard
+Disallow: /api/v1/
+Disallow: /explorer
