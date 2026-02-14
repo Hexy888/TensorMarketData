@@ -168,7 +168,7 @@ class AgentAPIKeyResponse(BaseModel):
 async def generate_agent_api_key():
     """
     Generate a free API key for AI agents.
-    No account or email required. Gives 100 free credits.
+    No account or email required. Gives 10 free credits to try the API.
     """
     import uuid
     
@@ -184,7 +184,7 @@ async def generate_agent_api_key():
         user_id=user_id,
         email="agent@tensormarketdata.com",
         name="API Agent",
-        credits=100,
+        credits=10,
     )
 
 
