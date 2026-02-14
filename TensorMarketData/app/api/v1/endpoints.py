@@ -290,54 +290,6 @@ async def get_supplier(
 @router.get(
     "/companies/sample",
     response_model=SearchResponse,
-    tags=["Data"],
-    summary="Get sample company data",
-)
-async def get_sample_companies(
-    q: Optional[str] = Query(None, description="Filter by sector or name"),
-    api_key: APIKey = Depends(validate_api_key),
-) -> SearchResponse:
-    """
-    Get sample company data - free demo data.
-    Use this to test the API while we integrate real data sources.
-    """
-    companies = SAMPLE_COMPANIES
-    
-    if q:
-        companies = [c for c in companies if q.lower() in (c.get("name", "") + c.get("sector", "")).lower()]
-    
-    results = [
-        SearchResult(
-            supplier=SupplierResponse(
-                id=c.get("ticker", ""),
-                name=c.get("name", ""),
-                industry_vector=c.get("sector", ""),
-                contact={},
-                verification_score=1.0 if c.get("verified") else 0.0,
-                last_verified_at=None,
-                created_at="2026-01-01T00:00:00Z",
-                updated_at="2026-01-01T00:00:00Z",
-            ),
-            match_score=1.0,
-            credits_used=0,
-        )
-        for c in companies
-    ]
-    
-    return SearchResponse(
-        query=q or "all companies",
-        total_results=len(results),
-        results=results,
-        credits_used=0,
-    )
-
-
-@router.get(
-    "/companies/{ticker}",
-    response_model=SupplierResponse,
-    tags=["Data"],
-    summary="Get company by ticker",
-)
 async def get_company_by_ticker(
     ticker: str,
     api_key: APIKey = Depends(validate_api_key),
