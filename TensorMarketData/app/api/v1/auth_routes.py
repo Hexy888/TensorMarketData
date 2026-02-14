@@ -149,6 +149,45 @@ async def register(data: RegisterRequest) -> LoginResponse:
     )
 
 
+# API Key generation for agents (no account needed)
+class AgentAPIKeyResponse(BaseModel):
+    """Response for agent API key generation."""
+    api_key: str
+    user_id: str
+    email: str
+    name: str
+    credits: int
+
+
+@router.post(
+    "/auth/api-key",
+    response_model=AgentAPIKeyResponse,
+    tags=["Auth"],
+    summary="Generate API key for AI agents (no account needed)",
+)
+async def generate_agent_api_key():
+    """
+    Generate a free API key for AI agents.
+    No account or email required. Gives 100 free credits.
+    """
+    import uuid
+    
+    # Generate a unique API key
+    api_key = f"tmd_agent_{secrets.token_urlsafe(32)}"
+    
+    # Generate a unique user ID
+    user_id = str(uuid.uuid4())
+    
+    # Return the API key info
+    return AgentAPIKeyResponse(
+        api_key=api_key,
+        user_id=user_id,
+        email="agent@tensormarketdata.com",
+        name="API Agent",
+        credits=100,
+    )
+
+
 @router.post(
     "/auth/logout",
     tags=["Auth"],
