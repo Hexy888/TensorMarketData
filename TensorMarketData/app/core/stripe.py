@@ -214,10 +214,10 @@ PRICES = {
     },
 }
 
-# Credit packages (create in Stripe Dashboard)
+# Credit packages (Stripe Dashboard prices)
 CREDIT_PACKAGES = {
-    "starter": {"stripe_price": "price_credits_1000", "credits": 1000, "dollars": 10},
-    "pro": {"stripe_price": "price_credits_10000", "credits": 10000, "dollars": 75},
+    "starter": {"stripe_price": "price_1T0Z4k3TkjY65gWqiMPrfi2b", "credits": 10000, "dollars": 29},
+    "pro": {"stripe_price": "price_1T0Z6s3TkjY65gWqKCaUHu8A", "credits": 100000, "dollars": 99},
     "enterprise": {"stripe_price": "price_credits_100000", "credits": 100000, "dollars": 500},
 }
 
