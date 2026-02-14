@@ -83,6 +83,20 @@ async def docs():
         return f.read()
 
 
+@app.get("/docs/api", response_class=HTMLResponse)
+async def docs_api():
+    """API documentation page"""
+    with open(os.path.join(TEMPLATES_DIR, "docs.html"), "r") as f:
+        return f.read()
+
+
+@app.get("/docs/agent-integration", response_class=HTMLResponse)
+async def docs_agent_integration():
+    """Agent integration guide"""
+    with open(os.path.join(TEMPLATES_DIR, "docs.html"), "r") as f:
+        return f.read()
+
+
 @app.get("/pricing", response_class=HTMLResponse)
 async def pricing():
     """Pricing page"""
