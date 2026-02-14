@@ -124,9 +124,6 @@ class AuthService:
             name=email.split("@")[0],
             credits=100,
         ), None
-                
-        except Exception as e:
-            return None, str(e)
     
     async def get_user(self, user_id: str) -> Optional[User]:
         """Get a user by ID."""
