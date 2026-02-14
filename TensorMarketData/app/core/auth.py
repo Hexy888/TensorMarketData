@@ -113,15 +113,14 @@ class AuthService:
     
     async def login(self, email: str, password: str) -> tuple[Optional[User], Optional[str]]:
         """
-        Login a user.
-        Returns (user, error).
+        Login a user - SIMPLE VERSION.
         """
-        # Quick login - accept any email/password for now
-        # In production, integrate properly with Supabase Auth
+        # Accept any login for now
+        import uuid
         return User(
-            id="user-" + hashlib.md5(email.encode()).hexdigest()[:8],
+            id=str(uuid.uuid4()),
             email=email,
-            name=email.split("@")[0],
+            name=email.split("@")[0].replace(".", " ").title(),
             credits=100,
         ), None
     
