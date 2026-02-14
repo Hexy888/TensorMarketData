@@ -1,9 +1,26 @@
 User-agent: *
 Allow: /
 
+# Allow AI bots and agents
+User-agent: ChatGPT-Plugin
+Allow: /api/
+Allow: /docs/
+Allow: /explorer/
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
 Sitemap: https://tensormarketdata.com/sitemap.xml
 
-# Disallow admin/private areas
+# Disallow private areas
 Disallow: /dashboard
 Disallow: /api/v1/
-Disallow: /explorer
