@@ -52,6 +52,11 @@ async def validate_api_key(
     # Hash the provided key for comparison
     key_hash = hashlib.sha256(api_key.encode()).hexdigest()
 
+    # Support agent API keys (start with tmd_agent_)
+    if api_key.startswith("tmd_agent_"):
+        # Create a mock record for agent keys
+        return create_mock_api_key(api_key, key_hash)
+
     # Try to validate against Supabase
     api_key_record = None
     try:
