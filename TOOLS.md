@@ -37,4 +37,7 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 
 ---
 
-Add whatever helps you do your job. This is your cheat sheet.
+### Apollo.io
+- API Key: kw_KuGhJAIw3DNrCyHdQSQ
+- Plan: Professional (4,000 credits/mo)
+- Status: Active

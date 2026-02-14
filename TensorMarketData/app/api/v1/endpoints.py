@@ -370,3 +370,100 @@ async def get_company_by_ticker(
         created_at="2026-02-14T00:00:00Z",
         updated_at="2026-02-14T00:00:00Z",
     )
+
+
+# Apollo Data Endpoints
+@router.get(
+    "/apollo/enrich/{domain}",
+    response_model=SupplierResponse,
+    tags=["Apollo"],
+    summary="Enrich company data via Apollo",
+)
+async def enrich_company(
+    domain: str,
+    api_key: APIKey = Depends(validate_api_key),
+) -> SupplierResponse:
+    """
+    Enrich company data using Apollo.io API.
+    Pass domain (e.g., 'google.com', 'stripe.com')
+    """
+    try:
+        from app.services.apollo import enrich_company as apollo_enrich
+        
+        company = await apollo_enrich(domain)
+        
+        if not company:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Company {domain} not found",
+            )
+        
+        return SupplierResponse(
+            id=company.get("id", ""),
+            name=company.get("name", ""),
+            industry_vector=company.get("industry", ""),
+            contact=company,
+            verification_score=0.9,
+            last_verified_at="2026-02-14T00:00:00Z",
+            created_at="2026-02-14T00:00:00Z",
+            updated_at="2026-02-14T00:00:00Z",
+        )
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail=f"Apollo API error: {str(e)}",
+        )
+
+
+@router.get(
+    "/apollo/search",
+    response_model=SearchResponse,
+    tags=["Apollo"],
+    summary="Search companies via Apollo",
+)
+async def search_apollo(
+    q: str = Query(..., min_length=1, description="Search query"),
+    limit: int = Query(10, le=50),
+    api_key: APIKey = Depends(validate_api_key),
+) -> SearchResponse:
+    """
+    Search for companies using Apollo.io API.
+    """
+    try:
+        from app.services.apollo import search_companies as apollo_search
+        
+        companies = await apollo_search(q, limit)
+        
+        results = [
+            SearchResult(
+                supplier=SupplierResponse(
+                    id=c.get("id", ""),
+                    name=c.get("name", ""),
+                    industry_vector=c.get("industry", ""),
+                    contact=c,
+                    verification_score=0.8,
+                    last_verified_at="2026-02-14T00:00:00Z",
+                    created_at="2026-02-14T00:00:00Z",
+                    updated_at="2026-02-14T00:00:00Z",
+                ),
+                match_score=0.9,
+                credits_used=1,
+            )
+            for c in companies
+        ]
+        
+        return SearchResponse(
+            query=q,
+            total_results=len(results),
+            results=results,
+            credits_used=len(results),
+        )
+        
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail=f"Apollo search error: {str(e)}",
+        )
