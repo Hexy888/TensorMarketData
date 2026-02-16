@@ -165,7 +165,7 @@ async def verify_email(email: str) -> bool:
                 data = resp.json()
                 # Check verification status
                 return data.get("result") == "verified"
-    except Exception as", "") e:
+    except Exception as e:
         print(f"Email verify error: {e}")
     
     return False
