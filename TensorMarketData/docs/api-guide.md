@@ -5,7 +5,7 @@ This guide covers the TensorMarketData API for developers building AI agents and
 ## Base URL
 
 ```
-https://api.tensormarketdata.com/v1
+https://tensormarketdata.com/v1
 ```
 
 ## Authentication
@@ -14,7 +14,7 @@ All API requests require an API key. Include it in the `Authorization` header:
 
 ```bash
 curl -H "Authorization: Bearer $TENSOR_API_KEY" \
-  https://api.tensormarketdata.com/v1/datasets
+  https://tensormarketdata.com/v1/datasets
 ```
 
 **Security note**: Never expose API keys in client-side code or version control. Use environment variables.
@@ -142,7 +142,7 @@ Opens a server-sent events (SSE) stream for real-time data:
 
 ```bash
 curl -N -H "Authorization: Bearer $TENSOR_API_KEY" \
-  https://api.tensormarketdata.com/v1/datasets/ds_ecommerce_products_001/stream
+  https://tensormarketdata.com/v1/datasets/ds_ecommerce_products_001/stream
 ```
 
 **Stream format**:
@@ -220,7 +220,7 @@ Error responses include `error` object with `code`, `message`, and `details`:
 import requests
 
 TENSOR_API_KEY = os.environ["TENSOR_API_KEY"]
-BASE_URL = "https://api.tensormarketdata.com/v1"
+BASE_URL = "https://tensormarketdata.com/v1"
 
 headers = {"Authorization": f"Bearer {TENSOR_API_KEY}"}
 
@@ -249,7 +249,7 @@ data = response.json()["data"]
 const fetch = require('node-fetch');
 
 const TENSOR_API_KEY = process.env.TENSOR_API_KEY;
-const BASE_URL = 'https://api.tensormarketdata.com/v1';
+const BASE_URL = 'https://tensormarketdata.com/v1';
 
 const headers = { 'Authorization': `Bearer ${TENSOR_API_KEY}` };
 

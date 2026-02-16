@@ -3,140 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pricing - TensorMarketData - B2B Data API Plans for AI Agents</title>
-  <meta name="description" content="TensorMarketData pricing plans for B2B data API access. Developer ($29/mo), Business ($99/mo), and Enterprise plans. Usage-based billing for AI agents and procurement bots.">
-  <meta name="keywords" content="pricing, B2B data API pricing, AI agent data cost, business API pricing, supplier data pricing, API billing, usage-based pricing">
-  
-  <!-- Open Graph -->
-  <meta property="og:title" content="Pricing - TensorMarketData">
-  <meta property="og:description" content="Simple, transparent pricing for B2B data API access for AI agents">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://tensormarketdata.com/pricing">
-  
-  <!-- Canonical -->
-  <link rel="canonical" href="https://tensormarketdata.com/pricing">
-  
-  <!-- JSON-LD for Pricing -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "PriceSpecification",
-    "name": "TensorMarketData Pricing Plans",
-    "description": "Pricing plans for B2B data marketplace API for AI agents",
-    "priceCurrency": "USD",
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "TensorMarketData API Plans",
-      "itemListElement": [
-        {
-          "@type": "Offer",
-          "name": "Developer Plan",
-          "description": "Perfect for individual developers and small AI projects",
-          "price": "29.00",
-          "unitCode": "MON",
-          "availability": "https://schema.org/InStock",
-          "validFrom": "2026-01-01"
-        },
-        {
-          "@type": "Offer",
-          "name": "Business Plan",
-          "description": "For growing teams requiring higher limits and semantic search",
-          "price": "99.00",
-          "unitCode": "MON",
-          "availability": "https://schema.org/InStock",
-          "validFrom": "2026-01-01"
-        },
-        {
-          "@type": "Offer",
-          "name": "Enterprise Plan",
-          "description": "Custom solutions for large organizations with dedicated support",
-          "priceSpecification": {
-            "@type": "PriceSpecification",
-            "priceType": "https://schema.org/PriceType/enquire"
-          },
-          "availability": "https://schema.org/PreOrder",
-          "validFrom": "2026-01-01"
-        }
-      ]
-    }
-  }
-  </script>
-  
+  <title>Pricing - TensorMarketData</title>
+  <meta name="description" content="TensorMarketData pricing plans for B2B data API access.">
   <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
   <nav>
-    <a href="/" class="logo">Tensor<span>MarketData</span></a>
+    <a href="/"><img src="/static/images/logo.svg" alt="TensorMarketData" height="32"/></a>
     <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/docs">Documentation</a></li>
+      <li><a href="/quickstart">Quickstart</a></li>
+      <li><a href="/docs">Docs</a></li>
+      <li><a href="/openapi.json">OpenAPI</a></li>
+      <li><a href="/coverage">Coverage</a></li>
+      <li><a href="/status">Status</a></li>
       <li><a href="/pricing" class="active">Pricing</a></li>
-      <li><a href="/dashboard">Dashboard</a></li>
-      <li><a href="/submit">Submit Data</a></li>
-      <li><a href="/providers">Providers</a></li>
-      <li><a href="/explorer">API Explorer</a></li>
+      <li><a href="/changelog">Changelog</a></li>
+      <li><a href="/dashboard" class="cta">Get API Key</a></li>
     </ul>
   </nav>
 
   <section class="hero" style="padding: 4rem 2rem;">
     <h1>Simple, Transparent Pricing</h1>
-    <p>Pay only for what you use. No hidden fees. Cancel anytime.</p>
+    <p>Hard caps. No surprise overages. Cancel anytime.</p>
   </section>
 
   <section style="margin-top: -3rem;">
     <div class="container">
-      <div class="pricing">
-        <div class="pricing-card">
-          <span class="badge">Free</span>
-          <h3>Try It Out</h3>
-          <div class="price">$0<span>/forever</span></div>
-          <ul>
-            <li>10 API calls</li>
-            <li>Basic search</li>
-            <li>1 API key</li>
-            <li>Community support</li>
-          </ul>
-          <a href="/signup" class="btn btn-secondary" style="color: var(--dark); background: #e2e8f0;">Get Free Key</a>
-        </div>
-        <div class="pricing-card">
-          <h3>Developer</h3>
-          <div class="price">$29<span>/month</span></div>
-          <ul>
-            <li>10,000 API calls/month</li>
-            <li>Basic keyword search</li>
-            <li>1 API key</li>
-            <li>Email support</li>
-            <li>Community access</li>
-          </ul>
-          <a href="/dashboard" class="btn btn-secondary" style="color: var(--dark); background: #e2e8f0;">Sign Up</a>
-        </div>
-        <div class="pricing-card featured">
-          <span class="badge">Most Popular</span>
-          <h3>Business</h3>
-          <div class="price">$99<span>/month</span></div>
-          <ul>
-            <li>100,000 API calls/month</li>
-            <li>Semantic search (pgvector)</li>
-            <li>5 API keys</li>
-            <li>Priority email support</li>
-            <li>Custom integrations</li>
-            <li>Analytics dashboard</li>
-          </ul>
-          <a href="/dashboard" class="btn btn-primary">Sign Up</a>
-        </div>
-        <div class="pricing-card">
-          <h3>Enterprise</h3>
-          <div class="price">Custom</div>
-          <ul>
-            <li>Unlimited API calls</li>
-            <li>Dedicated infrastructure</li>
-            <li>Unlimited API keys</li>
-            <li>24/7 phone support</li>
-            <li>Custom SLA</li>
-            <li>On-premise deployment</li>
-            <li>Dedicated account manager</li>
-          </ul>
-          <a href="/contact" class="btn btn-secondary" style="color: var(--dark); background: #e2e8f0;">Contact Sales</a>
+      <div class="pricing" id="pricing-cards">
+        <p style="text-align:center;color:var(--text-2);">Loading pricing...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Agent Quickstart Panel -->
+  <section style="background: var(--surface-2); padding: 3rem 2rem; margin-top: 2rem;">
+    <div class="container">
+      <h2 style="margin-bottom: 1rem;">Agent Quickstart</h2>
+      <p style="color: var(--text-2); margin-bottom: 1.5rem;">Copy this exact curl to make your first API call:</p>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<pre>curl -sS "https://tensormarketdata.com/v1/search?q=coffee" \
+  -H "Authorization: Bearer $TMD_API_KEY" \
+  -H "Accept: application/json"</pre>
+      </div>
+      <div class="callout info" style="margin-top: 1rem;">
+        <div class="callout-icon">ℹ️</div>
+        <div>
+          <div class="callout-title">Rate Limit Headers</div>
+          <div class="callout-text">Every response includes: X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset</div>
         </div>
       </div>
     </div>
@@ -149,20 +63,16 @@
       </div>
       <div style="max-width: 800px; margin: 0 auto;">
         <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
-          <h4 style="margin-bottom: 0.5rem;">What counts as an API call?</h4>
-          <p style="color: var(--gray);">Each request to /search, /supplier/{id}, or /supplier/{id}/inventory counts as one API call and deducts 1 credit.</p>
+          <h4 style="margin-bottom: 0.5rem;">What counts as a credit?</h4>
+          <p style="color: var(--gray);">Each API call to /search, /supplier/{id}, or /supplier/{id}/inventory deducts 1 credit.</p>
         </div>
         <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
           <h4 style="margin-bottom: 0.5rem;">Can I carry over unused credits?</h4>
           <p style="color: var(--gray);">Credits reset monthly and do not carry over. Upgrade your plan if you need more capacity.</p>
         </div>
-        <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
-          <h4 style="margin-bottom: 0.5rem;">Do I need a credit card to start?</h4>
-          <p style="color: var(--gray);">No credit card required for API key. Sign up and start building!</p>
-        </div>
         <div style="background: white; padding: 1.5rem; border-radius: 8px;">
           <h4 style="margin-bottom: 0.5rem;">Can I cancel anytime?</h4>
-          <p style="color: var(--gray);">Absolutely. Cancel from your dashboard at any time. You'll retain access until the end of your billing period.</p>
+          <p style="color: var(--gray);">Cancel from your dashboard at any time. You'll retain access until the end of your billing period.</p>
         </div>
       </div>
     </div>
@@ -172,13 +82,93 @@
     <div class="container" style="text-align: center;">
       <h2>Ready to Get Started?</h2>
       <p style="color: var(--gray); margin: 1rem 0 2rem;">Start building with TensorMarketData today</p>
-      <a href="/dashboard" class="btn btn-primary">Create Free Account</a>
+      <a href="/dashboard" class="btn btn-primary">Get API Key</a>
     </div>
   </section>
 
   <footer>
     <p>&copy; 2026 TensorMarketData. All rights reserved.</p>
   </footer>
+
+<script>
+async function loadPricing() {
+  try {
+    const res = await fetch('/portal/pricing.json');
+    const data = await res.json();
+    const container = document.getElementById('pricing-cards');
+    
+    if (!data.plans || data.plans.length === 0) {
+      container.innerHTML = '<p style="color:red;">Failed to load pricing</p>';
+      return;
+    }
+    
+    container.innerHTML = data.plans.map((plan, idx) => {
+      const isFeatured = plan.plan_id === 'business';
+      const price = plan.monthly_price_usd === 0 ? 'Free' : `$${plan.monthly_price_usd}`;
+      const period = plan.monthly_price_usd === 0 ? '/forever' : '/month';
+      const cta = plan.plan_id === 'free' 
+        ? '<a href="/dashboard" class="btn btn-secondary" style="color: var(--dark); background: #e2e8f0;">Get Free Key</a>'
+        : plan.plan_id === 'enterprise'
+        ? '<a href="/contact" class="btn btn-secondary" style="color: var(--dark); background: #e2e8f0;">Contact Sales</a>'
+        : `<button onclick="checkout('${plan.plan_id}')" class="btn ${isFeatured ? 'btn-primary' : 'btn-secondary'}" style="${!isFeatured ? 'color: var(--dark); background: #e2e8f0;' : ''}">Sign Up</button>`;
+      
+      const credits = plan.included_credits === 0 ? 'Demo only' : `${plan.included_credits.toLocaleString()} credits`;
+      const rpm = plan.rate_limit?.requests_per_minute || 'N/A';
+      
+      return `
+        <div class="pricing-card${isFeatured ? ' featured' : ''}">
+          ${isFeatured ? '<span class="badge">Most Popular</span>' : ''}
+          <h3>${plan.name}</h3>
+          <div class="price">${price}<span>${period}</span></div>
+          <ul>
+            <li>${credits}/month</li>
+            <li>${rpm} requests/minute</li>
+            ${plan.features?.map(f => `<li>${f}</li>`).join('') || ''}
+          </ul>
+          ${cta}
+        </div>
+      `;
+    }).join('');
+  } catch (err) {
+    console.error('Pricing load error:', err);
+    document.getElementById('pricing-cards').innerHTML = '<p style="color:red;">Failed to load pricing</p>';
+  }
+}
+
+async function checkout(plan) {
+  try {
+    const response = await fetch('/v1/payments/subscription', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ plan: plan }),
+      credentials: 'include'
+    });
+    
+    const data = await response.json();
+    
+    if (data.url) {
+      window.location.href = data.url;
+    } else if (response.status === 401) {
+      alert('Please sign in to upgrade your plan');
+      window.location.href = '/login?redirect=/pricing';
+    } else {
+      alert('Error: ' + (data.detail?.error || 'Something went wrong. Please try again.'));
+    }
+  } catch (error) {
+    console.error('Checkout error:', error);
+    alert('Please sign in to upgrade your plan');
+    window.location.href = '/login?redirect=/pricing';
+  }
+}
+
+function copyCode(btn) {
+  const code = btn.nextElementSibling.textContent;
+  navigator.clipboard.writeText(code);
+  btn.textContent = 'Copied!';
+  setTimeout(() => btn.textContent = 'Copy', 2000);
+}
+
+loadPricing();
+</script>
 </body>
 </html>
-Sat Feb 14 16:33:47 CST 2026

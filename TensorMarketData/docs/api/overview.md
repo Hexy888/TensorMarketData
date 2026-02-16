@@ -7,7 +7,7 @@ Welcome to the TensorMarketData API documentation. Our REST API provides program
 ### Base URL
 
 ```
-https://api.tensormarketdata.com/v1
+https://tensormarketdata.com/v1
 ```
 
 ### Key Features
@@ -40,7 +40,7 @@ Authorization: Bearer YOUR_API_KEY
 ### Example Request
 
 ```bash
-curl -X GET "https://api.tensormarketdata.com/v1/datasets" \
+curl -X GET "https://tensormarketdata.com/v1/datasets" \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json"
 ```
@@ -177,6 +177,6 @@ print(f"Generated {len(embeddings)} embeddings of dimension {len(embeddings[0])}
 ## Support
 
 - **Documentation**: https://docs.tensormarketdata.com
-- **API Reference**: https://api.tensormarketdata.com/docs
+- **API Reference**: https://tensormarketdata.com/docs
 - **Support Email**: support@tensormarketdata.com
 - **Discord Community**: https://discord.gg/tensormarketdata

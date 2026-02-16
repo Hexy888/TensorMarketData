@@ -39,7 +39,7 @@ POST /embed
 ### Example Request
 
 ```bash
-curl -X POST "https://api.tensormarketdata.com/v1/embed" \
+curl -X POST "https://tensormarketdata.com/v1/embed" \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -117,7 +117,7 @@ POST /embed
 ### Example Request
 
 ```bash
-curl -X POST "https://api.tensormarketdata.com/v1/embed" \
+curl -X POST "https://tensormarketdata.com/v1/embed" \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{

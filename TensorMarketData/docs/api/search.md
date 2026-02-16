@@ -46,7 +46,7 @@ Perform a similarity search using a text query.
 #### Example Request
 
 ```bash
-curl -X POST "https://api.tensormarketdata.com/v1/search" \
+curl -X POST "https://tensormarketdata.com/v1/search" \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -119,7 +119,7 @@ Perform search using pre-computed vectors.
 #### Example Request
 
 ```bash
-curl -X POST "https://api.tensormarketdata.com/v1/search/vectors" \
+curl -X POST "https://tensormarketdata.com/v1/search/vectors" \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{

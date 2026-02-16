@@ -58,7 +58,7 @@ GET /datasets
 ### Example Request
 
 ```bash
-curl "https://api.tensormarketdata.com/v1/datasets?category=text&min_quality=4.5&limit=10" \
+curl "https://tensormarketdata.com/v1/datasets?category=text&min_quality=4.5&limit=10" \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
@@ -133,7 +133,7 @@ GET /datasets/{dataset_id}
 ### Example Request
 
 ```bash
-curl "https://api.tensormarketdata.com/v1/datasets/ds_wikipedia_2023" \
+curl "https://tensormarketdata.com/v1/datasets/ds_wikipedia_2023" \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
@@ -197,7 +197,7 @@ POST /datasets/{dataset_id}/purchase
 ### Example Request
 
 ```bash
-curl -X POST "https://api.tensormarketdata.com/v1/datasets/ds_wikipedia_2023/purchase" \
+curl -X POST "https://tensormarketdata.com/v1/datasets/ds_wikipedia_2023/purchase" \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -266,7 +266,7 @@ GET /datasets/{dataset_id}/download
 
 ```bash
 # Get download URL (redirects to CDN)
-curl -L "https://api.tensormarketdata.com/v1/datasets/ds_wikipedia_2023/download" \
+curl -L "https://tensormarketdata.com/v1/datasets/ds_wikipedia_2023/download" \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -o wikipedia_vectors.tar.gz
 ```
@@ -356,7 +356,7 @@ GET /datasets/{dataset_id}/ownership
 ### Example Request
 
 ```bash
-curl "https://api.tensormarketdata.com/v1/datasets/ds_wikipedia_2023/ownership" \
+curl "https://tensormarketdata.com/v1/datasets/ds_wikipedia_2023/ownership" \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 

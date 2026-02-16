@@ -360,6 +360,6 @@ def retry_with_backoff(func, max_retries=3):
 ## Get Help
 
 - **Documentation**: https://docs.tensormarketdata.com
-- **API Reference**: https://api.tensormarketdata.com/docs
+- **API Reference**: https://tensormarketdata.com/docs
 - **Discord**: https://discord.gg/tensormarketdata
 - **Email**: support@tensormarketdata.com

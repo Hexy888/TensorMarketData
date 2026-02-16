@@ -9,15 +9,19 @@ import os
 
 from fastapi import FastAPI, Request, status, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.responses import HTMLResponse, JSONResponse, PlainTextResponse
 from fastapi.staticfiles import StaticFiles
+from fastapi.openapi.utils import get_openapi as get_openapi_schema
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 from app.core.config import settings
 from app.core.supabase import supabase, check_health
-from app.api.v1 import endpoints_router, submission_router, auth_router
+from app.api.v1 import endpoints_router, submission_router, auth_router, analytics_router, portal_router, auth_model_router, internal_router, public_router, auth_contracts_router
+from app.api.v1.billing import router as billing_router
 from app.api.v1.payments import router as payments_router
 from app.api.v1.webhooks import router as webhooks_router
 from app.api.v1.email import router as email_router
+from app.api.v1.agents import router as agents_router
 
 # Create templates directory path
 TEMPLATES_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "templates")
@@ -36,7 +40,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
 app = FastAPI(
     title="TensorMarketData",
     description="Headless B2B Data Marketplace for AI Agents",
-    version="0.1.0",
+    version="1.1.1",
     lifespan=lifespan,
     docs_url=None,
     redoc_url=None,
@@ -50,6 +54,68 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Agent Discovery Routes - defined early for testing
+# Nova - testing route registration
+
+# Seed endpoint for testing
+@app.post("/v1/admin/seed")
+async def seed_data():
+    """Seed sample companies (for testing)"""
+    from app.core.supabase import supabase
+    
+    companies = [
+        {"name": "Stripe", "domain": "stripe.com", "industry": "FinTech", "description": "Payment processing platform"},
+        {"name": "Twilio", "domain": "twilio.com", "industry": "Cloud Communications", "description": "Cloud communications platform"},
+        {"name": "Shopify", "domain": "shopify.com", "industry": "E-commerce", "description": "E-commerce platform"},
+        {"name": "Slack", "domain": "slack.com", "industry": "Enterprise Software", "description": "Business messaging platform"},
+        {"name": "Zoom", "domain": "zoom.us", "industry": "Video Communications", "description": "Video conferencing"},
+        {"name": "Datadog", "domain": "datadoghq.com", "industry": "Monitoring", "description": "Cloud monitoring platform"},
+        {"name": "Snowflake", "domain": "snowflake.com", "industry": "Data Cloud", "description": "Data cloud platform"},
+        {"name": "Cloudflare", "domain": "cloudflare.com", "industry": "Security", "description": "Web infrastructure company"},
+        {"name": "Notion", "domain": "notion.so", "industry": "Productivity", "description": "All-in-one workspace"},
+        {"name": "Figma", "domain": "figma.com", "industry": "Design Tools", "description": "Design and prototyping"},
+    ]
+    
+    added = 0
+    for c in companies:
+        try:
+            await supabase.query("suppliers", method="POST", data={
+                "name": c["name"],
+                "contact_json": {"email": f"info@{c['domain']}", "phone": None, "linkedin": None},
+                "verification_score": 0.9,
+            })
+            added += 1
+        except Exception as e:
+            print(f"Error adding {c['name']}: {e}")
+    
+    return {"added": added, "message": f"Added {added} companies"}
+
+
+# SEO: Root-level robots.txt and sitemap.xml (using APIRouter)
+from fastapi import APIRouter
+
+seo_router = APIRouter()
+
+@seo_router.get("/robots.txt", response_class=PlainTextResponse)
+async def robots():
+    """Robots.txt for SEO"""
+    return "User-agent: *\nAllow: /\nSitemap: https://tensormarketdata.com/static/sitemap.xml"
+
+@seo_router.get("/sitemap.xml", response_class=PlainTextResponse)  
+async def sitemap():
+    """XML sitemap for SEO"""
+    return '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://tensormarketdata.com/</loc></url></urlset>'
+
+@seo_router.get("/test-seo-route")
+async def test_seo():
+    """Test SEO route"""
+    return {"status": "ok"}
+
+
+# Note: /robots.txt and /sitemap.xml at root level aren't working on Render
+# Using /static/robots.txt and /static/sitemap.xml instead
+
 
 # Mount static files
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
@@ -65,7 +131,11 @@ async def root():
 @app.get("/health")
 async def health_check():
     """Health check for Railway"""
-    return {"status": "healthy", "app": "TensorMarketData"}
+    return {"status": "healthy", "app": "TensorMarketData", "version": "test-v1"}
+
+@app.get("/test-deploy-abc123")
+async def test_deploy():
+    return {"status": "success", "message": "new code deployed!"}
 
 
 # HTML Routes
@@ -97,11 +167,132 @@ async def docs_agent_integration():
         return f.read()
 
 
+@app.get("/version-test")
+async def version_test():
+    return {"version": "1.1.1", "deployed": True}
+
 @app.get("/pricing", response_class=HTMLResponse)
 async def pricing():
-    """Pricing page"""
-    with open(os.path.join(TEMPLATES_DIR, "pricing.html"), "r") as f:
-        return f.read()
+    """Pricing page - renders from /portal/pricing.json"""
+    content = """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing - TensorMarketData</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+  <nav>
+    <a href="/"><img src="/static/images/logo.svg" alt="TensorMarketData" height="32"/></a>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/docs">Documentation</a></li>
+      <li><a href="/pricing" class="active">Pricing</a></li>
+      <li><a href="/dashboard">Dashboard</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero" style="padding: 4rem 2rem;">
+    <h1>Simple, Transparent Pricing</h1>
+    <p>Predictable pricing. No hidden fees. Hard caps.</p>
+  </section>
+
+  <section style="margin-top: -3rem;">
+    <div class="container">
+      <div class="pricing" id="pricing-cards">
+        <p style="text-align:center;color:var(--text-2);">Loading pricing...</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin: 3rem auto; max-width: 600px; padding: 0 1rem;">
+    <div class="callout" style="background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--s-4);">
+      <h3 style="margin-bottom: var(--s-2);">Agent Quickstart</h3>
+      <p style="color: var(--text-2); margin-bottom: var(--s-3); font-size: 0.9rem;">Copy this exact curl to test the API:</p>
+      <div class="code-block" style="font-size: 0.85rem;">
+<pre>curl -sS "https://tensormarketdata.com/v1/search?q=coffee" \
+  -H "Authorization: Bearer $TMD_API_KEY" \
+  -H "Accept: application/json"</pre>
+      </div>
+      <p style="color: var(--text-2); margin-top: var(--s-3); font-size: 0.8rem;">
+        Response headers: <code>X-RateLimit-Limit</code>, <code>X-RateLimit-Remaining</code>, <code>X-RateLimit-Reset</code>
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 TensorMarketData. All rights reserved.</p>
+  </footer>
+
+<script>
+async function loadPricing() {
+  try {
+    const res = await fetch('/portal/pricing.json');
+    const data = await res.json();
+    const container = document.getElementById('pricing-cards');
+    
+    container.innerHTML = data.plans.map(plan => {
+      const isFeatured = plan.plan_id === 'business';
+      const badge = plan.plan_id === 'free' ? '<span class="badge">Free</span>' : 
+                   plan.plan_id === 'business' ? '<span class="badge">Most Popular</span>' : '';
+      const btnClass = isFeatured ? 'btn btn-primary' : 'btn btn-secondary';
+      const btnStyle = plan.plan_id === 'free' ? 'color: var(--dark); background: #e2e8f0;' : '';
+      
+      const features = plan.features.map(f => '<li>✓ ' + f.replace(/_/g, ' ') + '</li>').join('');
+      
+      return '<div class="pricing-card' + (isFeatured ? ' featured' : '') + '">' +
+        badge +
+        '<h3>' + plan.name + '</h3>' +
+        '<div class="price">$' + plan.monthly_price_usd + '<span>/month</span></div>' +
+        '<ul>' +
+          '<li>' + plan.included_credits.toLocaleString() + ' credits</li>' +
+          '<li>' + plan.rate_limit.requests_per_minute + ' requests/min</li>' +
+          features +
+        '</ul>' +
+        (plan.plan_id === 'free' 
+          ? '<a href="/docs" class="' + btnClass + '" style="' + btnStyle + '">Read Docs</a>'
+          : '<button onclick="checkout(\'' + plan.plan_id + '\')" class="' + btnClass + '" style="' + btnStyle + '">Subscribe</button>') +
+        '</div>';
+    }).join('');
+  } catch (e) {
+    console.error('loadPricing error:', e);
+    document.getElementById('pricing-cards').innerHTML = '<p style="color:red;">Failed to load pricing: ' + e.message + '</p>';
+  }
+}
+
+function checkout(plan) {
+  fetch('/billing/checkout', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ plan_id: plan, email: 'user@example.com' }),
+    credentials: 'include'
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.url) {
+      window.location.href = data.url;
+    } else if (response.status === 401) {
+      alert('Please sign in to upgrade your plan');
+      window.location.href = '/login?redirect=/pricing';
+    } else {
+      alert('Error: ' + (data.detail?.error || 'Something went wrong'));
+    }
+  })
+  .catch(error => {
+    console.error('Checkout error:', error);
+    alert('Please sign in to upgrade your plan');
+    window.location.href = '/login?redirect=/pricing';
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  loadPricing();
+});
+</script>
+</body>
+</html>"""
+    return content
 
 
 @app.get("/dashboard", response_class=HTMLResponse)
@@ -146,6 +337,56 @@ async def submit():
         return f.read()
 
 
+@app.get("/quickstart", response_class=HTMLResponse)
+async def quickstart():
+    """Quickstart guide - copy/paste snippets for agents"""
+    with open(os.path.join(TEMPLATES_DIR, "quickstart.html"), "r") as f:
+        return f.read()
+
+
+@app.get("/coverage", response_class=HTMLResponse)
+async def coverage():
+    """Data coverage page"""
+    with open(os.path.join(TEMPLATES_DIR, "coverage.html"), "r") as f:
+        return f.read()
+
+
+@app.get("/changelog", response_class=HTMLResponse)
+async def changelog():
+    """Changelog page"""
+    with open(os.path.join(TEMPLATES_DIR, "changelog.html"), "r") as f:
+        return f.read()
+
+
+@app.get("/status", response_class=HTMLResponse)
+async def status_page():
+    """Status page - operational transparency"""
+    with open(os.path.join(TEMPLATES_DIR, "status.html"), "r") as f:
+        return f.read()
+
+
+@app.get("/support", response_class=HTMLResponse)
+async def support_page():
+    """Support page"""
+    with open(os.path.join(TEMPLATES_DIR, "support.html"), "r") as f:
+        return f.read()
+
+
+@app.get("/login", response_class=HTMLResponse)
+async def login_page():
+    """Login page - magic link auth"""
+    # Use the auth_model router's HTML
+    from app.api.v1.auth_model import login_page as auth_login
+    return auth_login()
+
+
+@app.get("/console", response_class=HTMLResponse)
+async def console_page():
+    """Console - auth-gated API key management"""
+    with open(os.path.join(TEMPLATES_DIR, "console.html"), "r") as f:
+        return f.read()
+
+
 @app.get("/blog/ai-agents-b2b-data-programmatic-access", response_class=HTMLResponse)
 async def blog_post():
     """SEO blog post"""
@@ -184,13 +425,95 @@ async def global_exception_handler(request: Request, exc: Exception):
     )
 
 
-# Include API routes
+# Test endpoint - Nova
+@app.get("/v1/nova-test")
+async def nova_test():
+    return {"status": "ok", "message": "Nova test route"}
+
+# OpenAPI JSON endpoint (canonical contract for agents)
+@app.get("/openapi.json", tags=["Documentation"])
+async def get_openapi():
+    """Get OpenAPI 3.0 specification (canonical API contract)"""
+    # Always regenerate to ensure fresh data (no cache)
+    app.openapi_schema = None
+    
+    # Generate base schema
+    openapi_schema = get_openapi_schema(
+        title="TensorMarketData",
+        description="Headless B2B Data Marketplace for AI Agents",
+        version="1.1.1",
+        routes=app.routes,
+    )
+    
+    # Add Bearer auth security scheme
+    openapi_schema["components"]["securitySchemes"] = {
+        "bearerAuth": {
+            "type": "http",
+            "scheme": "bearer",
+            "description": "Authorization: Bearer <API_KEY>"
+        }
+    }
+    
+    # Filter to ONLY public endpoints (per design spec)
+    # These are the only endpoints exposed in public OpenAPI
+    public_paths = ["/v1/search", "/v1/supplier/{supplier_id}", "/v1/supplier/{supplier_id}/inventory"]
+    filtered_paths = {}
+    
+    for path, path_item in openapi_schema.get("paths", {}).items():
+        # Include exact matches and pattern matches
+        if path in public_paths:
+            filtered_paths[path] = path_item
+        elif path.startswith("/v1/supplier/"):
+            # Dynamic supplier paths
+            filtered_paths[path] = path_item
+    
+    # Replace paths with filtered
+    openapi_schema["paths"] = filtered_paths
+    
+    # Apply bearer auth to all filtered paths
+    for path, path_item in openapi_schema.get("paths", {}).items():
+        for method, method_item in path_item.items():
+            if method in ["get", "post", "put", "delete", "patch"]:
+                method_item["security"] = [{"bearerAuth": []}]
+    
+    # Add shared schemas (ErrorEnvelope)
+    openapi_schema["components"]["schemas"] = {
+        "ErrorEnvelope": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "object",
+                    "properties": {
+                        "code": {"type": "string"},
+                        "message": {"type": "string"},
+                        "details": {"type": "object"},
+                        "request_id": {"type": "string"}
+                    }
+                }
+            }
+        }
+    }
+    
+    app.openapi_schema = openapi_schema
+    return app.openapi_schema
+
+
+# Include all routers
 app.include_router(endpoints_router, prefix="/v1")
 app.include_router(submission_router, prefix="/v1")
 app.include_router(auth_router, prefix="/v1")
 app.include_router(payments_router, prefix="/v1")
 app.include_router(webhooks_router, prefix="/v1")
 app.include_router(email_router, prefix="/v1")
+app.include_router(seo_router)  # SEO: robots.txt, sitemap.xml
+app.include_router(agents_router, prefix="/v1")  # Agent Discovery
+app.include_router(analytics_router, prefix="/v1")  # Analytics
+app.include_router(portal_router)  # Portal JSON endpoints
+app.include_router(auth_model_router)  # Auth: magic link + API keys
+app.include_router(auth_contracts_router)  # Endpoint contracts: console keys, portal usage, logs, support
+app.include_router(billing_router)  # Billing: Stripe checkout + webhook
+app.include_router(internal_router, prefix="/internal")  # Internal service routes
+app.include_router(public_router)  # Public routes
 
 
 if __name__ == "__main__":

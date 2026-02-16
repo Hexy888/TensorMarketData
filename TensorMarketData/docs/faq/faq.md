@@ -424,7 +424,7 @@ results = client.search("alternative query terms", dataset_id)
 ## Still Have Questions?
 
 - **Documentation**: https://docs.tensormarketdata.com
-- **API Reference**: https://api.tensormarketdata.com/docs
+- **API Reference**: https://tensormarketdata.com/docs
 - **Discord**: https://discord.gg/tensormarketdata
 - **Email**: support@tensormarketdata.com
 - **Sales**: sales@tensormarketdata.com

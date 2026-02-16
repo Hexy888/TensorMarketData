@@ -12,8 +12,8 @@ AI agents can't buy data. They can't scrape websites. They can't solve CAPTCHAs.
 
 ```
 # An agent can now do this:
-curl -X GET "https://api.tensormarketdata.com/v1/search?q=AI+companies" \
-  -H "X-API-Key: {agent's_api_key}"
+curl -X GET "https://tensormarketdata.com/v1/search?q=AI+companies" \
+  -H "Authorization: Bearer: {agent's_api_key}"
 ```
 
 No scraping. No HTML parsing. Just JSON.
@@ -27,14 +27,14 @@ Sign up at https://tensormarketdata.com/dashboard
 
 ### 2. Search for Companies
 ```bash
-curl -X GET "https://api.tensormarketdata.com/v1/search?q=software+companies" \
-  -H "X-API-Key: YOUR_API_KEY"
+curl -X GET "https://tensormarketdata.com/v1/search?q=software+companies" \
+  -H "Authorization: Bearer: YOUR_API_KEY"
 ```
 
 ### 3. Get Company Details
 ```bash
-curl -X GET "https://api.tensormarketdata.com/v1/company/GOOGL" \
-  -H "X-API-Key: YOUR_API_KEY"
+curl -X GET "https://tensormarketdata.com/v1/company/GOOGL" \
+  -H "Authorization: Bearer: YOUR_API_KEY"
 ```
 
 ---
@@ -78,8 +78,8 @@ curl -X GET "https://api.tensormarketdata.com/v1/company/GOOGL" \
 ```python
 # Find companies in your target market
 response = requests.get(
-    "https://api.tensormarketdata.com/v1/search",
-    headers={"X-API-Key": api_key},
+    "https://tensormarketdata.com/v1/search",
+    headers={"Authorization: Bearer": api_key},
     params={"q": "fintech companies SF"}
 )
 ```
@@ -88,8 +88,8 @@ response = requests.get(
 ```python
 # Verify company exists before meeting
 response = requests.get(
-    "https://api.tensormarketdata.com/v1/company/AAPL",
-    headers={"X-API-Key": api_key}
+    "https://tensormarketdata.com/v1/company/AAPL",
+    headers={"Authorization: Bearer": api_key}
 )
 ```
 
@@ -97,8 +97,8 @@ response = requests.get(
 ```python
 # Enrich your CRM with verified data
 response = requests.get(
-    "https://api.tensormarketdata.com/v1/enrich?domain=example.com",
-    headers={"X-API-Key": api_key}
+    "https://tensormarketdata.com/v1/enrich?domain=example.com",
+    headers={"Authorization: Bearer": api_key}
 )
 ```
 
@@ -142,8 +142,8 @@ Subscribe to events:
 - `api.usage` - Monthly usage report
 
 ```bash
-curl -X POST "https://api.tensormarketdata.com/v1/webhooks" \
-  -H "X-API-Key: YOUR_API_KEY" \
+curl -X POST "https://tensormarketdata.com/v1/webhooks" \
+  -H "Authorization: Bearer: YOUR_API_KEY" \
   -d '{"url": "https://your-agent.com/webhook", "events": ["credits.low"]}'
 ```
 
@@ -169,12 +169,12 @@ Your agent talks to our API. That's it.
 import requests
 
 API_KEY = "tmd_xxxxx"
-BASE_URL = "https://api.tensormarketdata.com/v1"
+BASE_URL = "https://tensormarketdata.com/v1"
 
 def search_companies(query):
     response = requests.get(
         f"{BASE_URL}/search",
-        headers={"X-API-Key": API_KEY},
+        headers={"Authorization: Bearer": API_KEY},
         params={"q": query}
     )
     return response.json()
@@ -182,16 +182,16 @@ def search_companies(query):
 
 ### JavaScript
 ```javascript
-const response = await fetch('https://api.tensormarketdata.com/v1/search?q=AI+companies', {
-  headers: { 'X-API-Key': API_KEY }
+const response = await fetch('https://tensormarketdata.com/v1/search?q=AI+companies', {
+  headers: { 'Authorization: Bearer': API_KEY }
 });
 const data = await response.json();
 ```
 
 ### cURL
 ```bash
-curl -X GET "https://api.tensormarketdata.com/v1/search?q=software" \
-  -H "X-API-Key: YOUR_KEY"
+curl -X GET "https://tensormarketdata.com/v1/search?q=software" \
+  -H "Authorization: Bearer: YOUR_KEY"
 ```
 
 ---
