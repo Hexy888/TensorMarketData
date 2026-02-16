@@ -11,16 +11,14 @@
     :root {
       --primary: #4f46e5;
       --primary-dark: #3730a3;
-      --primary-light: #6366f1;
+      --primary-light: #818cf8;
       --bg: #ffffff;
       --bg-secondary: #f8fafc;
-      --bg-alt: #f1f5f9;
       --text: #1e293b;
       --text-muted: #64748b;
       --text-light: #94a3b8;
       --border: #e2e8f0;
       --success: #16a34a;
-      --accent: #818cf8;
     }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -30,7 +28,6 @@
     }
     .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
     
-    /* Header */
     header { 
       padding: 1rem 0; 
       border-bottom: 1px solid var(--border); 
@@ -68,11 +65,8 @@
       padding: 0.6rem 1.25rem;
       border-radius: 8px;
       font-weight: 600;
-      transition: all 0.2s;
     }
-    .nav-links .cta:hover { background: var(--primary-dark); color: #fff; transform: translateY(-1px); }
     
-    /* Hero */
     .hero { 
       padding: 8rem 0 5rem; 
       text-align: center;
@@ -107,7 +101,6 @@
       line-height: 1.7;
     }
     
-    /* Stats */
     .stats { 
       display: flex; 
       justify-content: center; 
@@ -124,7 +117,6 @@
     }
     .stat-label { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; }
     
-    /* Form */
     .form-container {
       background: #fff;
       padding: 2.5rem;
@@ -135,11 +127,10 @@
       box-shadow: 0 20px 60px -15px rgba(0,0,0,0.08);
       text-align: left;
     }
-    
     .form-container h3 { margin-bottom: 0.5rem; color: var(--text); font-size: 1.4rem; font-weight: 700; }
     .form-container > p { color: var(--text-muted); margin-bottom: 1.75rem; font-size: 0.95rem; }
     
-    .form-group { margin-bottom: 1.1rem; text-align: left; }
+    .form-group { margin-bottom: 1.1rem; }
     .form-group label { display: block; margin-bottom: 0.4rem; color: var(--text); font-size: 0.85rem; font-weight: 600; }
     .form-group input, .form-group select {
       width: 100%;
@@ -186,7 +177,6 @@
     .success-message h4 { color: var(--success); margin-bottom: 0.5rem; font-size: 1.1rem; }
     .success-message p { color: var(--text-muted); font-size: 0.9rem; }
     
-    /* Features */
     .features { 
       padding: 6rem 0; 
       background: var(--bg-secondary);
@@ -218,25 +208,26 @@
       box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
       border-color: var(--primary-light);
     }
-    .feature-icon {
-      width: 52px;
-      height: 52px;
-      background: linear-gradient(135deg, rgba(79,70,229,0.1), rgba(129,140,248,0.15));
-      border-radius: 14px;
+    .icon-box {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-bottom: 1.25rem;
     }
-    .feature-icon svg {
+    .icon-box svg {
       width: 24px;
       height: 24px;
-      color: var(--primary);
+      stroke: white;
+      stroke-width: 2;
+      fill: none;
     }
     .feature-card h3 { color: var(--text); margin-bottom: 0.6rem; font-size: 1.1rem; font-weight: 700; }
     .feature-card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.65; }
     
-    /* Quality */
     .quality { padding: 6rem 0; }
     .quality-grid {
       display: grid;
@@ -261,7 +252,6 @@
     .quality-label { color: var(--text); font-weight: 700; margin-bottom: 0.5rem; font-size: 1.1rem; }
     .quality-desc { color: var(--text-muted); font-size: 0.9rem; }
     
-    /* Process */
     .process { 
       padding: 6rem 0; 
       background: var(--bg-secondary);
@@ -298,7 +288,6 @@
     .step h3 { color: var(--text); margin-bottom: 0.6rem; margin-top: 0.5rem; font-weight: 700; }
     .step p { color: var(--text-muted); font-size: 0.95rem; }
     
-    /* CTA */
     .cta-section {
       padding: 6rem 0;
       text-align: center;
@@ -332,7 +321,6 @@
       box-shadow: 0 15px 40px -10px rgba(79,70,229,0.35);
     }
     
-    /* Footer */
     footer { 
       padding: 3rem 0; 
       text-align: center; 
@@ -439,55 +427,48 @@
       
       <div class="features-grid">
         <div class="feature-card">
-          <div class="feature-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V18zm2.498-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.435A13.5 13.5 0 0012 2.25z" />
-            </svg>
+          <div class="icon-box">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
           <h3>Decision Maker Contacts</h3>
           <p>Reach the right people—founders, executives, and key stakeholders with real buying authority.</p>
         </div>
+        
         <div class="feature-card">
-          <div class="feature-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
+          <div class="icon-box">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
           </div>
           <h3>95%+ Email Accuracy</h3>
           <p>Every email verified in real-time. No bounces, no wasted outreach, no damaged sender reputation.</p>
         </div>
+        
         <div class="feature-card">
-          <div class="feature-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-            </svg>
+          <div class="icon-box">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           </div>
           <h3>Deep Company Research</h3>
           <p>Funding rounds, tech stack, employee counts, growth signals, and recent news for context.</p>
         </div>
+        
         <div class="feature-card">
-          <div class="feature-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-            </svg>
+          <div class="icon-box">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
           </div>
           <h3>Fast Turnaround</h3>
           <p>Most lists delivered within 48 hours. Rush orders available for time-sensitive campaigns.</p>
         </div>
+        
         <div class="feature-card">
-          <div class="feature-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
-            </svg>
+          <div class="icon-box">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
           </div>
           <h3>Fresh Data</h3>
           <p>Lists are freshly researched—not stale database exports. We verify each contact before delivery.</p>
         </div>
+        
         <div class="feature-card">
-          <div class="feature-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-            </svg>
+          <div class="icon-box">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
           </div>
           <h3>Custom Formats</h3>
           <p>Get data in CSV, Excel, or directly integrated into your CRM. Whatever workflow you use.</p>
@@ -568,15 +549,10 @@
   <script>
     document.getElementById('lead-form').addEventListener('submit', async function(e) {
       e.preventDefault();
-      
       const formData = new FormData(this);
       const data = Object.fromEntries(formData);
-      
-      // Show success
       this.style.display = 'none';
       document.getElementById('success').style.display = 'block';
-      
-      // Log for now
       console.log('Lead request:', data);
     });
   </script>
