@@ -290,6 +290,7 @@ async def get_supplier(
 @router.get(
     "/companies/sample",
     response_model=SearchResponse,
+)
 async def get_company_by_ticker(
     ticker: str,
     api_key: APIKey = Depends(validate_api_key),

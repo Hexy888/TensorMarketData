@@ -16,12 +16,12 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 from app.core.config import settings
 from app.core.supabase import supabase, check_health
-from app.api.v1 import endpoints_router, submission_router, auth_router, analytics_router, portal_router, auth_model_router, internal_router, public_router, auth_contracts_router
-from app.api.v1.billing import router as billing_router
-from app.api.v1.payments import router as payments_router
+from app.api.v1 import endpoints_router, submission_router, auth_router
+# from app.api.v1.billing import router as billing_router
+# from app.api.v1.payments import router as payments_router
 from app.api.v1.webhooks import router as webhooks_router
 from app.api.v1.email import router as email_router
-from app.api.v1.agents import router as agents_router
+# from app.api.v1.agents import router as agents_router
 
 # Create templates directory path
 TEMPLATES_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "templates")
@@ -385,18 +385,18 @@ async def get_openapi():
 app.include_router(endpoints_router, prefix="/v1")
 app.include_router(submission_router, prefix="/v1")
 app.include_router(auth_router, prefix="/v1")
-app.include_router(payments_router, prefix="/v1")
+# app.include_router(payments_router, prefix="/v1")
 app.include_router(webhooks_router, prefix="/v1")
 app.include_router(email_router, prefix="/v1")
-app.include_router(seo_router)  # SEO: robots.txt, sitemap.xml
-app.include_router(agents_router, prefix="/v1")  # Agent Discovery
-app.include_router(analytics_router, prefix="/v1")  # Analytics
-app.include_router(portal_router)  # Portal JSON endpoints
-app.include_router(auth_model_router)  # Auth: magic link + API keys
-app.include_router(auth_contracts_router)  # Endpoint contracts: console keys, portal usage, logs, support
-app.include_router(billing_router)  # Billing: Stripe checkout + webhook
-app.include_router(internal_router, prefix="/internal")  # Internal service routes
-app.include_router(public_router)  # Public routes
+# app.include_router(seo_router)  # SEO: robots.txt, sitemap.xml
+# app.include_router(agents_router, prefix="/v1")  # Agent Discovery
+# app.include_router(analytics_router, prefix="/v1")  # Analytics
+# app.include_router(portal_router)  # Portal JSON endpoints
+# app.include_router(auth_model_router)  # Auth: magic link + API keys
+# app.include_router(auth_contracts_router)  # Endpoint contracts
+# app.include_router(billing_router)  # Billing: Stripe checkout + webhook
+# app.include_router(internal_router, prefix="/internal")  # Internal service routes
+# app.include_router(public_router)  # Public routes
 
 
 if __name__ == "__main__":
