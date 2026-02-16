@@ -1,6 +1,67 @@
 # TensorMarketData API Guide
 
+> **⏱️ Quickstart**: Get your API key → Make your first call in under 2 minutes. [Jump to Quickstart ↓](#quickstart)
+
 This guide covers the TensorMarketData API for developers building AI agents and data-intensive applications.
+
+---
+
+## ⭐ Quickstart: Your First API Call (Under 2 Minutes)
+
+### Step 1: Get Your API Key
+
+1. Sign up at [tensormarketdata.com](https://tensormarketdata.com)
+2. Go to **Dashboard → API Keys**
+3. Copy your API key (starts with `tk_`)
+
+### Step 2: Make Your First Call
+
+```bash
+# Set your API key
+export TENSOR_API_KEY="tk_your_key_here"
+
+# List available datasets
+curl -H "Authorization: Bearer $TENSOR_API_KEY" \
+  https://tensormarketdata.com/v1/datasets
+```
+
+**Expected response:**
+```json
+{
+  "datasets": [
+    {
+      "id": "ds_ecommerce_products_001",
+      "name": "E-commerce Product Catalog",
+      "category": "ecommerce",
+      "record_count": 15000000,
+      "freshness": "realtime"
+    }
+  ],
+  "total": 1
+}
+```
+
+### Step 3: Query Your First Dataset
+
+```bash
+curl -X POST https://tensormarketdata.com/v1/datasets/ds_ecommerce_products_001/query \
+  -H "Authorization: Bearer $TENSOR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "filters": {"field": "category", "operator": "eq", "value": "electronics"},
+    "fields": ["product_id", "name", "price"],
+    "limit": 5
+  }'
+```
+
+**That's it!** You're now querying real-time e-commerce data. 
+
+> 💡 **Pro tip**: Install our Python client for even easier integration:
+> ```bash
+> pip install tensormarketdata
+> ```
+
+---
 
 ## Base URL
 
