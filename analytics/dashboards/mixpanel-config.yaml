@@ -1,0 +1,111 @@
+# TensorMarketData Mixpanel Configuration
+
+## Project Settings
+
+**Project Token**: `{{MIXPANEL_PROJECT_TOKEN}}`
+**Project ID**: `{{MIXPANEL_PROJECT_ID}}`
+
+**API Secret**: `{{MIXPANEL_API_SECRET}}`
+
+## Dashboard URL
+https://mixpanel.com/report/[PROJECT_ID]/
+
+## User Properties Schema
+
+```json
+{
+  "user_id": "string (unique)",
+  "email": "string",
+  "company": "string",
+  "company_size": "1-10, 11-50, 51-200, 201-1000, 1000+",
+  "signup_date": "datetime",
+  "signup_source": "google, github, email",
+  "plan": "free, starter, pro, enterprise",
+  "plan_value": "number (monthly $)",
+  "api_key_count": "number",
+  "first_query_date": "datetime",
+  "converted_to_paid": "boolean",
+  "converted_date": "datetime",
+  "region": "us, eu, apac",
+  "industry": "string"
+}
+```
+
+## Event Tracking Plan
+
+### Authentication Events
+| Event | Properties | Trigger |
+|-------|------------|---------|
+| `User Signed Up` | source, referral_code | Signup completion |
+| `User Logged In` | method, mfa_used | Login success |
+| `User Invited` | inviter_id, role | Invite sent |
+
+### API Key Events
+| Event | Properties | Trigger |
+|-------|------------|---------|
+| `API Key Created` | key_name, tier | Key generation |
+| `API Key Revoked` | reason, key_name | Key deletion |
+| `API Key Rotated` | previous_key_name | Key rotation |
+
+### API Usage Events
+| Event | Properties | Trigger |
+|-------|------------|---------|
+| `Query Executed` | endpoint, model, latency_ms, credits_used | API call |
+| `Query Failed` | endpoint, error_code, error_message | API error |
+| `Batch Query` | batch_size, credits_used | Batch endpoint |
+
+### Feature Usage Events
+| Event | Properties | Trigger |
+|-------|------------|---------|
+| `Dataset Viewed` | dataset_id, category | Dataset page |
+| `Dataset Downloaded` | dataset_id, format | Download |
+| `Search Performed` | query, results_count | Search submit |
+| `Report Generated` | type, filters | Report creation |
+
+### Billing Events
+| Event | Properties | Trigger |
+|-------|------------|---------|
+| `Plan Upgraded` | from_plan, to_plan, amount | Upgrade completion |
+| `Plan Downgraded` | from_plan, to_plan | Downgrade completion |
+| `Payment Method Added` | type (card, bank) | Payment add |
+| `Invoice Paid` | amount, currency | Payment success |
+
+## Funnel Definitions
+
+### Free → Paid Conversion Funnel
+```
+1. User Signed Up
+   ↓ (70% continue)
+2. API Key Created
+   ↓ (60% continue)
+3. Query Executed
+   ↓ (5% convert)
+4. Plan Upgraded
+```
+
+### Developer Activation Funnel
+```
+1. User Signed Up
+   ↓
+2. API Key Created
+   ↓
+3. First Query Executed
+   ↓ (within 7 days)
+4. Second Query Executed
+   ↓ (within 14 days)
+5. Third+ Query Executed
+```
+
+## Retention Cohorts
+
+- **Weekly retention** by signup cohort (Users 0-12 weeks)
+- **Monthly retention** by plan tier
+- **Feature retention** by dataset category
+
+## Segmentation Views
+
+1. **By Plan**: free, starter, pro, enterprise
+2. **By Region**: us, eu, apac
+3. **By Industry**: tech, finance, healthcare, etc.
+4. **By Company Size**: 1-10, 11-50, 51-200, 200+
+5. **By Signup Source**: organic, paid, referral

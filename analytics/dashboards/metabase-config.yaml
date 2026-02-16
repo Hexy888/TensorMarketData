@@ -1,0 +1,198 @@
+# TensorMarketData Metabase Dashboard Configurations
+
+## Dashboard 1: Executive Overview
+
+**Dashboard ID**: `exec-overview`
+**Refresh**: 1 hour
+
+### Tiles
+
+| Position | Visualization | Metric | Source |
+|----------|--------------|--------|--------|
+| (1,1) | Number | MRR | Stripe |
+| (1,2) | Number | MRR Growth % | Calculated |
+| (1,3) | Number | MAU | Mixpanel |
+| (1,4) | Number | NRR % | Stripe |
+| (2,1) | Trend Line | MRR (12 months) | Stripe |
+| (2,2) | Trend Line | MAU (12 months) | Mixpanel |
+| (2,3) | Bar Chart | MRR by Plan | Stripe |
+| (2,4) | Funnel | Conversion Funnel | Mixpanel |
+
+---
+
+## Dashboard 2: Growth Metrics
+
+**Dashboard ID**: `growth`
+**Refresh**: 4 hours
+
+### Tiles
+
+| Position | Visualization | Metric | Source |
+|----------|--------------|--------|--------|
+| (1,1) | Number | New Signups (MTD) | Auth |
+| (1,2) | Number | Signup → API Key Rate | Mixpanel |
+| (1,3) | Number | API Key → Query Rate | Mixpanel |
+| (1,4) | Number | Free → Paid Conversion | Mixpanel |
+| (2,1) | Trend Line | Daily Signups (30 days) | Auth |
+| (2,2) | Bar Chart | Signups by Source | Analytics |
+| (2,3) | Table | Top Campaigns | Analytics |
+| (2,4) | Cohort Heatmap | Weekly Cohort Retention | Mixpanel |
+| (3,1) | Trend Line | CAC (30 days) | Finance |
+| (3,2) | Trend Line | CAC by Channel | Finance |
+
+---
+
+## Dashboard 3: Product Usage
+
+**Dashboard ID**: `product-usage`
+**Refresh**: 1 hour
+
+### Tiles
+
+| Position | Visualization | Metric | Source |
+|----------|--------------|--------|--------|
+| (1,1) | Number | DAU | Mixpanel |
+| (1,2) | Number | DAU/MAU (Stickiness) | Mixpanel |
+| (1,3) | Number | Avg Queries/User | API Gateway |
+| (1,4) | Number | Active API Keys | Auth |
+| (2,1) | Trend Line | DAU (30 days) | Mixpanel |
+| (2,2) | Trend Line | Queries (30 days) | API Gateway |
+| (2,3) | Bar Chart | Queries by Endpoint | API Gateway |
+| (2,4) | Histogram | Queries per User Distribution | Mixpanel |
+| (3,1) | Table | Top Datasets by Usage | Analytics |
+| (3,2) | Table | Feature Adoption Rates | Mixpanel |
+
+---
+
+## Dashboard 4: Revenue & Unit Economics
+
+**Dashboard ID**: `revenue`
+**Refresh**: 24 hours
+
+### Tiles
+
+| Position | Visualization | Metric | Source |
+|----------|--------------|--------|--------|
+| (1,1) | Number | MRR | Stripe |
+| (1,2) | Number | ARPU | Calculated |
+| (1,3) | Number | LTV | Calculated |
+| (1,4) | Number | LTV:CAC | Calculated |
+| (2,1) | Trend Line | MRR (12 months) | Stripe |
+| (2,2) | Trend Line | Revenue per Query | Calculated |
+| (2,3) | Bar Chart | MRR by Plan | Stripe |
+| (2,4) | Bar Chart | Expansion Revenue by Cohort | Stripe |
+| (3,1) | Table | Revenue by Region | Stripe |
+| (3,2) | Table | Enterprise Accounts | CRM |
+
+---
+
+## Dashboard 5: Retention & Churn
+
+**Dashboard ID**: `retention`
+**Refresh**: 24 hours
+
+### Tiles
+
+| Position | Visualization | Metric | Source |
+|----------|--------------|--------|--------|
+| (1,1) | Number | Monthly Churn % | Mixpanel |
+| (1,2) | Number | Gross Retention % | Stripe |
+| (1,3) | Number | Net Revenue Retention | Stripe |
+| (1,4) | Number | Logo Retention | Stripe |
+| (2,1) | Trend Line | Monthly Churn (12 months) | Mixpanel |
+| (2,2) | Cohort Heatmap | Weekly Retention Cohorts | Mixpanel |
+| (2,3) | Table | Churned Accounts (Last 30) | CRM |
+| (2,4) | Table | At-Risk Accounts | CRM |
+
+---
+
+## Dashboard 6: Operations
+
+**Dashboard ID**: `operations`
+**Refresh**: 5 minutes
+
+### Tiles
+
+| Position | Visualization | Metric | Source |
+|----------|--------------|--------|--------|
+| (1,1) | Gauge | API Error Rate (Target <1%) | API Gateway |
+| (1,2) | Gauge | Latency p95 (Target <500ms) | API Gateway |
+| (1,3) | Number | Uptime (24h) | Pingdom |
+| (1,4) | Number | Failed Payments (24h) | Stripe |
+| (2,1) | Trend Line | API Calls (24h) | API Gateway |
+| (2,2) | Trend Line | Error Rate (24h) | API Gateway |
+| (2,3) | Trend Line | Latency p95 (24h) | API Gateway |
+| (2,4) | Table | Recent Errors | Logs |
+
+---
+
+## Dashboard 7: Conversion Funnel
+
+**Dashboard ID**: `conversion-funnel`
+**Refresh**: 4 hours
+
+### Tiles
+
+| Position | Visualization | Metric | Source |
+|----------|--------------|--------|--------|
+| (1,1) | Funnel | Visitor → Signup → API Key → Query → Paid | Plausible/Mixpanel |
+| (2,1) | Bar Chart | Conversion by Source | Analytics |
+| (2,2) | Bar Chart | Conversion by Plan | Mixpanel |
+| (2,3) | Cohort Heatmap | Time to Activation | Mixpanel |
+| (2,4) | Table | Drop-off Analysis | Analytics |
+
+---
+
+## SQL Query Library for Custom Tiles
+
+### MRR Calculation
+```sql
+SELECT 
+  DATE_TRUNC('month', created_at) AS month,
+  SUM(amount) AS mrr
+FROM subscriptions
+WHERE status = 'active'
+GROUP BY 1
+ORDER BY 1 DESC
+```
+
+### User Cohort Retention
+```sql
+WITH cohorts AS (
+  SELECT 
+    user_id,
+    DATE_TRUNC('week', signup_date) AS cohort,
+    MIN(DATE_TRUNC('week', event_date)) AS active_week
+  FROM user_activity
+  GROUP BY 1, 2
+)
+
+SELECT 
+  cohort,
+  COUNT(DISTINCT user_id) AS cohort_size,
+  COUNT(DISTINCT CASE WHEN weeks_active = 0 THEN user_id END) AS week_0,
+  COUNT(DISTINCT CASE WHEN weeks_active = 1 THEN user_id END) AS week_1,
+  COUNT(DISTINCT CASE WHEN weeks_active = 2 THEN user_id END) AS week_2,
+  COUNT(DISTINCT CASE WHEN weeks_active = 3 THEN user_id END) AS week_3
+FROM (
+  SELECT 
+    c.user_id,
+    c.cohort,
+    DATE_DIFF('week', c.cohort, c.active_week) AS weeks_active
+  FROM cohorts c
+)
+GROUP BY 1
+ORDER BY 1 DESC
+```
+
+### CAC by Channel
+```sql
+SELECT 
+  signup_source,
+  SUM(marketing_spend) AS spend,
+  COUNT(DISTINCT user_id) AS customers,
+  SUM(marketing_spend) / COUNT(DISTINCT user_id) AS cac
+FROM marketing_attribution
+GROUP BY 1
+ORDER BY cac
+```

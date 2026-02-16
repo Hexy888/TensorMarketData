@@ -1,0 +1,35 @@
+[Unit]
+Description=TensorMarketData Production Service
+Documentation=https://github.com/your-org/tensormarketdata
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+User=deploy
+Group=deploy
+WorkingDirectory=/opt/tensormarketdata
+
+# Execute docker compose
+ExecStart=/usr/local/bin/docker-compose -f docker-compose.yml up -d
+ExecStop=/usr/local/bin/docker-compose -f docker-compose.yml down
+ExecReload=/bin/kill -HUP $MAINPID
+
+# Restart policy
+Restart=always
+RestartSec=10
+
+# Environment
+Environment=ENV=production
+EnvironmentFile=/opt/tensormarketdata/.env.production
+
+# Health check
+ExecStartPost=/bin/bash -c 'until curl -sf http://localhost:8000/health; do sleep 2; done'
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=tensormarketdata
+
+[Install]
+WantedBy=multi-user.target

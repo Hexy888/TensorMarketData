@@ -1,0 +1,119 @@
+# TensorMarketData Mixpanel JQL Query Library
+
+## User Acquisition Source Report
+```javascript
+// Get users by signup source with conversion rates
+function main() {
+  var users = Events({
+    event: "User Signed Up",
+    limit: Infinity
+  });
+  
+  var conversions = Events({
+    event: "Plan Upgraded",
+    limit: Infinity
+  });
+  
+  // Aggregate by source
+  var bySource = {};
+  users.forEach(function(e) {
+    var source = e.properties.signup_source || 'unknown';
+    if (!bySource[source]) {
+      bySource[source] = { signups: 0, paid: 0 };
+    }
+    bySource[source].signups++;
+  });
+  
+  conversions.forEach(function(e) {
+    var userId = e.user_id;
+    // Find signup source for this user
+    var userSignup = events({
+      event: "User Signed Up",
+      user_id: userId,
+      limit: 1
+    }).first();
+    
+    if (userSignup) {
+      var source = userSignup.properties.signup_source || 'unknown';
+      if (bySource[source]) {
+        bySource[source].paid++;
+      }
+    }
+  });
+  
+  return bySource;
+}
+```
+
+## API Usage Intensity Report
+```javascript
+// Calculate queries per user per week
+function main() {
+  var queries = Events({
+    event: "Query Executed",
+    limit: Infinity
+  });
+  
+  var userWeeks = {};
+  
+  queries.forEach(function(e) {
+    var key = e.user_id + '_' + getWeek(e.time);
+    if (!userWeeks[key]) {
+      userWeeks[key] = { user_id: e.user_id, week: getWeek(e.time), count: 0 };
+    }
+    userWeeks[key].count++;
+  });
+  
+  // Calculate distribution
+  var distribution = { power_users: 0, regular: 0, occasional: 0 };
+  Object.values(userWeeks).forEach(function(uw) {
+    if (uw.count > 100) distribution.power_users++;
+    else if (uw.count > 10) distribution.regular++;
+    else distribution.occasional++;
+  });
+  
+  return distribution;
+}
+
+function getWeek(date) {
+  var d = new Date(date);
+  var onejan = new Date(d.getFullYear(), 0, 1);
+  return Math.ceil((((d - onejan) / 86400000) + onejan.getDay() + 1) / 7);
+}
+```
+
+## Churn Risk Score Report
+```javascript
+// Identify users at risk of churning
+function main() {
+  var recentEvents = Events({
+    event: ["Query Executed", "Dataset Viewed"],
+    limit: Infinity
+  });
+  
+  var users = {};
+  var now = Date.now();
+  var THIRTY_DAYS = 30 * 24 * 60 * 60 * 1000;
+  
+  recentEvents.forEach(function(e) {
+    var daysSince = (now - e.time) / THIRTY_DAYS;
+    if (daysSince < 1) {
+      users[e.user_id] = { 
+        last_active: e.time, 
+        events: 0,
+        score: 100 
+      };
+    }
+    if (users[e.user_id]) {
+      users[e.user_id].events++;
+      users[e.user_id].score -= daysSince * 20;
+    }
+  });
+  
+  var atRisk = Object.keys(users)
+    .filter(function(u) { return users[u].score < 50; })
+    .map(function(u) { return { user_id: u, score: users[u].score }; });
+  
+  return atRisk.slice(0, 100);
+}
+```

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing - TensorMarketData - B2B Lead Generation</title>
+  <meta name="description" content="Transparent pricing for high-quality B2B leads. Starting at $199 for 100 verified contacts. No contracts, no subscriptions required.">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --bg: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-card: #1a1a24;
+      --border: #2a2a3a;
+      --text: #e0e0e0;
+      --text-muted: #888;
+      --text-dim: #555;
+      --success: #22c55e;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    
+    header { 
+      padding: 1.25rem 0; 
+      border-bottom: 1px solid var(--border); 
+      background: rgba(10,10,15,0.9);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+    }
+    header .container { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+    }
+    .logo { font-size: 1.4rem; font-weight: 700; }
+    .logo span { color: var(--primary); }
+    nav { display: flex; gap: 2rem; align-items: center; }
+    nav a { 
+      color: var(--text-muted); 
+      text-decoration: none; 
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--text); }
+    nav a.cta {
+      background: var(--primary);
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+    }
+    
+    .hero { 
+      padding: 8rem 0 4rem; 
+      text-align: center;
+      background: radial-gradient(ellipse at top, #1a1a2e 0%, var(--bg) 60%);
+    }
+    h1 { 
+      font-size: 2.75rem; 
+      font-weight: 800; 
+      margin-bottom: 1rem; 
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+    .hero p { 
+      font-size: 1.15rem; 
+      color: var(--text-muted); 
+      max-width: 550px; 
+      margin: 0 auto;
+    }
+    
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin: 3rem 0;
+    }
+    .pricing-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .pricing-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--primary);
+    }
+    .pricing-card.featured {
+      border-color: var(--primary);
+      background: linear-gradient(180deg, rgba(99,102,241,0.08) 0%, var(--bg-card) 100%);
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(99,102,241,0.15);
+      color: #a78bfa;
+      padding: 0.3rem 0.75rem;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .pricing-card h3 { color: #fff; font-size: 1.25rem; margin-bottom: 0.5rem; }
+    .price {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.25rem;
+    }
+    .price span { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
+    .price-note { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem; }
+    
+    .leads-count {
+      background: var(--bg);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+    .leads-count .num { font-size: 1.75rem; font-weight: 700; color: var(--primary); }
+    .leads-count .label { font-size: 0.85rem; color: var(--text-muted); }
+    
+    .per-lead {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+    
+    .features-list {
+      text-align: left;
+      margin-bottom: 1.5rem;
+      list-style: none;
+    }
+    .features-list li {
+      padding: 0.5rem 0;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .features-list li::before {
+      content: "✓";
+      color: var(--success);
+      font-weight: bold;
+    }
+    
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+    .btn-primary:hover { background: var(--primary-dark); }
+    .btn-secondary {
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { border-color: var(--text-muted); }
+    
+    .guarantee {
+      text-align: center;
+      padding: 2rem;
+      background: var(--bg-secondary);
+      border-radius: 12px;
+      margin: 3rem 0;
+    }
+    .guarantee h3 { color: #fff; margin-bottom: 0.5rem; }
+    .guarantee p { color: var(--text-muted); font-size: 0.9rem; }
+    
+    .faq { padding: 4rem 0; }
+    .faq h2 { 
+      text-align: center; 
+      font-size: 2rem; 
+      color: #fff; 
+      margin-bottom: 2rem; 
+    }
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    .faq-item {
+      background: var(--bg-card);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .faq-item h4 { color: #fff; margin-bottom: 0.5rem; }
+    .faq-item p { color: var(--text-muted); font-size: 0.9rem; }
+    
+    footer { 
+      padding: 2rem 0; 
+      text-align: center; 
+      color: var(--text-dim); 
+      font-size: 0.85rem; 
+      border-top: 1px solid var(--border);
+    }
+    .email-link { color: var(--primary); text-decoration: none; }
+    
+    @media (max-width: 768px) {
+      h1 { font-size: 2rem; }
+      .pricing-grid, .faq-grid { grid-template-columns: 1fr; }
+      nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">Tensor<span>MarketData</span></div>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <a href="/#quality">Quality</a>
+        <a href="#contact" class="cta">Get Leads</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Simple, Transparent Pricing</h1>
+      <p>No subscriptions required. No long-term contracts. Pay only for the leads you need.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="pricing-grid">
+        <!-- Starter -->
+        <div class="pricing-card">
+          <span class="badge">Best Value</span>
+          <h3>Starter</h3>
+          <div class="price">$199<span>/one-time</span></div>
+          <div class="leads-count">
+            <div class="num">100</div>
+            <div class="label">Verified Leads</div>
+          </div>
+          <div class="per-lead">$1.99 per lead</div>
+          <ul class="features-list">
+            <li>Validated decision-maker contacts</li>
+            <li>95%+ email deliverability</li>
+            <li>Company research & context</li>
+            <li>30-day replacement guarantee</li>
+            <li>CSV/Excel delivery</li>
+          </ul>
+          <a href="#contact" class="btn btn-secondary">Request Quote</a>
+        </div>
+        
+        <!-- Growth -->
+        <div class="pricing-card featured">
+          <span class="badge">Most Popular</span>
+          <h3>Growth</h3>
+          <div class="price">$499<span>/one-time</span></div>
+          <div class="leads-count">
+            <div class="num">500</div>
+            <div class="label">Verified Leads</div>
+          </div>
+          <div class="per-lead">$0.99 per lead</div>
+          <ul class="features-list">
+            <li>Everything in Starter</li>
+            <li>Priority turnaround</li>
+            <li>Tech stack data</li>
+            <li>Funding & growth signals</li>
+            <li>CRM integration available</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary">Request Quote</a>
+        </div>
+        
+        <!-- Monthly -->
+        <div class="pricing-card">
+          <span class="badge">Enterprise</span>
+          <h3>Monthly</h3>
+          <div class="price">$999<span>/month</span></div>
+          <div class="leads-count">
+            <div class="num">200</div>
+            <div class="label">Fresh Leads Monthly</div>
+          </div>
+          <div class="per-lead">$5.00 per lead</div>
+          <ul class="features-list">
+            <li>Everything in Growth</li>
+            <li>Monthly fresh leads</li>
+            <li>Dedicated account manager</li>
+            <li>Custom research requests</li>
+            <li>API access available</li>
+          </ul>
+          <a href="#contact" class="btn btn-secondary">Contact Sales</a>
+        </div>
+      </div>
+      
+      <div class="guarantee" id="contact">
+        <h3>🔒 Quality Guarantee</h3>
+        <p>Every email verified for deliverability. Bad contacts? We'll replace them free within 30 days. No questions asked.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq">
+    <div class="container">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h4>How do you verify emails?</h4>
+          <p>We use multi-step verification—syntax check, domain validation, and SMTP verification to ensure 95%+ deliverability.</p>
+        </div>
+        <div class="faq-item">
+          <h4>How long does delivery take?</h4>
+          <p>Starter lists ship within 48 hours. Growth and Monthly orders prioritized for 24-hour delivery.</p>
+        </div>
+        <div class="faq-item">
+          <h4>What data do I get per lead?</h4>
+          <p>Each lead includes: name, title, email, phone (when available), company info, funding, and tech stack.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Can I request specific criteria?</h4>
+          <p>Absolutely. Tell us your ideal customer profile and we'll custom-research leads matching your requirements.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>Questions? <a href="mailto:nova@tensormarketdata.com" class="email-link">nova@tensormarketdata.com</a></p>
+      <p style="margin-top: 0.5rem;">© 2026 TensorMarketData. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

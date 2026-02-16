@@ -1,0 +1,243 @@
+# TensorMarketData Automated Reports
+
+## Daily Report - Operations
+
+**Schedule**: Every day at 8:00 AM CST
+**Recipients**: engineering@, ops@
+
+### Metrics Included
+
+```yaml
+report: "Daily Operations"
+frequency: daily
+time: "08:00 CST"
+recipients:
+  - ops@tensormarketdata.com
+  - engineering@tensormarketdata.com
+metrics:
+  - name: "DAU"
+    source: mixpanel
+    comparison: yesterday, last_week
+  
+  - name: "API Calls (24h)"
+    source: api_gateway
+    comparison: yesterday, last_week
+  
+  - name: "Error Rate"
+    source: api_gateway
+    threshold: 1%
+    alert: ">5%"
+  
+  - name: "Latency p95"
+    source: api_gateway
+    threshold: 500ms
+    alert: ">1000ms"
+  
+  - name: "Failed Signups"
+    source: auth
+    threshold: 10% of normal
+    alert: ">2x normal"
+  
+  - name: "API Key Creations"
+    source: mixpanel
+    comparison: yesterday
+  
+  - name: "Revenue (MTD)"
+    source: stripe
+    comparison: forecast
+
+alerts:
+  - condition: "error_rate > 5%"
+    severity: critical
+    channel: "#alerts-critical"
+  
+  - condition: "latency_p95 > 1000ms"
+    severity: warning
+    channel: "#alerts"
+```
+
+---
+
+## Weekly Report - Growth
+
+**Schedule**: Every Monday at 9:00 AM CST
+**Recipients**: growth@, ceo@
+
+### Metrics Included
+
+```yaml
+report: "Weekly Growth"
+frequency: weekly
+time: "09:00 CST"
+recipients:
+  - growth@tensormarketdata.com
+  - ceo@tensormarketdata.com
+metrics:
+  - name: "WAU"
+    source: mixpanel
+    change: WoW, MoM
+  
+  - name: "New Signups"
+    source: auth
+    total: 0
+    by_source:
+      - organic
+      - paid_google
+      - paid_linkedin
+      - referral
+      - direct
+  
+  - name: "Signup → API Key Rate"
+    source: mixpanel
+    benchmark: 50%
+    trend: 4_week
+  
+  - name: "API Key → Query Rate"
+    source: mixpanel
+    benchmark: 40%
+    trend: 4_week
+  
+  - name: "Funnel Conversion"
+    stages:
+      - visitor_to_signup: "15%"
+      - signup_to_api_key: "60%"
+      - apikey_to_query: "50%"
+      - query_to_paid: "5%"
+  
+  - name: "Top Channels"
+    source: plausible
+    limit: 5
+    metrics: [visitors, conversion_rate]
+  
+  - name: "Campaign Performance"
+    source: analytics
+    campaigns: ["q1-growth", "product-launch"]
+    metrics: [spend, signups, cac]
+  
+  - name: "NPS Score"
+    source: uservoice
+    trend: 4_week
+```
+
+---
+
+## Monthly Report - Business Review
+
+**Schedule**: 1st of each month at 10:00 AM CST
+**Recipients**: all-hands@, board@
+
+### Metrics Included
+
+```yaml
+report: "Monthly Business Review"
+frequency: monthly
+time: "10:00 CST"
+recipients:
+  - all-hands@tensormarketdata.com
+  - board@tensormarketdata.com
+sections:
+  - title: "Executive Summary"
+    metrics:
+      - MRR
+      - MRR Growth
+      - MAU
+      - Churn Rate
+      - Net Revenue Retention
+  
+  - title: "Revenue Analysis"
+    metrics:
+      - MRR by plan (free, starter, pro, enterprise)
+      - ARPU
+      - Expansion revenue
+      - Revenue per query
+  
+  - title: "Growth Metrics"
+    metrics:
+      - New customers
+      - CAC (blended)
+      - CAC by channel
+      - Payback period
+      - LTV:CAC ratio
+  
+  - title: "Product Metrics"
+    metrics:
+      - MAU / DAU ratio (stickiness)
+      - Queries per user
+      - Feature adoption rates
+      - API usage intensity distribution
+  
+  - title: "Customer Health"
+    metrics:
+      - Logo retention
+      - Gross revenue retention
+      - Net revenue retention
+      - Churned accounts analysis
+  
+  - title: "Forward Looking"
+    metrics:
+      - Pipeline (trials in progress)
+      - Forecast next month
+      - Key initiatives
+  
+  - title: "Appendix"
+    contents:
+      - Full KPI table
+      - Cohort analysis
+      - Channel breakdown
+```
+
+---
+
+## Report Delivery Configuration
+
+```yaml
+delivery:
+  formats:
+    - slack
+    - email (PDF attachment)
+    - dashboard (automated refresh)
+  
+  slack_channels:
+    daily: "#metrics-daily"
+    weekly: "#metrics-weekly"
+    monthly: "#metrics-monthly"
+  
+  retention:
+    reports: 24 months
+    raw_data: 7 years (compliance)
+```
+
+## SQL Template - Daily Metrics
+
+```sql
+-- Daily Operations Metrics Query
+WITH daily_stats AS (
+  SELECT 
+    CURRENT_DATE() AS report_date,
+    
+    -- Users
+    COUNT(DISTINCT CASE WHEN last_active >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 24 HOUR) 
+      THEN user_id END) AS dau,
+    
+    -- API Calls
+    COUNT(*) AS api_calls_24h,
+    SUM(CASE WHEN status >= 400 THEN 1 ELSE 0 END) AS failed_calls,
+    ROUND(SUM(CASE WHEN status >= 400 THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) AS error_rate,
+    
+    -- Latency
+    APPROX_QUANTILES(latency_ms, 100)[OFFSET(95)] AS latency_p95,
+    
+    -- Signups
+    COUNT(CASE WHEN signup_date >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 24 HOUR) 
+      THEN user_id END) AS new_signups,
+    
+    -- API Keys
+    COUNT(CASE WHEN created_at >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 24 HOUR) 
+      THEN key_id END) AS new_api_keys
+    
+  FROM api_requests
+  LEFT JOIN users ON api_requests.user_id = users.id
+)
+
+SELECT * FROM daily_stats
+```

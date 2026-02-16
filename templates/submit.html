@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit Data - TensorMarketData</title>
+  <meta name="description" content="Submit your B2B data to TensorMarketData. Earn credits by providing verified supplier data to AI agents.">
+  <meta property="og:title" content="Submit Data - TensorMarketData">
+  <meta property="og:description" content="Earn credits by providing verified supplier data to AI agents">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tensormarketdata.com/submit">
+  <link rel="canonical" href="https://tensormarketdata.com/submit">
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <style>
+    .submit-container { max-width: 800px; margin: 0 auto; padding: 2rem; }
+    .form-section { background: white; padding: 2rem; border-radius: 12px; margin-bottom: 1.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .form-section h3 { margin-bottom: 1rem; color: var(--dark); }
+    .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--gray); }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 1rem; }
+    .form-group textarea { min-height: 120px; resize: vertical; }
+    .form-group .hint { font-size: 0.875rem; color: var(--gray); margin-top: 0.25rem; }
+    .upload-area { border: 2px dashed #e2e8f0; padding: 2rem; text-align: center; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+    .upload-area:hover { border-color: var(--primary); background: rgba(99, 102, 241, 0.05); }
+    .upload-area input { display: none; }
+    .format-badge { display: inline-block; padding: 0.25rem 0.75rem; background: #f1f5f9; border-radius: 4px; font-size: 0.875rem; margin: 0.25rem; }
+    .submission-status { padding: 1rem; border-radius: 8px; margin-top: 1rem; display: none; }
+    .submission-status.success { background: #dcfce7; color: #166534; }
+    .submission-status.error { background: #fee2e2; color: #991b1b; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">Tensor<span>MarketData</span></a>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/docs">Documentation</a></li>
+      <li><a href="/submit">Submit Data</a></li>
+      <li><a href="/dashboard">Dashboard</a></li>
+      <li><a href="/submit">Submit Data</a></li>
+      <li><a href="/providers">Providers</a></li>
+    </ul>
+  </nav>
+
+  <div class="submit-container">
+    <h1 style="margin-bottom: 0.5rem;">Submit Supplier Data</h1>
+    <p style="color: var(--gray); margin-bottom: 2rem;">Contribute to the marketplace and earn rewards for quality data.</p>
+
+    <form id="submitForm">
+      <!-- Company Info -->
+      <div class="form-section">
+        <h3>Company Information</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="companyName">Company Name *</label>
+            <input type="text" id="companyName" name="companyName" required placeholder="Acme Corporation">
+          </div>
+          <div class="form-group">
+            <label for="website">Website</label>
+            <input type="url" id="website" name="website" placeholder="https://acme.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="description">Company Description</label>
+          <textarea id="description" name="description" placeholder="Brief description of what the company does..."></textarea>
+        </div>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="form-section">
+        <h3>Contact Information</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="contact@company.com">
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="+1-555-0123">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="linkedin">LinkedIn URL</label>
+          <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/company/...">
+        </div>
+      </div>
+
+      <!-- Products -->
+      <div class="form-section">
+        <h3>Products / Services</h3>
+        <div class="form-group">
+          <label for="products">Products or Services (comma-separated)</label>
+          <textarea id="products" name="products" placeholder="widgets, manufacturing, consulting services..."></textarea>
+          <p class="hint">List the main products or services offered</p>
+        </div>
+        <div class="form-group">
+          <label for="categories">Categories</label>
+          <select id="categories" name="categories" multiple>
+            <option value="technology">Technology</option>
+            <option value="manufacturing">Manufacturing</option>
+            <option value="healthcare">Healthcare</option>
+            <option value="retail">Retail</option>
+            <option value="finance">Finance</option>
+            <option value="professional">Professional Services</option>
+            <option value="other">Other</option>
+          </select>
+          <p class="hint">Hold Ctrl/Cmd to select multiple</p>
+        </div>
+      </div>
+
+      <!-- Data Source -->
+      <div class="form-section">
+        <h3>Data Source</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="sourceType">How did you obtain this data?</label>
+            <select id="sourceType" name="sourceType" required>
+              <option value="direct">Direct contact with company</option>
+              <option value="public">Public directory/website</option>
+              <option value="event">Trade show/conference</option>
+              <option value="referral">Referral</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="sourceDate">When was this data collected?</label>
+            <input type="date" id="sourceDate" name="sourceDate" required>
+          </div>
+        </div>
+      </div>
+
+      <!-- File Upload -->
+      <div class="form-section">
+        <h3>Bulk Upload (Optional)</h3>
+        <div class="upload-area" id="uploadArea">
+          <input type="file" id="fileUpload" accept=".csv,.json,.xlsx">
+          <p><strong>Click to upload</strong> or drag and drop</p>
+          <p class="hint">CSV, JSON, or Excel files accepted</p>
+        </div>
+        <div id="fileInfo" style="margin-top: 1rem; display: none;"></div>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem;">Submit Data</button>
+    </form>
+
+    <div id="submissionStatus" class="submission-status"></div>
+
+    <!-- Rewards Info -->
+    <div class="form-section" style="margin-top: 2rem; background: #f1f5f9;">
+      <h3>Rewards Program</h3>
+      <p>Get rewarded for contributing quality data:</p>
+      <ul style="margin: 1rem 0 0 1.5rem; color: var(--gray);">
+        <li>10 credits for verified submissions</li>
+        <li>50 credits for premium data (pricing, inventory)</li>
+        <li>Bonus credits for exclusive data providers</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // File upload handling
+    const uploadArea = document.getElementById('uploadArea');
+    const fileInput = document.getElementById('fileUpload');
+    const fileInfo = document.getElementById('fileInfo');
+
+    uploadArea.addEventListener('click', () => fileInput.click());
+
+    uploadArea.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      uploadArea.style.borderColor = 'var(--primary)';
+    });
+
+    uploadArea.addEventListener('dragleave', () => {
+      uploadArea.style.borderColor = '#e2e8f0';
+    });
+
+    uploadArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      uploadArea.style.borderColor = '#e2e8f0';
+      if (e.dataTransfer.files.length) {
+        handleFile(e.dataTransfer.files[0]);
+      }
+    });
+
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files.length) {
+        handleFile(fileInput.files[0]);
+      }
+    });
+
+    function handleFile(file) {
+      fileInfo.innerHTML = `<strong>${file.name}</strong> (${(file.size / 1024).toFixed(1)} KB)`;
+      fileInfo.style.display = 'block';
+    }
+
+    // Form submission
+    document.getElementById('submitForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(e.target);
+      const status = document.getElementById('submissionStatus');
+
+      status.innerHTML = 'Submitting...';
+      status.className = 'submission-status';
+      status.style.display = 'block';
+
+      try {
+        // In production, would send to API
+        await new Promise(resolve => setTimeout(resolve, 1500));
+
+        status.innerHTML = `
+          <strong>Thank you!</strong> Your submission has been received.
+          <br>Verification typically takes 24-48 hours.
+          <br>You'll receive credits upon approval.
+        `;
+        status.className = 'submission-status success';
+        e.target.reset();
+        fileInfo.style.display = 'none';
+      } catch (error) {
+        status.innerHTML = `<strong>Error:</strong> ${error.message}`;
+        status.className = 'submission-status error';
+      }
+    });
+
+    // Set default date to today
+    document.getElementById('sourceDate').valueAsDate = new Date();
+  </script>
+
+  <footer>
+    <p>&copy; 2026 TensorMarketData. All rights reserved.</p>
+  </footer>
+</body>
+</html>
