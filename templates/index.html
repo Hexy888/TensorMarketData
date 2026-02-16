@@ -9,17 +9,18 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --primary: #6366f1;
-      --primary-dark: #4f46e5;
-      --bg: #0a0a0f;
-      --bg-secondary: #12121a;
-      --bg-card: #1a1a24;
-      --border: #2a2a3a;
-      --text: #e0e0e0;
-      --text-muted: #888;
-      --text-dim: #555;
-      --success: #22c55e;
-      --accent: #a78bfa;
+      --primary: #4f46e5;
+      --primary-dark: #3730a3;
+      --primary-light: #6366f1;
+      --bg: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-alt: #f1f5f9;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --border: #e2e8f0;
+      --success: #16a34a;
+      --accent: #818cf8;
     }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -31,9 +32,9 @@
     
     /* Header */
     header { 
-      padding: 1.25rem 0; 
+      padding: 1rem 0; 
       border-bottom: 1px solid var(--border); 
-      background: rgba(10,10,15,0.8);
+      background: rgba(255,255,255,0.95);
       backdrop-filter: blur(10px);
       position: fixed;
       width: 100%;
@@ -46,9 +47,10 @@
       align-items: center; 
     }
     .logo { 
-      font-size: 1.4rem; 
-      font-weight: 700; 
-      letter-spacing: -0.02em;
+      font-size: 1.5rem; 
+      font-weight: 800; 
+      letter-spacing: -0.03em;
+      color: var(--text);
     }
     .logo span { color: var(--primary); }
     .nav-links { display: flex; gap: 2rem; align-items: center; }
@@ -56,51 +58,47 @@
       color: var(--text-muted); 
       text-decoration: none; 
       font-size: 0.9rem;
+      font-weight: 500;
       transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--text); }
     .nav-links .cta {
       background: var(--primary);
       color: #fff;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      font-weight: 500;
+      padding: 0.6rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.2s;
     }
-    .nav-links .cta:hover { background: var(--primary-dark); color: #fff; }
+    .nav-links .cta:hover { background: var(--primary-dark); color: #fff; transform: translateY(-1px); }
     
     /* Hero */
     .hero { 
       padding: 8rem 0 5rem; 
       text-align: center;
-      background: radial-gradient(ellipse at top, #1a1a2e 0%, var(--bg) 60%);
+      background: linear-gradient(180deg, #f8fafc 0%, var(--bg) 100%);
     }
     .badge {
       display: inline-block;
-      background: rgba(99,102,241,0.1);
-      border: 1px solid rgba(99,102,241,0.3);
-      color: var(--accent);
+      background: rgba(79,70,229,0.08);
+      border: 1px solid rgba(79,70,229,0.2);
+      color: var(--primary);
       padding: 0.4rem 1rem;
       border-radius: 100px;
       font-size: 0.8rem;
-      font-weight: 500;
+      font-weight: 600;
       margin-bottom: 1.5rem;
     }
     h1 { 
       font-size: 3.5rem; 
       font-weight: 800; 
       margin-bottom: 1.25rem; 
-      color: #fff;
+      color: var(--text);
       letter-spacing: -0.03em;
-      line-height: 1.1;
-    }
-    h1 span {
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      line-height: 1.15;
     }
     .hero p { 
-      font-size: 1.2rem; 
+      font-size: 1.25rem; 
       color: var(--text-muted); 
       margin-bottom: 2.5rem; 
       max-width: 640px; 
@@ -113,149 +111,155 @@
     .stats { 
       display: flex; 
       justify-content: center; 
-      gap: 3rem; 
+      gap: 4rem; 
       margin-bottom: 3rem;
       flex-wrap: wrap;
     }
     .stat { text-align: center; }
     .stat-value { 
-      font-size: 2rem; 
-      font-weight: 700; 
-      color: #fff;
+      font-size: 2.5rem; 
+      font-weight: 800; 
+      color: var(--primary);
+      letter-spacing: -0.02em;
     }
-    .stat-label { font-size: 0.85rem; color: var(--text-dim); }
+    .stat-label { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; }
     
     /* Form */
     .form-container {
-      background: var(--bg-card);
-      padding: 2rem;
-      border-radius: 16px;
-      max-width: 480px;
+      background: #fff;
+      padding: 2.5rem;
+      border-radius: 20px;
+      max-width: 520px;
       margin: 0 auto;
       border: 1px solid var(--border);
+      box-shadow: 0 20px 60px -15px rgba(0,0,0,0.08);
       text-align: left;
     }
     
-    .form-container h3 { margin-bottom: 0.5rem; color: #fff; font-size: 1.25rem; }
-    .form-container > p { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.9rem; }
+    .form-container h3 { margin-bottom: 0.5rem; color: var(--text); font-size: 1.4rem; font-weight: 700; }
+    .form-container > p { color: var(--text-muted); margin-bottom: 1.75rem; font-size: 0.95rem; }
     
-    .form-group { margin-bottom: 1rem; text-align: left; }
-    .form-group label { display: block; margin-bottom: 0.4rem; color: var(--text-muted); font-size: 0.85rem; }
+    .form-group { margin-bottom: 1.1rem; text-align: left; }
+    .form-group label { display: block; margin-bottom: 0.4rem; color: var(--text); font-size: 0.85rem; font-weight: 600; }
     .form-group input, .form-group select {
       width: 100%;
-      padding: 12px 16px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
+      padding: 14px 16px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
       background: var(--bg);
-      color: #fff;
+      color: var(--text);
       font-size: 0.95rem;
-      transition: border-color 0.2s;
+      transition: all 0.2s;
     }
-    .form-group input:focus { outline: none; border-color: var(--primary); }
-    .form-group input::placeholder { color: var(--text-dim); }
+    .form-group input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(79,70,229,0.1); }
+    .form-group input::placeholder { color: var(--text-light); }
     
     button.submit-btn {
       width: 100%;
       background: var(--primary);
       color: #fff;
-      padding: 14px;
+      padding: 16px;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s;
+      margin-top: 0.5rem;
     }
     button.submit-btn:hover { 
       background: var(--primary-dark); 
-      transform: translateY(-1px);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px -10px rgba(79,70,229,0.4);
     }
     
     .success-message {
       display: none;
       color: var(--success);
-      padding: 1.5rem;
-      background: rgba(34,197,94,0.1);
-      border: 1px solid rgba(34,197,94,0.3);
+      padding: 1.75rem;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
       border-radius: 12px;
       margin-top: 1rem;
       text-align: center;
     }
-    .success-message h4 { color: var(--success); margin-bottom: 0.5rem; }
+    .success-message h4 { color: var(--success); margin-bottom: 0.5rem; font-size: 1.1rem; }
     .success-message p { color: var(--text-muted); font-size: 0.9rem; }
     
     /* Features */
     .features { 
-      padding: 5rem 0; 
+      padding: 6rem 0; 
       background: var(--bg-secondary);
     }
-    .section-header { text-align: center; margin-bottom: 3rem; }
+    .section-header { text-align: center; margin-bottom: 4rem; }
     .section-header h2 { 
       font-size: 2.25rem; 
-      font-weight: 700; 
-      color: #fff; 
+      font-weight: 800; 
+      color: var(--text); 
       margin-bottom: 0.75rem;
       letter-spacing: -0.02em;
     }
-    .section-header p { color: var(--text-muted); max-width: 500px; margin: 0 auto; }
+    .section-header p { color: var(--text-muted); max-width: 520px; margin: 0 auto; font-size: 1.05rem; }
     
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.25rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
     }
     .feature-card {
-      background: var(--bg-card);
-      padding: 1.75rem;
-      border-radius: 12px;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 16px;
       border: 1px solid var(--border);
-      transition: transform 0.2s, border-color 0.2s;
+      transition: all 0.3s;
     }
     .feature-card:hover {
-      transform: translateY(-2px);
-      border-color: var(--primary);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
+      border-color: var(--primary-light);
     }
     .feature-icon {
-      width: 44px;
-      height: 44px;
-      background: rgba(99,102,241,0.1);
-      border-radius: 10px;
+      width: 52px;
+      height: 52px;
+      background: linear-gradient(135deg, rgba(79,70,229,0.1), rgba(129,140,248,0.1));
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.25rem;
-      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      margin-bottom: 1.25rem;
     }
-    .feature-card h3 { color: #fff; margin-bottom: 0.5rem; font-size: 1.05rem; }
-    .feature-card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+    .feature-card h3 { color: var(--text); margin-bottom: 0.6rem; font-size: 1.1rem; font-weight: 700; }
+    .feature-card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.65; }
     
-    /* Quality Guarantee */
-    .quality { padding: 5rem 0; }
+    /* Quality */
+    .quality { padding: 6rem 0; }
     .quality-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
+      gap: 1.5rem;
       margin-top: 3rem;
     }
     .quality-item {
       text-align: center;
-      padding: 2rem;
-      background: var(--bg-card);
-      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      background: var(--bg-secondary);
+      border-radius: 16px;
       border: 1px solid var(--border);
     }
     .quality-value {
-      font-size: 2.5rem;
-      font-weight: 700;
+      font-size: 3rem;
+      font-weight: 800;
       color: var(--primary);
       margin-bottom: 0.25rem;
+      letter-spacing: -0.03em;
     }
-    .quality-label { color: #fff; font-weight: 500; margin-bottom: 0.5rem; }
-    .quality-desc { color: var(--text-muted); font-size: 0.85rem; }
+    .quality-label { color: var(--text); font-weight: 700; margin-bottom: 0.5rem; font-size: 1.1rem; }
+    .quality-desc { color: var(--text-muted); font-size: 0.9rem; }
     
     /* Process */
     .process { 
-      padding: 5rem 0; 
+      padding: 6rem 0; 
       background: var(--bg-secondary);
     }
     .process-grid {
@@ -266,63 +270,86 @@
     }
     .step {
       position: relative;
-      padding: 1.5rem;
-      background: var(--bg-card);
-      border-radius: 12px;
+      padding: 2rem;
+      background: #fff;
+      border-radius: 16px;
       border: 1px solid var(--border);
     }
     .step-num {
       position: absolute;
-      top: -12px;
+      top: -16px;
       left: 24px;
-      width: 28px;
-      height: 28px;
+      width: 36px;
+      height: 36px;
       background: var(--primary);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 700;
-      font-size: 0.85rem;
+      font-weight: 800;
+      font-size: 1rem;
       color: #fff;
+      box-shadow: 0 4px 15px rgba(79,70,229,0.3);
     }
-    .step h3 { color: #fff; margin-bottom: 0.5rem; margin-top: 0.5rem; }
-    .step p { color: var(--text-muted); font-size: 0.9rem; }
+    .step h3 { color: var(--text); margin-bottom: 0.6rem; margin-top: 0.5rem; font-weight: 700; }
+    .step p { color: var(--text-muted); font-size: 0.95rem; }
     
     /* CTA */
     .cta-section {
-      padding: 5rem 0;
+      padding: 6rem 0;
       text-align: center;
     }
     .cta-section h2 {
-      font-size: 2rem;
-      color: #fff;
+      font-size: 2.25rem;
+      color: var(--text);
       margin-bottom: 1rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
     }
     .cta-section p {
       color: var(--text-muted);
       margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+    .cta-section .btn {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      padding: 16px 40px;
+      border-radius: 10px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    .cta-section .btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 15px 40px -10px rgba(79,70,229,0.35);
     }
     
     /* Footer */
     footer { 
-      padding: 2.5rem 0; 
+      padding: 3rem 0; 
       text-align: center; 
-      color: var(--text-dim); 
-      font-size: 0.85rem; 
+      color: var(--text-light); 
+      font-size: 0.9rem; 
       border-top: 1px solid var(--border);
+      background: var(--bg-secondary);
     }
     .email-link { 
       color: var(--primary); 
-      text-decoration: none; 
+      text-decoration: none;
+      font-weight: 500;
     }
     .email-link:hover { text-decoration: underline; }
     
     @media (max-width: 768px) {
       h1 { font-size: 2.25rem; }
       .stats { gap: 2rem; }
-      .quality-grid, .process-grid { grid-template-columns: 1fr; }
+      .quality-grid, .process-grid, .features-grid { grid-template-columns: 1fr; }
       .nav-links { display: none; }
+      .form-container { padding: 1.75rem; }
     }
   </style>
 </head>
@@ -342,7 +369,7 @@
   <section class="hero">
     <div class="container">
       <span class="badge">Enterprise-Grade B2B Data</span>
-      <h1>Build Your Pipeline with<br><span>High-Quality Leads</span></h1>
+      <h1>Build Your Pipeline with<br>High-Quality Leads</h1>
       <p>Stop wasting time on outdated lists. Get verified decision-maker contacts with 95%+ email deliverability, accurate data, and actionable intelligence.</p>
       
       <div class="stats">
@@ -397,9 +424,9 @@
         </div>
       </div>
     </div>
-  <section class="features</section>
+  </section>
 
-  " id="features">
+  <section class="features" id="features">
     <div class="container">
       <div class="section-header">
         <h2>Why Sales Teams Choose Us</h2>
@@ -499,7 +526,7 @@
     <div class="container">
       <h2>Ready to Fill Your Pipeline?</h2>
       <p>Get a free sample of 10 leads to experience our data quality firsthand.</p>
-      <a href="#contact" class="submit-btn" style="display: inline-block; width: auto; padding: 14px 32px; text-decoration: none;">Request Free Sample</a>
+      <a href="#contact" class="btn">Request Free Sample</a>
     </div>
   </section>
 
