@@ -3,6 +3,11 @@
 ## Overview
 All agents operate autonomously. This is their complete knowledge base.
 
+## ⚠️ IMPORTANT: PIVOT
+**We pivoted from data marketplace to B2B Lead Generation as a Service.**
+- Apollo-powered lead search + email delivery
+- Target: B2B companies needing prospecting data
+
 ---
 
 ## Company Knowledge (Know This)
@@ -10,7 +15,7 @@ All agents operate autonomously. This is their complete knowledge base.
 **What We Sell:**
 - API for AI agents to buy company data
 - Company search, enrichment, contact data
-- First marketplace for AI agent data
+- First lead generation for AI agent data
 
 **Our Stack:**
 - FastAPI + Render + Supabase + Stripe + Apollo

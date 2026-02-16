@@ -44,7 +44,7 @@ person_query = {
 1. **AI/LLM Startups** - Langfuse, Pinecone, Weights & Biases, etc.
 2. **Developer Tools** - API platforms, SDK providers
 3. **Enterprise AI** - Companies building AI products
-4. **Data Companies** - Data brokers, marketplaces
+4. **Data Companies** - Data brokers, lead generations
 
 ---
 

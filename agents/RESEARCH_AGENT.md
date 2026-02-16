@@ -44,7 +44,7 @@ langchain_companies = apollo.search_companies("LangChain")
 
 3. **Similar Products**
    - Any "API for company data"
-   - Any "B2B data marketplace"
+   - Any "B2B data lead generation"
 
 ---
 
