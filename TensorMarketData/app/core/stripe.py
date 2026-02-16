@@ -214,11 +214,11 @@ PRICES = {
     },
 }
 
-# Credit packages (Stripe Dashboard prices)
+# Lead generation packages
 CREDIT_PACKAGES = {
-    "starter": {"stripe_price": "price_1T0Z4k3TkjY65gWqiMPrfi2b", "credits": 10000, "dollars": 29},
-    "pro": {"stripe_price": "price_1T0Z6s3TkjY65gWqKCaUHu8A", "credits": 100000, "dollars": 99},
-    "enterprise": {"stripe_price": "price_credits_100000", "credits": 100000, "dollars": 500},
+    "starter": {"stripe_price": "price_starter_100", "credits": 100, "dollars": 199, "name": "Starter - 100 Leads"},
+    "growth": {"stripe_price": "price_growth_500", "credits": 500, "dollars": 499, "name": "Growth - 500 Leads"},
+    "monthly": {"stripe_price": "price_monthly_200", "credits": 200, "dollars": 999, "name": "Monthly - 200 Leads/Month"},
 }
 
 # Revenue share percentage for providers

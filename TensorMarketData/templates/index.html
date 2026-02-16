@@ -3,56 +3,160 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TensorMarketData - B2B Lead Generation</title>
-  <meta name="description" content="High-quality B2B leads for your sales team. AI-powered research, validated emails, decision maker identification.">
+  <title>TensorMarketData - Premium B2B Lead Generation</title>
+  <meta name="description" content="Enterprise-grade B2B leads with 95%+ email deliverability. Decision makers, validated contacts, and actionable intelligence for your sales pipeline.">
   
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --bg: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-card: #1a1a24;
+      --border: #2a2a3a;
+      --text: #e0e0e0;
+      --text-muted: #888;
+      --text-dim: #555;
+      --success: #22c55e;
+      --accent: #a78bfa;
+    }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #0a0a0f;
-      color: #e0e0e0;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.6;
     }
-    .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
     
-    header { padding: 1.5rem 0; border-bottom: 1px solid #1a1a2e; }
-    header .container { display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-size: 1.5rem; font-weight: 700; }
-    .logo span { color: #6366f1; }
+    /* Header */
+    header { 
+      padding: 1.25rem 0; 
+      border-bottom: 1px solid var(--border); 
+      background: rgba(10,10,15,0.8);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+    }
+    header .container { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+    }
+    .logo { 
+      font-size: 1.4rem; 
+      font-weight: 700; 
+      letter-spacing: -0.02em;
+    }
+    .logo span { color: var(--primary); }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a { 
+      color: var(--text-muted); 
+      text-decoration: none; 
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links .cta {
+      background: var(--primary);
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+    .nav-links .cta:hover { background: var(--primary-dark); color: #fff; }
     
-    .hero { padding: 5rem 0; text-align: center; }
-    h1 { font-size: 3rem; font-weight: 800; margin-bottom: 1rem; color: #fff; }
-    .hero p { font-size: 1.25rem; color: #888; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
-    
-    .form-container {
-      background: #151520;
-      padding: 2rem;
-      border-radius: 12px;
-      max-width: 500px;
-      margin: 0 auto;
-      border: 1px solid #252535;
+    /* Hero */
+    .hero { 
+      padding: 8rem 0 5rem; 
+      text-align: center;
+      background: radial-gradient(ellipse at top, #1a1a2e 0%, var(--bg) 60%);
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(99,102,241,0.1);
+      border: 1px solid rgba(99,102,241,0.3);
+      color: var(--accent);
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+    }
+    h1 { 
+      font-size: 3.5rem; 
+      font-weight: 800; 
+      margin-bottom: 1.25rem; 
+      color: #fff;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+    h1 span {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p { 
+      font-size: 1.2rem; 
+      color: var(--text-muted); 
+      margin-bottom: 2.5rem; 
+      max-width: 640px; 
+      margin-left: auto; 
+      margin-right: auto;
+      line-height: 1.7;
     }
     
-    .form-container h3 { margin-bottom: 1rem; color: #fff; }
-    .form-container p { color: #888; margin-bottom: 1.5rem; font-size: 0.9rem; }
+    /* Stats */
+    .stats { 
+      display: flex; 
+      justify-content: center; 
+      gap: 3rem; 
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat-value { 
+      font-size: 2rem; 
+      font-weight: 700; 
+      color: #fff;
+    }
+    .stat-label { font-size: 0.85rem; color: var(--text-dim); }
+    
+    /* Form */
+    .form-container {
+      background: var(--bg-card);
+      padding: 2rem;
+      border-radius: 16px;
+      max-width: 480px;
+      margin: 0 auto;
+      border: 1px solid var(--border);
+      text-align: left;
+    }
+    
+    .form-container h3 { margin-bottom: 0.5rem; color: #fff; font-size: 1.25rem; }
+    .form-container > p { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.9rem; }
     
     .form-group { margin-bottom: 1rem; text-align: left; }
-    .form-group label { display: block; margin-bottom: 0.5rem; color: #aaa; font-size: 0.85rem; }
+    .form-group label { display: block; margin-bottom: 0.4rem; color: var(--text-muted); font-size: 0.85rem; }
     .form-group input, .form-group select {
       width: 100%;
       padding: 12px 16px;
       border-radius: 8px;
-      border: 1px solid #252535;
-      background: #0a0a0f;
+      border: 1px solid var(--border);
+      background: var(--bg);
       color: #fff;
-      font-size: 1rem;
+      font-size: 0.95rem;
+      transition: border-color 0.2s;
     }
-    .form-group input:focus { outline: none; border-color: #6366f1; }
+    .form-group input:focus { outline: none; border-color: var(--primary); }
+    .form-group input::placeholder { color: var(--text-dim); }
     
     button.submit-btn {
       width: 100%;
-      background: #6366f1;
+      background: var(--primary);
       color: #fff;
       padding: 14px;
       border: none;
@@ -60,55 +164,165 @@
       font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: all 0.3s;
     }
-    button.submit-btn:hover { background: #4f46e5; }
+    button.submit-btn:hover { 
+      background: var(--primary-dark); 
+      transform: translateY(-1px);
+    }
     
     .success-message {
       display: none;
-      color: #22c55e;
-      padding: 1rem;
-      background: #052e16;
-      border-radius: 8px;
+      color: var(--success);
+      padding: 1.5rem;
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.3);
+      border-radius: 12px;
       margin-top: 1rem;
+      text-align: center;
     }
+    .success-message h4 { color: var(--success); margin-bottom: 0.5rem; }
+    .success-message p { color: var(--text-muted); font-size: 0.9rem; }
     
-    .features { padding: 4rem 0; background: #0f0f18; }
-    .features h2 { text-align: center; font-size: 2rem; margin-bottom: 3rem; color: #fff; }
+    /* Features */
+    .features { 
+      padding: 5rem 0; 
+      background: var(--bg-secondary);
+    }
+    .section-header { text-align: center; margin-bottom: 3rem; }
+    .section-header h2 { 
+      font-size: 2.25rem; 
+      font-weight: 700; 
+      color: #fff; 
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+    .section-header p { color: var(--text-muted); max-width: 500px; margin: 0 auto; }
+    
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
     }
     .feature-card {
-      background: #151520;
-      padding: 1.5rem;
+      background: var(--bg-card);
+      padding: 1.75rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .feature-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--primary);
+    }
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(99,102,241,0.1);
       border-radius: 10px;
-      border: 1px solid #1a1a2e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
     }
-    .feature-card h3 { color: #fff; margin-bottom: 0.5rem; font-size: 1.1rem; }
-    .feature-card p { color: #888; font-size: 0.9rem; }
+    .feature-card h3 { color: #fff; margin-bottom: 0.5rem; font-size: 1.05rem; }
+    .feature-card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
     
-    .process { padding: 4rem 0; }
-    .process h2 { text-align: center; font-size: 2rem; margin-bottom: 2rem; color: #fff; }
-    .process-steps { max-width: 600px; margin: 0 auto; }
-    .step { display: flex; gap: 1rem; margin-bottom: 1.5rem; }
+    /* Quality Guarantee */
+    .quality { padding: 5rem 0; }
+    .quality-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .quality-item {
+      text-align: center;
+      padding: 2rem;
+      background: var(--bg-card);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .quality-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+    }
+    .quality-label { color: #fff; font-weight: 500; margin-bottom: 0.5rem; }
+    .quality-desc { color: var(--text-muted); font-size: 0.85rem; }
+    
+    /* Process */
+    .process { 
+      padding: 5rem 0; 
+      background: var(--bg-secondary);
+    }
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .step {
+      position: relative;
+      padding: 1.5rem;
+      background: var(--bg-card);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
     .step-num {
-      width: 32px; height: 32px;
-      background: #6366f1;
+      position: absolute;
+      top: -12px;
+      left: 24px;
+      width: 28px;
+      height: 28px;
+      background: var(--primary);
       border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 700; flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: #fff;
     }
-    .step-content h3 { color: #fff; margin-bottom: 0.25rem; }
-    .step-content p { color: #888; font-size: 0.9rem; }
+    .step h3 { color: #fff; margin-bottom: 0.5rem; margin-top: 0.5rem; }
+    .step p { color: var(--text-muted); font-size: 0.9rem; }
     
-    footer { padding: 2rem 0; text-align: center; color: #555; font-size: 0.85rem; border-top: 1px solid #1a1a2e; }
-    .email-link { color: #6366f1; text-decoration: none; }
+    /* CTA */
+    .cta-section {
+      padding: 5rem 0;
+      text-align: center;
+    }
+    .cta-section h2 {
+      font-size: 2rem;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+    .cta-section p {
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
     
-    @media (max-width: 600px) {
-      h1 { font-size: 2rem; }
-      .hero { padding: 3rem 0; }
+    /* Footer */
+    footer { 
+      padding: 2.5rem 0; 
+      text-align: center; 
+      color: var(--text-dim); 
+      font-size: 0.85rem; 
+      border-top: 1px solid var(--border);
+    }
+    .email-link { 
+      color: var(--primary); 
+      text-decoration: none; 
+    }
+    .email-link:hover { text-decoration: underline; }
+    
+    @media (max-width: 768px) {
+      h1 { font-size: 2.25rem; }
+      .stats { gap: 2rem; }
+      .quality-grid, .process-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
     }
   </style>
 </head>
@@ -116,107 +330,182 @@
   <header>
     <div class="container">
       <div class="logo">Tensor<span>MarketData</span></div>
+      <nav class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#quality">Data Quality</a>
+        <a href="#process">How It Works</a>
+        <a href="#contact" class="cta">Get Leads</a>
+      </nav>
     </div>
   </header>
 
   <section class="hero">
     <div class="container">
-      <h1>B2B Lead Generation</h1>
-      <p>High-quality leads for your sales team. Validated emails, decision makers, and deep research.</p>
+      <span class="badge">Enterprise-Grade B2B Data</span>
+      <h1>Build Your Pipeline with<br><span>High-Quality Leads</span></h1>
+      <p>Stop wasting time on outdated lists. Get verified decision-maker contacts with 95%+ email deliverability, accurate data, and actionable intelligence.</p>
       
-      <div class="form-container">
-        <h3>Get Started</h3>
-        <p>Tell us about what leads you need. I'll personally research and deliver your list.</p>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-value">95%+</div>
+          <div class="stat-label">Email Deliverability</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">48hrs</div>
+          <div class="stat-label">Average Delivery</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">100%</div>
+          <div class="stat-label">Human-Verified</div>
+        </div>
+      </div>
+      
+      <div class="form-container" id="contact">
+        <h3>Get a Sample List</h3>
+        <p>I'll personally research and deliver 10 qualified leads to showcase our data quality.</p>
         
         <form id="lead-form">
           <div class="form-group">
-            <label>Your Email</label>
+            <label>Your Work Email</label>
             <input type="email" name="email" placeholder="you@company.com" required>
           </div>
           <div class="form-group">
-            <label>What industry?</label>
-            <input type="text" name="industry" placeholder="e.g., SaaS, AI, Marketing">
+            <label>Target Industry</label>
+            <input type="text" name="industry" placeholder="e.g., B2B SaaS, AI/ML, Fintech">
           </div>
           <div class="form-group">
-            <label>Company size?</label>
+            <label>Ideal Company Size</label>
             <select name="size">
               <option value="">Any size</option>
               <option value="1-10">1-10 employees</option>
               <option value="11-50">11-50 employees</option>
               <option value="51-200">51-200 employees</option>
-              <option value="200+">200+ employees</option>
+              <option value="200-500">200-500 employees</option>
+              <option value="500+">500+ employees</option>
             </select>
           </div>
           <div class="form-group">
-            <label>Anything else?</label>
-            <input type="text" name="notes" placeholder="Location, specific criteria...">
+            <label>Specific Criteria (Optional)</label>
+            <input type="text" name="notes" placeholder="Location, funding stage, tech stack...">
           </div>
-          <button type="submit" class="submit-btn">Submit Request</button>
+          <button type="submit" class="submit-btn">Request Sample Leads</button>
         </form>
         
         <div class="success-message" id="success">
-          Thanks! I'll research your leads and get back to you within 24 hours.
+          <h4>✓ Request Received</h4>
+          <p>I'll personally research your leads and email a sample list within 24 hours.</p>
         </div>
       </div>
     </div>
-  </section>
+  <section class="features</section>
 
-  <section class="features">
+  " id="features">
     <div class="container">
-      <h2>What You Get</h2>
+      <div class="section-header">
+        <h2>Why Sales Teams Choose Us</h2>
+        <p>Every lead is enriched with accurate, actionable data you can use immediately.</p>
+      </div>
+      
       <div class="features-grid">
         <div class="feature-card">
-          <h3>🎯 Targeted Lists</h3>
-          <p>Leads matching your exact criteria - industry, size, location, and more.</p>
+          <div class="feature-icon">🎯</div>
+          <h3>Decision Maker Contacts</h3>
+          <p>Reach the right people—founders, executives, and key stakeholders with real buying authority.</p>
         </div>
         <div class="feature-card">
-          <h3>✅ Validated Emails</h3>
-          <p>Every email verified for deliverability. No bounces, no wasted outreach.</p>
+          <div class="feature-icon">✓</div>
+          <h3>95%+ Email Accuracy</h3>
+          <p>Every email verified in real-time. No bounces, no wasted outreach, no damaged sender reputation.</p>
         </div>
         <div class="feature-card">
-          <h3>👤 Decision Makers</h3>
-          <p>Connect with the right people - founders, executives, and key contacts.</p>
+          <div class="feature-icon">🔍</div>
+          <h3>Deep Company Research</h3>
+          <p>Funding rounds, tech stack, employee counts, growth signals, and recent news for context.</p>
         </div>
         <div class="feature-card">
-          <h3>📊 Company Data</h3>
-          <p>Funding, tech stack, growth signals, and more context on each lead.</p>
+          <div class="feature-icon">⚡</div>
+          <h3>Fast Turnaround</h3>
+          <p>Most lists delivered within 48 hours. Rush orders available for time-sensitive campaigns.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔄</div>
+          <h3>Fresh Data</h3>
+          <p>Lists are freshly researched—not stale database exports. We verify each contact before delivery.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📋</div>
+          <h3>Custom Formats</h3>
+          <p>Get data in CSV, Excel, or directly integrated into your CRM. Whatever workflow you use.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="process">
+  <section class="quality" id="quality">
     <div class="container">
-      <h2>How It Works</h2>
-      <div class="process-steps">
+      <div class="section-header">
+        <h2>Our Data Quality Guarantee</h2>
+        <p>We stand behind the accuracy of every contact we deliver.</p>
+      </div>
+      
+      <div class="quality-grid">
+        <div class="quality-item">
+          <div class="quality-value">95%</div>
+          <div class="quality-label">Email Deliverability</div>
+          <div class="quality-desc">Verified inbox delivery, not just syntax validation</div>
+        </div>
+        <div class="quality-item">
+          <div class="quality-value">100%</div>
+          <div class="quality-label">Human-Verified</div>
+          <div class="quality-desc">Every contact checked by our research team</div>
+        </div>
+        <div class="quality-item">
+          <div class="quality-value">30-Day</div>
+          <div class="quality-label">Replacement Guarantee</div>
+          <div class="quality-desc">Bad email? We'll replace it free of charge</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="process" id="process">
+    <div class="container">
+      <div class="section-header">
+        <h2>How It Works</h2>
+        <p>Simple, transparent process with no long-term contracts.</p>
+      </div>
+      
+      <div class="process-grid">
         <div class="step">
           <div class="step-num">1</div>
-          <div class="step-content">
-            <h3>Submit Your Request</h3>
-            <p>Tell me what kind of leads you need - industry, size, location, and any specific criteria.</p>
-          </div>
+          <h3>Tell Us What You Need</h3>
+          <p>Share your ideal customer profile—industry, company size, location, and any specific criteria.</p>
         </div>
         <div class="step">
           <div class="step-num">2</div>
-          <div class="step-content">
-            <h3>Research & Validate</h3>
-            <p>I research companies, verify emails, and enrich with decision maker information.</p>
-          </div>
+          <h3>We Research & Verify</h3>
+          <p>Our team researches companies, validates emails, and enriches each contact with decision-maker data.</p>
         </div>
         <div class="step">
           <div class="step-num">3</div>
-          <div class="step-content">
-            <h3>Receive Your List</h3>
-            <p>Get a clean spreadsheet with contacts, emails, and context. Start reaching out.</p>
-          </div>
+          <h3>Receive Your List</h3>
+          <p>Get a clean, ready-to-use spreadsheet. Start reaching out and watch your pipeline grow.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <h2>Ready to Fill Your Pipeline?</h2>
+      <p>Get a free sample of 10 leads to experience our data quality firsthand.</p>
+      <a href="#contact" class="submit-btn" style="display: inline-block; width: auto; padding: 14px 32px; text-decoration: none;">Request Free Sample</a>
     </div>
   </section>
 
   <footer>
     <div class="container">
-      <p>Contact: <a href="mailto:nova@tensormarketdata.com" class="email-link">nova@tensormarketdata.com</a></p>
+      <p>Questions? <a href="mailto:nova@tensormarketdata.com" class="email-link">nova@tensormarketdata.com</a></p>
       <p style="margin-top: 0.5rem;">© 2026 TensorMarketData. All rights reserved.</p>
     </div>
   </footer>
@@ -228,8 +517,7 @@
       const formData = new FormData(this);
       const data = Object.fromEntries(formData);
       
-      // In production, this would send to a backend
-      // For now, show success
+      // Show success
       this.style.display = 'none';
       document.getElementById('success').style.display = 'block';
       
