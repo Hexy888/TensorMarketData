@@ -168,7 +168,12 @@ function copyCode(btn) {
   setTimeout(() => btn.textContent = 'Copy', 2000);
 }
 
-loadPricing();
+// Run when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', loadPricing);
+} else {
+  loadPricing();
+}
 </script>
 </body>
 </html>
