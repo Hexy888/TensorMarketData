@@ -3,8 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pricing - TensorMarketData</title>
-  <meta name="description" content="TensorMarketData pricing plans for B2B data API access.">
+  <title>Pricing - TensorMarketData - B2B Data API for AI Agents</title>
+  <meta name="description" content="Simple, transparent pricing for B2B data API. Developer plan $29/mo with 10k credits, Business $99/mo with 100k credits. No surprise overages.">
+  <meta property="og:title" content="Pricing - TensorMarketData">
+  <meta property="og:description" content="Simple, transparent pricing for B2B data API. Starting at $29/month.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tensormarketdata.com/pricing">
+  <meta property="og:image" content="https://tensormarketdata.com/static/images/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pricing - TensorMarketData">
+  <meta name="twitter:description" content="Simple, transparent pricing for B2B data API.">
+  <meta name="twitter:image" content="https://tensormarketdata.com/static/images/og-image.png">
+  <link rel="canonical" href="https://tensormarketdata.com/pricing">
   <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
@@ -30,7 +40,45 @@
   <section style="margin-top: -3rem;">
     <div class="container">
       <div class="pricing" id="pricing-cards">
-        <p style="text-align:center;color:var(--text-2);">Loading pricing...</p>
+        <!-- Fallback pricing - JS will replace this -->
+        <div class="pricing-card">
+          <span class="badge">Free</span>
+          <h3>Free</h3>
+          <div class="price">Free<span>/forever</span></div>
+          <ul>
+            <li>Demo only</li>
+            <li>0 requests/min</li>
+            <li>✓ openapi schema</li>
+            <li>✓ documentation access</li>
+          </ul>
+          <a href="/dashboard" class="btn btn-secondary" style="color: var(--dark); background: #e2e8f0;">Get Free Key</a>
+        </div>
+        <div class="pricing-card">
+          <h3>Developer</h3>
+          <div class="price">$29<span>/month</span></div>
+          <ul>
+            <li>5,000 credits</li>
+            <li>60 requests/min</li>
+            <li>✓ search</li>
+            <li>✓ supplier detail</li>
+            <li>✓ inventory</li>
+          </ul>
+          <button onclick="checkout('developer')" class="btn btn-secondary">Subscribe</button>
+        </div>
+        <div class="pricing-card featured">
+          <span class="badge">Most Popular</span>
+          <h3>Business</h3>
+          <div class="price">$99<span>/month</span></div>
+          <ul>
+            <li>25,000 credits</li>
+            <li>240 requests/min</li>
+            <li>✓ search</li>
+            <li>✓ supplier detail</li>
+            <li>✓ inventory</li>
+            <li>✓ higher limits</li>
+          </ul>
+          <button onclick="checkout('business')" class="btn btn-primary">Subscribe</button>
+        </div>
       </div>
     </div>
   </section>
