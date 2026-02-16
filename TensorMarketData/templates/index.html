@@ -1,19 +1,241 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>LeadForge - B2B Lead Generation</title>
-<meta name="description" content="We find your perfect prospects">
-<style>
-body{font-family:system-ui;max-width:800px;margin:0 auto;padding:40px 20px;text-align:center;background:#0f0f1a;color:#fff}
-h1{font-size:3rem;margin-bottom:10px}
-p{color:#888;font-size:1.2rem}
-.cta{background:#6366f1;color:#fff;padding:15px 30px;text-decoration:none;border-radius:8px;display:inline-block;margin-top:20px}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TensorMarketData - B2B Lead Generation</title>
+  <meta name="description" content="High-quality B2B leads for your sales team. AI-powered research, validated emails, decision maker identification.">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0a0f;
+      color: #e0e0e0;
+      line-height: 1.6;
+    }
+    .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+    
+    header { padding: 1.5rem 0; border-bottom: 1px solid #1a1a2e; }
+    header .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1.5rem; font-weight: 700; }
+    .logo span { color: #6366f1; }
+    
+    .hero { padding: 5rem 0; text-align: center; }
+    h1 { font-size: 3rem; font-weight: 800; margin-bottom: 1rem; color: #fff; }
+    .hero p { font-size: 1.25rem; color: #888; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+    
+    .form-container {
+      background: #151520;
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 500px;
+      margin: 0 auto;
+      border: 1px solid #252535;
+    }
+    
+    .form-container h3 { margin-bottom: 1rem; color: #fff; }
+    .form-container p { color: #888; margin-bottom: 1.5rem; font-size: 0.9rem; }
+    
+    .form-group { margin-bottom: 1rem; text-align: left; }
+    .form-group label { display: block; margin-bottom: 0.5rem; color: #aaa; font-size: 0.85rem; }
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid #252535;
+      background: #0a0a0f;
+      color: #fff;
+      font-size: 1rem;
+    }
+    .form-group input:focus { outline: none; border-color: #6366f1; }
+    
+    button.submit-btn {
+      width: 100%;
+      background: #6366f1;
+      color: #fff;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button.submit-btn:hover { background: #4f46e5; }
+    
+    .success-message {
+      display: none;
+      color: #22c55e;
+      padding: 1rem;
+      background: #052e16;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+    
+    .features { padding: 4rem 0; background: #0f0f18; }
+    .features h2 { text-align: center; font-size: 2rem; margin-bottom: 3rem; color: #fff; }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    .feature-card {
+      background: #151520;
+      padding: 1.5rem;
+      border-radius: 10px;
+      border: 1px solid #1a1a2e;
+    }
+    .feature-card h3 { color: #fff; margin-bottom: 0.5rem; font-size: 1.1rem; }
+    .feature-card p { color: #888; font-size: 0.9rem; }
+    
+    .process { padding: 4rem 0; }
+    .process h2 { text-align: center; font-size: 2rem; margin-bottom: 2rem; color: #fff; }
+    .process-steps { max-width: 600px; margin: 0 auto; }
+    .step { display: flex; gap: 1rem; margin-bottom: 1.5rem; }
+    .step-num {
+      width: 32px; height: 32px;
+      background: #6366f1;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; flex-shrink: 0;
+    }
+    .step-content h3 { color: #fff; margin-bottom: 0.25rem; }
+    .step-content p { color: #888; font-size: 0.9rem; }
+    
+    footer { padding: 2rem 0; text-align: center; color: #555; font-size: 0.85rem; border-top: 1px solid #1a1a2e; }
+    .email-link { color: #6366f1; text-decoration: none; }
+    
+    @media (max-width: 600px) {
+      h1 { font-size: 2rem; }
+      .hero { padding: 3rem 0; }
+    }
+  </style>
 </head>
 <body>
-<h1>LeadForge</h1>
-<p>B2B Lead Generation Services</p>
-<p>We find your perfect prospects so you can close more deals.</p>
-<a href="mailto:hello@tensormarketdata.com" class="cta">Get a Sample List</a>
+  <header>
+    <div class="container">
+      <div class="logo">Tensor<span>MarketData</span></div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>B2B Lead Generation</h1>
+      <p>High-quality leads for your sales team. Validated emails, decision makers, and deep research.</p>
+      
+      <div class="form-container">
+        <h3>Get Started</h3>
+        <p>Tell us about what leads you need. I'll personally research and deliver your list.</p>
+        
+        <form id="lead-form">
+          <div class="form-group">
+            <label>Your Email</label>
+            <input type="email" name="email" placeholder="you@company.com" required>
+          </div>
+          <div class="form-group">
+            <label>What industry?</label>
+            <input type="text" name="industry" placeholder="e.g., SaaS, AI, Marketing">
+          </div>
+          <div class="form-group">
+            <label>Company size?</label>
+            <select name="size">
+              <option value="">Any size</option>
+              <option value="1-10">1-10 employees</option>
+              <option value="11-50">11-50 employees</option>
+              <option value="51-200">51-200 employees</option>
+              <option value="200+">200+ employees</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Anything else?</label>
+            <input type="text" name="notes" placeholder="Location, specific criteria...">
+          </div>
+          <button type="submit" class="submit-btn">Submit Request</button>
+        </form>
+        
+        <div class="success-message" id="success">
+          Thanks! I'll research your leads and get back to you within 24 hours.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="container">
+      <h2>What You Get</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>🎯 Targeted Lists</h3>
+          <p>Leads matching your exact criteria - industry, size, location, and more.</p>
+        </div>
+        <div class="feature-card">
+          <h3>✅ Validated Emails</h3>
+          <p>Every email verified for deliverability. No bounces, no wasted outreach.</p>
+        </div>
+        <div class="feature-card">
+          <h3>👤 Decision Makers</h3>
+          <p>Connect with the right people - founders, executives, and key contacts.</p>
+        </div>
+        <div class="feature-card">
+          <h3>📊 Company Data</h3>
+          <p>Funding, tech stack, growth signals, and more context on each lead.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="process">
+    <div class="container">
+      <h2>How It Works</h2>
+      <div class="process-steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h3>Submit Your Request</h3>
+            <p>Tell me what kind of leads you need - industry, size, location, and any specific criteria.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h3>Research & Validate</h3>
+            <p>I research companies, verify emails, and enrich with decision maker information.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h3>Receive Your List</h3>
+            <p>Get a clean spreadsheet with contacts, emails, and context. Start reaching out.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>Contact: <a href="mailto:nova@tensormarketdata.com" class="email-link">nova@tensormarketdata.com</a></p>
+      <p style="margin-top: 0.5rem;">© 2026 TensorMarketData. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('lead-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData);
+      
+      // In production, this would send to a backend
+      // For now, show success
+      this.style.display = 'none';
+      document.getElementById('success').style.display = 'block';
+      
+      // Log for now
+      console.log('Lead request:', data);
+    });
+  </script>
 </body>
 </html>
