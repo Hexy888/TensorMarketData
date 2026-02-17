@@ -1,5 +1,5 @@
 """
-TensorMarketData - A Headless B2B Data Marketplace for AI Agents
+TensorMarketData - Human-Verified B2B Prospect Leads Service
 """
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"

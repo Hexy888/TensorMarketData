@@ -1,6 +1,6 @@
 """
 TensorMarketData - Main FastAPI Application
-A headless B2B data marketplace for AI agents.
+Human-Verified B2B Prospect Leads Service
 """
 
 from contextlib import asynccontextmanager
@@ -41,8 +41,8 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
 # Create FastAPI application
 app = FastAPI(
     title="TensorMarketData",
-    description="Headless B2B Data Marketplace for AI Agents",
-    version="1.1.1",
+    description="Human-Verified B2B Prospect Leads for Outbound Sales",
+    version="0.2.0",
     lifespan=lifespan,
     docs_url=None,
     redoc_url=None,

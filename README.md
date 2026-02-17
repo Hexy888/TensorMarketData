@@ -1,6 +1,6 @@
 # TensorMarketData
 
-**A headless B2B data marketplace** designed for AI agents. Make millions by providing structured, verified business data to autonomous agents.
+**Human-Verified B2B Prospect Leads for Outbound Sales.** Get verified decision-maker contacts delivered in ~48 hours with a 30-day replacement guarantee.
 
 ## 🚀 Quick Start
 
