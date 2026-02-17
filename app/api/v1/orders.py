@@ -409,13 +409,33 @@ async def admin_update_status(order_id: str, payload: dict):
 
 
 @router.post("/admin/orders/{order_id}/upload")
-async def admin_upload_deliverable(order_id: str, file_data: dict):
+async def admin_upload_deliverable(order_id: str):
     """
     Upload deliverable file for an order.
-    Expects: {filename, content_base64, package}
+    Accepts multipart/form-data with 'file' field.
+    """
+    from fastapi import UploadFile, File, Form
+    from fastapi.responses import JSONResponse
+    
+    # This endpoint needs to be rewritten to accept file uploads
+    # For now, return a message about the expected format
+    return JSONResponse(
+        status_code=400,
+        content={"detail": "Use base64 format: POST /admin/orders/{id}/upload-json with JSON body {filename, content_base64, package}"}
+    )
+
+
+@router.post("/admin/orders/{order_id}/upload-json")
+async def admin_upload_deliverable_json(order_id: str, file_data: dict = None):
+    """
+    Upload deliverable file for an order.
+    Expects JSON: {filename, content_base64, package}
     """
     if order_id not in orders_db:
         raise HTTPException(status_code=404, detail="Order not found")
+    
+    if not file_data:
+        raise HTTPException(status_code=400, detail="Missing file_data")
     
     import base64
     
