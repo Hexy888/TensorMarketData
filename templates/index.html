@@ -143,6 +143,76 @@
             background: var(--accent-hover);
         }
         
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+        
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text-primary);
+            margin: 5px 0;
+            transition: 0.3s;
+        }
+        
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-bottom: 1px solid var(--border-primary);
+            padding: var(--space-4);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .mobile-nav.open {
+            display: block;
+        }
+        
+        .mobile-nav a {
+            display: block;
+            padding: var(--space-3) 0;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid var(--border-primary);
+        }
+        
+        .mobile-nav a:last-child {
+            border-bottom: none;
+        }
+
+        /* Mobile Nav - 768px and below */
+        @media (max-width: 768px) {
+            nav {
+                position: relative;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .mobile-nav {
+                display: none;
+            }
+            
+            .mobile-nav.open {
+                display: block;
+            }
+        }
+        
         /* Hero Section */
         .hero {
             text-align: center;
@@ -489,8 +559,26 @@
                 <li><a href="/faq">FAQ</a></li>
             </ul>
             <a href="/pricing" class="nav-cta">Get Started</a>
+            <button class="hamburger" onclick="toggleMobileNav()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </nav>
+        <div class="mobile-nav" id="mobileNav">
+            <a href="/pricing">Pricing</a>
+            <a href="/how-it-works">How It Works</a>
+            <a href="/blog">Blog</a>
+            <a href="/faq">FAQ</a>
+            <a href="/pricing">Get Started</a>
+        </div>
     </div>
+
+    <script>
+    function toggleMobileNav() {
+        document.getElementById('mobileNav').classList.toggle('open');
+    }
+    </script>
 
     <!-- Hero Section -->
     <section class="hero">
