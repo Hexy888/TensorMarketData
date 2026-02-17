@@ -114,6 +114,118 @@ class SupabaseClient:
 supabase = SupabaseClient()
 
 
+class TableQueryBuilder:
+    """Mock Supabase table query builder to match official client API."""
+    
+    def __init__(self, client: SupabaseClient, table_name: str):
+        self.client = client
+        self.table_name = table_name
+        self._select = "*"
+        self._filters = {}
+        self._data = None
+        self._method = "GET"
+    
+    def select(self, columns: str = "*"):
+        self._select = columns
+        return self
+    
+    def eq(self, column: str, value: str):
+        self._filters[f"{column}:eq.{value}"] = None
+        return self
+    
+    def gte(self, column: str, value: str):
+        self._filters[f"{column}:gte.{value}"] = value
+        return self
+    
+    def lte(self, column: str, value: str):
+        self._filters[f"{column}:lte.{value}"] = value
+        return self
+    
+    def ilike(self, column: str, value: str):
+        self._filters[f"{column}:ilike.%{value}%"] = None
+        return self
+    
+    def limit(self, count: int):
+        self._filters["limit"] = str(count)
+        return self
+    
+    def order(self, column: str, desc: bool = False):
+        self._filters["order"] = f"{column}{',desc' if desc else ''}"
+        return self
+    
+    def insert(self, data: Dict) -> Any:
+        self._data = data
+        self._method = "POST"
+        return self.execute()
+    
+    def update(self, data: Dict) -> Any:
+        self._data = data
+        self._method = "PATCH"
+        return self.execute()
+    
+    def delete(self) -> Any:
+        self._method = "DELETE"
+        return self.execute()
+    
+    def execute(self) -> Any:
+        """Execute the query."""
+        import asyncio
+        
+        async def _exec():
+            params = {"select": self._select}
+            for k, v in self._filters.items():
+                if v is not None:
+                    params[k] = v
+                else:
+                    # Just filter key, no value
+                    pass
+            
+            # Build proper params for filtering
+            filters = {}
+            for k, v in self._filters.items():
+                if ":" in k:
+                    col, op = k.split(":", 1)
+                    filters[col] = f"{op}.{v}" if v else op.split(".")[1]
+            
+            # Merge select and filters
+            for k, v in filters.items():
+                if k in params:
+                    continue
+                params[k] = v
+            
+            if self._method == "GET":
+                return await self.client.query(self.table_name, params=params)
+            elif self._method == "POST":
+                return await self.client.query(self.table_name, method="POST", data=self._data)
+            elif self._method == "PATCH":
+                return await self.client.query(self.table_name, method="PATCH", params=params, data=self._data)
+            elif self._method == "DELETE":
+                return await self.client.query(self.table_name, method="DELETE", params=params)
+        
+        # Run sync for FastAPI
+        try:
+            loop = asyncio.get_event_loop()
+            if loop.is_running():
+                # We're in async context, create a task
+                import concurrent.futures
+                with concurrent.futures.ThreadPoolExecutor() as pool:
+                    future = pool.submit(asyncio.run, _exec())
+                    return future.result()
+            else:
+                return asyncio.run(_exec())
+        except:
+            return asyncio.run(_exec())
+
+
+def table(self, table_name: str):
+    """Return a table query builder (matches official Supabase client API)."""
+    return TableQueryBuilder(self, table_name)
+
+
+# Add table method to class
+SupabaseClient.table = table
+
+
 async def check_health() -> tuple[bool, str]:
     """Check database health via Supabase API."""
     try:
