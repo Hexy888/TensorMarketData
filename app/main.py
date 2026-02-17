@@ -22,6 +22,7 @@ from app.api.v1 import endpoints_router, submission_router, auth_router
 from app.api.v1.webhooks import router as webhooks_router
 # from app.api.v1.email import router as email_router  # Disabled - needs supabase fix
 from app.api.v1.leads import router as leads_router
+from app.api.v1.orders import router as orders_router
 # from app.api.v1.agents import router as agents_router
 
 # Create templates directory path
@@ -176,6 +177,55 @@ async def version_test():
 async def pricing():
     """Pricing page - uses template file"""
     with open(os.path.join(TEMPLATES_DIR, "pricing.html"), "r") as f:
+        return f.read()
+
+
+@app.get("/get-started", response_class=HTMLResponse)
+async def get_started():
+    """Get started page - paid order form"""
+    with open(os.path.join(TEMPLATES_DIR, "get-started.html"), "r") as f:
+        return f.read()
+
+
+@app.get("/sample", response_class=HTMLResponse)
+async def sample():
+    """Sample request page"""
+    with open(os.path.join(TEMPLATES_DIR, "sample.html"), "r") as f:
+        return f.read()
+
+
+@app.get("/sample-confirmed", response_class=HTMLResponse)
+async def sample_confirmed():
+    """Sample request confirmed page"""
+    with open(os.path.join(TEMPLATES_DIR, "sample-confirmed.html"), "r") as f:
+        return f.read()
+
+
+@app.get("/order-confirmed", response_class=HTMLResponse)
+async def order_confirmed():
+    """Order confirmed page"""
+    with open(os.path.join(TEMPLATES_DIR, "order-confirmed.html"), "r") as f:
+        return f.read()
+
+
+@app.get("/faq", response_class=HTMLResponse)
+async def faq():
+    """FAQ page"""
+    with open(os.path.join(TEMPLATES_DIR, "faq.html"), "r") as f:
+        return f.read()
+
+
+@app.get("/terms", response_class=HTMLResponse)
+async def terms():
+    """Terms page"""
+    with open(os.path.join(TEMPLATES_DIR, "terms.html"), "r") as f:
+        return f.read()
+
+
+@app.get("/privacy", response_class=HTMLResponse)
+async def privacy():
+    """Privacy page"""
+    with open(os.path.join(TEMPLATES_DIR, "privacy.html"), "r") as f:
         return f.read()
 
 
@@ -390,6 +440,7 @@ app.include_router(auth_router, prefix="/v1")
 app.include_router(webhooks_router, prefix="/v1")
 # app.include_router(email_router, prefix="/v1")  # Disabled - needs supabase fix
 app.include_router(leads_router, prefix="/v1")
+app.include_router(orders_router, prefix="/v1")
 # app.include_router(seo_router)  # SEO: robots.txt, sitemap.xml
 # app.include_router(agents_router, prefix="/v1")  # Agent Discovery
 # app.include_router(analytics_router, prefix="/v1")  # Analytics

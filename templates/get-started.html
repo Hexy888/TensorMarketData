@@ -211,16 +211,35 @@
       const formData = new FormData(this);
       const data = Object.fromEntries(formData);
       
+      // Build order payload
+      const order = {
+        order_type: "paid",
+        package: data.package,
+        quantity: parseInt(data.quantity),
+        requirements: {
+          work_email: data.email,
+          target_industry: data.industry,
+          geography: { country: data.geography },
+          company_size_range: data.company_size,
+          buyer_titles: { titles: data.titles.split(",").map(t => t.trim()), free_text: null },
+          outreach_channel: data.channel,
+          exclusions: data.exclusions || null,
+          deadline: data.deadline || null,
+          notes: null
+        }
+      };
+      
       try {
-        const res = await fetch('/v1/submit', {
+        const res = await fetch('/v1/orders', {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({type: 'order', ...data})
+          body: JSON.stringify(order)
         });
         if (res.ok) {
-          window.location.href = '/get-started?success=1';
+          window.location.href = '/order-confirmed';
         } else {
-          alert('Error submitting order. Please try again.');
+          const err = await res.json();
+          alert(err.detail || 'Error submitting order. Please try again.');
         }
       } catch(err) {
         alert('Error submitting order. Please try again.');

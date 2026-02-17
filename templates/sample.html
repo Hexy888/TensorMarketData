@@ -176,13 +176,13 @@
       const data = Object.fromEntries(formData);
       
       try {
-        const res = await fetch('/v1/submit', {
+        const res = await fetch('/v1/samples', {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({type: 'sample', ...data})
+          body: JSON.stringify(data)
         });
         if (res.ok) {
-          window.location.href = '/sample?success=1';
+          window.location.href = '/sample-confirmed';
         } else {
           alert('Error submitting form. Please try again.');
         }
