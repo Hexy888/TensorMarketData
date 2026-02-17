@@ -1,26 +1,25 @@
 User-agent: *
 Allow: /
 
-# Allow AI bots and agents
-User-agent: ChatGPT-Plugin
-Allow: /api/
-Allow: /docs/
-Allow: /explorer/
-
-User-agent: GPTBot
-Allow: /
-
-User-agent: Google-Extended
-Allow: /
-
-User-agent: Applebot
-Allow: /
-
-User-agent: Anthropic-AI
-Allow: /
+# Legacy paths - disallow
+Disallow: /docs
+Disallow: /docs/
+Disallow: /dashboard
+Disallow: /explorer
+Disallow: /providers
+Disallow: /submit
+Disallow: /quickstart
+Disallow: /coverage
+Disallow: /changelog
+Disallow: /status
+Disallow: /support
+Disallow: /console
+Disallow: /admin/
+Disallow: /app/
+Disallow: /blog/
+Disallow: /bot
+Disallow: /openapi.json
+Disallow: /v1/nova-test
+Disallow: /test-deploy-abc123
 
 Sitemap: https://tensormarketdata.com/sitemap.xml
-
-# Disallow private areas
-Disallow: /dashboard
-Disallow: /api/v1/

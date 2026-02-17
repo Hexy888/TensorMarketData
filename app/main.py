@@ -132,46 +132,37 @@ async def root():
 
 @app.get("/health")
 async def health_check():
-    """Health check for Railway"""
-    return {"status": "healthy", "app": "TensorMarketData", "version": "test-v1"}
-
-@app.get("/test-deploy-abc123")
-async def test_deploy():
-    return {"status": "success", "message": "new code deployed!"}
+    """Health check"""
+    return {"status": "healthy", "version": "0.2.0"}
 
 
-# HTML Routes
-@app.get("/index", response_class=HTMLResponse)
-async def home():
-    """Home page"""
-    with open(os.path.join(TEMPLATES_DIR, "index.html"), "r") as f:
-        return f.read()
-
-
-@app.get("/docs", response_class=HTMLResponse)
-async def docs():
-    """Documentation page"""
-    with open(os.path.join(TEMPLATES_DIR, "docs.html"), "r") as f:
-        return f.read()
-
-
-@app.get("/docs/api", response_class=HTMLResponse)
-async def docs_api():
-    """API documentation page"""
-    with open(os.path.join(TEMPLATES_DIR, "docs.html"), "r") as f:
-        return f.read()
-
-
-@app.get("/docs/agent-integration", response_class=HTMLResponse)
-async def docs_agent_integration():
-    """Agent integration guide"""
-    with open(os.path.join(TEMPLATES_DIR, "docs.html"), "r") as f:
-        return f.read()
-
-
+# Legacy routes - redirect to home
+@app.get("/index")
+@app.get("/docs")
+@app.get("/docs/api")
+@app.get("/docs/agent-integration")
 @app.get("/version-test")
-async def version_test():
-    return {"version": "1.1.1", "deployed": True}
+@app.get("/dashboard")
+@app.get("/explorer")
+@app.get("/contact")
+@app.get("/signup")
+@app.get("/login")
+@app.get("/submit")
+@app.get("/quickstart")
+@app.get("/coverage")
+@app.get("/changelog")
+@app.get("/status")
+@app.get("/support")
+@app.get("/console")
+@app.get("/blog/ai-agents-b2b-data-programmatic-access")
+@app.get("/providers")
+@app.get("/bot")
+@app.get("/v1/nova-test")
+@app.get("/test-deploy-abc123")
+async def redirect_to_home():
+    """Redirect legacy routes to home"""
+    from fastapi.responses import RedirectResponse
+    return RedirectResponse("/", status_code=301)
 
 @app.get("/pricing", response_class=HTMLResponse)
 async def pricing():
@@ -373,77 +364,16 @@ async def global_exception_handler(request: Request, exc: Exception):
     )
 
 
-# Test endpoint - Nova
+# Legacy API endpoints - redirect to home
 @app.get("/v1/nova-test")
-async def nova_test():
-    return {"status": "ok", "message": "Nova test route"}
+async def redirect_legacy():
+    from fastapi.responses import RedirectResponse
+    return RedirectResponse("/", status_code=301)
 
-# OpenAPI JSON endpoint (canonical contract for agents)
-@app.get("/openapi.json", tags=["Documentation"])
-async def get_openapi():
-    """Get OpenAPI 3.0 specification (canonical API contract)"""
-    # Always regenerate to ensure fresh data (no cache)
-    app.openapi_schema = None
-    
-    # Generate base schema
-    openapi_schema = get_openapi_schema(
-        title="TensorMarketData",
-        description="Headless B2B Data Marketplace for AI Agents",
-        version="1.1.1",
-        routes=app.routes,
-    )
-    
-    # Add Bearer auth security scheme
-    openapi_schema["components"]["securitySchemes"] = {
-        "bearerAuth": {
-            "type": "http",
-            "scheme": "bearer",
-            "description": "Authorization: Bearer <API_KEY>"
-        }
-    }
-    
-    # Filter to ONLY public endpoints (per design spec)
-    # These are the only endpoints exposed in public OpenAPI
-    public_paths = ["/v1/search", "/v1/supplier/{supplier_id}", "/v1/supplier/{supplier_id}/inventory"]
-    filtered_paths = {}
-    
-    for path, path_item in openapi_schema.get("paths", {}).items():
-        # Include exact matches and pattern matches
-        if path in public_paths:
-            filtered_paths[path] = path_item
-        elif path.startswith("/v1/supplier/"):
-            # Dynamic supplier paths
-            filtered_paths[path] = path_item
-    
-    # Replace paths with filtered
-    openapi_schema["paths"] = filtered_paths
-    
-    # Apply bearer auth to all filtered paths
-    for path, path_item in openapi_schema.get("paths", {}).items():
-        for method, method_item in path_item.items():
-            if method in ["get", "post", "put", "delete", "patch"]:
-                method_item["security"] = [{"bearerAuth": []}]
-    
-    # Add shared schemas (ErrorEnvelope)
-    openapi_schema["components"]["schemas"] = {
-        "ErrorEnvelope": {
-            "type": "object",
-            "properties": {
-                "error": {
-                    "type": "object",
-                    "properties": {
-                        "code": {"type": "string"},
-                        "message": {"type": "string"},
-                        "details": {"type": "object"},
-                        "request_id": {"type": "string"}
-                    }
-                }
-            }
-        }
-    }
-    
-    app.openapi_schema = openapi_schema
-    return app.openapi_schema
+@app.get("/openapi.json")
+async def redirect_openapi():
+    from fastapi.responses import RedirectResponse
+    return RedirectResponse("/", status_code=301)
 
 
 # Include all routers
