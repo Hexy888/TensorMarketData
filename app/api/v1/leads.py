@@ -12,7 +12,11 @@ from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel, EmailStr
 import httpx
 
-from app.models.schemas import ErrorResponse
+# Simple error response without importing from app.models
+class ErrorResponse(BaseModel):
+    error: str
+    detail: Optional[str] = None
+    code: Optional[str] = None
 
 router = APIRouter()
 
