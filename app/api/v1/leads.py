@@ -6,7 +6,13 @@ from fastapi import APIRouter, Query
 router = APIRouter()
 
 
-@router.get("/sample")
+@router.get("/hello")
+async def hello():
+    """Test endpoint - hello."""
+    return {"message": "hello from leads"}
+
+
+@router.get("/sample-leads")
 async def get_sample(
     email: str = Query(default="demo@example.com"),
     industry: str = Query(default="SaaS")
@@ -25,8 +31,3 @@ async def get_sample(
 async def get_stats():
     """Get lead stats."""
     return {"samples": 0, "orders": 0}
-
-
-@router.get("/test")
-async def test():
-    return {"status": "ok"}
