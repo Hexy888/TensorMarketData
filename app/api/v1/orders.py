@@ -111,6 +111,8 @@ class SampleCreate(BaseModel):
 orders_db: dict = {}
 requirements_db: dict = {}
 status_events_db: list = []
+files_db: dict = {}  # order_id -> list of files
+replacement_requests_db: dict = {}  # order_id -> list of requests
 
 @router.post("/orders", response_model=OrderResponse)
 async def create_order(order: OrderCreate):
@@ -312,7 +314,98 @@ async def admin_list_orders(status: Optional[str] = None):
         orders = [o for o in orders if o["status"] == status]
     # Sort by created_at desc
     orders.sort(key=lambda x: x["created_at"], reverse=True)
-    return {"orders": orders}
+    # Add requirements summary
+    result = []
+    for o in orders:
+        req = requirements_db.get(o["id"], {})
+        result.append({
+            **o,
+            "requirements_summary": {
+                "work_email": req.get("work_email"),
+                "target_industry": req.get("target_industry"),
+                "quantity": o["quantity"],
+                "package": o["package"]
+            }
+        })
+    return {"orders": result}
+
+
+@router.get("/admin/orders/{order_id}")
+async def admin_get_order(order_id: str):
+    """Get full order details for admin."""
+    if order_id not in orders_db:
+        raise HTTPException(status_code=404, detail="Order not found")
+    
+    order = orders_db[order_id]
+    requirements = requirements_db.get(order_id, {})
+    events = [e for e in status_events_db if e["order_id"] == order_id]
+    
+    return {
+        "order": order,
+        "requirements": requirements,
+        "events": events,
+        "files": files_db.get(order_id, []),
+        "replacement_requests": replacement_requests_db.get(order_id, [])
+    }
+
+
+@router.post("/admin/orders/{order_id}/status")
+async def admin_update_status(order_id: str, payload: dict):
+    """
+    Update order status with transition validation.
+    Body: {to_status: string, note?: string}
+    """
+    if order_id not in orders_db:
+        raise HTTPException(status_code=404, detail="Order not found")
+    
+    order = orders_db[order_id]
+    current_status = order["status"]
+    new_status = payload.get("to_status")
+    note = payload.get("note")
+    
+    # Validate status
+    try:
+        new_status_enum = OrderStatus(new_status)
+    except ValueError:
+        raise HTTPException(status_code=400, detail=f"Invalid status: {new_status}")
+    
+    # Validate transition
+    allowed = ALLOWED_TRANSITIONS.get(current_status, [])
+    if new_status_enum not in allowed:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Cannot transition from {current_status} to {new_status}"
+        )
+    
+    now = datetime.utcnow()
+    order["status"] = new_status_enum
+    order["updated_at"] = now
+    
+    if new_status_enum == OrderStatus.ACCEPTED:
+        order["accepted_at"] = now
+    elif new_status_enum == OrderStatus.DELIVERED:
+        order["delivered_at"] = now
+    elif new_status_enum == OrderStatus.CLOSED:
+        order["closed_at"] = now
+    
+    # Log event
+    status_events_db.append({
+        "order_id": order_id,
+        "from_status": current_status,
+        "to_status": new_status_enum,
+        "note": note,
+        "created_at": now
+    })
+    
+    # Send emails based on status
+    requirements = requirements_db.get(order_id, {})
+    if new_status_enum == OrderStatus.ACCEPTED:
+        eta = payload.get("eta", "within 48 hours")
+        await dispatch_email("order", "accepted", order, requirements, eta=eta)
+    elif new_status_enum == OrderStatus.AWAITING_CLARIFICATION:
+        await dispatch_email("order", "clarification_needed", order, requirements, question=note or "Please confirm your ICP requirements")
+    
+    return {"status": "updated", "new_status": new_status_enum}
 
 
 @router.post("/admin/orders/{order_id}/upload")
@@ -331,9 +424,14 @@ async def admin_upload_deliverable(order_id: str, file_data: dict):
     except Exception:
         raise HTTPException(status_code=400, detail="Invalid file content")
     
-    # TODO: Validate CSV against package schema
-    # from app.core.csv_schema import validate_csv_schema
-    # is_valid, errors = validate_csv_schema(file_content.decode('utf-8'), file_data["package"])
+    # Validate CSV against package schema
+    from app.core.csv_schema import validate_csv_schema, Package as CSVPackage
+    order = orders_db[order_id]
+    csv_package = CSVPackage(order["package"])
+    is_valid, errors = validate_csv_schema(file_content.decode('utf-8'), csv_package)
+    
+    if not is_valid:
+        raise HTTPException(status_code=400, detail=f"CSV validation failed: {'; '.join(errors)}")
     # if not is_valid:
     #     raise HTTPException(status_code=400, detail=f"Validation failed: {errors}")
     
@@ -382,13 +480,15 @@ async def admin_deliver_order(order_id: str):
         "created_at": now
     })
     
-    # TODO: Generate signed URL
-    # download_url = generate_signed_download_url(storage_key, filename)
+    # Send delivery email with placeholder URL
+    requirements = requirements_db.get(order_id, {})
+    download_url = f"https://tensormarketdata.com/app/orders/{order_id}/download"
+    await dispatch_email("order", "delivered", order, requirements, download_url=download_url)
     
     return {
         "status": "delivered",
-        "delivered_at": now.isoformat()
-        # "download_url": download_url
+        "delivered_at": now.isoformat(),
+        "download_url": download_url
     }
 
 
@@ -450,9 +550,96 @@ async def request_replacement(order_id: str, request: dict):
         "created_at": now
     })
     
-    # TODO: Store replacement request
+    # Store replacement request
+    if order_id not in replacement_requests_db:
+        replacement_requests_db[order_id] = []
+    replacement_requests_db[order_id].append({
+        "id": str(uuid.uuid4()),
+        "evidence_type": request.get("evidence_type"),
+        "evidence_text": request.get("evidence_text"),
+        "affected_emails": request.get("affected_emails", []),
+        "status": "received",
+        "created_at": now
+    })
+    
+    # Send replacement received email
+    await dispatch_email("order", "replacement_requested", order, requirements)
     
     return {"status": "replacement_requested"}
+
+
+@router.post("/admin/orders/{order_id}/replacement-upload")
+async def admin_upload_replacement(order_id: str, file_data: dict):
+    """Upload replacement file for an order."""
+    if order_id not in orders_db:
+        raise HTTPException(status_code=404, detail="Order not found")
+    
+    import base64
+    
+    try:
+        file_content = base64.b64decode(file_data["content_base64"])
+    except Exception:
+        raise HTTPException(status_code=400, detail="Invalid file content")
+    
+    order = orders_db[order_id]
+    
+    # Store file (placeholder)
+    if order_id not in files_db:
+        files_db[order_id] = []
+    
+    files_db[order_id].append({
+        "id": str(uuid.uuid4()),
+        "file_type": "replacement",
+        "filename": file_data.get("filename", "replacement.csv"),
+        "size_bytes": len(file_content),
+        "created_at": datetime.utcnow()
+    })
+    
+    return {"status": "uploaded", "filename": file_data.get("filename")}
+
+
+@router.post("/admin/orders/{order_id}/send-replacement")
+async def admin_send_replacement(order_id: str):
+    """Send replacement file to customer."""
+    if order_id not in orders_db:
+        raise HTTPException(status_code=404, detail="Order not found")
+    
+    order = orders_db[order_id]
+    
+    if order["status"] != OrderStatus.REPLACEMENT_REQUESTED:
+        raise HTTPException(status_code=400, detail="Order must be in replacement_requested status")
+    
+    # Check replacement file exists
+    files = files_db.get(order_id, [])
+    replacement_files = [f for f in files if f.get("file_type") == "replacement"]
+    if not replacement_files:
+        raise HTTPException(status_code=400, detail="No replacement file uploaded")
+    
+    now = datetime.utcnow()
+    
+    # Update status
+    order["status"] = OrderStatus.REPLACEMENT_DELIVERED
+    order["updated_at"] = now
+    
+    # Log event
+    status_events_db.append({
+        "order_id": order_id,
+        "from_status": OrderStatus.REPLACEMENT_REQUESTED,
+        "to_status": OrderStatus.REPLACEMENT_DELIVERED,
+        "note": "Replacement delivered",
+        "created_at": now
+    })
+    
+    # Mark replacement request complete
+    if order_id in replacement_requests_db:
+        for req in replacement_requests_db[order_id]:
+            if req.get("status") == "received":
+                req["status"] = "completed"
+                req["updated_at"] = now
+    
+    # TODO: Generate signed URL and send email
+    
+    return {"status": "replacement_delivered"}
 
 
 # ============ ANALYTICS ============
