@@ -389,7 +389,7 @@ app.include_router(auth_router, prefix="/v1")
 # app.include_router(payments_router, prefix="/v1")
 app.include_router(webhooks_router, prefix="/v1")
 # app.include_router(email_router, prefix="/v1")  # Disabled - needs supabase fix
-# app.include_router(leads_router, prefix="/v1")  # Disabled - debugging supabase issue
+app.include_router(leads_router, prefix="/v1")
 # app.include_router(seo_router)  # SEO: robots.txt, sitemap.xml
 # app.include_router(agents_router, prefix="/v1")  # Agent Discovery
 # app.include_router(analytics_router, prefix="/v1")  # Analytics
