@@ -1,20 +1,23 @@
 """
 Leads API - Simple endpoints
 """
-from fastapi import APIRouter, Query
+from fastapi import APIRouter
+from pydantic import BaseModel
 
 router = APIRouter()
 
 
+class SampleRequest(BaseModel):
+    email: str = "demo@example.com"
+    industry: str = "SaaS"
+
+
 @router.post("/leads/sample")
-async def request_sample(
-    email: str = Query(...),
-    industry: str = Query(...)
-):
+async def request_sample(request: SampleRequest = SampleRequest()):
     """Request free sample leads."""
     return {
         "status": "success",
-        "message": f"Great! I'll send 10 {industry} leads to {email}",
+        "message": f"Great! I'll send 10 {request.industry} leads to {request.email}",
         "leads_count": 10
     }
 
