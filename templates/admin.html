@@ -67,19 +67,19 @@
 <body>
   <header>
     <div class="container">
-      <div class="logo">Tensor<span>MarketData</span> Admin</div>
+      <a href="/" class="logo">Tensor<span>MarketData</span> Admin</a></div>
       <nav class="nav">
         <a href="/admin" class="active">Orders</a>
         <a href="#">Customers</a>
         <a href="#">Settings</a>
       </nav>
-    </div>
+    </a></div>
   </header>
 
   <div class="container">
     <div class="page-header">
       <h1>Orders</h1>
-    </div>
+    </a></div>
     
     <div class="filters" id="filters">
       <button class="filter active" data-status="all">All</button>
@@ -88,12 +88,12 @@
       <button class="filter" data-status="in_research">In Research</button>
       <button class="filter" data-status="ready_for_delivery">Ready</button>
       <button class="filter" data-status="delivered">Delivered</button>
-    </div>
+    </a></div>
     
     <div class="board" id="board">
       <!-- Columns will be populated by JS -->
-    </div>
-  </div>
+    </a></div>
+  </a></div>
 
   <script>
     const STATUS_COLUMNS = [
@@ -139,20 +139,20 @@
           <div class="column-header">
             <span class="column-title">${col.label}</span>
             <span class="column-count">${colOrders.length}</span>
-          </div>
+          </a></div>
           ${colOrders.length === 0 
             ? '<div class="empty-column">No orders</div>' 
             : colOrders.map(o => `
               <div class="order-card status-${o.status}" onclick="viewOrder('${o.id}')">
-                <div class="order-id">${o.id.slice(0, 8)}</div>
+                <div class="order-id">${o.id.slice(0, 8)}</a></div>
                 <div class="order-meta">
                   <span class="order-type ${o.order_type}">${o.order_type}</span>
                   <span class="order-package">${o.package} · ${o.quantity} leads</span>
-                </div>
+                </a></div>
                 <div style="font-size: 0.8rem; color: var(--text-muted)">
                   ${new Date(o.created_at).toLocaleDateString()}
-                </div>
-              </div>
+                </a></div>
+              </a></div>
             `).join('')}
         `;
         board.appendChild(colDiv);

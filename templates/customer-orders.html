@@ -52,19 +52,19 @@
 <body>
   <header>
     <div class="container">
-      <div class="logo">Tensor<span>MarketData</span></div>
-    </div>
+      <a href="/" class="logo">Tensor<span>MarketData</span></a>
+    </a></div>
   </header>
 
   <div class="container">
     <div class="page-header">
       <h1>My Orders</h1>
-    </div>
+    </a></div>
     
     <div class="orders-list" id="orders-list">
-      <div class="empty">Loading orders...</div>
-    </div>
-  </div>
+      <div class="empty">Loading orders...</a></div>
+    </a></div>
+  </a></div>
 
   <script>
     async function loadOrders() {
@@ -88,36 +88,36 @@
           <div class="order-card">
             <div class="order-header">
               <div>
-                <div class="order-id">Order #${order.id.slice(0, 8)}</div>
+                <div class="order-id">Order #${order.id.slice(0, 8)}</a></div>
                 <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">
                   ${new Date(order.created_at).toLocaleDateString()}
-                </div>
-              </div>
+                </a></div>
+              </a></div>
               <span class="order-status status-${order.status}">${order.status.replace('_', ' ')}</span>
-            </div>
+            </a></div>
             
             <div class="order-details">
               <div class="detail-item">
-                <div class="detail-label">Package</div>
-                <div class="detail-value">${order.package?.toUpperCase() || 'N/A'}</div>
-              </div>
+                <div class="detail-label">Package</a></div>
+                <div class="detail-value">${order.package?.toUpperCase() || 'N/A'}</a></div>
+              </a></div>
               <div class="detail-item">
-                <div class="detail-label">Quantity</div>
-                <div class="detail-value">${order.quantity} leads</div>
-              </div>
+                <div class="detail-label">Quantity</a></div>
+                <div class="detail-value">${order.quantity} leads</a></div>
+              </a></div>
               <div class="detail-item">
-                <div class="detail-label">Type</div>
-                <div class="detail-value">${order.order_type}</div>
-              </div>
-            </div>
+                <div class="detail-label">Type</a></div>
+                <div class="detail-value">${order.order_type}</a></div>
+              </a></div>
+            </a></div>
             
             <div class="order-actions">
               ${order.status === 'delivered' || order.status === 'replacement_delivered' ? 
                 `<button class="btn btn-primary">Download Leads</button>
                  <button class="btn btn-outline">Request Replacement</button>` : 
                 ''}
-            </div>
-          </div>
+            </a></div>
+          </a></div>
         `).join('');
       } catch (e) {
         console.error(e);
