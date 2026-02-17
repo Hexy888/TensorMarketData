@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - TensorMarketData</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #4f46e5;
+      --primary-dark: #3730a3;
+      --bg: #ffffff;
+      --bg-secondary: #f8fafc;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --success: #16a34a;
+      --warning: #f59e0b;
+      --danger: #dc2626;
+    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg-secondary); color: var(--text); }
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 1.5rem; }
+    
+    header { background: white; padding: 1rem 0; border-bottom: 1px solid var(--border); }
+    header .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1.25rem; font-weight: 700; }
+    .logo span { color: var(--primary); }
+    .nav { display: flex; gap: 1.5rem; align-items: center; }
+    .nav a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
+    .nav a:hover { color: var(--text); }
+    .nav .active { color: var(--primary); font-weight: 600; }
+    
+    .page-header { padding: 2rem 0; display: flex; justify-content: space-between; align-items: center; }
+    .page-header h1 { font-size: 1.75rem; }
+    
+    .filters { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .filter { padding: 0.5rem 1rem; border: 1px solid var(--border); border-radius: 6px; background: white; cursor: pointer; font-size: 0.85rem; }
+    .filter.active { background: var(--primary); color: white; border-color: var(--primary); }
+    
+    .board { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; padding-bottom: 2rem; }
+    .column { background: var(--bg-secondary); border-radius: 12px; padding: 1rem; min-height: 400px; }
+    .column-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+    .column-title { font-weight: 600; font-size: 0.9rem; }
+    .column-count { background: var(--border); padding: 0.2rem 0.5rem; border-radius: 10px; font-size: 0.75rem; }
+    
+    .order-card { background: white; border-radius: 8px; padding: 1rem; margin-bottom: 0.75rem; border: 1px solid var(--border); cursor: pointer; transition: box-shadow 0.2s; }
+    .order-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .order-id { font-family: monospace; font-size: 0.8rem; color: var(--text-muted); }
+    .order-meta { font-size: 0.85rem; margin: 0.5rem 0; }
+    .order-type { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; }
+    .order-type.paid { background: #dbeafe; color: #1d4ed8; }
+    .order-type.sample { background: #dcfce7; color: #16a34a; }
+    .order-package { font-size: 0.8rem; color: var(--text-muted); }
+    
+    .status-new { border-left: 3px solid var(--primary); }
+    .status-accepted { border-left: 3px solid var(--success); }
+    .status-delivered { border-left: 3px solid var(--warning); }
+    .status-closed { border-left: 3px solid var(--text-muted); }
+    
+    .empty-column { text-align: center; color: var(--text-muted); padding: 2rem; font-size: 0.9rem; }
+    
+    @media (max-width: 768px) {
+      .board { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">Tensor<span>MarketData</span> Admin</div>
+      <nav class="nav">
+        <a href="/admin" class="active">Orders</a>
+        <a href="#">Customers</a>
+        <a href="#">Settings</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="page-header">
+      <h1>Orders</h1>
+    </div>
+    
+    <div class="filters" id="filters">
+      <button class="filter active" data-status="all">All</button>
+      <button class="filter" data-status="new">New</button>
+      <button class="filter" data-status="accepted">Accepted</button>
+      <button class="filter" data-status="in_research">In Research</button>
+      <button class="filter" data-status="ready_for_delivery">Ready</button>
+      <button class="filter" data-status="delivered">Delivered</button>
+    </div>
+    
+    <div class="board" id="board">
+      <!-- Columns will be populated by JS -->
+    </div>
+  </div>
+
+  <script>
+    const STATUS_COLUMNS = [
+      { id: 'new', label: 'New' },
+      { id: 'awaiting_clarification', label: 'Awaiting Clarification' },
+      { id: 'accepted', label: 'Accepted' },
+      { id: 'in_research', label: 'In Research' },
+      { id: 'verifying', label: 'Verifying' },
+      { id: 'enriching', label: 'Enriching' },
+      { id: 'ready_for_delivery', label: 'Ready for Delivery' },
+      { id: 'delivered', label: 'Delivered' },
+      { id: 'replacement_requested', label: 'Replacement Requested' },
+      { id: 'closed', label: 'Closed' }
+    ];
+    
+    let orders = [];
+    
+    async function loadOrders() {
+      try {
+        const res = await fetch('/v1/admin/orders');
+        const data = await res.json();
+        orders = data.orders || [];
+        renderBoard();
+      } catch (e) {
+        console.error('Failed to load orders:', e);
+      }
+    }
+    
+    function renderBoard(filter = 'all') {
+      const board = document.getElementById('board');
+      board.innerHTML = '';
+      
+      const filtered = filter === 'all' 
+        ? orders 
+        : orders.filter(o => o.status === filter);
+      
+      STATUS_COLUMNS.forEach(col => {
+        const colOrders = filtered.filter(o => o.status === col.id);
+        
+        const colDiv = document.createElement('div');
+        colDiv.className = 'column';
+        colDiv.innerHTML = `
+          <div class="column-header">
+            <span class="column-title">${col.label}</span>
+            <span class="column-count">${colOrders.length}</span>
+          </div>
+          ${colOrders.length === 0 
+            ? '<div class="empty-column">No orders</div>' 
+            : colOrders.map(o => `
+              <div class="order-card status-${o.status}" onclick="viewOrder('${o.id}')">
+                <div class="order-id">${o.id.slice(0, 8)}</div>
+                <div class="order-meta">
+                  <span class="order-type ${o.order_type}">${o.order_type}</span>
+                  <span class="order-package">${o.package} · ${o.quantity} leads</span>
+                </div>
+                <div style="font-size: 0.8rem; color: var(--text-muted)">
+                  ${new Date(o.created_at).toLocaleDateString()}
+                </div>
+              </div>
+            `).join('')}
+        `;
+        board.appendChild(colDiv);
+      });
+    }
+    
+    function viewOrder(orderId) {
+      window.location.href = `/admin/orders/${orderId}`;
+    }
+    
+    // Filter buttons
+    document.querySelectorAll('.filter').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderBoard(btn.dataset.status);
+      });
+    });
+    
+    loadOrders();
+  </script>
+</body>
+</html>

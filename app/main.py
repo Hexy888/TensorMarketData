@@ -321,6 +321,13 @@ async def console_page():
         return f.read()
 
 
+@app.get("/admin", response_class=HTMLResponse)
+async def admin_page():
+    """Admin dashboard"""
+    with open(os.path.join(TEMPLATES_DIR, "admin.html"), "r") as f:
+        return f.read()
+
+
 @app.get("/blog/ai-agents-b2b-data-programmatic-access", response_class=HTMLResponse)
 async def blog_post():
     """SEO blog post"""
