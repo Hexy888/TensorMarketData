@@ -1,76 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Sales - TensorMarketData</title>
-  <meta name="description" content="Contact TensorMarketData for enterprise pricing and custom integrations. Get in touch with our sales team.">
-  <meta property="og:title" content="Contact Sales - TensorMarketData">
-  <meta property="og:description" content="Get in touch for enterprise pricing and custom integrations">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://tensormarketdata.com/contact">
-  <link rel="canonical" href="https://tensormarketdata.com/contact">
-  <link rel="stylesheet" href="/static/css/styles.css">
-  <style>
-    .contact-container { max-width: 600px; margin: 0 auto; padding: 3rem 2rem; }
-    .contact-form { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-    .form-group { margin-bottom: 1.5rem; }
-    .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
-    .form-group input, .form-group textarea { width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 1rem; }
-    .form-group textarea { min-height: 150px; resize: vertical; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | TensorMarketData</title>
+    <meta name="description" content="Email-only support. Reach our team for questions about review management, pricing, or onboarding.">
+    <link rel="canonical" href="https://tensormarketdata.com/contact">
+    <style>
+        :root { --accent-primary: #0D9488; --text-primary: #0F172A; --text-secondary: #475569; --text-muted: #64748B; --bg-secondary: #F8FAFC; --border-primary: #E2E8F0; --radius-lg: 12px; --radius-md: 8px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; color: var(--text-primary); line-height: 1.6; }
+        .container { max-width: 700px; margin: 0 auto; padding: 0 var(--space-6); }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: var(--space-4) 0; border-bottom: 1px solid var(--border-primary); }
+        .nav-logo { font-size: 1.25rem; font-weight: 700; color: var(--text-primary); text-decoration: none; }
+        .nav-links { display: flex; gap: var(--space-6); list-style: none; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+        .hero { text-align: center; padding: var(--space-12) 0; }
+        .hero h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: var(--space-4); }
+        .hero p { color: var(--text-secondary); }
+        .contact-options { display: grid; gap: var(--space-6); margin: var(--space-8) 0; }
+        .contact-card { padding: var(--space-6); background: var(--bg-secondary); border-radius: var(--radius-lg); }
+        .contact-card h3 { margin-bottom: 8px; }
+        .contact-card p { color: var(--text-secondary); margin-bottom: 8px; }
+        .contact-card a { color: var(--accent-primary); text-decoration: none; }
+        .note { text-align: center; padding: var(--space-6); background: var(--bg-secondary); border-radius: var(--radius-lg); margin: var(--space-8) 0; }
+        .note p { color: var(--text-muted); }
+        footer { border-top: 1px solid var(--border-primary); padding: var(--space-8) 0; margin-top: var(--space-12); }
+        .footer-content { display: flex; justify-content: space-between; }
+        .footer-links { display: flex; gap: var(--space-6); list-style: none; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.875rem; }
+    </style>
 </head>
 <body>
-  <nav>
-    <a href="/" class="logo">Tensor<span>MarketData</span></a>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/docs">Documentation</a></li>
-      <li><a href="/pricing">Pricing</a></li>
-      <li><a href="/dashboard">Dashboard</a></li>
-      <li><a href="/submit">Submit Data</a></li>
-      <li><a href="/providers">Providers</a></li>
-      <li><a href="/explorer">API Explorer</a></li>
-    </ul>
-  </nav>
-
-  <div class="contact-container">
-    <h1 style="text-align: center; margin-bottom: 1rem;">Contact Sales</h1>
-    <p style="text-align: center; color: var(--gray); margin-bottom: 2rem;">Ready for Enterprise? Let's talk.</p>
-    
-    <div class="contact-form">
-      <form id="contactForm">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" required placeholder="Your name">
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required placeholder="you@company.com">
-        </div>
-        <div class="form-group">
-          <label for="company">Company</label>
-          <input type="text" id="company" name="company" placeholder="Company name">
-        </div>
-        <div class="form-group">
-          <label for="message">How can we help?</label>
-          <textarea id="message" name="message" required placeholder="Tell us about your needs..."></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
-      </form>
+    <div class="container">
+        <nav>
+            <a href="/" class="nav-logo">TensorMarketData</a>
+            <ul class="nav-links">
+                <li><a href="/pricing">Pricing</a></li>
+                <li><a href="/how-it-works">How It Works</a></li>
+                <li><a href="/faq">FAQ</a></li>
+            </ul>
+            <a href="/pricing" class="btn" style="display:inline-block;padding:8px 16px;background:var(--accent-primary);color:white;border-radius:8px;text-decoration:none;font-weight:500;">Get Started</a>
+        </nav>
     </div>
-  </div>
 
-  <script>
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert('Thank you for your interest! Our team will contact you within 24 hours.');
-      this.reset();
-    });
-  </script>
+    <div class="container">
+        <section class="hero">
+            <h1>Contact us</h1>
+            <p>Email-only operations. No phone calls.</p>
+        </section>
 
-  <footer>
-    <p>&copy; 2026 TensorMarketData. All rights reserved.</p>
-  </footer>
+        <div class="contact-options">
+            <div class="contact-card">
+                <h3>Support</h3>
+                <p>For existing clients with questions about your account, reviews, or service.</p>
+                <p><a href="mailto:support@tensormarketdata.com">support@tensormarketdata.com</a></p>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">Response time: Within 1 business day</p>
+            </div>
+
+            <div class="contact-card">
+                <h3>Sales</h3>
+                <p>For questions about pricing, packages, or onboarding.</p>
+                <p><a href="mailto:sales@tensormarketdata.com">sales@tensormarketdata.com</a></p>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">Response time: Within 2 business days</p>
+            </div>
+
+            <div class="contact-card">
+                <h3>General</h3>
+                <p>For everything else.</p>
+                <p><a href="mailto:hello@tensormarketdata.com">hello@tensormarketdata.com</a></p>
+            </div>
+        </div>
+
+        <div class="note">
+            <p><strong>For current clients:</strong> Please include your business name and the email you use to log into the portal.</p>
+            <p style="margin-top: 8px;"><strong>No phone support.</strong> Everything is async and documented.</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p style="color: var(--text-muted); font-size: 0.875rem;">© 2026 TensorMarketData</p>
+                <ul class="footer-links">
+                    <li><a href="/privacy">Privacy</a></li>
+                    <li><a href="/terms">Terms</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

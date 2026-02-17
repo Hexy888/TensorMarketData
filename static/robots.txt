@@ -1,25 +1,25 @@
 User-agent: *
 Allow: /
 
-# Legacy paths - disallow
-Disallow: /docs
-Disallow: /docs/
-Disallow: /dashboard
-Disallow: /explorer
-Disallow: /providers
-Disallow: /submit
-Disallow: /quickstart
-Disallow: /coverage
-Disallow: /changelog
-Disallow: /status
-Disallow: /support
-Disallow: /console
-Disallow: /admin/
+# Disallow admin and app areas
 Disallow: /app/
-Disallow: /blog/
-Disallow: /bot
-Disallow: /openapi.json
-Disallow: /v1/nova-test
-Disallow: /test-deploy-abc123
+Disallow: /admin/
+Disallow: /api/
+Disallow: /portal/
+Disallow: /docs/
+Disallow: /legacy/
 
+# Disallow legacy routes
+Disallow: /leads/
+Disallow: /b2b-leads/
+Disallow: /sample-leads/
+Disallow: /credits/
+Disallow: /providers/
+Disallow: /explorer/
+Disallow: /sample
+Disallow: /signup
+Disallow: /submit
+Disallow: /dashboard
+
+# Sitemap
 Sitemap: https://tensormarketdata.com/sitemap.xml

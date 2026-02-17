@@ -23,6 +23,8 @@ from app.api.v1.webhooks import router as webhooks_router
 # from app.api.v1.email import router as email_router  # Disabled - needs supabase fix
 from app.api.v1.leads import router as leads_router
 from app.api.v1.orders import router as orders_router
+from app.api.v1.checkout import router as checkout_router
+from app.api.v1.onboarding import router as onboarding_router
 # from app.api.v1.agents import router as agents_router
 
 # Create templates directory path
@@ -171,6 +173,41 @@ async def pricing():
         return f.read()
 
 
+@app.get("/how-it-works", response_class=HTMLResponse)
+async def how_it_works():
+    """How it works page"""
+    with open(os.path.join(TEMPLATES_DIR, "how-it-works.html"), "r") as f:
+        return f.read()
+
+
+@app.get("/contact", response_class=HTMLResponse)
+async def contact():
+    """Contact page"""
+    with open(os.path.join(TEMPLATES_DIR, "contact.html"), "r") as f:
+        return f.read()
+
+
+@app.get("/thank-you", response_class=HTMLResponse)
+async def thank_you(request: Request):
+    """Thank you page after checkout"""
+    with open(os.path.join(TEMPLATES_DIR, "thank-you.html"), "r") as f:
+        return f.read()
+
+
+@app.get("/onboarding", response_class=HTMLResponse)
+async def onboarding(request: Request):
+    """Onboarding form page"""
+    with open(os.path.join(TEMPLATES_DIR, "onboarding.html"), "r") as f:
+        return f.read()
+
+
+@app.get("/access", response_class=HTMLResponse)
+async def access(request: Request):
+    """Access checklist page"""
+    with open(os.path.join(TEMPLATES_DIR, "access.html"), "r") as f:
+        return f.read()
+
+
 @app.get("/get-started", response_class=HTMLResponse)
 async def get_started():
     """Get started page - paid order form"""
@@ -312,10 +349,63 @@ async def console_page():
         return f.read()
 
 
+# ============ ADMIN PORTAL ============
+
 @app.get("/admin", response_class=HTMLResponse)
 async def admin_page():
     """Admin dashboard"""
-    with open(os.path.join(TEMPLATES_DIR, "admin.html"), "r") as f:
+    with open(os.path.join(TEMPLATES_DIR, "admin", "dashboard.html"), "r") as f:
+        return f.read()
+
+
+# ============ CLIENT PORTAL (APP) ============
+
+@app.get("/app", response_class=HTMLResponse)
+async def app_dashboard():
+    """Client portal dashboard"""
+    with open(os.path.join(TEMPLATES_DIR, "app", "dashboard.html"), "r") as f:
+        return f.read()
+
+
+@app.get("/app/dashboard", response_class=HTMLResponse)
+async def app_dashboard_alt():
+    """Client portal dashboard (alt)"""
+    with open(os.path.join(TEMPLATES_DIR, "app", "dashboard.html"), "r") as f:
+        return f.read()
+
+
+@app.get("/app/reviews", response_class=HTMLResponse)
+async def app_reviews():
+    """Client portal reviews"""
+    with open(os.path.join(TEMPLATES_DIR, "app", "dashboard.html"), "r") as f:
+        return f.read()
+
+
+@app.get("/app/approvals", response_class=HTMLResponse)
+async def app_approvals():
+    """Client portal approvals"""
+    with open(os.path.join(TEMPLATES_DIR, "app", "approvals.html"), "r") as f:
+        return f.read()
+
+
+@app.get("/app/reports", response_class=HTMLResponse)
+async def app_reports():
+    """Client portal reports"""
+    with open(os.path.join(TEMPLATES_DIR, "app", "dashboard.html"), "r") as f:
+        return f.read()
+
+
+@app.get("/app/settings", response_class=HTMLResponse)
+async def app_settings():
+    """Client portal settings"""
+    with open(os.path.join(TEMPLATES_DIR, "app", "settings.html"), "r") as f:
+        return f.read()
+
+
+@app.get("/app/billing", response_class=HTMLResponse)
+async def app_billing():
+    """Client portal billing"""
+    with open(os.path.join(TEMPLATES_DIR, "app", "billing.html"), "r") as f:
         return f.read()
 
 
@@ -385,6 +475,8 @@ app.include_router(webhooks_router, prefix="/v1")
 # app.include_router(email_router, prefix="/v1")  # Disabled - needs supabase fix
 app.include_router(leads_router, prefix="/v1")
 app.include_router(orders_router, prefix="/v1")
+app.include_router(checkout_router, prefix="/v1")
+app.include_router(onboarding_router, prefix="/v1")
 # app.include_router(seo_router)  # SEO: robots.txt, sitemap.xml
 # app.include_router(agents_router, prefix="/v1")  # Agent Discovery
 # app.include_router(analytics_router, prefix="/v1")  # Analytics

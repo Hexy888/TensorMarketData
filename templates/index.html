@@ -1,780 +1,721 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- Primary Meta Tags -->
-  <title>TensorMarketData - Human-Verified B2B Prospect Leads</title>
-  <meta name="title" content="TensorMarketData - Human-Verified B2B Prospect Leads">
-  <meta name="description" content="Human-verified B2B prospect leads for outbound teams. Verified decision-maker contacts delivered in ~48 hours. 30-day replacement guarantee.">
-  <meta name="keywords" content="B2B lead generation, verified email leads, sales prospecting, outbound sales, decision maker contacts, prospect lists, cold email leads">
-  
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://tensormarketdata.com/">
-  <meta property="og:title" content="TensorMarketData - Prospect Lists Built for Outbound Teams">
-  <meta property="og:description" content="Verified decision-maker contacts delivered in ~48 hours. For SDR teams, founders, and agencies running cold email.">
-  <meta property="og:image" content="https://tensormarketdata.com/images/og-image.jpg">
-  <meta property="og:site_name" content="TensorMarketData">
-  
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://tensormarketdata.com/">
-  <meta property="twitter:title" content="TensorMarketData - B2B Lead Generation">
-  <meta property="twitter:description" content="Verified B2B leads with 95%+ email deliverability. Starting at $200 for 100 leads.">
-  <meta property="twitter:image" content="https://tensormarketdata.com/images/og-image.jpg">
-  
-  <!-- Canonical -->
-  <link rel="canonical" href="https://tensormarketdata.com/">
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  
-  <!-- Schema.org JSON-LD -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "TensorMarketData",
-    "url": "https://tensormarketdata.com",
-    "logo": "https://tensormarketdata.com/logo.png",
-    "description": "Premium B2B lead generation service with verified email leads and 95%+ deliverability.",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Minneapolis",
-      "addressRegion": "MN",
-      "addressCountry": "US"
-    },
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "email": "nova@tensormarketdata.com",
-      "contactType": "sales"
-    },
-    "sameAs": [
-      "https://twitter.com/tensormarket",
-      "https://linkedin.com/company/tensormarketdata"
-    ]
-  }
-  </script>
-  
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    :root {
-      --primary: #4f46e5;
-      --primary-dark: #3730a3;
-      --primary-light: #818cf8;
-      --bg: #ffffff;
-      --bg-secondary: #f8fafc;
-      --text: #1e293b;
-      --text-muted: #64748b;
-      --text-light: #94a3b8;
-      --border: #e2e8f0;
-      --success: #16a34a;
-    }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    header { 
-      padding: 1rem 0; 
-      
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(10px);
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 100;
-    }
-    header .container { 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-    }
-    .logo { 
-      font-size: 1.5rem; 
-      font-weight: 800; 
-      letter-spacing: -0.03em;
-      color: var(--text);
-      text-decoration: none;
-    }
-    .logo span { color: var(--primary); }
-    .nav-links { display: flex; gap: 2rem; align-items: center; }
-    .nav-links a { 
-      color: var(--text-muted); 
-      text-decoration: none; 
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--text); }
-    .nav-links .cta {
-      background: var(--primary);
-      color: #fff;
-      padding: 0.6rem 1.25rem;
-      border-radius: 8px;
-      font-weight: 600;
-    }
+    <!-- SEO Metadata -->
+    <title>Reputation Operations for Businesses | TensorMarketData</title>
+    <meta name="description" content="Automated review monitoring, response drafting with approval gates, and weekly reporting. Protect trust without extra staff.">
+    <meta name="keywords" content="review management, reputation management, review monitoring, review responses, online reputation">
     
-    .hero { 
-      padding: 8rem 0 5rem; 
-      text-align: center;
-      background: linear-gradient(180deg, #f8fafc 0%, var(--bg) 100%);
-    }
-    .badge {
-      display: inline-block;
-      background: rgba(79,70,229,0.08);
-      border: 1px solid rgba(79,70,229,0.2);
-      color: var(--primary);
-      padding: 0.4rem 1rem;
-      border-radius: 100px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-    }
-    h1 { 
-      font-size: 3.5rem; 
-      font-weight: 800; 
-      margin-bottom: 1.25rem; 
-      color: var(--text);
-      letter-spacing: -0.03em;
-      line-height: 1.15;
-    }
-    .hero p { 
-      font-size: 1.25rem; 
-      color: var(--text-muted); 
-      margin-bottom: 2.5rem; 
-      max-width: 640px; 
-      margin-left: auto; 
-      margin-right: auto;
-      line-height: 1.7;
-    }
+    <!-- Open Graph -->
+    <meta property="og:title" content="Reputation Operations for Businesses | TensorMarketData">
+    <meta property="og:description" content="Automated review monitoring, response drafting with approval gates, and weekly reporting.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tensormarketdata.com/">
     
-    .stats { 
-      display: flex; 
-      justify-content: center; 
-      gap: 4rem; 
-      margin-bottom: 3rem;
-      flex-wrap: wrap;
-    }
-    .stat { text-align: center; }
-    .stat-value { 
-      font-size: 2.5rem; 
-      font-weight: 800; 
-      color: var(--primary);
-      letter-spacing: -0.02em;
-    }
-    .stat-label { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; }
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Reputation Operations for Businesses | TensorMarketData">
+    <meta name="twitter:description" content="Automated review monitoring, response drafting with approval gates, and weekly reporting.">
     
-    .form-container {
-      background: #fff;
-      padding: 2.5rem;
-      border-radius: 20px;
-      max-width: 520px;
-      margin: 0 auto;
-      border: 1px solid var(--border);
-      box-shadow: 0 20px 60px -15px rgba(0,0,0,0.08);
-      text-align: left;
-    }
-    .form-container h3 { margin-bottom: 0.5rem; color: var(--text); font-size: 1.4rem; font-weight: 700; }
-    .form-container > p { color: var(--text-muted); margin-bottom: 1.75rem; font-size: 0.95rem; }
+    <!-- Canonical -->
+    <link rel="canonical" href="https://tensormarketdata.com/">
     
-    .form-group { margin-bottom: 1.1rem; }
-    .form-group label { display: block; margin-bottom: 0.4rem; color: var(--text); font-size: 0.85rem; font-weight: 600; }
-    .form-group input, .form-group select {
-      width: 100%;
-      padding: 14px 16px;
-      border-radius: 10px;
-      border: 1.5px solid var(--border);
-      background: var(--bg);
-      color: var(--text);
-      font-size: 0.95rem;
-      transition: all 0.2s;
-    }
-    .form-group input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(79,70,229,0.1); }
-    .form-group input::placeholder { color: var(--text-light); }
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
     
-    button.submit-btn {
-      width: 100%;
-      background: var(--primary);
-      color: #fff;
-      padding: 16px;
-      border: none;
-      border-radius: 10px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-      margin-top: 0.5rem;
-    }
-    button.submit-btn:hover { 
-      background: var(--primary-dark); 
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px -10px rgba(79,70,229,0.4);
-    }
-    
-    .success-message {
-      display: none;
-      color: var(--success);
-      padding: 1.75rem;
-      background: #f0fdf4;
-      border: 1px solid #bbf7d0;
-      border-radius: 12px;
-      margin-top: 1rem;
-      text-align: center;
-    }
-    .success-message h4 { color: var(--success); margin-bottom: 0.5rem; font-size: 1.1rem; }
-    .success-message p { color: var(--text-muted); font-size: 0.9rem; }
-    
-    .features { 
-      padding: 6rem 0; 
-      background: var(--bg-secondary);
-    }
-    .section-header { text-align: center; margin-bottom: 4rem; }
-    .section-header h2 { 
-      font-size: 2.25rem; 
-      font-weight: 800; 
-      color: var(--text); 
-      margin-bottom: 0.75rem;
-      letter-spacing: -0.02em;
-    }
-    .section-header p { color: var(--text-muted); max-width: 520px; margin: 0 auto; font-size: 1.05rem; }
-    
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-    .feature-card {
-      background: #fff;
-      padding: 2rem;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      transition: all 0.3s;
-    }
-    .feature-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
-      border-color: var(--primary-light);
-    }
-    .icon-box {
-      width: 48px;
-      height: 48px;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1.25rem;
-    }
-    .icon-box svg {
-      width: 24px;
-      height: 24px;
-      stroke: white;
-      stroke-width: 2;
-      fill: none;
-    }
-    .feature-card h3 { color: var(--text); margin-bottom: 0.6rem; font-size: 1.1rem; font-weight: 700; }
-    .feature-card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.65; }
-    
-    .quality { padding: 6rem 0; }
-    .quality-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-    .quality-item {
-      text-align: center;
-      padding: 2.5rem 2rem;
-      background: var(--bg-secondary);
-      border-radius: 16px;
-      border: 1px solid var(--border);
-    }
-    .quality-value {
-      font-size: 3rem;
-      font-weight: 800;
-      color: var(--primary);
-      margin-bottom: 0.25rem;
-      letter-spacing: -0.03em;
-    }
-    .quality-label { color: var(--text); font-weight: 700; margin-bottom: 0.5rem; font-size: 1.1rem; }
-    .quality-desc { color: var(--text-muted); font-size: 0.9rem; }
-    
-    .process { 
-      padding: 6rem 0; 
-      background: var(--bg-secondary);
-    }
-    .process-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      margin-top: 3rem;
-    }
-    .step {
-      position: relative;
-      padding: 2rem;
-      background: #fff;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-    }
-    .step-num {
-      position: absolute;
-      top: -16px;
-      left: 24px;
-      width: 36px;
-      height: 36px;
-      background: var(--primary);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 1rem;
-      color: #fff;
-      box-shadow: 0 4px 15px rgba(79,70,229,0.3);
-    }
-    .step h3 { color: var(--text); margin-bottom: 0.6rem; margin-top: 0.5rem; font-weight: 700; }
-    .step p { color: var(--text-muted); font-size: 0.95rem; }
-    
-    .cta-section {
-      padding: 6rem 0;
-      text-align: center;
-    }
-    .cta-section h2 {
-      font-size: 2.25rem;
-      color: var(--text);
-      margin-bottom: 1rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-    }
-    .cta-section p {
-      color: var(--text-muted);
-      margin-bottom: 2rem;
-      font-size: 1.1rem;
-    }
-    .cta-section .btn {
-      display: inline-block;
-      background: var(--primary);
-      color: #fff;
-      padding: 16px 40px;
-      border-radius: 10px;
-      font-size: 1.05rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.3s;
-    }
-    .cta-section .btn:hover {
-      background: var(--primary-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 15px 40px -10px rgba(79,70,229,0.35);
-    }
-    
-    footer { 
-      padding: 3rem 0; 
-      text-align: center; 
-      color: var(--text-light); 
-      font-size: 0.9rem; 
-      border-top: 1px solid var(--border);
-      background: var(--bg-secondary);
-    }
-    .email-link { 
-      color: var(--primary); 
-      text-decoration: none;
-      font-weight: 500;
-    }
-    .email-link:hover { text-decoration: underline; }
-    
-    @media (max-width: 768px) {
-      h1 { font-size: 2.25rem; }
-      .stats { gap: 2rem; }
-      .quality-grid, .process-grid, .features-grid { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
-      .form-container { padding: 1.75rem; }
-    }
-    
-    /* Sample Output */
-    .sample-output { padding: 4rem 0; background: var(--bg-secondary); }
-    .sample-output h2 { text-align: center; margin-bottom: 0.5rem; }
-    .sample-output > .container > p { text-align: center; color: var(--text-muted); margin-bottom: 2rem; }
-    .sample-table { overflow-x: auto; margin-bottom: 1rem; }
-    .sample-table table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-    .sample-table th, .sample-table td { padding: 0.75rem 1rem; text-align: left; font-size: 0.85rem; }
-    .sample-table th { background: var(--primary); color: white; font-weight: 600; white-space: nowrap; }
-    .sample-table td { font-family: monospace; font-size: 0.8rem; }
-    .sample-note { text-align: center; color: var(--text-muted); font-size: 0.9rem; }
-    
-    /* CTA Buttons */
-    .cta-buttons { display: flex; gap: 1rem; justify-content: center; margin: 2rem 0; flex-wrap: wrap; }
-    .cta-buttons .btn { padding: 0.875rem 2rem; font-size: 1rem; }
-    .trust-line { text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 1rem; }
-    .trust-chips { display: flex; gap: 0.75rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap; }
-    .chip { background: var(--bg-secondary); padding: 0.4rem 0.85rem; border-radius: 20px; font-size: 0.8rem; color: var(--text-muted); border: 1px solid var(--border); }
-    
-    /* Definition Block */
-    .definition-block { padding: 2rem 0; background: var(--bg-alt); text-align: center; }
-    .definition-block h2 { font-size: 1.25rem; margin-bottom: 0.5rem; }
-    .definition-block p { color: var(--text-muted); }
-    .definition-block .note { font-size: 0.85rem; color: var(--text-light); margin-top: 0.5rem; }
-    
-    .best-for { font-size: 0.85rem; color: var(--text-muted); margin: 1rem 0; padding: 0.5rem; background: var(--bg-alt); border-radius: 4px; }
-    .excluded { color: var(--text-light); font-size: 0.85rem; }
-    
-    .guarantee-section { padding: 4rem 0; background: var(--bg-secondary); text-align: center; }
-    .guarantee-section h2 { margin-bottom: 1rem; }
-    .guarantee-section p { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
-    
-    .footer-links { display: flex; gap: 1.5rem; justify-content: center; margin-bottom: 1rem; }
-    .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
-    .footer-links a:hover { color: var(--primary); }
-    .link-secondary { color: var(--primary); text-decoration: none; font-size: 0.9rem; }
-    .link-secondary:hover { text-decoration: underline; }
-    .link-arrow { color: var(--primary); text-decoration: none; font-weight: 600; }
-    .link-arrow:hover { text-decoration: underline; }
-    
-    /* FAQ Preview */
-    .faq-preview { padding: 4rem 0; }
-    .faq-preview h2 { text-align: center; margin-bottom: 0.5rem; }
-    .faq-preview > .container > p { text-align: center; color: var(--text-muted); margin-bottom: 2rem; }
-    .faq-list { max-width: 700px; margin: 0 auto 2rem; }
-    .faq-item { }
-    .faq-question { padding: 1rem 0; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-    .faq-answer { padding-bottom: 1rem; color: var(--text-muted); display: none; }
-    .faq-item.open .faq-answer { display: block; }
-    .faq-item.open .faq-icon { transform: rotate(180deg); }
-    .faq-icon { transition: transform 0.2s; }
-  </style>
+    <style>
+        /* Design Tokens */
+        :root {
+            /* Colors */
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F8FAFC;
+            --bg-tertiary: #F1F5F9;
+            --surface-card: #FFFFFF;
+            --border-primary: #E2E8F0;
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #64748B;
+            --accent-primary: #0D9488;
+            --accent-hover: #0F766E;
+            --accent-light: #CCFBF1;
+            --accent-subtle: #F0FDFA;
+            --success: #059669;
+            --success-light: #D1FAE5;
+            --warning: #D97706;
+            --warning-light: #FEF3C7;
+            --error: #DC2626;
+            --error-light: #FEE2E2;
+            
+            /* Typography */
+            --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+            
+            /* Spacing */
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-6: 24px;
+            --space-8: 32px;
+            --space-12: 48px;
+            --space-16: 64px;
+            
+            /* Radius */
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-full: 9999px;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            line-height: 1.6;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+        
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-4) 0;
+            border-bottom: 1px solid var(--border-primary);
+        }
+        
+        .nav-logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: var(--space-6);
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent-primary);
+        }
+        
+        .nav-cta {
+            background: var(--accent-primary);
+            color: white;
+            padding: var(--space-2) var(--space-4);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        
+        .nav-cta:hover {
+            background: var(--accent-hover);
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: var(--space-16) 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--space-4);
+            color: var(--text-primary);
+        }
+        
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-6);
+        }
+        
+        /* Trust Chips */
+        .trust-chips {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: var(--space-3);
+            margin-bottom: var(--space-8);
+        }
+        
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-3);
+            background: var(--accent-subtle);
+            color: var(--accent-primary);
+            border-radius: var(--radius-full);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .chip svg {
+            width: 16px;
+            height: 16px;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: var(--space-3) var(--space-6);
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: var(--accent-primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--accent-hover);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-primary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--bg-secondary);
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: var(--space-4);
+            justify-content: center;
+        }
+        
+        /* Sections */
+        section {
+            padding: var(--space-12) 0;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: var(--space-8);
+        }
+        
+        /* How It Works */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-6);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .step {
+            text-align: center;
+            padding: var(--space-6);
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-primary);
+            color: white;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 auto var(--space-4);
+        }
+        
+        .step h3 {
+            font-size: 1.125rem;
+            margin-bottom: var(--space-2);
+        }
+        
+        .step p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-6);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            padding: var(--space-6);
+            background: var(--surface-card);
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-lg);
+        }
+        
+        .feature-card h3 {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-size: 1.125rem;
+            margin-bottom: var(--space-2);
+        }
+        
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        /* Policy Strip */
+        .policy-strip {
+            background: var(--bg-secondary);
+            padding: var(--space-8) 0;
+        }
+        
+        .policy-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: var(--space-8);
+        }
+        
+        .policy-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            color: var(--text-secondary);
+        }
+        
+        .policy-item svg {
+            color: var(--success);
+        }
+        
+        /* Pricing Preview */
+        .pricing-preview {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-4);
+        }
+        
+        @media (max-width: 768px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .pricing-card {
+            padding: var(--space-6);
+            background: var(--surface-card);
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-lg);
+            text-align: center;
+        }
+        
+        .pricing-card.featured {
+            border-color: var(--accent-primary);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .pricing-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: var(--space-2);
+        }
+        
+        .pricing-card .price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+        }
+        
+        .pricing-card ul {
+            list-style: none;
+            margin: var(--space-4) 0;
+            text-align: left;
+        }
+        
+        .pricing-card li {
+            padding: var(--space-2) 0;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        .pricing-card li::before {
+            content: "✓";
+            color: var(--success);
+            margin-right: var(--space-2);
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid var(--border-primary);
+            padding: var(--space-4) 0;
+        }
+        
+        .faq-question {
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .faq-answer {
+            margin-top: var(--space-3);
+            color: var(--text-secondary);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: var(--space-16) 0;
+            background: var(--accent-subtle);
+            border-radius: var(--radius-lg);
+            margin: var(--space-8) 0;
+        }
+        
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: var(--space-4);
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-primary);
+            padding: var(--space-8) 0;
+            margin-top: var(--space-12);
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: var(--space-6);
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-primary);
+        }
+    </style>
 </head>
 <body>
-  <header>
+    <!-- Navigation -->
     <div class="container">
-      <a href="/" class="logo">Tensor<span>MarketData</span></a>
-      <nav class="nav-links">
-        <a href="/pricing">Pricing</a>
-        <a href="#process">How It Works</a>
-        <a href="/faq">FAQ</a>
-        <a href="/get-started" class="cta">Get Started</a>
-        <a href="/sample" class="link-secondary">Free Sample</a>
-      </nav>
+        <nav>
+            <a href="/" class="nav-logo">TensorMarketData</a>
+            <ul class="nav-links">
+                <li><a href="/pricing">Pricing</a></li>
+                <li><a href="/how-it-works">How It Works</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/faq">FAQ</a></li>
+            </ul>
+            <a href="/pricing" class="nav-cta">Get Started</a>
+        </nav>
     </div>
-  </header>
 
-  <section class="hero">
-    <div class="container">
-      <span class="badge">Human-Verified B2B Prospect Leads</span>
-      <h1>Prospect Lists Built<br>for Outbound Teams</h1>
-      <p>Verified decision-maker contacts delivered in ~48 hours. 30-day 1:1 replacement for invalid emails.<br>For SDR teams, founders, and agencies running cold email / LinkedIn outbound.</p>
-      
-      <div class="stats">
-        <div class="stat">
-          <div class="stat-value">~48hrs</div>
-          <div class="stat-label">Delivery Time</div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Reputation operations, automated — with approval gates for negatives.</h1>
+            <p>TensorMarketData monitors your reviews, drafts responses fast, routes negatives for approval, and runs a review-request system — so your reputation stays protected without extra staff.</p>
+            
+            <!-- Trust Chips -->
+            <div class="trust-chips">
+                <span class="chip">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 18,18"/></svg>
+                    Same-day monitoring
+                </span>
+                <span class="chip">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7l8 4 8-4z"/></svg>
+                    Approval-gated negatives
+                </span>
+                <span class="chip">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+                    Audit log on every action
+                </span>
+                <span class="chip">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z"/></svg>
+                    Weekly scorecards
+                </span>
+            </div>
+            
+            <div class="hero-buttons">
+                <a href="/pricing" class="btn btn-primary">See Pricing</a>
+                <a href="/how-it-works" class="btn btn-secondary">How it works</a>
+            </div>
         </div>
-        <div class="stat">
-          <div class="stat-value">30-day</div>
-          <div class="stat-label">Replacement Guarantee</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">Human</div>
-          <div class="stat-label">Verified</div>
-        </div>
-      </div>
-      
-      <div class="cta-buttons">
-        <a href="/pricing" class="btn btn-primary">See Pricing</a>
-        <a href="/sample" class="btn btn-secondary">Get Free Sample (10)</a>
-      </div>
-      <p class="trust-line">No subscriptions. Order only what you need.</p>
-      
-      <div class="trust-chips">
-        <span class="chip">Human-verified</span>
-        <span class="chip">~48h typical</span>
-        <span class="chip">30-day replacement</span>
-      </div>
-    </div>
-  </section>
-            <input type="text" name="industry" placeholder="e.g., B2B SaaS, AI/ML, Fintech">
-          </div>
-          <div class="form-group">
-            <label>Ideal Company Size</label>
-            <select name="size">
-              <option value="">Any size</option>
-              <option value="1-10">1-10 employees</option>
-              <option value="11-50">11-50 employees</option>
-              <option value="51-200">51-200 employees</option>
-              <option value="200-500">200-500 employees</option>
-              <option value="500+">500+ employees</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Specific Criteria (Optional)</label>
-            <input type="text" name="notes" placeholder="Location, funding stage, tech stack...">
-          </div>
-          <button type="submit" class="submit-btn">Request Sample Leads</button>
-        </form>
-        
-        <div class="success-message" id="success">
-          <h4>✓ Request Received</h4>
-          <p>I'll personally research your leads and email a sample list within 24 hours.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="features" id="features">
-    <div class="container">
-      <div class="section-header">
-        <h2>Exactly what you get</h2>
-        <p>Every order is delivered as a clean CSV/Excel export with consistent columns—ready for outreach or CRM import.</p>
-      </div>
-      
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="icon-box">
-            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </div>
-          <h3>Verified work email</h3>
-          <p>Every contact includes a verified work email address, ready for outreach.</p>
+    <!-- What We Do -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">What we do</h2>
+            <ul style="max-width: 600px; margin: 0 auto; list-style: none;">
+                <li style="padding: 12px 0; border-bottom: 1px solid var(--border-primary);">✓ Monitor new reviews across your platforms</li>
+                <li style="padding: 12px 0; border-bottom: 1px solid var(--border-primary);">✓ Draft responses in your brand voice</li>
+                <li style="padding: 12px 0;">✓ Auto-post positives (optional) and queue negatives for approval</li>
+            </ul>
         </div>
-        
-        <div class="feature-card">
-          <div class="icon-box">
-            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          </div>
-          <h3>Decision-maker name + title</h3>
-          <p>Reach the right people—founders, executives, and key stakeholders with buying authority.</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="icon-box">
-            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          </div>
-          <h3>LinkedIn URL (when available)</h3>
-          <p>Pro package includes LinkedIn profile URLs for multi-channel outreach.</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="icon-box">
-            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          </div>
-          <h3>Company domain + industry + employee range</h3>
-          <p>Full company context including domain, industry classification, and size.</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="icon-box">
-            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <h3>HQ location (when available)</h3>
-          <p>Headquarters location for geo-targeting and regional campaigns.</p>
-        </div>
-      </div>
-      
-      <p style="text-align: center; margin-top: 2rem;"><a href="/pricing" class="link-arrow">See package details →</a></p>
-    </div>
-  </section>
-            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-          </div>
-          <h3>Fast Turnaround</h3>
-          <p>Most lists delivered within 48 hours. Rush orders available for time-sensitive campaigns.</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="icon-box">
-            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-          </div>
-          <h3>Fresh Data</h3>
-          <p>Lists are freshly researched—not stale database exports. We verify each contact before delivery.</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="icon-box">
-            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-          </div>
-          <h3>Custom Formats</h3>
-          <p>Get data in CSV, Excel, or directly integrated into your CRM. Whatever workflow you use.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="guarantee-section" id="guarantee">
-    <div class="container">
-      <div class="section-header">
-        <h2>Replacement guarantee</h2>
-        <p>If an email is invalid within 30 days, we replace it 1:1.<br>Replacement covers emails only; it does not guarantee replies, meetings, or revenue.</p>
-      </div>
-    </div>
-  </section>
+    <!-- How It Works -->
+    <section style="background: var(--bg-secondary);">
+        <div class="container">
+            <h2 class="section-title">How it works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Connect</h3>
+                    <p>Link your review platforms (Google Business Profile first).</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Monitor</h3>
+                    <p>We watch for new reviews and draft replies using your templates.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Approve</h3>
+                    <p>You approve negatives. Positives can auto-post if enabled.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Report</h3>
+                    <p>Weekly scorecards show what's working and what needs attention.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <section class="process" id="process">
-    <div class="container">
-      <div class="section-header">
-        <h2>How it works</h2>
-      </div>
-      
-      <div class="process-grid">
-        <div class="step">
-          <div class="step-num">1</div>
-          <h3>Submit your ICP</h3>
-          <p>Industry, geography, titles, company size, and outreach channel.</p>
+    <!-- Features -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">What you get</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>
+                        Review Inbox
+                    </h3>
+                    <p>See all reviews in one place. New, pending, posted — organized.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7l8 4 8-4z"/></svg>
+                        Approval Queue
+                    </h3>
+                    <p>Every negative review waits for your OK before posting.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>
+                        Weekly Scorecards
+                    </h3>
+                    <p>Review count, rating trends, response time, coverage stats.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        Escalation Tickets
+                    </h3>
+                    <p>High-risk reviews flagged and escalated immediately.</p>
+                </div>
+            </div>
         </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <h3>We research + verify</h3>
-          <p>Human research + email verification before delivery.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <h3>We format for action</h3>
-          <p>Consistent columns, clean files, CRM-ready exports.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">4</div>
-          <h3>You launch outbound</h3>
-          <p>Start sending immediately—with replacement coverage for invalid emails.</p>
-        </div>
-      </div>
-      
-      <div style="text-align: center; margin-top: 2rem;">
-        <a href="/get-started" class="btn btn-primary">Get Started</a>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="sample-output">
-    <div class="container">
-      <h2>Sample output (Pro)</h2>
-      <p>This is the structure you'll receive. (Example row shown for illustration.)</p>
-      
-      <div class="sample-table">
-        <table>
-          <thead>
-            <tr>
-              <th>first_name</th>
-              <th>last_name</th>
-              <th>title</th>
-              <th>verified_work_email</th>
-              <th>linkedin_url</th>
-              <th>company_name</th>
-              <th>domain</th>
-              <th>industry</th>
-              <th>employee_range</th>
-              <th>hq_location</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Jordan</td>
-              <td>Patel</td>
-              <td>VP of Operations</td>
-              <td>jordan.patel@acmeexample.com</td>
-              <td>linkedin.com/in/jordanpatel-example</td>
-              <td>AcmeExample</td>
-              <td>acmeexample.com</td>
-              <td>Logistics Software</td>
-              <td>51-200</td>
-              <td>Austin, TX, US</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="sample-note">Columns may vary by package. Premium adds stricter targeting and optional enrichments where feasible.</p>
+    <!-- Policy Strip -->
+    <div class="policy-strip">
+        <div class="container">
+            <div class="policy-grid">
+                <div class="policy-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20,6 9,17 4,12"/></svg>
+                    Negatives never post without approval
+                </div>
+                <div class="policy-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20,6 9,17 4,12"/></svg>
+                    Every action is logged
+                </div>
+                <div class="policy-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>
+                    No calls required — async ops
+                </div>
+            </div>
+        </div>
     </div>
-  </section>
 
-  <section class="faq-preview">
-    <div class="container">
-      <h2>Questions, answered</h2>
-      <p>Everything you need to know about our lead generation service.</p>
-      
-      <div class="faq-list">
-        <div class="faq-item">
-          <div class="faq-question">What's included in a lead? <span class="faq-icon">▼</span></div>
-          <div class="faq-answer">A "lead" is 1 verified decision-maker contact record. Each package includes defined fields (name, title, verified email, company details). See Pricing for exact columns.</div>
+    <!-- Pricing Preview -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Simple pricing</h2>
+            <div class="pricing-preview">
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h3>Monitor + Respond</h3>
+                        <div class="price">$99/mo</div>
+                        <ul>
+                            <li>Review monitoring + inbox</li>
+                            <li>Draft replies for all reviews</li>
+                            <li>Optional auto-post 4-5★</li>
+                            <li>Weekly scorecard</li>
+                        </ul>
+                        <a href="/pricing" class="btn btn-secondary" style="width: 100%;">View Details</a>
+                    </div>
+                    <div class="pricing-card featured">
+                        <h3>Package B</h3>
+                        <div class="price">$199/mo</div>
+                        <ul>
+                            <li>Everything in A</li>
+                            <li>Automated review requests</li>
+                            <li>One follow-up max</li>
+                            <li>Monthly insights</li>
+                        </ul>
+                        <a href="/pricing" class="btn btn-primary" style="width: 100%;">View Details</a>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>Multi-Location</h3>
+                        <div class="price">$399/mo</div>
+                        <ul>
+                            <li>Everything in B</li>
+                            <li>Location-level reporting</li>
+                            <li>Escalation routing</li>
+                            <li>Dedicated manager</li>
+                        </ul>
+                        <a href="/pricing" class="btn btn-secondary" style="width: 100%;">View Details</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="faq-item">
-          <div class="faq-question">How are emails verified? <span class="faq-icon">▼</span></div>
-          <div class="faq-answer">We use a verification process prior to delivery to reduce invalid emails. If an email is invalid within 30 days, we replace it 1:1.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question">What does the replacement guarantee cover? <span class="faq-icon">▼</span></div>
-          <div class="faq-answer">30-day 1:1 replacement for invalid emails (hard bounce or failed verification). Replacement covers emails only; it does not guarantee replies, meetings, or revenue.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question">How fast is delivery? <span class="faq-icon">▼</span></div>
-          <div class="faq-answer">~48 hours typical. Complex ICPs or large orders may take longer. Rush available.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question">Can you match strict titles and geographies? <span class="faq-icon">▼</span></div>
-          <div class="faq-answer">Yes. Pro supports clear title and geo targeting. Premium is designed for strict ICP constraints (C-suite only, niche verticals, tight geos).</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question">What format do you deliver? <span class="faq-icon">▼</span></div>
-          <div class="faq-answer">CSV/Excel exports with consistent columns, ready for outreach or CRM import.</div>
-        </div>
-      </div>
-      
-      <div style="text-align: center;">
-        <a href="/faq" class="btn btn-secondary">Read FAQ</a>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="cta-section">
-    <div class="container">
-      <h2>Get a list you can actually use</h2>
-      <p>Clear fields. Verified emails. Delivered fast.</p>
-      <div class="cta-buttons">
-        <a href="/get-started" class="btn btn-primary">Get Started</a>
-        <a href="/sample" class="btn btn-secondary">Get Free Sample (10)</a>
-      </div>
-    </div>
-  </section>
+    <!-- FAQ Preview -->
+    <section style="background: var(--bg-secondary);">
+        <div class="container">
+            <h2 class="section-title">Frequently asked questions</h2>
+            <div class="faq-section">
+                <div class="faq-item">
+                    <div class="faq-question">Which platforms do you support?</div>
+                    <div class="faq-answer">We start with Google Business Profile — the highest-impact platform for local businesses. Additional platforms available as needed.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Do you respond to every review?</div>
+                    <div class="faq-answer">Yes. Every new review is classified and a response is drafted. No review gets missed.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Can you post replies automatically?</div>
+                    <div class="faq-answer">4-5★ can auto-post if you enable it. 1-3★ always require your approval first.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Can you remove bad reviews?</div>
+                    <div class="faq-answer">No. We can't remove reviews. We help you respond professionally, which often leads to the reviewer updating their review.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What do you need to start?</div>
+                    <div class="faq-answer">Google Business Profile access, brand voice guidelines, and an escalation contact email.</div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: var(--space-6);">
+                <a href="/faq" class="btn btn-secondary">View All FAQ</a>
+            </div>
+        </div>
+    </section>
 
-  <footer>
-    <div class="container">
-      <div class="footer-links">
-        <a href="/pricing">Pricing</a>
-        <a href="/faq">FAQ</a>
-        <a href="/terms">Terms</a>
-        <a href="/privacy">Privacy</a>
-      </div>
-      <p>Questions? <a href="mailto:nova@tensormarketdata.com" class="email-link">nova@tensormarketdata.com</a></p>
-      <p style="margin-top: 0.5rem;">© 2026 TensorMarketData. All rights reserved.</p>
-    </div>
-  </footer>
+    <!-- Testimonials Section -->
+    <section class="testimonials-section" style="padding: var(--space-16) 0; background: var(--bg-secondary);">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: var(--space-12); font-size: 2rem; color: var(--text-primary);">Trusted by businesses that care about their reputation</h2>
+            <div class="testimonial-card" style="max-width: 700px; margin: 0 auto; background: var(--surface-card); padding: var(--space-8); border-radius: var(--radius-lg); box-shadow: var(--shadow-md);">
+                <div style="color: var(--warning); font-size: 1.25rem; margin-bottom: var(--space-4);">★★★★★</div>
+                <p style="font-size: 1.125rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: var(--space-6);">"We were losing customers to negative reviews we didn't even know existed. TensorMarketData changed that — now we see every review within hours and can respond before small issues become big problems. Our rating went from 3.8 to 4.6 in 4 months."</p>
+                <div style="display: flex; align-items: center; gap: var(--space-4);">
+                    <div style="width: 48px; height: 48px; background: var(--accent-primary); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 1.125rem;">JM</div>
+                    <div>
+                        <div style="font-weight: 600; color: var(--text-primary);">James Mitchell</div>
+                        <div style="color: var(--text-muted); font-size: 0.875rem;">Owner, Mitchell Auto Group</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <script>
-    // FAQ accordion
-    document.querySelectorAll('.faq-question').forEach(q => {
-      q.addEventListener('click', () => {
-        q.parentElement.classList.toggle('open');
-      });
-    });
-    
-    // Analytics
-    document.querySelectorAll('a[href="/pricing"]').forEach(a => {
-      a.addEventListener('click', () => { track('homepage_cta_pricing_click'); });
-    });
-    document.querySelectorAll('a[href="/sample"]').forEach(a => {
-      a.addEventListener('click', () => { track('homepage_cta_sample_click'); });
-    });
-    document.querySelectorAll('a[href="/get-started"]').forEach(a => {
-      a.addEventListener('click', () => { track('homepage_cta_get_started_click'); });
-    });
-    
-    function track(event) {
-      fetch('/v1/analytics', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({event})
-      }).catch(() => {});
-    }
-  </script>
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Protect your reputation this week.</h2>
+            <a href="/pricing" class="btn btn-primary">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p style="color: var(--text-muted); font-size: 0.875rem;">© 2026 TensorMarketData</p>
+                <ul class="footer-links">
+                    <li><a href="/privacy">Privacy</a></li>
+                    <li><a href="/terms">Terms</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

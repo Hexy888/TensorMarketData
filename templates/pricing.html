@@ -1,480 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- Primary Meta Tags -->
-  <title>Pricing - Verified B2B Lead Packages</title>
-  <meta name="title" content="Pricing - Verified B2B Lead Packages">
-  <meta name="description" content="Transparent B2B lead pricing. 100 verified leads for $200, 250 for $450, 500 for $800. No subscriptions. Bounce replacements free.">
-  <meta name="keywords" content="B2B lead pricing, verified email leads, lead generation cost, email list prices, sales leads">
-  
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://tensormarketdata.com/pricing/">
-  <meta property="og:title" content="Pricing - TensorMarketData B2B Leads">
-  <meta property="og:description" content="100 verified leads for $200. No subscriptions. Bounce replacements free.">
-  <meta property="og:image" content="https://tensormarketdata.com/images/og-image.jpg">
-  <meta property="og:site_name" content="TensorMarketData">
-  
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://tensormarketdata.com/pricing/">
-  <meta property="twitter:title" content="TensorMarketData Pricing - B2B Leads">
-  <meta property="twitter:description" content="100 verified leads for $200. No subscriptions. Bounce replacements free.">
-  <meta property="twitter:image" content="https://tensormarketdata.com/images/og-image.jpg">
-  
-  <!-- Canonical -->
-  <link rel="canonical" href="https://tensormarketdata.com/pricing/">
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    :root {
-      --primary: #4f46e5;
-      --primary-dark: #3730a3;
-      --bg: #ffffff;
-      --bg-secondary: #f8fafc;
-      --bg-alt: #f1f5f9;
-      --text: #1e293b;
-      --text-muted: #64748b;
-      --text-light: #94a3b8;
-      --border: #e2e8f0;
-      --success: #16a34a;
-    }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
-    
-    header { 
-      padding: 1rem 0; 
-      
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(10px);
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 100;
-    }
-    header .container { 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-    }
-    .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.03em; color: var(--text); text-decoration: none; }
-    .logo:hover { text-decoration: none; }
-    .logo span { color: var(--primary); }
-    nav { display: flex; gap: 2rem; align-items: center; }
-    nav a { 
-      color: var(--text-muted); 
-      text-decoration: none; 
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    nav a:hover { color: var(--text); }
-    nav a.cta {
-      background: var(--primary);
-      color: #fff;
-      padding: 0.6rem 1.25rem;
-      border-radius: 8px;
-      font-weight: 600;
-    }
-    
-    .hero { 
-      padding: 8rem 0 4rem; 
-      text-align: center;
-      background: linear-gradient(180deg, #f8fafc 0%, var(--bg) 100%);
-    }
-    h1 { 
-      font-size: 2.75rem; 
-      font-weight: 800; 
-      margin-bottom: 1rem; 
-      color: var(--text);
-      letter-spacing: -0.02em;
-    }
-    .hero p { 
-      font-size: 1.15rem; 
-      color: var(--text-muted); 
-      max-width: 550px; 
-      margin: 0 auto;
-    }
-    
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin: 3rem 0;
-    }
-    .pricing-card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 2.5rem 2rem;
-      text-align: center;
-      transition: all 0.3s;
-    }
-    .pricing-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 60px -15px rgba(0,0,0,0.1);
-    }
-    .pricing-card.featured {
-      border-color: var(--primary);
-      box-shadow: 0 20px 60px -15px rgba(79,70,229,0.15);
-    }
-    .badge {
-      display: inline-block;
-      background: rgba(79,70,229,0.1);
-      color: var(--primary);
-      padding: 0.35rem 0.85rem;
-      border-radius: 100px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-    .pricing-card h3 { color: var(--text); font-size: 1.3rem; margin-bottom: 0.5rem; font-weight: 700; }
-    .price {
-      font-size: 2.75rem;
-      font-weight: 800;
-      color: var(--text);
-      margin-bottom: 0.25rem;
-      letter-spacing: -0.03em;
-    }
-    .price span { font-size: 1rem; color: var(--text-muted); font-weight: 500; }
-    .price-note { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem; }
-    
-    .leads-count {
-      background: var(--bg-secondary);
-      padding: 1.25rem;
-      border-radius: 12px;
-      margin-bottom: 1.5rem;
-    }
-    .leads-count .num { font-size: 2rem; font-weight: 800; color: var(--primary); }
-    .leads-count .label { font-size: 0.85rem; color: var(--text-muted); }
-    
-    .per-lead {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
-      font-weight: 500;
-    }
-    
-    .features-list {
-      text-align: left;
-      margin-bottom: 1.75rem;
-      list-style: none;
-    }
-    .features-list li {
-      padding: 0.6rem 0;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-    .features-list li::before {
-      content: "✓";
-      color: var(--success);
-      font-weight: 700;
-    }
-    
-    .btn {
-      display: block;
-      width: 100%;
-      padding: 15px;
-      border-radius: 10px;
-      font-size: 1rem;
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
-      border: none;
-      transition: all 0.2s;
-    }
-    .btn-primary {
-      background: var(--primary);
-      color: #fff;
-    }
-    .btn-primary:hover { 
-      background: var(--primary-dark); 
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px -10px rgba(79,70,229,0.35);
-    }
-    .btn-secondary {
-      background: var(--bg-secondary);
-      color: var(--text);
-      border: 1.5px solid var(--border);
-    }
-    .btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
-    
-    .guarantee {
-      text-align: center;
-      padding: 2rem;
-      background: #f0fdf4;
-      border: 1px solid #bbf7d0;
-      border-radius: 16px;
-      margin: 3rem 0;
-    }
-    .guarantee h3 { color: var(--success); margin-bottom: 0.5rem; font-size: 1.2rem; font-weight: 700; }
-    .guarantee p { color: var(--text-muted); font-size: 0.95rem; }
-    
-    .faq { padding: 5rem 0; }
-    .faq h2 { 
-      text-align: center; 
-      font-size: 2rem; 
-      color: var(--text); 
-      margin-bottom: 2.5rem; 
-      font-weight: 800;
-    }
-    .faq-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.25rem;
-    }
-    .faq-item {
-      background: var(--bg-secondary);
-      padding: 1.75rem;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-    }
-    .faq-item h4 { color: var(--text); margin-bottom: 0.5rem; font-weight: 700; }
-    .faq-item p { color: var(--text-muted); font-size: 0.9rem; }
-    
-    footer { 
-      padding: 2.5rem 0; 
-      text-align: center; 
-      color: var(--text-light); 
-      font-size: 0.9rem; 
-      border-top: 1px solid var(--border);
-      background: var(--bg-secondary);
-    }
-    .email-link { color: var(--primary); text-decoration: none; font-weight: 500; }
-    
-    @media (max-width: 768px) {
-      h1 { font-size: 2rem; }
-      .pricing-grid, .faq-grid { grid-template-columns: 1fr; }
-      nav { display: none; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Management Pricing | TensorMarketData</title>
+    <meta name="description" content="Simple, predictable pricing for review management. Monitor, respond, generate reviews. Start in 24 hours.">
+    <meta property="og:title" content="Review Management Pricing | TensorMarketData">
+    <meta property="og:description" content="Simple, predictable pricing for review management.">
+    <link rel="canonical" href="https://tensormarketdata.com/pricing">
+    <style>
+        :root {
+            --accent-primary: #0D9488;
+            --accent-hover: #0F766E;
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #64748B;
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F8FAFC;
+            --border-primary: #E2E8F0;
+            --success: #059669;
+            --radius-lg: 12px;
+            --radius-md: 8px;
+            --space-4: 16px;
+            --space-6: 24px;
+            --space-8: 32px;
+            --space-12: 48px;
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; color: var(--text-primary); line-height: 1.6; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 var(--space-6); }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: var(--space-4) 0; border-bottom: 1px solid var(--border-primary); }
+        .nav-logo { font-size: 1.25rem; font-weight: 700; color: var(--text-primary); text-decoration: none; }
+        .nav-links { display: flex; gap: var(--space-6); list-style: none; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+        .nav-cta { background: var(--accent-primary); color: white; padding: 8px 16px; border-radius: var(--radius-md); text-decoration: none; font-weight: 500; }
+        .hero { text-align: center; padding: var(--space-12) 0; }
+        .hero h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: var(--space-4); }
+        .hero p { color: var(--text-secondary); max-width: 600px; margin: 0 auto var(--space-6); }
+        .packages { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); margin: var(--space-8) 0; }
+        @media (max-width: 768px) { .packages { grid-template-columns: 1fr; } }
+        .package { padding: var(--space-6); border: 1px solid var(--border-primary); border-radius: var(--radius-lg); }
+        .package.featured { border-color: var(--accent-primary); box-shadow: var(--shadow-md); position: relative; }
+        .package h3 { font-size: 1.25rem; margin-bottom: var(--space-4); }
+        .price { font-size: 2.5rem; font-weight: 700; color: var(--accent-primary); }
+        .price span { font-size: 1rem; font-weight: 400; color: var(--text-muted); }
+        .package ul { list-style: none; margin: var(--space-4) 0; }
+        .package li { padding: 8px 0; color: var(--text-secondary); font-size: 0.9rem; }
+        .package li::before { content: "✓"; color: var(--success); margin-right: 8px; }
+        .btn { display: block; padding: 12px 24px; border-radius: var(--radius-md); text-align: center; text-decoration: none; font-weight: 500; margin-top: var(--space-4); }
+        .btn-primary { background: var(--accent-primary); color: white; }
+        .btn-primary:hover { background: var(--accent-hover); }
+        .btn-secondary { background: transparent; border: 1px solid var(--border-primary); color: var(--text-secondary); }
+        .policy { background: var(--bg-secondary); padding: var(--space-8); border-radius: var(--radius-lg); margin: var(--space-8) 0; }
+        .policy h3 { margin-bottom: var(--space-4); }
+        .policy ul { list-style: none; }
+        .policy li { padding: 8px 0; color: var(--text-secondary); }
+        .policy li::before { content: "•"; color: var(--accent-primary); margin-right: 8px; }
+        .donts { padding: var(--space-8) 0; }
+        .donts h3 { color: #DC2626; margin-bottom: var(--space-4); }
+        .donts li { color: var(--text-secondary); list-style: none; padding: 4px 0; }
+        .timeline { background: var(--bg-secondary); padding: var(--space-6); border-radius: var(--radius-lg); margin: var(--space-8) 0; }
+        .timeline h3 { margin-bottom: var(--space-4); }
+        .timeline ol { margin-left: var(--space-6); color: var(--text-secondary); }
+        .timeline li { padding: 4px 0; }
+        footer { border-top: 1px solid var(--border-primary); padding: var(--space-8) 0; margin-top: var(--space-12); }
+        .footer-content { display: flex; justify-content: space-between; }
+        .footer-links { display: flex; gap: var(--space-6); list-style: none; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.875rem; }
+    </style>
 </head>
 <body>
-  <header>
     <div class="container">
-      <a href="/" class="logo">Tensor<span>MarketData</span></a>
-      <nav>
-        <a href="/">Home</a>
-        <a href="/#features">Features</a>
-        <a href="/#quality">Quality</a>
-        <a href="#contact" class="cta">Get Leads</a>
-      </nav>
-    </a></div>
-  </header>
+        <nav>
+            <a href="/" class="nav-logo">TensorMarketData</a>
+            <ul class="nav-links">
+                <li><a href="/pricing">Pricing</a></li>
+                <li><a href="/how-it-works">How It Works</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/faq">FAQ</a></li>
+            </ul>
+            <a href="/pricing" class="nav-cta">Get Started</a>
+        </nav>
+    </div>
 
-  <section class="hero">
     <div class="container">
-      <h1>Pricing</h1>
-      <p>Human-verified B2B prospect leads. No subscriptions. 30-day replacement guarantee.</p>
-    </a></div>
-  </section>
+        <section class="hero">
+            <h1>Choose the level of reputation coverage you want.</h1>
+            <p>All packages include monitoring, response drafting, approval gates for negatives, and weekly scorecards. No calls. Async ops only.</p>
+        </section>
 
-  <!-- What counts as a lead -->
-  <section class="definition-block">
-    <div class="container">
-      <h2>What counts as a lead?</h2>
-      <p><strong>1 verified decision-maker contact record</strong> = first_name + last_name + title + verified_work_email + company info.</p>
-      <p class="note">We do NOT sell inbound leads, marketing Qualified leads (MQLs), or company records without contact data.</p>
-    </a></div>
-  </section>
+        <div class="packages">
+            <div class="package">
+                <h3>Monitor + Respond</h3>
+                <div class="price">$99<span>/month</span></div>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin: 8px 0 16px;">Essential review management for single-location businesses.</p>
+                <ul>
+                    <li>Review monitoring + inbox</li>
+                    <li>Draft replies for all reviews</li>
+                    <li>Optional auto-post for 4-5★ reviews</li>
+                    <li>Approval queue for 1-3★ reviews</li>
+                    <li>Weekly scorecard</li>
+                    <li>Audit log on every action</li>
+                </ul>
+                <a href="/get-started" class="btn btn-secondary">Get Started — Package A</a>
+            </div>
 
-  <section>
-    <div class="container">
-      <div class="pricing-grid">
-        <!-- Starter -->
-        <div class="pricing-card">
-          <h3>Starter</h3>
-          <div class="price">$3.00<span>/lead</span></a></div>
-          <div class="leads-count">
-            <div class="num">300</a></div>
-            <div class="label">minimum</a></div>
-          </a></div>
-          <div class="per-lead">$900 total</a></div>
-          <p class="best-for">Best for: broad targeting, high-volume list building, early outbound testing</p>
-          <ul class="features-list">
-            <li><strong>CONTACT:</strong></li>
-            <li>first_name</li>
-            <li>last_name</li>
-            <li>title</li>
-            <li>verified_work_email</li>
-            <li><strong>COMPANY:</strong></li>
-            <li>company_name</li>
-            <li>domain</li>
-            <li><strong>BASIC:</strong></li>
-            <li>industry (broad)</li>
-            <li>employee_range</li>
-            <li class="excluded">NOT included: linkedin_url (optional)</li>
-          </ul>
-          <a href="/get-started?package=starter" class="btn btn-secondary">Get Started</a>
-        </a></div>
-        
-        <!-- Pro -->
-        <div class="pricing-card featured">
-          <span class="badge">Most Popular</span>
-          <h3>Pro</h3>
-          <div class="price">$4.50<span>/lead</span></a></div>
-          <div class="leads-count">
-            <div class="num">200</a></div>
-            <div class="label">minimum</a></div>
-          </a></div>
-          <div class="per-lead">$900 total</a></div>
-          <p class="best-for">Best for: consistent outbound campaigns needing context + speed</p>
-          <ul class="features-list">
-            <li><strong>CONTACT:</strong></li>
-            <li>first_name</li>
-            <li>last_name</li>
-            <li>title</li>
-            <li>verified_work_email</li>
-            <li>linkedin_url</li>
-            <li><strong>COMPANY:</strong></li>
-            <li>company_name</li>
-            <li>domain</li>
-            <li>hq_location</li>
-            <li>industry (specific)</li>
-            <li>employee_range</li>
-          </ul>
-          <a href="/get-started?package=pro" class="btn btn-primary">Get Started</a>
-        </a></div>
-        
-        <!-- Premium -->
-        <div class="pricing-card">
-          <h3>Premium</h3>
-          <div class="price">$8.00<span>/lead</span></a></div>
-          <div class="leads-count">
-            <div class="num">150</a></div>
-            <div class="label">minimum</a></div>
-          </a></div>
-          <div class="per-lead">$1,200 total</a></div>
-          <p class="best-for">Best for: strict ICPs where precision matters more than volume</p>
-          <ul class="features-list">
-            <li><strong>EVERYTHING IN PRO, PLUS:</strong></li>
-            <li>Strict title mapping (C-suite only, VP+)</li>
-            <li>Niche industry targeting</li>
-            <li>Tight geo constraints</li>
-            <li>Tech stack signals</li>
-            <li>Funding stage signals</li>
-            <li>Hiring signals</li>
-          </ul>
-          <a href="/get-started?package=premium" class="btn btn-secondary">Request Quote</a>
-        </a></div>
-      </a></div>
-          <span class="badge">Enterprise</span>
-          <h3>Monthly</h3>
-          <div class="price">$999<span>/month</span></a></div>
-          <div class="leads-count">
-            <div class="num">200</a></div>
-            <div class="label">Fresh Leads Monthly</a></div>
-          </a></div>
-          <div class="per-lead">$5.00 per lead</a></div>
-          <ul class="features-list">
-            <li>Everything in Pro</li>
-            <li>Monthly fresh leads</li>
-            <li>Dedicated account manager</li>
-            <li>Custom research requests</li>
-            <li>API access available</li>
-          </ul>
-          <a href="#" class="btn btn-secondary" onclick="buyLeads('monthly'); return false;">Contact Sales</a>
-        </a></div>
-      </a></div>
-      
-      <div class="guarantee" id="contact">
-        <h3>30-Day Replacement Guarantee</h3>
-        <p><strong>30-day 1:1 replacement for invalid emails.</strong></p>
-        <ul>
-          <li>Invalid email = hard bounce OR failed verification evidence</li>
-          <li>Replacement covers emails only — does not guarantee replies, meetings, or revenue</li>
-          <li>Provide bounce evidence or verification output for replacements</li>
-        </ul>
-      </a></div>
-    </a></div>
-  </section>
+            <div class="package featured">
+                <h3>Package B</h3>
+                <div class="price">$199<span>/month</span></div>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin: 8px 0 16px;">Essential + automated review requests. More reviews, less effort.</p>
+                <ul>
+                    <li>Everything in Package A</li>
+                    <li>Automated review requests (SMS/email)</li>
+                    <li>One follow-up max</li>
+                    <li>Monthly insights report</li>
+                    <li>Review request templates</li>
+                    <li>Priority support</li>
+                </ul>
+                <a href="/get-started" class="btn btn-primary">Get Started — Package B</a>
+            </div>
 
-  <section class="faq">
-    <div class="container">
-      <h2>Frequently Asked Questions</h2>
-      <div class="faq-grid">
-        <div class="faq-item">
-          <h4>What is included in a lead?</h4>
-          <p>1 verified decision-maker contact record = first_name, last_name, title, verified_work_email, company info. See exact columns per package above.</p>
-        </a></div>
-        <div class="faq-item">
-          <h4>How are emails verified?</h4>
-          <p>We use multi-step verification: syntax check, domain validation, and SMTP verification. Plus our 30-day replacement policy covers any invalid emails.</p>
-        </a></div>
-        <div class="faq-item">
-          <h4>What does the 30-day replacement guarantee cover?</h4>
-          <p>1:1 replacement for invalid emails (hard bounces). Does NOT guarantee inbox placement, replies, meetings, or revenue. Provide bounce evidence for replacements.</p>
-        </a></div>
-        <div class="faq-item">
-          <h4>What formats are delivered?</h4>
-          <p>CSV or Excel. CRM import-ready. Let us know your preferred format.</p>
-        </a></div>
-        <div class="faq-item">
-          <h4>Typical delivery times?</h4>
-          <p>Starter: ~48 hours. Pro: ~48 hours (priority). Premium: fastest (confirms after ICP review).</p>
-        </a></div>
-        <div class="faq-item">
-          <h4>Can you match strict titles/geo/industries?</h4>
-          <p>Yes. Pro includes industry, employee range, HQ location. Premium includes strict title mapping, niche targeting, tight geo constraints.</p>
-        </a></div>
-      </a></div>
-    </a></div>
-  </section>
+            <div class="package">
+                <h3>Multi-Location Pro</h3>
+                <div class="price">$399<span>/month</span></div>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin: 8px 0 16px;">For businesses with multiple locations.</p>
+                <ul>
+                    <li>Everything in Package B</li>
+                    <li>Location-level reporting + dashboards</li>
+                    <li>Location-level response templates</li>
+                    <li>Escalation routing per location</li>
+                    <li>Dedicated account manager</li>
+                    <li>Custom integrations</li>
+                </ul>
+                <a href="/get-started" class="btn btn-secondary">Get Started — Package C</a>
+            </div>
+        </div>
 
-  <footer>
-    <div class="container">
-      <p>Questions? <a href="mailto:nova@tensormarketdata.com" class="email-link">nova@tensormarketdata.com</a></p>
-      <p style="margin-top: 0.5rem;">© 2026 TensorMarketData. All rights reserved.</p>
-    </a></div>
-  </footer>
+        <div class="policy">
+            <h3>How approvals work</h3>
+            <ul>
+                <li>4-5★ reviews can auto-post (if you enable it)</li>
+                <li>1-3★ reviews always require your approval</li>
+                <li>Legal, medical, safety, or threat content requires approval + escalation</li>
+                <li>Every response is logged in your audit trail</li>
+            </ul>
+        </div>
 
-  <!-- Checkout Script -->
-  <script>
-    async function buyLeads(tier) {
-      const btn = event.target;
-      const originalText = btn.textContent;
-      btn.textContent = 'Processing...';
-      btn.disabled = true;
-      
-      try {
-        // Call API to create Stripe checkout session
-        const response = await fetch('/api/v1/leads/checkout', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({tier: tier})
-        });
-        
-        const data = await response.json();
-        
-        if (data.checkout_url) {
-          // Redirect to Stripe checkout
-          window.location.href = data.checkout_url;
-        } else {
-          alert('Checkout coming soon! Email nova@tensormarketdata.com to order.');
-          btn.textContent = originalText;
-          btn.disabled = false;
-        }
-      } catch (error) {
-        console.error('Checkout error:', error);
-        alert('Checkout coming soon! Email nova@tensormarketdata.com to order.');
-        btn.textContent = originalText;
-        btn.disabled = false;
-      }
-    }
-  </script>
+        <div class="donts">
+            <h3>What we don't do</h3>
+            <ul>
+                <li>✗ No guarantees of star rating increases</li>
+                <li>✗ We don't remove reviews (we help you respond professionally)</li>
+                <li>✗ No phone support (email only)</li>
+                <li>✗ No outcomes promised — we operate the system, you own the brand</li>
+            </ul>
+        </div>
+
+        <!-- Testimonial on Pricing -->
+        <div style="background: var(--bg-secondary); padding: 32px; border-radius: 12px; margin: 32px 0; border-left: 4px solid var(--accent-primary);">
+            <div style="color: #D97706; font-size: 1.25rem; margin-bottom: 12px;">★★★★★</div>
+            <p style="font-size: 1.1rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 16px;">"We were losing customers to negative reviews we didn't even know existed. TensorMarketData changed that — now we see every review within hours. Our rating went from 3.8 to 4.6 in 4 months."</p>
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="width: 40px; height: 40px; background: var(--accent-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 0.9rem;">JM</div>
+                <div>
+                    <div style="font-weight: 600; color: var(--text-primary); font-size: 0.9rem;">James Mitchell</div>
+                    <div style="color: var(--text-muted); font-size: 0.8rem;">Owner, Mitchell Auto Group</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline">
+            <h3>Start within 24 hours after access</h3>
+            <ol>
+                <li>Checkout → 2. Onboarding form → 3. Access granted → 4. Go live</li>
+            </ol>
+            <p style="margin-top: 16px; color: var(--text-secondary);">What we need: Google Business Profile access (or other platforms), your brand voice guidelines, contact email for approvals.</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p style="color: var(--text-muted); font-size: 0.875rem;">© 2026 TensorMarketData</p>
+                <ul class="footer-links">
+                    <li><a href="/privacy">Privacy</a></li>
+                    <li><a href="/terms">Terms</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

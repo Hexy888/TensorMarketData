@@ -1,142 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>FAQ - TensorMarketData</title>
-  <meta name="title" content="FAQ - TensorMarketData">
-  <meta name="description" content="Frequently asked questions about our B2B lead generation service.">
-  
-  <link rel="canonical" href="https://tensormarketdata.com/faq">
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    :root {
-      --primary: #4f46e5;
-      --bg: #ffffff;
-      --bg-secondary: #f8fafc;
-      --text: #1e293b;
-      --text-muted: #64748b;
-      --border: #e2e8f0;
-    }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-    .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
-    
-    header { padding: 1.5rem 0; }
-    header .container { display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.03em; color: var(--text); text-decoration: none; }
-    .logo span { color: var(--primary); }
-    .logo span { color: var(--primary); }
-    .nav-links { display: flex; gap: 1.5rem; align-items: center; }
-    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; }
-    .nav-links a:hover { color: var(--text); }
-    .nav-links .cta { background: var(--primary); color: white; padding: 0.5rem 1.25rem; border-radius: 6px; }
-    
-    .hero { padding: 4rem 0; text-align: center; }
-    .hero h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; }
-    
-    .faq-list { padding-bottom: 4rem; }
-    .faq-item { margin-bottom: 1.5rem; padding-bottom: 1.5rem; }
-    .faq-item:last-child { border-bottom: none; }
-    .faq-item h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
-    .faq-item p { color: var(--text-muted); }
-    .faq-item ul { color: var(--text-muted); margin-left: 1.5rem; margin-top: 0.5rem; }
-    .faq-item li { margin-bottom: 0.25rem; }
-    
-    footer { padding: 2rem 0; border-top: 1px solid var(--border); text-align: center; }
-    .footer-links { display: flex; gap: 1.5rem; justify-content: center; margin-bottom: 1rem; }
-    .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
-    footer p { color: var(--text-muted); font-size: 0.9rem; }
-    
-    @media (max-width: 640px) {
-      .nav-links { display: none; }
-      .hero h1 { font-size: 1.75rem; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ | TensorMarketData</title>
+    <meta name="description" content="Frequently asked questions about our review monitoring, response drafting, and approval workflow.">
+    <link rel="canonical" href="https://tensormarketdata.com/faq">
+    <style>
+        :root { --accent-primary: #0D9488; --text-primary: #0F172A; --text-secondary: #475569; --text-muted: #64748B; --bg-primary: #FFFFFF; --bg-secondary: #F8FAFC; --border-primary: #E2E8F0; --radius-lg: 12px; --radius-md: 8px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; color: var(--text-primary); line-height: 1.6; }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 var(--space-6); }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: var(--space-4) 0; border-bottom: 1px solid var(--border-primary); }
+        .nav-logo { font-size: 1.25rem; font-weight: 700; color: var(--text-primary); text-decoration: none; }
+        .nav-links { display: flex; gap: var(--space-6); list-style: none; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+        .hero { text-align: center; padding: var(--space-12) 0; }
+        .hero h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: var(--space-4); }
+        .faq-list { margin: var(--space-8) 0; }
+        .faq-item { border-bottom: 1px solid var(--border-primary); padding: var(--space-6) 0; }
+        .faq-item h3 { margin-bottom: 8px; }
+        .faq-item p { color: var(--text-secondary); }
+        .cta { text-align: center; padding: var(--space-8) 0; }
+        .btn { display: inline-block; padding: 12px 24px; background: var(--accent-primary); color: white; border-radius: var(--radius-md); text-decoration: none; font-weight: 500; }
+        footer { border-top: 1px solid var(--border-primary); padding: var(--space-8) 0; margin-top: var(--space-12); }
+        .footer-content { display: flex; justify-content: space-between; }
+        .footer-links { display: flex; gap: var(--space-6); list-style: none; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.875rem; }
+    </style>
 </head>
 <body>
-  <header>
     <div class="container">
-      <a href="/" class="logo">Tensor<span>MarketData</span></a>
-      <nav class="nav-links">
-        <a href="/pricing">Pricing</a>
-        <a href="/get-started" class="cta">Get Started</a>
-      </nav>
-    </a></div>
-  </header>
+        <nav>
+            <a href="/" class="nav-logo">TensorMarketData</a>
+            <ul class="nav-links">
+                <li><a href="/pricing">Pricing</a></li>
+                <li><a href="/how-it-works">How It Works</a></li>
+                <li><a href="/faq">FAQ</a></li>
+            </ul>
+            <a href="/pricing" class="btn">Get Started</a>
+        </nav>
+    </div>
 
-  <section class="hero">
     <div class="container">
-      <h1>FAQ</h1>
-    </a></div>
-  </section>
+        <section class="hero">
+            <h1>Frequently asked questions</h1>
+            <p>Everything you need to know about our reputation operations.</p>
+        </section>
 
-  <section class="faq-list">
-    <div class="container">
-      <div class="faq-item">
-        <h3>What is included in a lead?</h3>
-        <p>A "lead" is 1 verified decision-maker contact record (not an inbound conversion). Each package includes a defined set of fields (name, title, verified email, and company details). See <a href="/pricing">Pricing</a> for exact columns.</p>
-      </a></div>
-      
-      <div class="faq-item">
-        <h3>How are emails verified?</h3>
-        <p>We use a verification process prior to delivery to reduce invalid emails. If an email is invalid within 30 days, we replace it 1:1 with evidence (see guarantee).</p>
-      </a></div>
-      
-      <div class="faq-item">
-        <h3>What does the 30-day replacement guarantee cover?</h3>
-        <p>Invalid email = hard bounce or failed verification evidence. We replace invalid emails 1:1 within 30 days.</p>
-        <p>Replacement covers emails only; it does not guarantee replies, meetings, or revenue.</p>
-      </a></div>
-      
-      <div class="faq-item">
-        <h3>How fast is delivery?</h3>
-        <p>Delivery is ~48 hours typical. Complex ICPs or large orders may take longer. Rush available.</p>
-      </a></div>
-      
-      <div class="faq-item">
-        <h3>Can you match strict job titles and geographies?</h3>
-        <p>Yes. Pro supports clear title and geo targeting. Premium is designed for strict ICP constraints (C-suite only, niche verticals, tight geos, exclusions).</p>
-      </a></div>
-      
-      <div class="faq-item">
-        <h3>What format do you deliver?</h3>
-        <p>CSV/Excel exports with consistent columns, ready for outreach or CRM import.</p>
-      </a></div>
-      
-      <div class="faq-item">
-        <h3>Do you honor suppression lists / opt-outs?</h3>
-        <p>Yes. If you provide a suppression list, we will exclude those contacts from delivery. We also honor do-not-contact requests when received.</p>
-      </a></div>
-      
-      <div class="faq-item">
-        <h3>Do you provide phone numbers?</h3>
-        <p>Only if explicitly included in your order scope. Otherwise, delivery is email-first.</p>
-      </a></div>
-      
-      <div class="faq-item">
-        <h3>Is this compliant?</h3>
-        <p>We provide B2B contact data and honor suppression/opt-out requests. You are responsible for ensuring your outreach complies with applicable laws and platform policies.</p>
-      </a></div>
-    </a></div>
-  </section>
+        <div class="faq-list">
+            <div class="faq-item">
+                <h3>Which review platforms do you support?</h3>
+                <p>We start with Google Business Profile — it's the highest-impact platform for local businesses. We can add Yelp, Facebook, TripAdvisor, and other major platforms as needed.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How fast do you respond?</h3>
+                <p>We draft responses within 8 business hours of a new review appearing. That's our SLA. Most reviews are handled same-day.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Do you respond to every review?</h3>
+                <p>Yes. Every new review is classified and a response is drafted. No review gets missed.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Do you post replies automatically?</h3>
+                <p>4-5★ reviews can auto-post if you enable it in settings. 1-3★ reviews always require your approval first.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What requires approval?</h3>
+                <p>1-3★ reviews always need approval. Any review with legal threats, discrimination, safety concerns, or profanity gets escalated immediately.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can you remove bad reviews?</h3>
+                <p>No. We can't remove reviews. What we do is help you respond professionally, which often leads to the reviewer updating their review.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Do you handle multi-location?</h3>
+                <p>Yes, that's Package C. Each location gets separate dashboards, templates, escalation routing, and reporting.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How does review request automation work?</h3>
+                <p>After a customer completes a purchase, we send a request asking for a review. You provide the customer list, we manage timing and templates. One follow-up max.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can we customize brand voice?</h3>
+                <p>Absolutely. During onboarding, you provide brand voice guidelines or we use our professional default. You approve all templates.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What reports do we receive?</h3>
+                <p>Weekly: total reviews, average rating, response time, coverage, top themes. Monthly (Package B/C): insights + recommendations.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How do we contact support?</h3>
+                <p>Email only: support@tensormarketdata.com. Response within 1 business day. We don't offer phone support.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What if we cancel?</h3>
+                <p>Cancel anytime. You keep access until the end of your billing period. No refunds for partial months.</p>
+            </div>
+        </div>
 
-  <footer>
-    <div class="container">
-      <div class="footer-links">
-        <a href="/pricing">Pricing</a>
-        <a href="/terms">Terms</a>
-        <a href="/privacy">Privacy</a>
-      </a></div>
-      <p>© Tensor Market Data. All rights reserved.</p>
-    </a></div>
-  </footer>
+        <div class="cta">
+            <a href="/pricing" class="btn">Get Started</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p style="color: var(--text-muted); font-size: 0.875rem;">© 2026 TensorMarketData</p>
+                <ul class="footer-links">
+                    <li><a href="/privacy">Privacy</a></li>
+                    <li><a href="/terms">Terms</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
