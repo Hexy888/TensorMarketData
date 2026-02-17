@@ -8,10 +8,14 @@ import os
 # Email configuration
 EMAIL_FROM = os.environ.get("EMAIL_FROM", "TensorMarketData <nova@tensormarketdata.com>")
 APP_BASE_URL = os.environ.get("APP_BASE_URL", "https://tensormarketdata.com")
+EMAIL_SEND_ENABLED = os.environ.get("EMAIL_SEND_ENABLED", "false").lower() == "true"
 
 # TODO: Implement actual email sending (Resend/Postmark/gog)
 async def send_email(to: str, subject: str, body: str) -> bool:
     """Send email. Implement with actual provider."""
+    if not EMAIL_SEND_ENABLED:
+        print(f"📧 EMAIL (disabled) to {to}: {subject}")
+        return True
     print(f"📧 EMAIL to {to}: {subject}")
     print(f"   {body[:200]}...")
     return True

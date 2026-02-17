@@ -190,6 +190,14 @@
     const qtyHint = document.getElementById('qty-hint');
     const qtyInput = document.querySelector('input[name="quantity"]');
     
+    // Handle package preselection from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const preselectedPackage = urlParams.get('package');
+    if (preselectedPackage && ['starter', 'pro', 'premium'].includes(preselectedPackage)) {
+      packageSelect.value = preselectedPackage;
+      packageSelect.dispatchEvent(new Event('change'));
+    }
+    
     packageSelect.addEventListener('change', function() {
       const pkg = this.value;
       if (pkg === 'starter') {
