@@ -302,7 +302,7 @@
             <li>30-day replacement guarantee</li>
             <li>CSV/Excel delivery</li>
           </ul>
-          <a href="#contact" class="btn btn-secondary">Request Quote</a>
+          <a href="#" class="btn btn-secondary" onclick="buyLeads('starter'); return false;">Buy Now - $199</a>
         </div>
         
         <!-- Growth -->
@@ -322,7 +322,7 @@
             <li>Funding & growth signals</li>
             <li>CRM integration available</li>
           </ul>
-          <a href="#contact" class="btn btn-primary">Request Quote</a>
+          <a href="#" class="btn btn-primary" onclick="buyLeads('growth'); return false;">Buy Now - $499</a>
         </div>
         
         <!-- Monthly -->
@@ -342,7 +342,7 @@
             <li>Custom research requests</li>
             <li>API access available</li>
           </ul>
-          <a href="#contact" class="btn btn-secondary">Contact Sales</a>
+          <a href="#" class="btn btn-secondary" onclick="buyLeads('monthly'); return false;">Contact Sales</a>
         </div>
       </div>
       
@@ -383,5 +383,40 @@
       <p style="margin-top: 0.5rem;">© 2026 TensorMarketData. All rights reserved.</p>
     </div>
   </footer>
+
+  <!-- Checkout Script -->
+  <script>
+    async function buyLeads(tier) {
+      const btn = event.target;
+      const originalText = btn.textContent;
+      btn.textContent = 'Processing...';
+      btn.disabled = true;
+      
+      try {
+        // Call API to create Stripe checkout session
+        const response = await fetch('/api/v1/leads/checkout', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({tier: tier})
+        });
+        
+        const data = await response.json();
+        
+        if (data.checkout_url) {
+          // Redirect to Stripe checkout
+          window.location.href = data.checkout_url;
+        } else {
+          alert('Checkout coming soon! Email nova@tensormarketdata.com to order.');
+          btn.textContent = originalText;
+          btn.disabled = false;
+        }
+      } catch (error) {
+        console.error('Checkout error:', error);
+        alert('Checkout coming soon! Email nova@tensormarketdata.com to order.');
+        btn.textContent = originalText;
+        btn.disabled = false;
+      }
+    }
+  </script>
 </body>
 </html>
