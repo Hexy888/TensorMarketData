@@ -146,7 +146,6 @@ async def health_check():
 @app.get("/version-test")
 @app.get("/dashboard")
 @app.get("/explorer")
-@app.get("/contact")
 @app.get("/signup")
 @app.get("/login")
 @app.get("/submit")
@@ -156,7 +155,6 @@ async def health_check():
 @app.get("/status")
 @app.get("/support")
 @app.get("/console")
-@app.get("/blog/ai-agents-b2b-data-programmatic-access")
 @app.get("/providers")
 @app.get("/bot")
 @app.get("/v1/nova-test")
@@ -186,6 +184,11 @@ async def contact():
     with open(os.path.join(TEMPLATES_DIR, "contact.html"), "r") as f:
         return f.read()
 
+@app.get("/blog", response_class=HTMLResponse)
+async def blog_index():
+    """Blog index page"""
+    with open(os.path.join(TEMPLATES_DIR, "blog/index.html"), "r") as f:
+        return f.read()
 
 @app.get("/thank-you", response_class=HTMLResponse)
 async def thank_you(request: Request):
