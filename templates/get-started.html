@@ -148,14 +148,13 @@
             <option value="pro">Pro - $4.50/lead (200 min) - Most Popular</option>
             <option value="premium">Premium - $8/lead (150 min)</option>
           </select>
-          <div class="min-note">Minimums: Starter 300 / Pro 200 / Premium 150</a></div>
-        </a></div>
+        </div>
         
         <div class="form-group">
-          <label>Quantity *</label>
-          <input type="number" name="quantity" placeholder="Number of leads" required min="150">
-          <div class="min-note" id="qty-hint">Minimum: 300 for Starter</a></div>
-        </a></div>
+          <label>Number of Leads *</label>
+          <input type="number" name="quantity" id="quantity-input" placeholder="Enter quantity" required min="150">
+          <div class="price-estimate" id="price-estimate"></div>
+        </div>
         
         <div class="form-group">
           <label>Exclusions (optional)</label>
@@ -185,42 +184,52 @@
     </a></div>
   </footer>
 
-  <script>
     const packageSelect = document.getElementById('package-select');
-    const qtyHint = document.getElementById('qty-hint');
-    const qtyInput = document.querySelector('input[name="quantity"]');
+    const qtyInput = document.getElementById('quantity-input');
+    const priceEstimate = document.getElementById('price-estimate');
     
-    // Handle package preselection from URL
+    const PRICES = { 'starter': 3.00, 'pro': 4.50, 'premium': 8.00 };
+    const MINIMUMS = { 'starter': 300, 'pro': 200, 'premium': 150 };
+    
+    function updatePrice() {
+      const pkg = packageSelect.value;
+      const qty = parseInt(qtyInput.value) || 0;
+      if (!pkg || !priceEstimate) return;
+      
+      if (qty >= MINIMUMS[pkg]) {
+        const total = PRICES[pkg] * qty;
+        priceEstimate.innerHTML = `<strong>$${total.toLocaleString()}</strong> ($${PRICES[pkg]}/lead)`;
+        priceEstimate.style.display = 'block';
+      } else {
+        priceEstimate.innerHTML = `<span style="color:#dc2626">Min: ${MINIMUMS[pkg]} leads</span>`;
+        priceEstimate.style.display = 'block';
+      }
+    }
+    
+    // Package preselection from URL
     const urlParams = new URLSearchParams(window.location.search);
-    const preselectedPackage = urlParams.get('package');
-    if (preselectedPackage && ['starter', 'pro', 'premium'].includes(preselectedPackage)) {
-      packageSelect.value = preselectedPackage;
-      packageSelect.dispatchEvent(new Event('change'));
+    const preselected = urlParams.get('package');
+    if (preselected && MINIMUMS[preselected]) {
+      packageSelect.value = preselected;
+      qtyInput.value = MINIMUMS[preselected];
+      updatePrice();
     }
     
     packageSelect.addEventListener('change', function() {
-      const pkg = this.value;
-      if (pkg === 'starter') {
-        qtyInput.min = 300;
-        qtyHint.textContent = 'Minimum: 300 for Starter';
-        qtyHint.className = 'min-note starter-min';
-      } else if (pkg === 'pro') {
-        qtyInput.min = 200;
-        qtyHint.textContent = 'Minimum: 200 for Pro';
-        qtyHint.className = 'min-note';
-      } else if (pkg === 'premium') {
-        qtyInput.min = 150;
-        qtyHint.textContent = 'Minimum: 150 for Premium';
-        qtyHint.className = 'min-note';
+      if (this.value) {
+        qtyInput.value = MINIMUMS[this.value];
+        qtyInput.min = MINIMUMS[this.value];
       }
+      updatePrice();
     });
+    
+    qtyInput.addEventListener('input', updatePrice);
     
     document.getElementById('order-form').addEventListener('submit', async function(e) {
       e.preventDefault();
       const formData = new FormData(this);
       const data = Object.fromEntries(formData);
       
-      // Build order payload
       const order = {
         order_type: "paid",
         package: data.package,
@@ -248,12 +257,22 @@
           window.location.href = '/order-confirmed';
         } else {
           const err = await res.json();
-          alert(err.detail || 'Error submitting order. Please try again.');
+          alert(err.detail || 'Error submitting order.');
         }
       } catch(err) {
-        alert('Error submitting order. Please try again.');
+        alert('Error submitting order.');
       }
     });
-  </script>
-</body>
+  </script></body>
 </html>
+    <style>
+    .price-estimate { 
+      margin-top: 0.5rem; 
+      padding: 0.75rem; 
+      background: #f0fdf4; 
+      border-radius: 6px; 
+      font-size: 0.9rem;
+      color: #166534;
+      display: none;
+    }
+    </style>

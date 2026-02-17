@@ -1,0 +1,80 @@
+    const packageSelect = document.getElementById('package-select');
+    const qtyInput = document.getElementById('quantity-input');
+    const priceEstimate = document.getElementById('price-estimate');
+    
+    const PRICES = { 'starter': 3.00, 'pro': 4.50, 'premium': 8.00 };
+    const MINIMUMS = { 'starter': 300, 'pro': 200, 'premium': 150 };
+    
+    function updatePrice() {
+      const pkg = packageSelect.value;
+      const qty = parseInt(qtyInput.value) || 0;
+      if (!pkg || !priceEstimate) return;
+      
+      if (qty >= MINIMUMS[pkg]) {
+        const total = PRICES[pkg] * qty;
+        priceEstimate.innerHTML = `<strong>$${total.toLocaleString()}</strong> ($${PRICES[pkg]}/lead)`;
+        priceEstimate.style.display = 'block';
+      } else {
+        priceEstimate.innerHTML = `<span style="color:#dc2626">Min: ${MINIMUMS[pkg]} leads</span>`;
+        priceEstimate.style.display = 'block';
+      }
+    }
+    
+    // Package preselection from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const preselected = urlParams.get('package');
+    if (preselected && MINIMUMS[preselected]) {
+      packageSelect.value = preselected;
+      qtyInput.value = MINIMUMS[preselected];
+      updatePrice();
+    }
+    
+    packageSelect.addEventListener('change', function() {
+      if (this.value) {
+        qtyInput.value = MINIMUMS[this.value];
+        qtyInput.min = MINIMUMS[this.value];
+      }
+      updatePrice();
+    });
+    
+    qtyInput.addEventListener('input', updatePrice);
+    
+    document.getElementById('order-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData);
+      
+      const order = {
+        order_type: "paid",
+        package: data.package,
+        quantity: parseInt(data.quantity),
+        requirements: {
+          work_email: data.email,
+          target_industry: data.industry,
+          geography: { country: data.geography },
+          company_size_range: data.company_size,
+          buyer_titles: { titles: data.titles.split(",").map(t => t.trim()), free_text: null },
+          outreach_channel: data.channel,
+          exclusions: data.exclusions || null,
+          deadline: data.deadline || null,
+          notes: null
+        }
+      };
+      
+      try {
+        const res = await fetch('/v1/orders', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(order)
+        });
+        if (res.ok) {
+          window.location.href = '/order-confirmed';
+        } else {
+          const err = await res.json();
+          alert(err.detail || 'Error submitting order.');
+        }
+      } catch(err) {
+        alert('Error submitting order.');
+      }
+    });
+  </script>
