@@ -410,7 +410,6 @@
     /* CTA Buttons */
     .cta-buttons { display: flex; gap: 1rem; justify-content: center; margin: 2rem 0; flex-wrap: wrap; }
     .cta-buttons .btn { padding: 0.875rem 2rem; font-size: 1rem; }
-    .trust-line { text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 1rem; }
     
     /* Definition Block */
     .definition-block { padding: 2rem 0; background: var(--bg-alt); text-align: center; }
@@ -421,17 +420,9 @@
     .best-for { font-size: 0.85rem; color: var(--text-muted); margin: 1rem 0; padding: 0.5rem; background: var(--bg-alt); border-radius: 4px; }
     .excluded { color: var(--text-light); font-size: 0.85rem; }
     
-    .guarantee-section { padding: 4rem 0; background: var(--bg-secondary); text-align: center; }
-    .guarantee-section h2 { margin-bottom: 1rem; }
-    .guarantee-section p { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
-    
     .footer-links { display: flex; gap: 1.5rem; justify-content: center; margin-bottom: 1rem; }
     .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
     .footer-links a:hover { color: var(--primary); }
-    .link-secondary { color: var(--primary); text-decoration: none; font-size: 0.9rem; }
-    .link-secondary:hover { text-decoration: underline; }
-    .link-arrow { color: var(--primary); text-decoration: none; font-weight: 600; }
-    .link-arrow:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
@@ -439,11 +430,10 @@
     <div class="container">
       <div class="logo">Tensor<span>MarketData</span></div>
       <nav class="nav-links">
-        <a href="/pricing">Pricing</a>
+        <a href="#features">Features</a>
+        <a href="#quality">Data Quality</a>
         <a href="#process">How It Works</a>
-        <a href="/faq">FAQ</a>
-        <a href="/get-started" class="cta">Get Started</a>
-        <a href="/sample" class="link-secondary">Free Sample</a>
+        <a href="#contact" class="cta">Get Leads</a>
       </nav>
     </div>
   </header>
@@ -473,9 +463,18 @@
         <a href="/pricing" class="btn btn-primary">See Pricing</a>
         <a href="/sample" class="btn btn-secondary">Get Free Sample (10)</a>
       </div>
-      <p class="trust-line">No subscriptions. Order only what you need.</p>
-    </div>
-  </section>
+      
+      <div class="form-container" id="sample">
+        <h3>Get Your Free Sample (10 Leads)</h3>
+        <p>Same quality as paid orders. See the data yourself.</p>
+        
+        <form id="lead-form">
+          <div class="form-group">
+            <label>Your Work Email</label>
+            <input type="email" name="email" placeholder="you@company.com" required>
+          </div>
+          <div class="form-group">
+            <label>Target Industry</label>
             <input type="text" name="industry" placeholder="e.g., B2B SaaS, AI/ML, Fintech">
           </div>
           <div class="form-group">
@@ -507,55 +506,37 @@
   <section class="features" id="features">
     <div class="container">
       <div class="section-header">
-        <h2>Exactly what you get</h2>
-        <p>Every order is delivered as a clean CSV/Excel export with consistent columns—ready for outreach or CRM import.</p>
+        <h2>Why Sales Teams Choose Us</h2>
+        <p>Every lead is enriched with accurate, actionable data you can use immediately.</p>
       </div>
       
       <div class="features-grid">
         <div class="feature-card">
           <div class="icon-box">
-            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </div>
-          <h3>Verified work email</h3>
-          <p>Every contact includes a verified work email address, ready for outreach.</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="icon-box">
             <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
-          <h3>Decision-maker name + title</h3>
-          <p>Reach the right people—founders, executives, and key stakeholders with buying authority.</p>
+          <h3>Decision Maker Contacts</h3>
+          <p>Reach the right people—founders, executives, and key stakeholders with real buying authority.</p>
         </div>
         
         <div class="feature-card">
           <div class="icon-box">
-            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
           </div>
-          <h3>LinkedIn URL (when available)</h3>
-          <p>Pro package includes LinkedIn profile URLs for multi-channel outreach.</p>
+          <h3>95%+ Email Accuracy</h3>
+          <p>Every email verified in real-time. No bounces, no wasted outreach, no damaged sender reputation.</p>
         </div>
         
         <div class="feature-card">
           <div class="icon-box">
-            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           </div>
-          <h3>Company domain + industry + employee range</h3>
-          <p>Full company context including domain, industry classification, and size.</p>
+          <h3>Deep Company Research</h3>
+          <p>Funding rounds, tech stack, employee counts, growth signals, and recent news for context.</p>
         </div>
         
         <div class="feature-card">
           <div class="icon-box">
-            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <h3>HQ location (when available)</h3>
-          <p>Headquarters location for geo-targeting and regional campaigns.</p>
-        </div>
-      </div>
-      
-      <p style="text-align: center; margin-top: 2rem;"><a href="/pricing" class="link-arrow">See package details →</a></p>
-    </div>
-  </section>
             <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
           </div>
           <h3>Fast Turnaround</h3>
@@ -581,11 +562,29 @@
     </div>
   </section>
 
-  <section class="guarantee-section" id="guarantee">
+  <section class="quality" id="quality">
     <div class="container">
       <div class="section-header">
-        <h2>Replacement guarantee</h2>
-        <p>If an email is invalid within 30 days, we replace it 1:1.<br>Replacement covers emails only; it does not guarantee replies, meetings, or revenue.</p>
+        <h2>Our Data Quality Guarantee</h2>
+        <p>We stand behind the accuracy of every contact we deliver.</p>
+      </div>
+      
+      <div class="quality-grid">
+        <div class="quality-item">
+          <div class="quality-value">95%</div>
+          <div class="quality-label">Email Deliverability</div>
+          <div class="quality-desc">Verified inbox delivery, not just syntax validation</div>
+        </div>
+        <div class="quality-item">
+          <div class="quality-value">100%</div>
+          <div class="quality-label">Human-Verified</div>
+          <div class="quality-desc">Every contact checked by our research team</div>
+        </div>
+        <div class="quality-item">
+          <div class="quality-value">30-Day</div>
+          <div class="quality-label">Replacement Guarantee</div>
+          <div class="quality-desc">Bad email? We'll replace it free of charge</div>
+        </div>
       </div>
     </div>
   </section>
@@ -593,42 +592,34 @@
   <section class="process" id="process">
     <div class="container">
       <div class="section-header">
-        <h2>How it works</h2>
+        <h2>How It Works</h2>
+        <p>Simple, transparent process with no long-term contracts.</p>
       </div>
       
       <div class="process-grid">
         <div class="step">
           <div class="step-num">1</div>
-          <h3>Submit your ICP</h3>
-          <p>Industry, geography, titles, company size, and outreach channel.</p>
+          <h3>Tell Us What You Need</h3>
+          <p>Share your ideal customer profile—industry, company size, location, and any specific criteria.</p>
         </div>
         <div class="step">
           <div class="step-num">2</div>
-          <h3>We research + verify</h3>
-          <p>Human research + email verification before delivery.</p>
+          <h3>We Research & Verify</h3>
+          <p>Our team researches companies, validates emails, and enriches each contact with decision-maker data.</p>
         </div>
         <div class="step">
           <div class="step-num">3</div>
-          <h3>We format for action</h3>
-          <p>Consistent columns, clean files, CRM-ready exports.</p>
+          <h3>Receive Your List</h3>
+          <p>Get a clean, ready-to-use spreadsheet. Start reaching out and watch your pipeline grow.</p>
         </div>
-        <div class="step">
-          <div class="step-num">4</div>
-          <h3>You launch outbound</h3>
-          <p>Start sending immediately—with replacement coverage for invalid emails.</p>
-        </div>
-      </div>
-      
-      <div style="text-align: center; margin-top: 2rem;">
-        <a href="/get-started" class="btn btn-primary">Get Started</a>
       </div>
     </div>
   </section>
 
   <section class="sample-output">
     <div class="container">
-      <h2>Sample output (Pro)</h2>
-      <p>This is the structure you'll receive. (Example row shown for illustration.)</p>
+      <h2>Sample Output</h2>
+      <p>Here's what you'll receive. Real data, verified contacts.</p>
       
       <div class="sample-table">
         <table>
@@ -648,32 +639,53 @@
           </thead>
           <tbody>
             <tr>
-              <td>Jordan</td>
-              <td>Patel</td>
-              <td>VP of Operations</td>
-              <td>jordan.patel@acmeexample.com</td>
-              <td>linkedin.com/in/jordanpatel-example</td>
-              <td>AcmeExample</td>
-              <td>acmeexample.com</td>
-              <td>Logistics Software</td>
+              <td>Sarah</td>
+              <td>Chen</td>
+              <td>VP of Sales</td>
+              <td>sarah.chen@techstartup.io</td>
+              <td>linkedin.com/in/sarahchen</td>
+              <td>TechStartup.io</td>
+              <td>techstartup.io</td>
+              <td>B2B SaaS</td>
               <td>51-200</td>
-              <td>Austin, TX, US</td>
+              <td>San Francisco, CA</td>
+            </tr>
+            <tr>
+              <td>Michael</td>
+              <td>Rodriguez</td>
+              <td>Head of Growth</td>
+              <td>m.rodriguez@ainovate.com</td>
+              <td>linkedin.com/in/mrodriguez</td>
+              <td>AI Novate</td>
+              <td>ainovate.com</td>
+              <td>AI/ML</td>
+              <td>11-50</td>
+              <td>Austin, TX</td>
+            </tr>
+            <tr>
+              <td>Emily</td>
+              <td>Johnson</td>
+              <td>Director of BD</td>
+              <td>emily@cloudforce.io</td>
+              <td>linkedin.com/in/emilyjohnson</td>
+              <td>CloudForce</td>
+              <td>cloudforce.io</td>
+              <td>Cloud Computing</td>
+              <td>200-500</td>
+              <td>Seattle, WA</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p class="sample-note">Columns may vary by package. Premium adds stricter targeting and optional enrichments where feasible.</p>
+      <p class="sample-note">Fields shown are from Pro package. Starter package includes first_name, last_name, title, verified_work_email, company_name, domain, industry, employee_range.</p>
     </div>
   </section>
 
   <section class="cta-section">
     <div class="container">
-      <h2>Get a list you can actually use</h2>
-      <p>Clear fields. Verified emails. Delivered fast.</p>
-      <div class="cta-buttons">
-        <a href="/get-started" class="btn btn-primary">Get Started</a>
-        <a href="/sample" class="btn btn-secondary">Get Free Sample (10)</a>
-      </div>
+      <h2>Ready to Fill Your Pipeline?</h2>
+      <p>Get a free sample of 10 leads to experience our data quality firsthand.</p>
+      <a href="#contact" class="btn">Request Free Sample</a>
     </div>
   </section>
 
