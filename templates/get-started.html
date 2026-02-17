@@ -4,11 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <!-- Primary Meta Tags -->
   <title>Get Started - TensorMarketData</title>
   <meta name="title" content="Get Started - TensorMarketData">
-  <meta name="description" content="Order verified B2B prospect leads. Tell us your ICP and we'll confirm scope and delivery timeline.">
-  <meta name="keywords" content="B2B lead order, buy leads, order prospect list, outbound leads">
+  <meta name="description" content="Start your reputation management in 24 hours. Choose your plan and we'll get you set up.">
   
   <link rel="canonical" href="https://tensormarketdata.com/get-started">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -16,263 +14,199 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --primary: #4f46e5;
-      --primary-dark: #3730a3;
-      --bg: #ffffff;
-      --bg-secondary: #f8fafc;
-      --text: #1e293b;
-      --text-muted: #64748b;
-      --border: #e2e8f0;
+      --accent-primary: #0D9488;
+      --accent-hover: #0F766E;
+      --text-primary: #0F172A;
+      --text-secondary: #475569;
+      --text-muted: #64748B;
+      --bg-primary: #FFFFFF;
+      --bg-secondary: #F8FAFC;
+      --border-primary: #E2E8F0;
+      --success: #059669;
+      --radius-lg: 12px;
+      --radius-md: 8px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-12: 48px;
     }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-    .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
+    body { font-family: 'Inter', system-ui, sans-serif; color: var(--text-primary); line-height: 1.6; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 var(--space-6); }
     
-    header { padding: 1.5rem 0; }
+    header { padding: var(--space-4) 0; border-bottom: 1px solid var(--border-primary); }
     header .container { display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.03em; color: var(--text); text-decoration: none; }
-    .logo span { color: var(--primary); }
-    .logo span { color: var(--primary); }
-    .nav-links { display: flex; gap: 1.5rem; align-items: center; }
-    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; }
-    .nav-links a:hover { color: var(--text); }
-    .nav-links .cta { background: var(--primary); color: white; padding: 0.5rem 1.25rem; border-radius: 6px; }
-    .nav-links .cta:hover { background: var(--primary-dark); color: white; }
+    .logo { font-size: 1.25rem; font-weight: 700; color: var(--text-primary); text-decoration: none; }
+    .logo span { color: var(--accent-primary); }
+    .nav-links { display: flex; gap: var(--space-6); list-style: none; align-items: center; }
+    .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+    .nav-cta { background: var(--accent-primary); color: white; padding: 8px 16px; border-radius: var(--radius-md); text-decoration: none; font-weight: 500; }
     
-    .hero { padding: 4rem 0 2rem; text-align: center; }
-    .hero h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; }
-    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+    .hero { padding: var(--space-12) 0 var(--space-8); text-align: center; }
+    .hero h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: var(--space-4); }
+    .hero p { color: var(--text-secondary); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
     
-    .form-section { padding: 2rem 0 4rem; }
-    form { background: var(--bg-secondary); padding: 2rem; border-radius: 12px; }
-    .form-group { margin-bottom: 1.5rem; }
-    label { display: block; font-weight: 600; margin-bottom: 0.5rem; }
-    .helper { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem; }
-    input, select, textarea { width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 6px; font-size: 1rem; }
-    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1); }
+    .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); margin: var(--space-8) 0; }
+    @media (max-width: 768px) { .plans { grid-template-columns: 1fr; } }
+    .plan { padding: var(--space-6); border: 2px solid var(--border-primary); border-radius: var(--radius-lg); text-align: center; transition: all 0.2s; }
+    .plan:hover { border-color: var(--accent-primary); }
+    .plan.featured { border-color: var(--accent-primary); box-shadow: 0 4px 12px rgba(13, 148, 136, 0.15); }
+    .plan-badge { display: inline-block; background: var(--bg-secondary); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; color: var(--text-muted); margin-bottom: var(--space-4); }
+    .plan h3 { font-size: 1.5rem; margin-bottom: var(--space-2); }
+    .plan .price { font-size: 2.5rem; font-weight: 700; color: var(--accent-primary); }
+    .plan .price span { font-size: 1rem; font-weight: 400; color: var(--text-muted); }
+    .plan .best-for { color: var(--text-muted); font-size: 0.9rem; margin: var(--space-4) 0; font-style: italic; }
+    .plan ul { list-style: none; text-align: left; margin: var(--space-4) 0; }
+    .plan li { padding: 6px 0; color: var(--text-secondary); font-size: 0.9rem; }
+    .plan li::before { content: "✓"; color: var(--success); margin-right: 8px; font-weight: 600; }
+    .plan .btn { display: block; padding: 12px 24px; border-radius: var(--radius-md); text-decoration: none; font-weight: 500; margin-top: var(--space-4); }
+    .btn-primary { background: var(--accent-primary); color: white; }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-secondary { background: transparent; border: 2px solid var(--border-primary); color: var(--text-secondary); }
+    .btn-secondary:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
     
-    .btn { display: inline-block; background: var(--primary); color: white; padding: 0.875rem 2rem; border-radius: 6px; text-decoration: none; font-weight: 600; border: none; cursor: pointer; font-size: 1rem; }
-    .btn:hover { background: var(--primary-dark); }
+    .steps { background: var(--bg-secondary); padding: var(--space-8); border-radius: var(--radius-lg); margin: var(--space-8) 0; }
+    .steps h2 { text-align: center; margin-bottom: var(--space-6); }
+    .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-6); }
+    @media (max-width: 768px) { .steps-grid { grid-template-columns: 1fr; } }
+    .step { text-align: center; }
+    .step-num { width: 40px; height: 40px; background: var(--accent-primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; margin: 0 auto var(--space-4); }
+    .step h4 { margin-bottom: var(--space-2); }
+    .step p { font-size: 0.875rem; color: var(--text-muted); }
     
-    footer { padding: 2rem 0; border-top: 1px solid var(--border); text-align: center; }
-    .footer-links { display: flex; gap: 1.5rem; justify-content: center; margin-bottom: 1rem; }
-    .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
-    .footer-links a:hover { color: var(--primary); }
-    footer p { color: var(--text-muted); font-size: 0.9rem; }
+    .faq { margin: var(--space-8) 0; }
+    .faq h2 { text-align: center; margin-bottom: var(--space-6); }
+    .faq-item { border-bottom: 1px solid var(--border-primary); padding: var(--space-4) 0; }
+    .faq-item h4 { margin-bottom: var(--space-2); color: var(--text-secondary); }
+    .faq-item p { color: var(--text-muted); font-size: 0.9rem; }
     
-    .min-note { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem; }
-    .starter-min { color: #dc2626; }
-    
-    @media (max-width: 640px) {
-      .nav-links { display: none; }
-      .hero h1 { font-size: 1.75rem; }
-    }
+    footer { border-top: 1px solid var(--border-primary); padding: var(--space-8) 0; margin-top: var(--space-12); }
+    .footer-content { display: flex; justify-content: space-between; }
+    .footer-links { display: flex; gap: var(--space-6); list-style: none; }
+    .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.875rem; }
   </style>
 </head>
 <body>
   <header>
     <div class="container">
       <a href="/" class="logo">Tensor<span>MarketData</span></a>
-      <nav class="nav-links">
-        <a href="/pricing">Pricing</a>
-        <a href="/faq">FAQ</a>
-        <a href="/sample">Free Sample</a>
-      </nav>
-    </a></div>
+      <ul class="nav-links">
+        <li><a href="/pricing">Pricing</a></li>
+        <li><a href="/how-it-works">How It Works</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/faq">FAQ</a></li>
+        <li><a href="/pricing" class="nav-cta">Get Started</a></li>
+      </ul>
+    </div>
   </header>
 
-  <section class="hero">
-    <div class="container">
-      <h1>Get Started</h1>
-      <p>Tell us your ICP and we'll confirm scope and delivery timeline.</p>
-    </a></div>
-  </section>
+  <div class="container">
+    <section class="hero">
+      <h1>Start protecting your reputation.</h1>
+      <p>Choose your plan. We'll get you set up within 24 hours. No calls — all done via email.</p>
+    </section>
 
-  <section class="form-section">
-    <div class="container">
-      <form id="order-form">
-        <div class="form-group">
-          <label>Work Email *</label>
-          <input type="email" name="email" placeholder="you@company.com" required>
-          <div class="helper">Use your work email so we can deliver your file securely.</a></div>
-        </a></div>
-        
-        <div class="form-group">
-          <label>Target Industry *</label>
-          <input type="text" name="industry" placeholder="e.g., HVAC software, dental services, e-commerce brands" required>
-        </a></div>
-        
-        <div class="form-group">
-          <label>Geography *</label>
-          <input type="text" name="geography" placeholder="Country + state/region (or metros if needed)" required>
-          <div class="helper">Example: United States, California / United Kingdom, London</a></div>
-        </a></div>
-        
-        <div class="form-group">
-          <label>Company Size *</label>
-          <select name="company_size" required>
-            <option value="">Select...</option>
-            <option value="1-10">1-10 employees</option>
-            <option value="11-50">11-50 employees</option>
-            <option value="51-200">51-200 employees</option>
-            <option value="201-500">201-500 employees</option>
-            <option value="500+">500+ employees</option>
-          </select>
-        </a></div>
-        
-        <div class="form-group">
-          <label>Buyer Titles / Personas *</label>
-          <input type="text" name="titles" placeholder="e.g., Founder, VP Sales, Head of Ops" required>
-          <div class="helper">Example: Founder, VP Sales, Head of Ops</a></div>
-        </a></div>
-        
-        <div class="form-group">
-          <label>Outreach Channel *</label>
-          <select name="channel" required>
-            <option value="">Select...</option>
-            <option value="cold-email">Cold Email</option>
-            <option value="linkedin">LinkedIn</option>
-            <option value="calling">Calling</option>
-          </select>
-        </a></div>
-        
-        <div class="form-group">
-          <label>Package *</label>
-          <select name="package" id="package-select" required>
-            <option value="">Select...</option>
-            <option value="starter">Starter - $3/lead (300 min)</option>
-            <option value="pro">Pro - $4.50/lead (200 min) - Most Popular</option>
-            <option value="premium">Premium - $8/lead (150 min)</option>
-          </select>
+    <div class="plans">
+      <div class="plan">
+        <span class="plan-badge">Package A</span>
+        <h3>Monitor</h3>
+        <div class="price">$99<span>/mo</span></div>
+        <p class="best-for">Best for single-location businesses</p>
+        <ul>
+          <li>Review monitoring + inbox</li>
+          <li>Draft replies for all reviews</li>
+          <li>Approval queue for 1-3★</li>
+          <li>Weekly scorecard</li>
+        </ul>
+        <a href="https://buy.stripe.com/test-monitor" class="btn btn-secondary">Start with Monitor</a>
+      </div>
+      
+      <div class="plan featured">
+        <span class="plan-badge">Package B</span>
+        <h3>Automate</h3>
+        <div class="price">$199<span>/mo</span></div>
+        <p class="best-for">Best for more 5★ reviews</p>
+        <ul>
+          <li>Everything in Monitor</li>
+          <li>Review request automation</li>
+          <li>One follow-up max</li>
+          <li>Monthly insights</li>
+        </ul>
+        <a href="https://buy.stripe.com/test-automate" class="btn btn-primary">Start with Automate</a>
+      </div>
+      
+      <div class="plan">
+        <span class="plan-badge">Package C</span>
+        <h3>Multi-Location</h3>
+        <div class="price">$399<span>/mo</span></div>
+        <p class="best-for">Best for multi-branch operators</p>
+        <ul>
+          <li>Everything in Automate</li>
+          <li>Location-level reporting</li>
+          <li>Escalation routing</li>
+          <li>Dedicated ops owner</li>
+        </ul>
+        <a href="https://buy.stripe.com/test-multi" class="btn btn-secondary">Start with Multi-Location</a>
+      </div>
+    </div>
+
+    <div class="steps">
+      <h2>How it works</h2>
+      <div class="steps-grid">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h4>Choose plan</h4>
+          <p>Pick the package that fits your needs.</p>
         </div>
-        
-        <div class="form-group">
-          <label>Number of Leads *</label>
-          <input type="number" name="quantity" id="quantity-input" placeholder="Enter quantity" required min="150">
-          <div class="price-estimate" id="price-estimate"></div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h4>Checkout</h4>
+          <p>Pay securely via Stripe. Cancel anytime.</p>
         </div>
-        
-        <div class="form-group">
-          <label>Exclusions (optional)</label>
-          <input type="text" name="exclusions" placeholder="Competitors, industries, titles to exclude">
-          <div class="helper">Example: Competitor X, competitor Y / certain industries / titles to exclude</a></div>
-        </a></div>
-        
-        <div class="form-group">
-          <label>Deadline (optional)</label>
-          <input type="text" name="deadline" placeholder="If urgent, we'll confirm feasibility">
-        </a></div>
-        
-        <button type="submit" class="btn">Submit Order</button>
-      </form>
-    </a></div>
-  </section>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h4>Onboarding</h4>
+          <p>Fill out a short form. We need GBP access and your escalation email.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h4>Go live</h4>
+          <p>We start monitoring within 24 hours.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq">
+      <h2>Frequently asked questions</h2>
+      <div class="faq-item">
+        <h4>What do you need from us?</h4>
+        <p>Google Business Profile admin access (read-only), your brand voice guidelines, and an email for approval notifications.</p>
+      </div>
+      <div class="faq-item">
+        <h4>How long does setup take?</h4>
+        <p>24 hours after we receive access credentials.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Can we cancel anytime?</h4>
+        <p>Yes. Cancel from your dashboard or email us. You keep access until the end of your billing period.</p>
+      </div>
+      <div class="faq-item">
+        <h4>What platforms do you support?</h4>
+        <p>We start with Google Business Profile. Yelp, Facebook, and others available as add-ons.</p>
+      </div>
+    </div>
+  </div>
 
   <footer>
     <div class="container">
-      <div class="footer-links">
-        <a href="/pricing">Pricing</a>
-        <a href="/faq">FAQ</a>
-        <a href="/terms">Terms</a>
-        <a href="/privacy">Privacy</a>
-      </a></div>
-      <p>© Tensor Market Data. All rights reserved.</p>
-    </a></div>
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="/pricing">Pricing</a>
+          <a href="/faq">FAQ</a>
+          <a href="/privacy">Privacy</a>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.875rem;">© TensorMarketData. All rights reserved.</p>
+      </div>
+    </div>
   </footer>
-
-    const packageSelect = document.getElementById('package-select');
-    const qtyInput = document.getElementById('quantity-input');
-    const priceEstimate = document.getElementById('price-estimate');
-    
-    const PRICES = { 'starter': 3.00, 'pro': 4.50, 'premium': 8.00 };
-    const MINIMUMS = { 'starter': 300, 'pro': 200, 'premium': 150 };
-    
-    function updatePrice() {
-      const pkg = packageSelect.value;
-      const qty = parseInt(qtyInput.value) || 0;
-      if (!pkg || !priceEstimate) return;
-      
-      if (qty >= MINIMUMS[pkg]) {
-        const total = PRICES[pkg] * qty;
-        priceEstimate.innerHTML = `<strong>$${total.toLocaleString()}</strong> ($${PRICES[pkg]}/lead)`;
-        priceEstimate.style.display = 'block';
-      } else {
-        priceEstimate.innerHTML = `<span style="color:#dc2626">Min: ${MINIMUMS[pkg]} leads</span>`;
-        priceEstimate.style.display = 'block';
-      }
-    }
-    
-    // Package preselection from URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const preselected = urlParams.get('package');
-    if (preselected && MINIMUMS[preselected]) {
-      packageSelect.value = preselected;
-      qtyInput.value = MINIMUMS[preselected];
-      updatePrice();
-    }
-    
-    packageSelect.addEventListener('change', function() {
-      if (this.value) {
-        qtyInput.value = MINIMUMS[this.value];
-        qtyInput.min = MINIMUMS[this.value];
-      }
-      updatePrice();
-    });
-    
-    qtyInput.addEventListener('input', updatePrice);
-    
-    document.getElementById('order-form').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const formData = new FormData(this);
-      const data = Object.fromEntries(formData);
-      
-      const order = {
-        order_type: "paid",
-        package: data.package,
-        quantity: parseInt(data.quantity),
-        requirements: {
-          work_email: data.email,
-          target_industry: data.industry,
-          geography: { country: data.geography },
-          company_size_range: data.company_size,
-          buyer_titles: { titles: data.titles.split(",").map(t => t.trim()), free_text: null },
-          outreach_channel: data.channel,
-          exclusions: data.exclusions || null,
-          deadline: data.deadline || null,
-          notes: null
-        }
-      };
-      
-      try {
-        const res = await fetch('/v1/orders', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(order)
-        });
-        if (res.ok) {
-          window.location.href = '/order-confirmed';
-        } else {
-          const err = await res.json();
-          alert(err.detail || 'Error submitting order.');
-        }
-      } catch(err) {
-        alert('Error submitting order.');
-      }
-    });
-  </script></body>
+</body>
 </html>
-    <style>
-    .price-estimate { 
-      margin-top: 0.5rem; 
-      padding: 0.75rem; 
-      background: #f0fdf4; 
-      border-radius: 6px; 
-      font-size: 0.9rem;
-      color: #166534;
-      display: none;
-    }
-    </style>
