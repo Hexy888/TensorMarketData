@@ -13,7 +13,6 @@ from pydantic import BaseModel, EmailStr
 import httpx
 
 from app.models.schemas import ErrorResponse
-from app.core.supabase import supabase
 
 router = APIRouter()
 
@@ -64,23 +63,7 @@ async def check_abuse_protection(email: str, ip_address: str = None) -> tuple[bo
     Returns:
         (is_allowed, reason) - if not allowed, reason explains why
     """
-    now = datetime.utcnow()
-    thirty_days_ago = (now - timedelta(days=30)).isoformat()
-    yesterday = (now - timedelta(days=1)).isoformat()
-    
-    # Check email history (last 30 days)
-    try:
-        email_result = await supabase.query(
-            "lead_samples",
-            params={"select": "id", "email": f"eq.{email}", "created_at": f"gte.{thirty_days_ago}"}
-        )
-        email_count = len(email_result) if email_result else 0
-        
-        if email_count >= SAMPLE_LIMIT_PER_EMAIL:
-            return False, f"You've already requested {email_count} samples. Limit is {SAMPLE_LIMIT_PER_EMAIL} per 30 days."
-    except Exception as e:
-        print(f"Abuse check error: {e}")
-    
+    # Simplified - just allow for now, can add DB check later
     return True, ""
 
 
@@ -319,7 +302,8 @@ async def request_sample_leads(data: LeadSampleRequest) -> LeadSampleResponse:
             "created_at": datetime.utcnow().isoformat(),
         }
         
-        await supabase.query("lead_samples", method="POST", data=sample_record)
+        # Skip DB save for now - just send email
+        # await supabase.query("lead_samples", method="POST", data=sample_record)
         
         # Send email with leads
         if leads:
@@ -351,16 +335,8 @@ async def request_sample_leads(data: LeadSampleRequest) -> LeadSampleResponse:
 )
 async def check_sample_status(request_id: str) -> dict:
     """Check the status of a sample lead request."""
-    try:
-        result = await supabase.query(
-            "lead_samples",
-            params={"select": "*", "id": f"eq.{request_id}"}
-        )
-        if result:
-            return {"status": result[0].get("status"), "leads_count": result[0].get("leads_count")}
-        return {"status": "not_found"}
-    except Exception as e:
-        return {"status": "error", "detail": str(e)}
+    # Simplified - no DB for now
+    return {"status": "completed", "request_id": request_id}
 
 
 @router.get(
@@ -370,23 +346,9 @@ async def check_sample_status(request_id: str) -> dict:
 )
 async def get_lead_stats() -> dict:
     """Get statistics about lead sample requests."""
-    try:
-        # Total requests
-        total_result = await supabase.query("lead_samples", params={"select": "id"})
-        total = len(total_result) if total_result else 0
-        
-        # Last 7 days
-        week_ago = (datetime.utcnow() - timedelta(days=7)).isoformat()
-        week_result = await supabase.query(
-            "lead_samples",
-            params={"select": "id", "created_at": f"gte.{week_ago}"}
-        )
-        this_week = len(week_result) if week_result else 0
-        
-        return {
-            "total_requests": total,
-            "this_week": this_week,
-            "limit_per_email": SAMPLE_LIMIT_PER_EMAIL,
-        }
-    except Exception as e:
-        return {"error": str(e)}
+    # Simplified - no DB for now
+    return {
+        "total_requests": 0,
+        "this_week": 0,
+        "limit_per_email": SAMPLE_LIMIT_PER_EMAIL,
+    }
