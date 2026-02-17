@@ -70,22 +70,16 @@ async def check_abuse_protection(email: str, ip_address: str = None) -> tuple[bo
     
     # Check email history (last 30 days)
     try:
-        email_result = supabase.table("lead_samples").select("id").eq("email", email).gte("created_at", thirty_days_ago).execute()
-        email_count = len(email_result.data) if email_result.data else 0
+        email_result = await supabase.query(
+            "lead_samples",
+            params={"select": "id", "email": f"eq.{email}", "created_at": f"gte.{thirty_days_ago}"}
+        )
+        email_count = len(email_result) if email_result else 0
         
         if email_count >= SAMPLE_LIMIT_PER_EMAIL:
             return False, f"You've already requested {email_count} samples. Limit is {SAMPLE_LIMIT_PER_EMAIL} per 30 days."
     except Exception as e:
         print(f"Abuse check error: {e}")
-    
-    # Check IP history (last 24 hours) - if IP available
-    if ip_address:
-        try:
-            # Note: We'd need to store IP to check this
-            # For now, rely on email-based protection
-            pass
-        except Exception as e:
-            print(f"IP check error: {e}")
     
     return True, ""
 
@@ -325,7 +319,7 @@ async def request_sample_leads(data: LeadSampleRequest) -> LeadSampleResponse:
             "created_at": datetime.utcnow().isoformat(),
         }
         
-        supabase.table("lead_samples").insert(sample_record).execute()
+        await supabase.query("lead_samples", method="POST", data=sample_record)
         
         # Send email with leads
         if leads:
@@ -358,9 +352,12 @@ async def request_sample_leads(data: LeadSampleRequest) -> LeadSampleResponse:
 async def check_sample_status(request_id: str) -> dict:
     """Check the status of a sample lead request."""
     try:
-        result = supabase.table("lead_samples").select("*").eq("id", request_id).execute()
-        if result.data:
-            return {"status": result.data[0].get("status"), "leads_count": result.data[0].get("leads_count")}
+        result = await supabase.query(
+            "lead_samples",
+            params={"select": "*", "id": f"eq.{request_id}"}
+        )
+        if result:
+            return {"status": result[0].get("status"), "leads_count": result[0].get("leads_count")}
         return {"status": "not_found"}
     except Exception as e:
         return {"status": "error", "detail": str(e)}
@@ -375,13 +372,16 @@ async def get_lead_stats() -> dict:
     """Get statistics about lead sample requests."""
     try:
         # Total requests
-        total_result = supabase.table("lead_samples").select("id", count="exact").execute()
-        total = total_result.count or 0
+        total_result = await supabase.query("lead_samples", params={"select": "id"})
+        total = len(total_result) if total_result else 0
         
         # Last 7 days
         week_ago = (datetime.utcnow() - timedelta(days=7)).isoformat()
-        week_result = supabase.table("lead_samples").select("id", count="exact").gte("created_at", week_ago).execute()
-        this_week = week_result.count or 0
+        week_result = await supabase.query(
+            "lead_samples",
+            params={"select": "id", "created_at": f"gte.{week_ago}"}
+        )
+        this_week = len(week_result) if week_result else 0
         
         return {
             "total_requests": total,
