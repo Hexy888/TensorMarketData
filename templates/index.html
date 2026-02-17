@@ -411,6 +411,8 @@
     .cta-buttons { display: flex; gap: 1rem; justify-content: center; margin: 2rem 0; flex-wrap: wrap; }
     .cta-buttons .btn { padding: 0.875rem 2rem; font-size: 1rem; }
     .trust-line { text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 1rem; }
+    .trust-chips { display: flex; gap: 0.75rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap; }
+    .chip { background: var(--bg-secondary); padding: 0.4rem 0.85rem; border-radius: 20px; font-size: 0.8rem; color: var(--text-muted); border: 1px solid var(--border); }
     
     /* Definition Block */
     .definition-block { padding: 2rem 0; background: var(--bg-alt); text-align: center; }
@@ -432,6 +434,18 @@
     .link-secondary:hover { text-decoration: underline; }
     .link-arrow { color: var(--primary); text-decoration: none; font-weight: 600; }
     .link-arrow:hover { text-decoration: underline; }
+    
+    /* FAQ Preview */
+    .faq-preview { padding: 4rem 0; }
+    .faq-preview h2 { text-align: center; margin-bottom: 0.5rem; }
+    .faq-preview > .container > p { text-align: center; color: var(--text-muted); margin-bottom: 2rem; }
+    .faq-list { max-width: 700px; margin: 0 auto 2rem; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-question { padding: 1rem 0; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .faq-answer { padding-bottom: 1rem; color: var(--text-muted); display: none; }
+    .faq-item.open .faq-answer { display: block; }
+    .faq-item.open .faq-icon { transform: rotate(180deg); }
+    .faq-icon { transition: transform 0.2s; }
   </style>
 </head>
 <body>
@@ -474,6 +488,12 @@
         <a href="/sample" class="btn btn-secondary">Get Free Sample (10)</a>
       </div>
       <p class="trust-line">No subscriptions. Order only what you need.</p>
+      
+      <div class="trust-chips">
+        <span class="chip">Human-verified</span>
+        <span class="chip">~48h typical</span>
+        <span class="chip">30-day replacement</span>
+      </div>
     </div>
   </section>
             <input type="text" name="industry" placeholder="e.g., B2B SaaS, AI/ML, Fintech">
@@ -666,6 +686,44 @@
     </div>
   </section>
 
+  <section class="faq-preview">
+    <div class="container">
+      <h2>Questions, answered</h2>
+      <p>Everything you need to know about our lead generation service.</p>
+      
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-question">What's included in a lead? <span class="faq-icon">▼</span></div>
+          <div class="faq-answer">A "lead" is 1 verified decision-maker contact record. Each package includes defined fields (name, title, verified email, company details). See Pricing for exact columns.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">How are emails verified? <span class="faq-icon">▼</span></div>
+          <div class="faq-answer">We use a verification process prior to delivery to reduce invalid emails. If an email is invalid within 30 days, we replace it 1:1.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">What does the replacement guarantee cover? <span class="faq-icon">▼</span></div>
+          <div class="faq-answer">30-day 1:1 replacement for invalid emails (hard bounce or failed verification). Replacement covers emails only; it does not guarantee replies, meetings, or revenue.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">How fast is delivery? <span class="faq-icon">▼</span></div>
+          <div class="faq-answer">~48 hours typical. Complex ICPs or large orders may take longer. Rush available.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">Can you match strict titles and geographies? <span class="faq-icon">▼</span></div>
+          <div class="faq-answer">Yes. Pro supports clear title and geo targeting. Premium is designed for strict ICP constraints (C-suite only, niche verticals, tight geos).</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">What format do you deliver? <span class="faq-icon">▼</span></div>
+          <div class="faq-answer">CSV/Excel exports with consistent columns, ready for outreach or CRM import.</div>
+        </div>
+      </div>
+      
+      <div style="text-align: center;">
+        <a href="/faq" class="btn btn-secondary">Read FAQ</a>
+      </div>
+    </div>
+  </section>
+
   <section class="cta-section">
     <div class="container">
       <h2>Get a list you can actually use</h2>
@@ -691,53 +749,31 @@
   </footer>
 
   <script>
-    document.getElementById('lead-form').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      
-      const formData = new FormData(this);
-      const data = {
-        email: formData.get('email'),
-        industry: formData.get('industry'),
-        company_size: formData.get('size'),
-        criteria: formData.get('notes')
-      };
-      
-      const btn = this.querySelector('.submit-btn');
-      btn.textContent = 'Searching...';
-      btn.disabled = true;
-      
-      try {
-        const response = await fetch('https://tensormarketdata.com/v1/leads/sample', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
-        });
-        
-        const result = await response.json();
-        
-        if (response.ok) {
-          this.style.display = 'none';
-          document.getElementById('success').style.display = 'block';
-          document.getElementById('success').innerHTML = `
-            <h4>✓ Sample Sent!</h4>
-            <p>I've sent ${result.leads_count} leads to ${data.email}. Check your inbox!</p>
-          `;
-        } else {
-          btn.textContent = 'Request Sample Leads';
-          btn.disabled = false;
-          alert(result.detail?.detail || 'Something went wrong. Please try again.');
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        btn.textContent = 'Request Sample Leads';
-        btn.disabled = false;
-        // Still show success for demo purposes
-        this.style.display = 'none';
-        document.getElementById('success').style.display = 'block';
-      }
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', () => {
+        q.parentElement.classList.toggle('open');
+      });
     });
+    
+    // Analytics
+    document.querySelectorAll('a[href="/pricing"]').forEach(a => {
+      a.addEventListener('click', () => { track('homepage_cta_pricing_click'); });
+    });
+    document.querySelectorAll('a[href="/sample"]').forEach(a => {
+      a.addEventListener('click', () => { track('homepage_cta_sample_click'); });
+    });
+    document.querySelectorAll('a[href="/get-started"]').forEach(a => {
+      a.addEventListener('click', () => { track('homepage_cta_get_started_click'); });
+    });
+    
+    function track(event) {
+      fetch('/v1/analytics', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({event})
+      }).catch(() => {});
+    }
   </script>
 </body>
 </html>
