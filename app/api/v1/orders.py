@@ -8,6 +8,9 @@ from enum import Enum
 import uuid
 from datetime import datetime
 
+# Import email dispatcher
+from app.core.emails import dispatch_email
+
 router = APIRouter()
 
 # Enums
@@ -151,6 +154,11 @@ async def create_order(order: OrderCreate):
         "created_at": now
     })
     
+    # Send order received email
+    order_obj = orders_db[order_id]
+    req_obj = requirements_db[order_id]
+    await dispatch_email("order", "created", order_obj, req_obj)
+    
     return OrderResponse(
         id=order_id,
         order_type=order.order_type,
@@ -202,6 +210,9 @@ async def create_sample(sample: SampleCreate):
         "created_at": now
     })
     
+    # Send sample received email
+    await dispatch_email("sample", "created", orders_db[order_id], requirements_db[order_id])
+    
     return OrderResponse(
         id=order_id,
         order_type=OrderType.SAMPLE,
@@ -211,9 +222,29 @@ async def create_sample(sample: SampleCreate):
         created_at=now
     )
 
+@router.get("/orders")
+async def list_orders(email: Optional[str] = None):
+    """List orders for a customer (by email)."""
+    orders = list(orders_db.values())
+    if email:
+        orders = [o for o in orders if requirements_db.get(o["id"], {}).get("work_email") == email]
+    orders.sort(key=lambda x: x["created_at"], reverse=True)
+    return {"orders": orders}
+    """Get order details."""
+    if order_id not in orders_db:
+        raise HTTPException(status_code=404, detail="Order not found")
+    
+    order = orders_db[order_id]
+    requirements = requirements_db.get(order_id, {})
+    
+    return {
+        **order,
+        "requirements": requirements
+    }
+
 @router.get("/orders/{order_id}")
 async def get_order(order_id: str):
-    """Get order details."""
+    """Get order details by ID."""
     if order_id not in orders_db:
         raise HTTPException(status_code=404, detail="Order not found")
     

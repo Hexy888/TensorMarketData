@@ -328,6 +328,13 @@ async def admin_page():
         return f.read()
 
 
+@app.get("/app/orders", response_class=HTMLResponse)
+async def customer_orders_page():
+    """Customer orders list"""
+    with open(os.path.join(TEMPLATES_DIR, "customer-orders.html"), "r") as f:
+        return f.read()
+
+
 @app.get("/blog/ai-agents-b2b-data-programmatic-access", response_class=HTMLResponse)
 async def blog_post():
     """SEO blog post"""
