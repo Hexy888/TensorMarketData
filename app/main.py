@@ -190,6 +190,12 @@ async def blog_index():
     with open(os.path.join(TEMPLATES_DIR, "blog/index.html"), "r") as f:
         return f.read()
 
+@app.get("/blog/response-time-matters", response_class=HTMLResponse)
+async def blog_post_response_time():
+    """Blog post: Why Response Time Matters"""
+    with open(os.path.join(TEMPLATES_DIR, "blog/response-time-matters.html"), "r") as f:
+        return f.read()
+
 @app.get("/thank-you", response_class=HTMLResponse)
 async def thank_you(request: Request):
     """Thank you page after checkout"""
