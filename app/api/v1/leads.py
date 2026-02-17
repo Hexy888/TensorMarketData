@@ -1,13 +1,16 @@
 """
 Leads API - Simple endpoints
 """
-from fastapi import APIRouter
+from fastapi import APIRouter, Query
 
 router = APIRouter()
 
 
 @router.post("/leads/sample")
-async def request_sample(email: str = "", industry: str = ""):
+async def request_sample(
+    email: str = Query(...),
+    industry: str = Query(...)
+):
     """Request free sample leads."""
     return {
         "status": "success",
