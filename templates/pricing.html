@@ -277,8 +277,17 @@
 
   <section class="hero">
     <div class="container">
-      <h1>Simple, Transparent Pricing</h1>
-      <p>No subscriptions required. No long-term contracts. Pay only for the leads you need.</p>
+      <h1>Pricing</h1>
+      <p>Human-verified B2B prospect leads. No subscriptions. 30-day replacement guarantee.</p>
+    </div>
+  </section>
+
+  <!-- What counts as a lead -->
+  <section class="definition-block">
+    <div class="container">
+      <h2>What counts as a lead?</h2>
+      <p><strong>1 verified decision-maker contact record</strong> = first_name + last_name + title + verified_work_email + company info.</p>
+      <p class="note">We do NOT sell inbound leads, marketing Qualified leads (MQLs), or company records without contact data.</p>
     </div>
   </section>
 
@@ -287,46 +296,81 @@
       <div class="pricing-grid">
         <!-- Starter -->
         <div class="pricing-card">
-          <span class="badge">Best Value</span>
           <h3>Starter</h3>
-          <div class="price">$199<span>/one-time</span></div>
+          <div class="price">$3.00<span>/lead</span></div>
           <div class="leads-count">
-            <div class="num">100</div>
-            <div class="label">Verified Leads</div>
+            <div class="num">300</div>
+            <div class="label">minimum</div>
           </div>
-          <div class="per-lead">$1.99 per lead</div>
+          <div class="per-lead">$900 total</div>
+          <p class="best-for">Best for: broad targeting, high-volume list building, early outbound testing</p>
           <ul class="features-list">
-            <li>Validated decision-maker contacts</li>
-            <li>95%+ email deliverability</li>
-            <li>Company research & context</li>
-            <li>30-day replacement guarantee</li>
-            <li>CSV/Excel delivery</li>
+            <li><strong>CONTACT:</strong></li>
+            <li>first_name</li>
+            <li>last_name</li>
+            <li>title</li>
+            <li>verified_work_email</li>
+            <li><strong>COMPANY:</strong></li>
+            <li>company_name</li>
+            <li>domain</li>
+            <li><strong>BASIC:</strong></li>
+            <li>industry (broad)</li>
+            <li>employee_range</li>
+            <li class="excluded">NOT included: linkedin_url (optional)</li>
           </ul>
-          <a href="#" class="btn btn-secondary" onclick="buyLeads('starter'); return false;">Buy Now - $199</a>
+          <a href="/get-started?package=starter" class="btn btn-secondary">Get Started</a>
         </div>
         
-        <!-- Growth -->
+        <!-- Pro -->
         <div class="pricing-card featured">
           <span class="badge">Most Popular</span>
-          <h3>Growth</h3>
-          <div class="price">$499<span>/one-time</span></div>
+          <h3>Pro</h3>
+          <div class="price">$4.50<span>/lead</span></div>
           <div class="leads-count">
-            <div class="num">500</div>
-            <div class="label">Verified Leads</div>
+            <div class="num">200</div>
+            <div class="label">minimum</div>
           </div>
-          <div class="per-lead">$0.99 per lead</div>
+          <div class="per-lead">$900 total</div>
+          <p class="best-for">Best for: consistent outbound campaigns needing context + speed</p>
           <ul class="features-list">
-            <li>Everything in Starter</li>
-            <li>Priority turnaround</li>
-            <li>Tech stack data</li>
-            <li>Funding & growth signals</li>
-            <li>CRM integration available</li>
+            <li><strong>CONTACT:</strong></li>
+            <li>first_name</li>
+            <li>last_name</li>
+            <li>title</li>
+            <li>verified_work_email</li>
+            <li>linkedin_url</li>
+            <li><strong>COMPANY:</strong></li>
+            <li>company_name</li>
+            <li>domain</li>
+            <li>hq_location</li>
+            <li>industry (specific)</li>
+            <li>employee_range</li>
           </ul>
-          <a href="#" class="btn btn-primary" onclick="buyLeads('growth'); return false;">Buy Now - $499</a>
+          <a href="/get-started?package=pro" class="btn btn-primary">Get Started</a>
         </div>
         
-        <!-- Monthly -->
+        <!-- Premium -->
         <div class="pricing-card">
+          <h3>Premium</h3>
+          <div class="price">$8.00<span>/lead</span></div>
+          <div class="leads-count">
+            <div class="num">150</div>
+            <div class="label">minimum</div>
+          </div>
+          <div class="per-lead">$1,200 total</div>
+          <p class="best-for">Best for: strict ICPs where precision matters more than volume</p>
+          <ul class="features-list">
+            <li><strong>EVERYTHING IN PRO, PLUS:</strong></li>
+            <li>Strict title mapping (C-suite only, VP+)</li>
+            <li>Niche industry targeting</li>
+            <li>Tight geo constraints</li>
+            <li>Tech stack signals</li>
+            <li>Funding stage signals</li>
+            <li>Hiring signals</li>
+          </ul>
+          <a href="/get-started?package=premium" class="btn btn-secondary">Request Quote</a>
+        </div>
+      </div>
           <span class="badge">Enterprise</span>
           <h3>Monthly</h3>
           <div class="price">$999<span>/month</span></div>
@@ -347,8 +391,13 @@
       </div>
       
       <div class="guarantee" id="contact">
-        <h3>🔒 Quality Guarantee</h3>
-        <p>Every email verified for deliverability. Bad contacts? We'll replace them free within 30 days. No questions asked.</p>
+        <h3>30-Day Replacement Guarantee</h3>
+        <p><strong>30-day 1:1 replacement for invalid emails.</strong></p>
+        <ul>
+          <li>Invalid email = hard bounce OR failed verification evidence</li>
+          <li>Replacement covers emails only — does not guarantee replies, meetings, or revenue</li>
+          <li>Provide bounce evidence or verification output for replacements</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -358,20 +407,28 @@
       <h2>Frequently Asked Questions</h2>
       <div class="faq-grid">
         <div class="faq-item">
-          <h4>How do you verify emails?</h4>
-          <p>We use multi-step verification—syntax check, domain validation, and SMTP verification to ensure 95%+ deliverability.</p>
+          <h4>What is included in a lead?</h4>
+          <p>1 verified decision-maker contact record = first_name, last_name, title, verified_work_email, company info. See exact columns per package above.</p>
         </div>
         <div class="faq-item">
-          <h4>How long does delivery take?</h4>
-          <p>Starter lists ship within 48 hours. Growth and Monthly orders prioritized for 24-hour delivery.</p>
+          <h4>How are emails verified?</h4>
+          <p>We use multi-step verification: syntax check, domain validation, and SMTP verification. Plus our 30-day replacement policy covers any invalid emails.</p>
         </div>
         <div class="faq-item">
-          <h4>What data do I get per lead?</h4>
-          <p>Each lead includes: name, title, email, phone (when available), company info, funding, and tech stack.</p>
+          <h4>What does the 30-day replacement guarantee cover?</h4>
+          <p>1:1 replacement for invalid emails (hard bounces). Does NOT guarantee inbox placement, replies, meetings, or revenue. Provide bounce evidence for replacements.</p>
         </div>
         <div class="faq-item">
-          <h4>Can I request specific criteria?</h4>
-          <p>Absolutely. Tell us your ideal customer profile and we'll custom-research leads matching your requirements.</p>
+          <h4>What formats are delivered?</h4>
+          <p>CSV or Excel. CRM import-ready. Let us know your preferred format.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Typical delivery times?</h4>
+          <p>Starter: ~48 hours. Pro: ~48 hours (priority). Premium: fastest (confirms after ICP review).</p>
+        </div>
+        <div class="faq-item">
+          <h4>Can you match strict titles/geo/industries?</h4>
+          <p>Yes. Pro includes industry, employee range, HQ location. Premium includes strict title mapping, niche targeting, tight geo constraints.</p>
         </div>
       </div>
     </div>

@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <!-- Primary Meta Tags -->
-  <title>TensorMarketData - Premium B2B Lead Generation Service</title>
-  <meta name="title" content="TensorMarketData - Premium B2B Lead Generation Service">
-  <meta name="description" content="Enterprise-grade B2B lead generation with 95%+ email deliverability. Get verified decision maker contacts for outbound sales. Starting at $200 for 100 leads.">
-  <meta name="keywords" content="B2B lead generation, verified email leads, sales prospecting, outbound sales, decision maker contacts, B2B data provider, email list verification">
+  <title>TensorMarketData - Human-Verified B2B Prospect Leads</title>
+  <meta name="title" content="TensorMarketData - Human-Verified B2B Prospect Leads">
+  <meta name="description" content="Human-verified B2B prospect leads for outbound teams. Verified decision-maker contacts delivered in ~48 hours. 30-day replacement guarantee.">
+  <meta name="keywords" content="B2B lead generation, verified email leads, sales prospecting, outbound sales, decision maker contacts, prospect lists, cold email leads">
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://tensormarketdata.com/">
-  <meta property="og:title" content="TensorMarketData - Premium B2B Lead Generation">
-  <meta property="og:description" content="Enterprise-grade B2B leads with 95%+ email deliverability. Verified decision makers for your sales pipeline.">
+  <meta property="og:title" content="TensorMarketData - Prospect Lists Built for Outbound Teams">
+  <meta property="og:description" content="Verified decision-maker contacts delivered in ~48 hours. For SDR teams, founders, and agencies running cold email.">
   <meta property="og:image" content="https://tensormarketdata.com/images/og-image.jpg">
   <meta property="og:site_name" content="TensorMarketData">
   
@@ -395,6 +395,34 @@
       .nav-links { display: none; }
       .form-container { padding: 1.75rem; }
     }
+    
+    /* Sample Output */
+    .sample-output { padding: 4rem 0; background: var(--bg-secondary); }
+    .sample-output h2 { text-align: center; margin-bottom: 0.5rem; }
+    .sample-output > .container > p { text-align: center; color: var(--text-muted); margin-bottom: 2rem; }
+    .sample-table { overflow-x: auto; margin-bottom: 1rem; }
+    .sample-table table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    .sample-table th, .sample-table td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
+    .sample-table th { background: var(--primary); color: white; font-weight: 600; white-space: nowrap; }
+    .sample-table td { font-family: monospace; font-size: 0.8rem; }
+    .sample-note { text-align: center; color: var(--text-muted); font-size: 0.9rem; }
+    
+    /* CTA Buttons */
+    .cta-buttons { display: flex; gap: 1rem; justify-content: center; margin: 2rem 0; flex-wrap: wrap; }
+    .cta-buttons .btn { padding: 0.875rem 2rem; font-size: 1rem; }
+    
+    /* Definition Block */
+    .definition-block { padding: 2rem 0; background: var(--bg-alt); text-align: center; }
+    .definition-block h2 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+    .definition-block p { color: var(--text-muted); }
+    .definition-block .note { font-size: 0.85rem; color: var(--text-light); margin-top: 0.5rem; }
+    
+    .best-for { font-size: 0.85rem; color: var(--text-muted); margin: 1rem 0; padding: 0.5rem; background: var(--bg-alt); border-radius: 4px; }
+    .excluded { color: var(--text-light); font-size: 0.85rem; }
+    
+    .footer-links { display: flex; gap: 1.5rem; justify-content: center; margin-bottom: 1rem; }
+    .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
+    .footer-links a:hover { color: var(--primary); }
   </style>
 </head>
 <body>
@@ -412,28 +440,33 @@
 
   <section class="hero">
     <div class="container">
-      <span class="badge">Enterprise-Grade B2B Data</span>
-      <h1>Build Your Pipeline with<br>High-Quality Leads</h1>
-      <p>Stop wasting time on outdated lists. Get verified decision-maker contacts with 95%+ email deliverability, accurate data, and actionable intelligence.</p>
+      <span class="badge">Human-Verified B2B Prospect Leads</span>
+      <h1>Prospect Lists Built<br>for Outbound Teams</h1>
+      <p>Verified decision-maker contacts delivered in ~48 hours. 30-day 1:1 replacement for invalid emails.<br>For SDR teams, founders, and agencies running cold email / LinkedIn outbound.</p>
       
       <div class="stats">
         <div class="stat">
-          <div class="stat-value">95%+</div>
-          <div class="stat-label">Email Deliverability</div>
+          <div class="stat-value">~48hrs</div>
+          <div class="stat-label">Delivery Time</div>
         </div>
         <div class="stat">
-          <div class="stat-value">48hrs</div>
-          <div class="stat-label">Average Delivery</div>
+          <div class="stat-value">30-day</div>
+          <div class="stat-label">Replacement Guarantee</div>
         </div>
         <div class="stat">
-          <div class="stat-value">100%</div>
-          <div class="stat-label">Human-Verified</div>
+          <div class="stat-value">Human</div>
+          <div class="stat-label">Verified</div>
         </div>
       </div>
       
-      <div class="form-container" id="contact">
-        <h3>Get a Sample List</h3>
-        <p>I'll personally research and deliver 10 qualified leads to showcase our data quality.</p>
+      <div class="cta-buttons">
+        <a href="/pricing" class="btn btn-primary">See Pricing</a>
+        <a href="/sample" class="btn btn-secondary">Get Free Sample (10)</a>
+      </div>
+      
+      <div class="form-container" id="sample">
+        <h3>Get Your Free Sample (10 Leads)</h3>
+        <p>Same quality as paid orders. See the data yourself.</p>
         
         <form id="lead-form">
           <div class="form-group">
@@ -583,6 +616,71 @@
     </div>
   </section>
 
+  <section class="sample-output">
+    <div class="container">
+      <h2>Sample Output</h2>
+      <p>Here's what you'll receive. Real data, verified contacts.</p>
+      
+      <div class="sample-table">
+        <table>
+          <thead>
+            <tr>
+              <th>first_name</th>
+              <th>last_name</th>
+              <th>title</th>
+              <th>verified_work_email</th>
+              <th>linkedin_url</th>
+              <th>company_name</th>
+              <th>domain</th>
+              <th>industry</th>
+              <th>employee_range</th>
+              <th>hq_location</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Sarah</td>
+              <td>Chen</td>
+              <td>VP of Sales</td>
+              <td>sarah.chen@techstartup.io</td>
+              <td>linkedin.com/in/sarahchen</td>
+              <td>TechStartup.io</td>
+              <td>techstartup.io</td>
+              <td>B2B SaaS</td>
+              <td>51-200</td>
+              <td>San Francisco, CA</td>
+            </tr>
+            <tr>
+              <td>Michael</td>
+              <td>Rodriguez</td>
+              <td>Head of Growth</td>
+              <td>m.rodriguez@ainovate.com</td>
+              <td>linkedin.com/in/mrodriguez</td>
+              <td>AI Novate</td>
+              <td>ainovate.com</td>
+              <td>AI/ML</td>
+              <td>11-50</td>
+              <td>Austin, TX</td>
+            </tr>
+            <tr>
+              <td>Emily</td>
+              <td>Johnson</td>
+              <td>Director of BD</td>
+              <td>emily@cloudforce.io</td>
+              <td>linkedin.com/in/emilyjohnson</td>
+              <td>CloudForce</td>
+              <td>cloudforce.io</td>
+              <td>Cloud Computing</td>
+              <td>200-500</td>
+              <td>Seattle, WA</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="sample-note">Fields shown are from Pro package. Starter package includes first_name, last_name, title, verified_work_email, company_name, domain, industry, employee_range.</p>
+    </div>
+  </section>
+
   <section class="cta-section">
     <div class="container">
       <h2>Ready to Fill Your Pipeline?</h2>
@@ -593,6 +691,12 @@
 
   <footer>
     <div class="container">
+      <div class="footer-links">
+        <a href="/pricing">Pricing</a>
+        <a href="/faq">FAQ</a>
+        <a href="/terms">Terms</a>
+        <a href="/privacy">Privacy</a>
+      </div>
       <p>Questions? <a href="mailto:nova@tensormarketdata.com" class="email-link">nova@tensormarketdata.com</a></p>
       <p style="margin-top: 0.5rem;">© 2026 TensorMarketData. All rights reserved.</p>
     </div>
