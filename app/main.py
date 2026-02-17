@@ -20,7 +20,7 @@ from app.api.v1 import endpoints_router, submission_router, auth_router
 # from app.api.v1.billing import router as billing_router
 # from app.api.v1.payments import router as payments_router
 from app.api.v1.webhooks import router as webhooks_router
-from app.api.v1.email import router as email_router
+# from app.api.v1.email import router as email_router  # Disabled - needs supabase fix
 from app.api.v1.leads import router as leads_router
 # from app.api.v1.agents import router as agents_router
 
@@ -388,7 +388,7 @@ app.include_router(submission_router, prefix="/v1")
 app.include_router(auth_router, prefix="/v1")
 # app.include_router(payments_router, prefix="/v1")
 app.include_router(webhooks_router, prefix="/v1")
-app.include_router(email_router, prefix="/v1")
+# app.include_router(email_router, prefix="/v1")  # Disabled - needs supabase fix
 app.include_router(leads_router, prefix="/v1")
 # app.include_router(seo_router)  # SEO: robots.txt, sitemap.xml
 # app.include_router(agents_router, prefix="/v1")  # Agent Discovery
