@@ -17,3 +17,4 @@ cryptography==43.0.3
 python-dateutil==2.9.0.post0
 dnspython==2.6.1
 openai==1.51.2
+psycopg[binary]==3.2.3
