@@ -46,7 +46,7 @@ class SubmissionResponse(BaseModel):
 async def submit_data(data: SubmissionCreate) -> SubmissionResponse:
     """
     Submit supplier data for review.
-    Data is verified before being added to our lead database.
+    Data is verified before being added to the marketplace.
     """
     try:
         # Create submission record

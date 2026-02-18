@@ -6,7 +6,7 @@ Optimize website for search engines and AI search engines (ChatGPT, Perplexity, 
 ## Daily Tasks
 
 ### 1. Keyword Research
-- Research AI/data lead generation keywords
+- Research AI/data marketplace keywords
 - Find long-tail opportunities
 - Track ranking positions
 - Monitor competitor keywords
@@ -40,14 +40,14 @@ Optimize website for search engines and AI search engines (ChatGPT, Perplexity, 
 ## Keywords to Target
 
 ### Primary Keywords
-- AI data lead generation
+- AI data marketplace
 - B2B data API
 - AI agent data
 - Business data API
 - Verified business data
 
 ### Secondary Keywords
-- data lead generation for AI
+- data marketplace for AI
 - AI agent training data
 - B2B data provider
 - company data API
@@ -56,7 +56,7 @@ Optimize website for search engines and AI search engines (ChatGPT, Perplexity, 
 ### Long-tail Keywords
 - where to buy business data for AI agents
 - API for verified company data
-- B2B data lead generation for startups
+- B2B data marketplace for startups
 - AI training data without scraping
 
 ## Weekly Goals

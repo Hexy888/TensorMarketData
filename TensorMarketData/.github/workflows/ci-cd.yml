@@ -59,7 +59,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GITHUBUB_TOKEN }}
 
       - name: Extract metadata for Docker
         id: meta
@@ -81,51 +81,25 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-  deploy-railway:
+  deploy-render:
     needs: build
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
-      - name: Deploy to Railway
-        uses: amondnet/railway-deployment@v2
+      - name: Deploy to Render
+        uses: jakejarvis/render-deploy-action@master
         with:
-          railway_token: ${{ secrets.RAILWAY_TOKEN }}
-          service: tensormarketdata
-          environment: production
-          args: up
-
-  deploy-vps:
-    needs: build
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up SSH
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Deploy to VPS
-        run: |
-          echo "${{ secrets.SERVER_HOST }} ${{ secrets.SERVER_USER }}"
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "
-            cd /opt/tensormarketdata &&
-            git pull origin main &&
-            docker-compose down &&
-            docker-compose up -d --build &&
-            docker-compose exec -T app python -m pytest
-          "
+          service-id: ${{ secrets.RENDER_SERVICE_ID }}
+          api-key: ${{ secrets.RENDER_API_KEY }}
 
   notify:
-    needs: [deploy-railway, deploy-vps]
+    needs: [deploy-render]
     runs-on: ubuntu-latest
     if: always()
     steps:
       - name: Send notification
         run: |
-          if [ "${{ needs.deploy-railway.result }}" == "success" ] && [ "${{ needs.deploy-vps.result }}" == "success" ]; then
+          if [ "${{ needs.deploy-render.result }}" == "success" ]; then
             echo "✅ Deployment successful!"
           else
             echo "❌ Deployment failed!"

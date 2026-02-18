@@ -1,6 +1,6 @@
 """
-Stripe Payment Integration for TensorMarketData - Reputation Operations.
-Handles subscriptions for Package A/B/C.
+Stripe Payment Integration for TensorMarketData.
+Handles subscriptions, credits, and provider payouts.
 """
 
 import stripe
@@ -16,7 +16,7 @@ stripe.api_key = settings.stripe_secret_key
 
 
 class StripeService:
-    """Stripe payment service for reputation operations."""
+    """Stripe payment service."""
     
     def __init__(self):
         self.webhook_secret = settings.stripe_webhook_secret
@@ -28,7 +28,7 @@ class StripeService:
         customer = stripe.Customer.create(
             email=email,
             name=name,
-            metadata={"source": "tensormarketdata_reputation"},
+            metadata={"source": "tensormarketdata"},
         )
         return customer
     
@@ -38,11 +38,6 @@ class StripeService:
             return stripe.Customer.retrieve(customer_id)
         except stripe.error.NotFound:
             return None
-    
-    async def get_customer_by_email(self, email: str) -> Optional[Dict]:
-        """Get customer by email."""
-        customers = stripe.Customer.list(email=email, limit=1)
-        return customers.data[0] if customers.data else None
     
     async def create_subscription(
         self,
@@ -59,76 +54,91 @@ class StripeService:
         return subscription
     
     async def cancel_subscription(self, subscription_id: str) -> Dict:
-        """Cancel a subscription at period end."""
-        return stripe.Subscription.modify(
-            subscription_id,
-            cancel_at_period_end=True
-        )
+        """Cancel a subscription."""
+        return stripe.Subscription.cancel(subscription_id)
     
-    async def get_subscription(self, subscription_id: str) -> Optional[Dict]:
-        """Get subscription by ID."""
-        try:
-            return stripe.Subscription.retrieve(subscription_id)
-        except stripe.error.NotFound:
-            return None
-    
-    # ============ CHECKOUT SESSIONS ============
+    # ============ PAYMENTS ============
     
     async def create_checkout_session(
         self,
-        price_id: str,
-        customer_id: str = None,
-        customer_email: str = None,
-        success_url: str = "https://tensormarketdata.com/thank-you?session_id={CHECKOUT_SESSION_ID}",
-        cancel_url: str = "https://tensormarketdata.com/pricing?canceled=1",
-    ) -> Dict:
-        """Create a checkout session for subscription."""
-        checkout_params = {
-            "mode": "subscription",
-            "line_items": [{"price": price_id, "quantity": 1}],
-            "success_url": success_url,
-            "cancel_url": cancel_url,
-            "allow_promotion_codes": True,
-            "billing_address_collection": "required",
-            "customer_update": {
-                "address": "auto",
-                "name": "auto",
-            },
-            "metadata": {
-                "package": self._get_package_from_price(price_id),
-            },
-        }
-        
-        if customer_id:
-            checkout_params["customer"] = customer_id
-        elif customer_email:
-            checkout_params["customer_email"] = customer_email
-        
-        session = stripe.checkout.Session.create(**checkout_params)
-        return session
-    
-    def _get_package_from_price(self, price_id: str) -> str:
-        """Map price ID to package name."""
-        mapping = {
-            "price_monitor_respond_monthly": "package_a",
-            "price_package_b_monthly": "package_b",
-            "price_multi_location_monthly": "package_c",
-        }
-        return mapping.get(price_id, "unknown")
-    
-    # ============ CUSTOMER PORTAL ============
-    
-    async def create_portal_session(
-        self,
         customer_id: str,
-        return_url: str = "https://tensormarketdata.com/app/billing",
+        price_id: str,
+        success_url: str,
+        cancel_url: str,
     ) -> Dict:
-        """Create customer portal session."""
-        session = stripe.billing_portal.Session.create(
+        """Create a checkout session for one-time purchase."""
+        session = stripe.checkout.Session.create(
             customer=customer_id,
-            return_url=return_url,
+            mode="payment",
+            line_items=[{"price": price_id, "quantity": 1}],
+            success_url=success_url,
+            cancel_url=cancel_url,
         )
         return session
+    
+    async def create_credit_package_session(
+        self,
+        customer_id: str,
+        package_id: str,
+        success_url: str,
+        cancel_url: str,
+    ) -> Dict:
+        """Create checkout session for credit packages."""
+        packages = {
+            "starter": {"price": "price_starter", "credits": 1000},
+            "pro": {"price": "price_pro", "credits": 10000},
+            "enterprise": {"price": "price_enterprise", "credits": 100000},
+        }
+        
+        pkg = packages.get(package_id, packages["starter"])
+        
+        session = stripe.checkout.Session.create(
+            customer=customer_id,
+            mode="payment",
+            line_items=[{"price": pkg["price"], "quantity": 1}],
+            success_url=success_url,
+            cancel_url=cancel_url,
+            metadata={"credits": pkg["credits"]},
+        )
+        return session
+    
+    # ============ PROVIDER PAYOUTS ============
+    
+    async def create_connect_account(self, provider_email: str) -> Dict:
+        """Create a Stripe Connect account for a data provider."""
+        account = stripe.Account.create(
+            type="express",
+            email=provider_email,
+            metadata={"source": "tensormarketdata_provider"},
+            capabilities={
+                "transfers": {"requested": True},
+            },
+        )
+        return account
+    
+    async def create_transfer(
+        self,
+        amount: int,  # in cents
+        destination_account: str,
+        description: str = None,
+    ) -> Dict:
+        """Transfer funds to a provider."""
+        transfer = stripe.Transfer.create(
+            amount=amount,
+            currency="usd",
+            destination=destination_account,
+            description=description,
+            metadata={
+                "source": "tensormarketdata",
+                "type": "provider_payout",
+            },
+        )
+        return transfer
+    
+    async def get_account_balance(self, account_id: str) -> int:
+        """Get provider account balance in cents."""
+        balance = stripe.Balance.retrieve(stripe_account=account_id)
+        return balance.available[0].amount if balance.available else 0
     
     # ============ WEBHOOKS ============
     
@@ -144,12 +154,12 @@ class StripeService:
         data = event["data"]["object"]
         
         handlers = {
-            "checkout.session.completed": self._handle_checkout_completed,
-            "customer.subscription.created": self._handle_subscription_created,
-            "customer.subscription.updated": self._handle_subscription_updated,
-            "customer.subscription.deleted": self._handle_subscription_deleted,
-            "invoice.payment_succeeded": self._handle_payment_succeeded,
+            "checkout.session.completed": self._handle_checkout,
+            "customer.subscription.created": self._handle_subscription,
+            "customer.subscription.deleted": self._handle_cancel,
+            "invoice.payment_succeeded": self._handle_payment,
             "invoice.payment_failed": self._handle_payment_failed,
+            "account.updated": self._handle_connect_account,
         }
         
         handler = handlers.get(event_type)
@@ -158,86 +168,61 @@ class StripeService:
         
         return f"Unhandled event: {event_type}"
     
-    async def _handle_checkout_completed(self, data: Dict) -> str:
-        """Handle checkout session completed."""
-        # This is where we'd create the client record
+    async def _handle_checkout(self, data: Dict) -> str:
+        """Handle checkout completed."""
+        credits = data.get("metadata", {}).get("credits", 0)
         customer_id = data.get("customer")
-        customer_email = data.get("customer_email")
-        subscription_id = data.get("subscription")
-        package = data.get("metadata", {}).get("package", "unknown")
         
-        # Log for now - database operations come in Block 9
-        print(f"[STRIPE WEBHOOK] Checkout completed: customer={customer_id}, package={package}")
-        
-        return f"Checkout completed for package: {package}"
+        # Add credits to customer account
+        # In production, would update database
+        return f"Checkout completed: {credits} credits for customer {customer_id}"
     
-    async def _handle_subscription_created(self, data: Dict) -> str:
-        """Handle new subscription created."""
-        subscription_id = data.get("id")
-        customer_id = data.get("customer")
-        status = data.get("status")
-        
-        print(f"[STRIPE WEBHOOK] Subscription created: {subscription_id}, status={status}")
-        
-        return f"Subscription created: {subscription_id}"
+    async def _handle_subscription(self, data: Dict) -> str:
+        """Handle new subscription."""
+        return f"Subscription created: {data['id']}"
     
-    async def _handle_subscription_updated(self, data: Dict) -> str:
-        """Handle subscription updated."""
-        subscription_id = data.get("id")
-        status = data.get("status")
-        
-        print(f"[STRIPE WEBHOOK] Subscription updated: {subscription_id}, status={status}")
-        
-        return f"Subscription updated: {subscription_id}"
+    async def _handle_cancel(self, data: Dict) -> str:
+        """Handle subscription cancellation."""
+        return f"Subscription cancelled: {data['id']}"
     
-    async def _handle_subscription_deleted(self, data: Dict) -> str:
-        """Handle subscription canceled."""
-        subscription_id = data.get("id")
-        
-        print(f"[STRIPE WEBHOOK] Subscription canceled: {subscription_id}")
-        
-        return f"Subscription canceled: {subscription_id}"
-    
-    async def _handle_payment_succeeded(self, data: Dict) -> str:
+    async def _handle_payment(self, data: Dict) -> str:
         """Handle successful payment."""
-        invoice_id = data.get("id")
-        customer_id = data.get("customer")
-        
-        print(f"[STRIPE WEBHOOK] Payment succeeded: {invoice_id}")
-        
-        return f"Payment succeeded: {invoice_id}"
+        return f"Payment succeeded: {data['id']}"
     
     async def _handle_payment_failed(self, data: Dict) -> str:
         """Handle failed payment."""
-        invoice_id = data.get("id")
-        customer_id = data.get("customer")
-        
-        print(f"[STRIPE WEBHOOK] Payment failed: {invoice_id}")
-        
-        return f"Payment failed: {invoice_id}"
+        return f"Payment failed: {data['id']}"
+    
+    async def _handle_connect_account(self, data: Dict) -> str:
+        """Handle Connect account update."""
+        return f"Connect account updated: {data['id']}"
 
 
-# Price IDs - UPDATE WITH REAL STRIPE PRICE IDs
+# Price IDs (create in Stripe Dashboard)
 PRICES = {
-    "package_a": {
-        "name": "Monitor + Respond",
-        "price_id": "price_monitor_respond_monthly",  # Replace with real Stripe price ID
-        "amount": 9900,  # $99.00 in cents
-        "interval": "month",
+    "starter": {
+        "monthly": "price_starter_monthly_id",
+        "credits": 1000,
     },
-    "package_b": {
-        "name": "Package B",
-        "price_id": "price_package_b_monthly",  # Replace with real Stripe price ID
-        "amount": 19900,  # $199.00 in cents
-        "interval": "month",
+    "pro": {
+        "monthly": "price_pro_monthly_id", 
+        "credits": 10000,
     },
-    "package_c": {
-        "name": "Multi-Location Pro",
-        "price_id": "price_multi_location_monthly",  # Replace with real Stripe price ID
-        "amount": 39900,  # $399.00 in cents
-        "interval": "month",
+    "enterprise": {
+        "monthly": "price_enterprise_monthly_id",
+        "credits": 100000,
     },
 }
+
+# Lead generation packages
+CREDIT_PACKAGES = {
+    "starter": {"stripe_price": "price_starter_100", "credits": 100, "dollars": 199, "name": "Starter - 100 Leads"},
+    "growth": {"stripe_price": "price_growth_500", "credits": 500, "dollars": 499, "name": "Growth - 500 Leads"},
+    "monthly": {"stripe_price": "price_monthly_200", "credits": 200, "dollars": 999, "name": "Monthly - 200 Leads/Month"},
+}
+
+# Revenue share percentage for providers
+PROVIDER_REVENUE_SHARE = 0.70  # Providers get 70%
 
 
 # Global service instance

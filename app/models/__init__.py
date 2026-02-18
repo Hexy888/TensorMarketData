@@ -1,4 +1,3 @@
 """
-v2 Models - Import directly from app.models.submodule
+Models Package
 """
-# Import from submodules directly - no circular deps

@@ -3,149 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Contact - TensorMarketData</title>
-  <meta name="title" content="Contact - TensorMarketData">
-  <meta name="description" content="Contact TensorMarketData for review management support.">
-  
+  <title>Contact Sales - TensorMarketData</title>
+  <meta name="description" content="Contact TensorMarketData for enterprise pricing and custom integrations. Get in touch with our sales team.">
+  <meta property="og:title" content="Contact Sales - TensorMarketData">
+  <meta property="og:description" content="Get in touch for enterprise pricing and custom integrations">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tensormarketdata.com/contact">
   <link rel="canonical" href="https://tensormarketdata.com/contact">
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  
+  <link rel="stylesheet" href="/static/css/styles.css">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { overflow-x: hidden; }
-    :root {
-      --primary: #4f46e5;
-      --bg: #ffffff;
-      --text: #1e293b;
-      --text-muted: #64748b;
-      --border: #e2e8f0;
-    }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-    }
-    .container { max-width: 600px; margin: 0 auto; padding: 0 1.5rem; }
-    
-    header { padding: 1.5rem 0; }
-    header .container { display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.03em; color: var(--text); text-decoration: none; }
-    .logo span { color: var(--primary); }
-    .nav-links { display: flex; gap: 1.5rem; align-items: center; }
-    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; }
-    .nav-links a:hover { color: var(--text); }
-    .nav-links .cta { background: var(--primary); color: white; padding: 0.5rem 1.25rem; border-radius: 6px; }
-    
-    .content { padding: 4rem 0; }
-    .content h1 { font-size: 2rem; margin-bottom: 1rem; }
-    .content p { color: var(--text-muted); margin-bottom: 2rem; }
-    
-    .contact-methods { display: flex; flex-direction: column; gap: 1.5rem; }
-    .method { padding: 1.5rem; border: 1px solid var(--border); border-radius: 8px; }
-    .method h3 { font-size: 1rem; margin-bottom: 0.5rem; }
-    .method p { color: var(--text-muted); margin-bottom: 0; }
-    .method a { color: var(--primary); text-decoration: none; }
-    .method a:hover { text-decoration: underline; }
-    
-    .note { margin-top: 2rem; padding: 1rem; background: #f8fafc; border-radius: 6px; }
-    .note p { font-size: 0.9rem; color: var(--text-muted); margin: 0; }
-    
-    footer { padding: 2rem 0; border-top: 1px solid var(--border); text-align: center; }
-    .footer-links { display: flex; gap: 1.5rem; justify-content: center; margin-bottom: 1rem; }
-    .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
-    footer p { color: var(--text-muted); font-size: 0.9rem; }
-    
-    @media (max-width: 640px) {
-      .nav-links { display: none; }
-    }
+    .contact-container { max-width: 600px; margin: 0 auto; padding: 3rem 2rem; }
+    .contact-form { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+    .form-group input, .form-group textarea { width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 1rem; }
+    .form-group textarea { min-height: 150px; resize: vertical; }
   </style>
 </head>
 <body>
-  <!-- Header -->
-    <header class="tm-header">
-        <div class="tm-header__inner">
-            <a href="/" class="tm-logo">Tensor<span>MarketData</span></a>
-            <nav class="tm-nav--desktop">
-                <a href="/pricing" class="tm-nav__link">Pricing</a>
-                <a href="/how-it-works" class="tm-nav__link">How It Works</a>
-                <a href="/blog" class="tm-nav__link">Blog</a>
-                <a href="/faq" class="tm-nav__link">FAQ</a>
-            </nav>
-            <div class="tm-header__actions">
-                <a href="/pricing" class="tm-btn tm-btn--primary">Get Started</a>
-                <button class="tm-burger" aria-label="Menu" aria-expanded="false">
-                    <span class="tm-burger__bar"></span>
-                    <span class="tm-burger__bar"></span>
-                    <span class="tm-burger__bar"></span>
-                </button>
-            </div>
-        </div>
-    </header>
-    
-    <!-- Mobile Drawer -->
-    <div class="tm-drawer" id="tm-drawer" hidden>
-        <div class="tm-drawer__panel">
-            <a href="/pricing" class="tm-drawer__link">Pricing</a>
-            <a href="/how-it-works" class="tm-drawer__link">How It Works</a>
-            <a href="/blog" class="tm-drawer__link">Blog</a>
-            <a href="/faq" class="tm-drawer__link">FAQ</a>
-            <a href="/pricing" class="tm-drawer__cta">Get Started</a>
-        </div>
-    </div>
-    
-    <script>
-    (function () {
-        const toggle = document.querySelector('.tm-burger');
-        const drawer = document.getElementById('tm-drawer');
-        if (!toggle || !drawer) return;
-        function openDrawer() { drawer.hidden = false; toggle.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; }
-        function closeDrawer() { drawer.hidden = true; toggle.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }
-        toggle.addEventListener('click', () => { const isOpen = toggle.getAttribute('aria-expanded') === 'true'; isOpen ? closeDrawer() : openDrawer(); });
-        drawer.addEventListener('click', (e) => { if (e.target === drawer) closeDrawer(); });
-        drawer.querySelectorAll('a').forEach(a => { a.addEventListener('click', closeDrawer); });
-        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDrawer(); });
-    })();
-    </script>
+  <nav>
+    <a href="/" class="logo">Tensor<span>MarketData</span></a>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/docs">Documentation</a></li>
+      <li><a href="/pricing">Pricing</a></li>
+      <li><a href="/dashboard">Dashboard</a></li>
+      <li><a href="/submit">Submit Data</a></li>
+      <li><a href="/providers">Providers</a></li>
+      <li><a href="/explorer">API Explorer</a></li>
+    </ul>
+  </nav>
 
-  <section class="content">
-    <div class="container">
-      <h1>Contact Us</h1>
-      <p>We handle all support via email. No phone support available.</p>
-      
-      <div class="contact-methods">
-        <div class="method">
-          <h3>Support</h3>
-          <p>For existing customers: <a href="mailto:nova@tensormarketdata.com">nova@tensormarketdata.com</a></p>
+  <div class="contact-container">
+    <h1 style="text-align: center; margin-bottom: 1rem;">Contact Sales</h1>
+    <p style="text-align: center; color: var(--gray); margin-bottom: 2rem;">Ready for Enterprise? Let's talk.</p>
+    
+    <div class="contact-form">
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required placeholder="Your name">
         </div>
-        
-        <div class="method">
-          <h3>Sales</h3>
-          <p>Questions about packages: <a href="mailto:nova@tensormarketdata.com">nova@tensormarketdata.com</a></p>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required placeholder="you@company.com">
         </div>
-        
-        <div class="method">
-          <h3>Billing</h3>
-          <p>Billing questions: <a href="mailto:nova@tensormarketdata.com">nova@tensormarketdata.com</a></p>
+        <div class="form-group">
+          <label for="company">Company</label>
+          <input type="text" id="company" name="company" placeholder="Company name">
         </div>
-      </div>
-      
-      <div class="note">
-        <p><strong>Response time:</strong> We respond within 1 business day. For urgent approval requests, check your client portal dashboard.</p>
-      </div>
+        <div class="form-group">
+          <label for="message">How can we help?</label>
+          <textarea id="message" name="message" required placeholder="Tell us about your needs..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+      </form>
     </div>
-  </section>
+  </div>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Thank you for your interest! Our team will contact you within 24 hours.');
+      this.reset();
+    });
+  </script>
 
   <footer>
-    <div class="container">
-      <div class="footer-links">
-        <a href="/pricing">Pricing</a>
-        <a href="/faq">FAQ</a>
-        <a href="/privacy">Privacy</a>
-      </div>
-      <p>© TensorMarketData. All rights reserved.</p>
-    </div>
+    <p>&copy; 2026 TensorMarketData. All rights reserved.</p>
   </footer>
 </body>
 </html>
