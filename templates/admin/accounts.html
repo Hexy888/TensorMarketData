@@ -1,0 +1,60 @@
+{% extends "base_admin.html" %}
+{% block title %}Admin - Accounts{% endblock %}
+{% block content %}
+<div class="container section">
+<div class="h1">Accounts Intake</div>
+<p class="muted mb-2">Paste HVAC website URLs or domains (one per line). We normalize + dedupe.</p>
+
+{% if message %}
+<div class="card pad mb-2">
+<span class="badge {% if ok %}blue{% else %}yellow{% endif %}">{{ message }}</span>
+</div>
+{% endif %}
+
+<div class="card pad mb-2">
+<form method="post" action="/admin/accounts">
+<label>Domains (one per line)</label>
+<textarea name="domains" rows="6" placeholder="examplehvac.com&#10;https://coolairhvac.com"></textarea>
+<div class="flex flex-gap mt-2">
+<button type="submit" class="btn primary">Add Accounts</button>
+<a href="/admin/accounts" class="btn ghost">Refresh</a>
+</div>
+</form>
+
+<form method="post" action="/api/ops/outbound/accounts_process" class="mt-2">
+<input type="hidden" name="x_ops_token" value="{{ ops_token }}">
+<button type="submit" class="btn ghost">Run Processing</button>
+</form>
+<p class="small muted">accounts_process → apollo enrich</p>
+</div>
+
+<div class="card pad">
+<div class="h2">Recent Accounts</div>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Company</th>
+<th>Domain</th>
+<th>City</th>
+<th>State</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+{% for r in rows %}
+<tr>
+<td>{{ r.company_name }}</td>
+<td>{{ r.website_domain }}</td>
+<td>{{ r.city }}</td>
+<td>{{ r.state }}</td>
+<td><span class="badge {% if r.status == 'new' %}blue{% else %}yellow{% endif %}">{{ r.status }}</span></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+<p class="small muted mt-2">Showing {{ rows|length }} accounts</p>
+</div>
+</div>
+{% endblock %}

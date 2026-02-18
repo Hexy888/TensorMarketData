@@ -1,0 +1,28 @@
+{% extends "base_public.html" %}
+{% block title %}Thanks — TensorMarketData{% endblock %}
+{% block content %}
+<div class="container">
+<div class="section">
+<div class="card pad">
+<div class="badge">Payment received</div>
+<h1 class="h1" style="margin-top:12px;">You're in.</h1>
+<p class="p">We just emailed your secure login link. Open it to access your portal.</p>
+<div class="hr"></div>
+<h3 class="h2">What happens next</h3>
+<ul class="ul">
+<li class="li"><span class="dot"></span>Login to your portal</li>
+<li class="li"><span class="dot"></span>Connect Google Business Profile</li>
+<li class="li"><span class="dot"></span>Select your location</li>
+<li class="li"><span class="dot"></span>Turn on "Go Live"</li>
+</ul>
+<div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+<a class="btn primary" href="/login">Open Login</a>
+<a class="btn ghost" href="/pricing">Back to Pricing</a>
+</div>
+<p class="small" style="margin-top:14px;">
+Didn't get the email? Check spam or contact <a class="link" href="mailto:{{ support_email }}">{{ support_email }}</a>.
+</p>
+</div>
+</div>
+</div>
+{% endblock %}

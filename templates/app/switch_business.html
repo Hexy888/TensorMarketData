@@ -1,0 +1,18 @@
+{% extends "layouts/app.html" %}
+{% block app_content %}
+<div class="card">
+ <div class="h2">Switch business</div>
+ <p class="p">Active business: <b>{{ business.name }}</b></p>
+ <form method="post" action="/app/switch-business" style="display:grid;gap:12px;max-width:520px">
+  <label class="p"><b>Select business</b></label>
+  <select name="business_id" style="padding:12px;border-radius:12px;border:1px solid var(--line)">
+   {% for b in businesses %}
+   <option value="{{ b.id }}" {% if b.id == business.id %}selected{% endif %}>
+    {{ b.name }} ({{ b.industry }})
+   </option>
+   {% endfor %}
+  </select>
+  <button class="btn btn-primary" type="submit">Switch</button>
+ </form>
+</div>
+{% endblock %}

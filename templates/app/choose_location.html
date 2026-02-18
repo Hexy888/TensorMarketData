@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Select Location</title>
+<style>
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; margin:0; background:#0b1220; color:#e8eefc; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 24px 16px; }
+.card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.10); border-radius: 14px; padding: 16px; }
+select, input { width:100%; border-radius:12px; padding:10px; border:1px solid rgba(255,255,255,0.16); background: rgba(0,0,0,0.35); color:#e8eefc; }
+button { border:0; border-radius: 12px; padding: 10px 14px; font-weight:700; cursor:pointer; background:#4f7cff; color:white; }
+.muted { color: rgba(232,238,252,0.7); font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+<h2 style="margin:0 0 10px;">Choose your location</h2>
+<div class="muted">Select which location to connect for review monitoring.</div>
+<form method="post" action="/app/connect/google/select" style="margin-top:14px;">
+<input type="hidden" name="client_id" value="{{ client.id }}">
+<div class="muted">Account</div>
+<select name="account_name">
+{% for a in accounts %}
+<option value="{{ a.name }}" {% if a.name == default_account %}selected{% endif %}>
+{{ a.accountName or a.name }}
+</option>
+{% endfor %}
+</select>
+<div class="muted" style="margin-top:12px;">Location</div>
+<select name="location_name" id="loc">
+{% for l in locations %}
+<option value="{{ l.name }}">{{ l.title or l.name }}</option>
+{% endfor %}
+</select>
+<div class="muted" style="margin-top:12px;">Display name (optional)</div>
+<input name="display_name" placeholder="e.g., Rainbow Laundry - Minneapolis"/>
+<div style="margin-top:14px;">
+<button type="submit">Save & Continue</button>
+</div>
+</form>
+</div>
+</div>
+</body>
+</html>

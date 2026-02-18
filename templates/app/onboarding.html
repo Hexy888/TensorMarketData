@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Onboarding</title>
+<style>
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; margin:0; background:#0b1220; color:#e8eefc; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 24px 16px; }
+.card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.10); border-radius: 14px; padding: 16px; margin-bottom: 12px; }
+.muted { color: rgba(232,238,252,0.7); font-size: 12px; }
+.row { display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; align-items:center; }
+.pill { display:inline-block; padding:4px 10px; border-radius:999px; border:1px solid rgba(255,255,255,0.14); font-size:12px; }
+a { color:#9db6ff; text-decoration:none; }
+button { border:0; border-radius: 12px; padding: 10px 14px; font-weight:700; cursor:pointer; background:#4f7cff; color:white; }
+label { display:flex; gap:10px; align-items:center; }
+input[type="checkbox"] { width:18px; height:18px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+<div class="row">
+<div>
+<h2 style="margin:0;">Welcome, {{ client.name }}</h2>
+<div class="muted">{{ client.email }} • Plan: {{ client.plan }}</div>
+</div>
+<div class="pill">Status: {{ client.status }}</div>
+</div>
+</div>
+
+<div class="card">
+<h3 style="margin:0 0 10px;">Setup Checklist</h3>
+
+<div class="row" style="margin:10px 0;">
+<div>
+<div><strong>1) Connect Google</strong></div>
+<div class="muted">Required to ingest reviews and post replies.</div>
+</div>
+<div class="pill">
+{% if ob.connected_google %}✅ Connected{% else %}⏳ Not connected{% endif %}
+</div>
+</div>
+<a href="/app/connect/google?client_id={{ client.id }}">Connect Google →</a>
+
+<div class="row" style="margin:16px 0 10px;">
+<div>
+<div><strong>2) Select location</strong></div>
+<div class="muted">Choose the GBP location to manage.</div>
+</div>
+<div class="pill">
+{% if ob.selected_location %}✅ Selected{% else %}⏳ Not selected{% endif %}
+</div>
+</div>
+<a href="/app/connect/google/choose?client_id={{ client.id }}">Choose location →</a>
+</div>
+
+<div class="card">
+<h3 style="margin:0 0 10px;">Go Live</h3>
+<div class="muted" style="margin-bottom:12px;">
+When enabled, the system ingests reviews, drafts replies, and autoposts 4–5★ replies. 1–3★ replies always require approval.
+</div>
+<form method="post" action="/app/onboarding/go_live">
+<label class="muted">
+<input type="checkbox" name="go_live" value="on" {% if ob.go_live %}checked{% endif %}/>
+Enable Go Live
+</label>
+<div style="margin-top:12px;">
+<button type="submit">Save</button>
+</div>
+</form>
+</div>
+
+<div class="card">
+<h3 style="margin:0 0 10px;">Next</h3>
+<div class="muted">Once live, review drafts in <a href="/app/reviews?client_id={{ client.id }}">Reviews</a> and see weekly reports.</div>
+</div>
+</div>
+</body>
+</html>

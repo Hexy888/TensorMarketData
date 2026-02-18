@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block body %}
+<h2 style="margin:0 0 10px">Onboarding link — TensorMarketData</h2>
+<p style="margin:0 0 12px;color:#334155">
+ Here's your onboarding link:
+</p>
+<p style="margin:0 0 14px">
+ <a href="{{ onboarding_link }}" style="display:inline-block;background:#2563eb;color:#fff;text-decoration:none;padding:10px 12px;border-radius:12px">
+  Get started
+ </a>
+</p>
+<p style="margin:0 0 12px;color:#334155">
+ <b>What you'll need:</b>
+</p>
+<ul style="margin:0 0 14px;color:#334155">
+ <li>Approval email (who approves negatives)</li>
+ <li>Google Business Profile access (or invite us)</li>
+</ul>
+<p style="margin:0;color:#334155">
+ That's it — no calls required.
+</p>
+{% endblock %}

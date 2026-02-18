@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>{% block title %}TensorMarketData{% endblock %}</title>
+<link rel="stylesheet" href="/static/site.css?v=1"/>
+</head>
+<body>
+{% include "partials/header_public.html" %}
+<main>
+{% block content %}{% endblock %}
+</main>
+{% include "partials/footer_public.html" %}
+<script src="/static/site.js?v=1"></script>
+</body>
+</html>

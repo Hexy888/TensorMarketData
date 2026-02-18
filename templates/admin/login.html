@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+ <meta charset="utf-8"/>
+ <meta name="viewport" content="width=device-width, initial-scale=1"/>
+ <title>Admin Login - TensorMarketData</title>
+ <link rel="stylesheet" href="/static/css/styles.css"/>
+</head>
+<body>
+ <div class="container" style="max-width:520px;margin:60px auto">
+  <div class="card">
+   <div class="h2">Admin login</div>
+   {% if request.query_params.get("error") %}
+   <p class="p" style="color:#b91c1c">Invalid credentials.</p>
+   {% endif %}
+   <form method="post" action="/admin/login" style="display:grid;gap:12px;margin-top:10px">
+    <input name="email" type="email" placeholder="Email" required class="input"/>
+    <input name="password" type="password" placeholder="Password" required class="input"/>
+    <button class="btn btn-primary" type="submit">Sign in</button>
+   </form>
+  </div>
+ </div>
+</body>
+</html>

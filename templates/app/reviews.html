@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Reviews</title>
+<style>
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; margin:0; background:#0b1220; color:#e8eefc; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 24px 16px; }
+.card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.10); border-radius: 14px; padding: 16px; margin-bottom: 12px; }
+.muted { color: rgba(232,238,252,0.7); font-size: 12px; }
+.row { display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+.pill { display:inline-block; padding:4px 8px; border-radius:999px; border:1px solid rgba(255,255,255,0.14); font-size:12px; }
+button { border:0; border-radius: 12px; padding: 10px 14px; font-weight:700; cursor:pointer; background:#4f7cff; color:white; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<h2 style="margin:0 0 12px;">Reviews</h2>
+<div class="muted" style="margin-bottom:12px;">1–3★ require approval. 4–5★ may be autoposted.</div>
+
+{% for item in items %}
+<div class="card">
+<div class="row">
+<div>
+<div><strong>{{ item.reviewer_name }}</strong> — {{ item.rating }}★</div>
+<div class="muted">{{ item.review_time }}</div>
+</div>
+<div><span class="pill">{{ item.status }}</span></div>
+</div>
+<div style="margin-top:10px;">{{ item.comment }}</div>
+{% if item.draft_text %}
+<div class="muted" style="margin-top:12px;">Draft reply</div>
+<div style="margin-top:6px;">{{ item.draft_text }}</div>
+{% endif %}
+{% if item.status == "needs_approval" and item.draft_id %}
+<form method="post" action="/app/reviews/{{ item.draft_id }}/approve" style="margin-top:10px;">
+<button type="submit">Approve reply</button>
+</form>
+{% endif %}
+</div>
+{% endfor %}
+</div>
+</body>
+</html>

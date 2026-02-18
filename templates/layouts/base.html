@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>{{ brand }} — Reputation Ops for HVAC</title>
+<link rel="stylesheet" href="/static/css/styles.css"/>
+<script defer src="/static/js/nav.js"></script>
+</head>
+<body>
+<header class="header">
+ <div class="container header-inner">
+  <a class="brand" href="/">TensorMarketData</a>
+  <nav class="nav" aria-label="Primary">
+   <a href="/pricing">Pricing</a>
+   <a href="/how-it-works">How It Works</a>
+   <a href="/blog">Blog</a>
+   <a href="/faq">FAQ</a>
+  </nav>
+  <div class="actions">
+   <a class="btn btn-primary" href="/get-started">Get Started</a>
+   <button class="burger" data-burger aria-label="Open menu" aria-expanded="false" aria-controls="drawer">☰</button>
+  </div>
+ </div>
+</header>
+<div id="drawer" class="drawer" data-drawer hidden>
+ <div class="drawer-panel" role="dialog" aria-label="Site menu">
+  <a href="/pricing">Pricing</a>
+  <a href="/how-it-works">How It Works</a>
+  <a href="/blog">Blog</a>
+  <a href="/faq">FAQ</a>
+  <a class="cta" href="/get-started">Get Started</a>
+ </div>
+</div>
+<main>
+{% block content %}{% endblock %}
+</main>
+<footer class="footer">
+ <div class="container">
+  <div class="hr"></div>
+  <div class="grid grid-2">
+   <div>
+    <div style="font-weight:900;color:var(--text)">TensorMarketData</div>
+    <div class="p" style="margin-top:8px">Reputation operations for HVAC businesses. Email-only support. No calls.</div>
+   </div>
+   <div style="display:flex;gap:14px;justify-content:flex-end;flex-wrap:wrap">
+    <a href="/pricing">Pricing</a>
+    <a href="/how-it-works">How It Works</a>
+    <a href="/blog">Blog</a>
+    <a href="/faq">FAQ</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
+    <a href="/contact">Contact</a>
+   </div>
+  </div>
+  <div class="p" style="margin-top:14px">Support: {{ support_email }}</div>
+ </div>
+</footer>
+</body>
+</html>

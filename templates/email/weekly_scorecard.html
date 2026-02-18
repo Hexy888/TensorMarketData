@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block body %}
+<h2 style="margin:0 0 10px">Weekly scorecard is ready</h2>
+<p style="margin:0 0 14px;color:#334155">
+ Here's your weekly reputation summary:
+</p>
+<div style="background:#f8fafc;border:1px solid #e5e7eb;border-radius:12px;padding:14px;margin:0 0 14px">
+ <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+  <div><b>New reviews</b><br/><span style="font-size:24px">{{ stats.new_reviews or 0 }}</span></div>
+  <div><b>Replies posted</b><br/><span style="font-size:24px">{{ stats.replies_posted or 0 }}</span></div>
+  <div><b>Pending approvals</b><br/><span style="font-size:24px">{{ stats.pending or 0 }}</span></div>
+  <div><b>Average rating</b><br/><span style="font-size:24px">{{ stats.avg_rating or '—' }}</span></div>
+ </div>
+</div>
+<p style="margin:0">
+ <a href="{{ portal_link }}" style="display:inline-block;background:#2563eb;color:#fff;text-decoration:none;padding:10px 12px;border-radius:12px">
+  View details
+ </a>
+</p>
+{% endblock %}

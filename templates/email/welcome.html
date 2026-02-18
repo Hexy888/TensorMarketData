@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block body %}
+<h2 style="margin:0 0 10px">Welcome — let's connect Google Business Profile</h2>
+<p style="margin:0 0 12px;color:#334155">
+ Your workspace is created for <b>{{ business.name }}</b>.
+</p>
+<p style="margin:0 0 14px;color:#334155">
+ Step 1: Sign in using this secure link:
+</p>
+<p style="margin:0 0 16px">
+ <a href="{{ login_url }}" style="display:inline-block;background:#2563eb;color:#fff;text-decoration:none;padding:10px 12px;border-radius:12px">
+  Sign in to TensorMarketData
+ </a>
+</p>
+<p style="margin:0;color:#334155">
+ Step 2: In Settings → connect Google Business Profile and select your location.
+</p>
+{% endblock %}

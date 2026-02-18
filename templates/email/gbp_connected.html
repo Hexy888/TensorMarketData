@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block body %}
+<h2 style="margin:0 0 10px">Google Business Profile connected</h2>
+<p style="margin:0;color:#334155">
+ Location selected: <b>{{ location_title }}</b><br/>
+ <span style="color:#64748b;font-size:12px">{{ location_name }}</span>
+</p>
+<p style="margin:14px 0 0">
+ <a href="{{ app_url }}" style="display:inline-block;background:#2563eb;color:#fff;text-decoration:none;padding:10px 12px;border-radius:12px">
+  Open portal
+ </a>
+</p>
+{% endblock %}

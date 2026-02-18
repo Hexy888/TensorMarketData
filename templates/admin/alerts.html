@@ -1,0 +1,41 @@
+{% extends "base_admin.html" %}
+{% block title %}Admin - Alerts{% endblock %}
+{% block content %}
+<div class="container section">
+<div class="flex flex-between flex-gap mb-2">
+<div class="h1">Open Alerts</div>
+<a href="/admin/alerts?refresh=1" class="btn small ghost">Refresh</a>
+</div>
+
+{% if rows %}
+{% for a in rows %}
+<div class="card pad mb-2">
+<div class="flex flex-between flex-gap">
+<div>
+<span class="badge 
+{% if a.severity=='critical' %}red{% elif a.severity=='error' %}yellow{% elif a.severity=='warn' %}blue{% else %}blue{% endif %}">
+{{ a.severity|upper }}</span>
+<span class="badge">{{ a.kind }}</span>
+</div>
+<div class="small muted">{{ a.created_at[:19] if a.created_at else '' }}</div>
+</div>
+<div style="margin:8px 0">{{ a.message }}</div>
+<div class="flex flex-gap">
+{% if a.status=='open' %}
+<form method="post" action="/admin/alerts/{{ a.id }}/ack">
+<button type="submit" class="btn small ghost">Acknowledge</button>
+</form>
+{% endif %}
+<form method="post" action="/admin/alerts/{{ a.id }}/resolve">
+<button type="submit" class="btn small success">Resolve</button>
+</form>
+</div>
+</div>
+{% endfor %}
+{% else %}
+<div class="card pad">
+<p class="muted">No open alerts. All systems operational.</p>
+</div>
+{% endif %}
+</div>
+{% endblock %}

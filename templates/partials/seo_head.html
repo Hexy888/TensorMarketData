@@ -1,0 +1,43 @@
+{% set base_url = base_url or "https://tensormarketdata.com" %}
+{% set canonical_url = canonical_url or (base_url.rstrip("/") ~ request.url.path) %}
+{% set title = title or "TensorMarketData" %}
+{% set description = description or "Reputation operations for HVAC businesses." %}
+{% set og_image = og_image or (base_url.rstrip("/") ~ "/static/img/og-default.png") %}
+<title>{{ title }}</title>
+<meta name="description" content="{{ description }}">
+<link rel="canonical" href="{{ canonical_url }}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="TensorMarketData">
+<meta property="og:title" content="{{ title }}">
+<meta property="og:description" content="{{ description }}">
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:image" content="{{ og_image }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ title }}">
+<meta name="twitter:description" content="{{ description }}">
+<meta name="twitter:image" content="{{ og_image }}">
+<meta name="robots" content="index,follow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Organization",
+ "name": "TensorMarketData",
+ "url": "{{ base_url }}",
+ "email": "nova@tensormarketdata.com",
+ "sameAs": []
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "WebSite",
+ "name": "TensorMarketData",
+ "url": "{{ base_url }}",
+ "potentialAction": {
+  "@type": "SearchAction",
+  "target": "{{ base_url }}/blog?q={search_term_string}",
+  "query-input": "required name=search_term_string"
+ }
+}
+</script>
