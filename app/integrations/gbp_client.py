@@ -215,3 +215,18 @@ def is_verified_location_error(e: Exception) -> bool:
         return False
     msg = str(e).lower()
     return ("verified" in msg) or ("failed_precondition" in msg) or ("precondition" in msg)
+
+
+def is_retryable_gbp_error(err: GBPAPIError) -> bool:
+    """True for transient errors worth retrying (5xx, 429)."""
+    return getattr(err, 'status_code', 0) in (429, 500, 502, 503, 504)
+
+
+def is_quota_error(err: GBPAPIError) -> bool:
+    """True if the error indicates a quota/rate-limit issue."""
+    return getattr(err, 'status_code', 0) == 429
+
+
+def is_auth_error(err: GBPAPIError) -> bool:
+    """True if the error indicates an authentication/authorization failure."""
+    return getattr(err, 'status_code', 0) in (401, 403)
