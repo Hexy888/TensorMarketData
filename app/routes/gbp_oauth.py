@@ -3,6 +3,7 @@
 from __future__ import annotations
 from fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.responses import RedirectResponse, HTMLResponse
+from fastapi.templating import Jinja2Templates
 from sqlmodel import Session
 
 from app.db import get_session
