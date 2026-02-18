@@ -96,121 +96,52 @@
             padding: 0 var(--space-6);
         }
         
-        /* Navigation */
-        nav {
+        /* Header / Nav */
+        .tm-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: var(--space-4) 0;
-            border-bottom: 1px solid var(--border-primary);
+            justify-content: space-between;
+            padding: 16px 24px;
+            border-bottom: 1px solid #e5e5e5;
+            background: #fff;
+            position: relative;
+            z-index: 9999;
         }
-        
-        .nav-logo {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            text-decoration: none;
-        }
-        
-        .nav-links {
+        .tm-header__inner {
             display: flex;
-            gap: var(--space-6);
-            list-style: none;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
         }
+        .tm-logo { font-size: 1.25rem; font-weight: 700; color: #111; text-decoration: none; }
+        .tm-logo span { color: #0D9488; }
         
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
+        /* Desktop Nav */
+        .tm-nav--desktop { display: flex; align-items: center; gap: 24px; }
+        .tm-nav__link { text-decoration: none; color: #111; opacity: 0.85; white-space: nowrap; }
         
-        .nav-links a:hover {
-            color: var(--accent-primary);
-        }
+        /* Actions */
+        .tm-header__actions { display: flex; align-items: center; gap: 10px; }
+        .tm-btn { display:inline-flex; align-items:center; justify-content:center; padding:10px 14px; border-radius:10px; text-decoration:none; white-space:nowrap; }
+        .tm-btn--primary { background:#111; color:#fff; }
         
-        .nav-cta {
-            background: var(--accent-primary);
-            color: white;
-            padding: var(--space-2) var(--space-4);
-            border-radius: var(--radius-md);
-            text-decoration: none;
-            font-weight: 500;
-            transition: background 0.2s;
-        }
+        /* Burger */
+        .tm-burger { display: none; width: 44px; height: 44px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.12); background: #fff; padding: 10px; }
+        .tm-burger__bar { display: block; height: 2px; margin: 5px 0; background: #111; border-radius: 2px; }
         
-        .nav-cta:hover {
-            background: var(--accent-hover);
-        }
+        /* Drawer overlay */
+        .tm-drawer { position: fixed; inset: 0; z-index: 9998; background: rgba(0,0,0,0.35); }
+        .tm-drawer__panel { position: absolute; top: 72px; left: 12px; right: 12px; background: #fff; border-radius: 14px; padding: 12px; display: grid; gap: 10px; border: 1px solid rgba(0,0,0,0.08); }
+        .tm-drawer__link, .tm-drawer__cta { text-decoration: none; color: #111; padding: 12px 12px; border-radius: 12px; background: rgba(0,0,0,0.04); }
+        .tm-drawer__cta { background: #111; color: #fff; text-align: center; }
         
-        /* Hamburger Menu */
-        .hamburger {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 8px;
-        }
-        
-        .hamburger span {
-            display: block;
-            width: 24px;
-            height: 2px;
-            background: var(--text-primary);
-            margin: 5px 0;
-            transition: 0.3s;
-        }
-        
-        .mobile-nav {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: white;
-            border-bottom: 1px solid var(--border-primary);
-            padding: var(--space-4);
-            box-shadow: var(--shadow-md);
-        }
-        
-        .mobile-nav.open {
-            display: block;
-        }
-        
-        .mobile-nav a {
-            display: block;
-            padding: var(--space-3) 0;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            border-bottom: 1px solid var(--border-primary);
-        }
-        
-        .mobile-nav a:last-child {
-            border-bottom: none;
-        }
-
-        /* Mobile Nav - 768px and below */
+        /* Mobile behavior */
         @media (max-width: 768px) {
-            nav {
-                position: relative;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .hamburger {
-                display: block;
-            }
-            
-            .mobile-nav {
-                display: none;
-            }
-            
-            .mobile-nav.open {
-                display: block;
-            }
+            .tm-nav--desktop { display: none; }
+            .tm-burger { display: inline-flex; align-items: center; justify-content: center; }
+            .tm-btn--primary { padding: 10px 12px; }
         }
         
         /* Hero Section */
@@ -548,36 +479,73 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <div class="container">
-        <nav>
-            <a href="/" class="nav-logo">TensorMarketData</a>
-            <ul class="nav-links">
-                <li><a href="/pricing">Pricing</a></li>
-                <li><a href="/how-it-works">How It Works</a></li>
-                <li><a href="/blog">Blog</a></li>
-                <li><a href="/faq">FAQ</a></li>
-            </ul>
-            <a href="/pricing" class="nav-cta">Get Started</a>
-            <button class="hamburger" onclick="toggleMobileNav()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </nav>
-        <div class="mobile-nav" id="mobileNav">
-            <a href="/pricing">Pricing</a>
-            <a href="/how-it-works">How It Works</a>
-            <a href="/blog">Blog</a>
-            <a href="/faq">FAQ</a>
-            <a href="/pricing">Get Started</a>
+    <!-- Header -->
+    <header class="tm-header">
+        <div class="tm-header__inner">
+            <a href="/" class="tm-logo">Tensor<span>MarketData</span></a>
+            <nav class="tm-nav--desktop">
+                <a href="/pricing" class="tm-nav__link">Pricing</a>
+                <a href="/how-it-works" class="tm-nav__link">How It Works</a>
+                <a href="/blog" class="tm-nav__link">Blog</a>
+                <a href="/faq" class="tm-nav__link">FAQ</a>
+            </nav>
+            <div class="tm-header__actions">
+                <a href="/pricing" class="tm-btn tm-btn--primary">Get Started</a>
+                <button class="tm-burger" aria-label="Menu" aria-expanded="false">
+                    <span class="tm-burger__bar"></span>
+                    <span class="tm-burger__bar"></span>
+                    <span class="tm-burger__bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Mobile Drawer -->
+    <div class="tm-drawer" id="tm-drawer" hidden>
+        <div class="tm-drawer__panel">
+            <a href="/pricing" class="tm-drawer__link">Pricing</a>
+            <a href="/how-it-works" class="tm-drawer__link">How It Works</a>
+            <a href="/blog" class="tm-drawer__link">Blog</a>
+            <a href="/faq" class="tm-drawer__link">FAQ</a>
+            <a href="/pricing" class="tm-drawer__cta">Get Started</a>
         </div>
     </div>
-
+    
     <script>
-    function toggleMobileNav() {
-        document.getElementById('mobileNav').classList.toggle('open');
-    }
+    (function () {
+        const toggle = document.querySelector('.tm-burger');
+        const drawer = document.getElementById('tm-drawer');
+        if (!toggle || !drawer) return;
+        
+        function openDrawer() {
+            drawer.hidden = false;
+            toggle.setAttribute('aria-expanded', 'true');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeDrawer() {
+            drawer.hidden = true;
+            toggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+        }
+        
+        toggle.addEventListener('click', () => {
+            const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+            isOpen ? closeDrawer() : openDrawer();
+        });
+        
+        drawer.addEventListener('click', (e) => {
+            if (e.target === drawer) closeDrawer();
+        });
+        
+        drawer.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', closeDrawer);
+        });
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeDrawer();
+        });
+    })();
     </script>
 
     <!-- Hero Section -->
