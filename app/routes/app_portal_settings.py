@@ -3,7 +3,7 @@ from fastapi.responses import RedirectResponse
 from sqlmodel import Session
 from datetime import datetime
 from app.db import get_session
-from app.models import AuditLog
+from app.tenant_models import AuditLog
 from app.routes.auth_helpers import require_user_or_redirect
 
 router = APIRouter(prefix="/app")

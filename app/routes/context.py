@@ -1,7 +1,7 @@
 from fastapi import Request
 from sqlmodel import Session, select
 from app.security import unsign_session
-from app.models import User, Business
+from app.tenant_models import User, Business
 
 def get_session_claims(request: Request) -> dict | None:
     token = request.cookies.get("tmd_session", "")

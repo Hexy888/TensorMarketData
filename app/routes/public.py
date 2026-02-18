@@ -5,7 +5,7 @@ from sqlmodel import Session, select
 from datetime import datetime
 from app.config import settings
 from app.db import get_session
-from app.models import Onboarding, Business, Subscription, User
+from app.tenant_models import Onboarding, Business, Subscription, User
 from app.security import hash_password, make_magic_token
 from app.services.email import send_email
 

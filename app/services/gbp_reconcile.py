@@ -1,6 +1,6 @@
 from datetime import datetime
 from sqlmodel import Session, select
-from app.models import Business, DraftReply, Review, AuditLog
+from app.tenant_models import Business, DraftReply, Review, AuditLog
 from app.services.gbp_tokens import get_fresh_access_token
 from app.services.gbp_client import list_reviews_v4_all
 

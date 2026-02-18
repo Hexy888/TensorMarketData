@@ -1,6 +1,6 @@
 from datetime import datetime
 from sqlmodel import Session, select
-from app.models import Review, DraftReply, AuditLog
+from app.tenant_models import Review, DraftReply, AuditLog
 
 NEGATIVE_THRESHOLD = 3  # 1–3 stars = approval required
 

@@ -4,7 +4,7 @@ from sqlmodel import Session, select
 from app.db import get_session
 from app.security_magic import verify
 from app.security import sign_session
-from app.models import User
+from app.tenant_models import User
 
 router = APIRouter(prefix="/login")
 

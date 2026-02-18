@@ -1,6 +1,6 @@
 from datetime import datetime
 from sqlmodel import Session, select
-from app.models import Business, AuditLog
+from app.tenant_models import Business, AuditLog
 from app.services.ops import ops_run
 
 def audit(session: Session, business_id: int, action: str, detail: str):

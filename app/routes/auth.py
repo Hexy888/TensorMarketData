@@ -3,7 +3,7 @@ from fastapi.responses import RedirectResponse, HTMLResponse
 from fastapi.templating import Jinja2Templates
 from sqlmodel import Session, select
 from app.db import get_session
-from app.models import User, Business
+from app.tenant_models import User, Business
 from app.security import verify_password, sign_session, make_magic_token, verify_magic_token
 from app.services.email import send_email
 

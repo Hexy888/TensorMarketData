@@ -1,6 +1,6 @@
 from datetime import datetime
 from sqlmodel import Session, select
-from app.models import Business, Review, DraftReply, AuditLog
+from app.tenant_models import Business, Review, DraftReply, AuditLog
 from app.services.reputation import ingest_review, generate_draft_reply, NEGATIVE_THRESHOLD, set_draft_status
 from app.services.reply_poster import post_draft_reply
 

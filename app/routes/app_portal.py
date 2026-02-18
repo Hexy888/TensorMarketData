@@ -4,7 +4,7 @@ from fastapi.templating import Jinja2Templates
 from sqlmodel import Session, select
 from datetime import datetime
 from app.db import get_session
-from app.models import DraftReply, Review
+from app.tenant_models import DraftReply, Review
 from app.routes.auth_helpers import require_user_or_redirect
 from app.services.reputation import set_draft_status
 from app.services.stripe import create_checkout_session

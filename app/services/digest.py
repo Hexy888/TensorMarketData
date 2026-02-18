@@ -1,7 +1,7 @@
 import os
 from datetime import datetime, timedelta
 from sqlmodel import Session, select
-from app.models import Business, DraftReply, AuditLog
+from app.tenant_models import Business, DraftReply, AuditLog
 from app.services.email_smtp import send_smtp_email
 
 def digest_enabled() -> bool:

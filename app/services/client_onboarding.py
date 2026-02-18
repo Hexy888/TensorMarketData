@@ -3,7 +3,7 @@
 
 from datetime import datetime
 from sqlmodel import Session
-from app.models import Business, User
+from app.tenant_models import Business, User
 from app.services.email_tx import send_template
 from app.security_magic import sign
 

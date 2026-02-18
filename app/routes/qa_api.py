@@ -5,7 +5,7 @@ from datetime import datetime
 import os
 import requests
 from app.db import get_session
-from app.models import AuditLog, Business, Subscription
+from app.tenant_models import AuditLog, Business, Subscription
 from fastapi import Depends
 
 router = APIRouter(prefix="/api")

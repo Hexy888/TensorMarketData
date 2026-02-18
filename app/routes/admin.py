@@ -3,7 +3,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from sqlmodel import Session, select
 from app.db import get_session
-from app.models import DraftReply, Review, AuditLog
+from app.tenant_models import DraftReply, Review, AuditLog
 from app.routes.admin_auth import require_admin_or_redirect
 from datetime import datetime
 

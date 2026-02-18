@@ -6,7 +6,7 @@ from fastapi.templating import Jinja2Templates
 from sqlmodel import Session, select
 from app.db import get_session
 from app.routes.auth_helpers import require_user_or_redirect
-from app.models import GBPCredential, AuditLog, Business
+from app.tenant_models import GBPCredential, AuditLog, Business
 from app.services.gbp_client import (
     build_auth_url,
     exchange_code_for_tokens,

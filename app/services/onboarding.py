@@ -1,6 +1,6 @@
 from datetime import datetime
 from sqlmodel import Session, select
-from app.models import Business, User, AuditLog
+from app.tenant_models import Business, User, AuditLog
 from app.security_magic import sign
 from app.services.email_tx import send_template, support_email
 

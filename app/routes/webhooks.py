@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, Depends
 from sqlmodel import Session, select
 from datetime import datetime
 from app.db import get_session
-from app.models import Subscription, AuditLog, Business
+from app.tenant_models import Subscription, AuditLog, Business
 
 router = APIRouter(prefix="/webhooks")
 

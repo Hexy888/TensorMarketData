@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, Header
 from sqlmodel import Session, select
 from app.db import get_session
 from app.config import settings
-from app.models import Business
+from app.tenant_models import Business
 from app.services.ops import ops_run
 from app.services.alerts import send_alert
 

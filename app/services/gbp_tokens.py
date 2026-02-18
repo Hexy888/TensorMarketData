@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from sqlmodel import Session, select
-from app.models import GBPCredential
+from app.tenant_models import GBPCredential
 from app.services.gbp_client import decrypt_refresh_token, refresh_access_token
 
 def get_fresh_access_token(session: Session, business_id: int) -> str:
