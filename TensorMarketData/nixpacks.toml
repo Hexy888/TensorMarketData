@@ -1,7 +1,7 @@
 [package]
 name = "TensorMarketData"
 buildCommand = "pip install -r requirements.txt"
-startCommand = "cd TensorMarketData && python -m uvicorn app.main_simple:app --host 0.0.0.0 --port $PORT"
+startCommand = "python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT"
 
 [dependencies]
 python = "3.11"
