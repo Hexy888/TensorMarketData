@@ -57,18 +57,51 @@
   </style>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <a href="/" class="logo">Tensor<span>MarketData</span></a>
-      <nav class="nav-links">
-        <a href="/pricing">Pricing</a>
-        <a href="/how-it-works">How It Works</a>
-        <a href="/blog">Blog</a>
-        <a href="/faq">FAQ</a>
-        <a href="/get-started" class="cta">Get Started</a>
-      </nav>
+  <!-- Header -->
+    <header class="tm-header">
+        <div class="tm-header__inner">
+            <a href="/" class="tm-logo">Tensor<span>MarketData</span></a>
+            <nav class="tm-nav--desktop">
+                <a href="/pricing" class="tm-nav__link">Pricing</a>
+                <a href="/how-it-works" class="tm-nav__link">How It Works</a>
+                <a href="/blog" class="tm-nav__link">Blog</a>
+                <a href="/faq" class="tm-nav__link">FAQ</a>
+            </nav>
+            <div class="tm-header__actions">
+                <a href="/pricing" class="tm-btn tm-btn--primary">Get Started</a>
+                <button class="tm-burger" aria-label="Menu" aria-expanded="false">
+                    <span class="tm-burger__bar"></span>
+                    <span class="tm-burger__bar"></span>
+                    <span class="tm-burger__bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Mobile Drawer -->
+    <div class="tm-drawer" id="tm-drawer" hidden>
+        <div class="tm-drawer__panel">
+            <a href="/pricing" class="tm-drawer__link">Pricing</a>
+            <a href="/how-it-works" class="tm-drawer__link">How It Works</a>
+            <a href="/blog" class="tm-drawer__link">Blog</a>
+            <a href="/faq" class="tm-drawer__link">FAQ</a>
+            <a href="/pricing" class="tm-drawer__cta">Get Started</a>
+        </div>
     </div>
-  </header>
+    
+    <script>
+    (function () {
+        const toggle = document.querySelector('.tm-burger');
+        const drawer = document.getElementById('tm-drawer');
+        if (!toggle || !drawer) return;
+        function openDrawer() { drawer.hidden = false; toggle.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; }
+        function closeDrawer() { drawer.hidden = true; toggle.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }
+        toggle.addEventListener('click', () => { const isOpen = toggle.getAttribute('aria-expanded') === 'true'; isOpen ? closeDrawer() : openDrawer(); });
+        drawer.addEventListener('click', (e) => { if (e.target === drawer) closeDrawer(); });
+        drawer.querySelectorAll('a').forEach(a => { a.addEventListener('click', closeDrawer); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDrawer(); });
+    })();
+    </script>
 
   <section class="content">
     <div class="container">
