@@ -105,7 +105,14 @@ async def robots():
 @seo_router.get("/sitemap.xml", response_class=PlainTextResponse)  
 async def sitemap():
     """XML sitemap for SEO"""
-    return '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://tensormarketdata.com/</loc></url></urlset>'
+    return '''<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://tensormarketdata.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://tensormarketdata.com/pricing</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tensormarketdata.com/how-it-works</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://tensormarketdata.com/faq</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://tensormarketdata.com/contact</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+</urlset>'''
 
 @seo_router.get("/test-seo-route")
 async def test_seo():
@@ -388,7 +395,7 @@ app.include_router(auth_router, prefix="/v1")
 # app.include_router(payments_router, prefix="/v1")
 app.include_router(webhooks_router, prefix="/v1")
 app.include_router(email_router, prefix="/v1")
-# app.include_router(seo_router)  # SEO: robots.txt, sitemap.xml
+app.include_router(seo_router)  # SEO: robots.txt, sitemap.xml
 # app.include_router(agents_router, prefix="/v1")  # Agent Discovery
 # app.include_router(analytics_router, prefix="/v1")  # Analytics
 # app.include_router(portal_router)  # Portal JSON endpoints
