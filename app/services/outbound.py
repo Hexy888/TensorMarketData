@@ -5,7 +5,7 @@ import json
 import re
 from datetime import datetime, timedelta
 from sqlmodel import Session, select, or_, and_
-from app.models import OutboundTarget, OutboundEvent, OutboundOptout, Experiment
+from app.models.outbound import OutboundTarget, OutboundEvent, OutboundOptout
 from app.services.outbound_templates import (
     VARIANT_A_SUBJECT, VARIANT_A_BODY,
     VARIANT_B_SUBJECT, VARIANT_B_BODY,

@@ -4,7 +4,7 @@
 import re
 from typing import Tuple, Optional
 from sqlmodel import Session, select, or_, func
-from app.models import OutboundTarget, OutboundEvent, OutboundOptout
+from app.models.outbound import OutboundTarget, OutboundEvent, OutboundOptout
 from datetime import datetime, timedelta
 
 FREE_EMAIL_DOMAINS = {

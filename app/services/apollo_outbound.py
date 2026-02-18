@@ -6,7 +6,8 @@ import os
 import json
 from datetime import datetime
 from sqlmodel import Session, select, or_
-from app.models import HVACAccount, OutboundTarget, OutboundEvent, OutboundOptout
+from app.models.outbound import OutboundTarget, OutboundEvent, OutboundOptout
+from app.tenant_models import HVACAccount
 from app.services.apollo_client import (
     apollo_search_people,
     apollo_enrich_person,
