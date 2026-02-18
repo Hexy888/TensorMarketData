@@ -72,3 +72,8 @@ class Experiment(SQLModel, table=True):
     metric_secondary: str = Field(default="bounce_rate")
     result: str = Field(default="", sa_column=Column(Text))
     decision: str = Field(default="iterate")  # keep/kill/iterate
+
+
+# Alias for case-insensitive import compatibility
+OutboundOptOut = OutboundOptout
+
