@@ -22,4 +22,4 @@ Disallow: /submit
 Disallow: /dashboard
 
 # Sitemap
-Sitemap: https://tensormarketdata.com/sitemap.xml
+Sitemap: https://tensormarketdata.com/static/sitemap.xml
