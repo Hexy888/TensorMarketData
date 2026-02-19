@@ -1,350 +1,298 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pricing - TensorMarketData - B2B Lead Generation</title>
-  <meta name="description" content="Transparent pricing for high-quality B2B leads. Starting at $199 for 100 verified contacts. No contracts, no subscriptions required.">
-  
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    :root {
-      --primary: #6366f1;
-      --primary-dark: #4f46e5;
-      --bg: #0a0a0f;
-      --bg-secondary: #12121a;
-      --bg-card: #1a1a24;
-      --border: #2a2a3a;
-      --text: #e0e0e0;
-      --text-muted: #888;
-      --text-dim: #555;
-      --success: #22c55e;
-    }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
-    
-    header { 
-      padding: 1.25rem 0; 
-      border-bottom: 1px solid var(--border); 
-      background: rgba(10,10,15,0.9);
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 100;
-    }
-    header .container { 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-    }
-    .logo { font-size: 1.4rem; font-weight: 700; }
-    .logo span { color: var(--primary); }
-    nav { display: flex; gap: 2rem; align-items: center; }
-    nav a { 
-      color: var(--text-muted); 
-      text-decoration: none; 
-      font-size: 0.9rem;
-      transition: color 0.2s;
-    }
-    nav a:hover { color: var(--text); }
-    nav a.cta {
-      background: var(--primary);
-      color: #fff;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-    }
-    
-    .hero { 
-      padding: 8rem 0 4rem; 
-      text-align: center;
-      background: radial-gradient(ellipse at top, #1a1a2e 0%, var(--bg) 60%);
-    }
-    h1 { 
-      font-size: 2.75rem; 
-      font-weight: 800; 
-      margin-bottom: 1rem; 
-      color: #fff;
-      letter-spacing: -0.02em;
-    }
-    .hero p { 
-      font-size: 1.15rem; 
-      color: var(--text-muted); 
-      max-width: 550px; 
-      margin: 0 auto;
-    }
-    
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin: 3rem 0;
-    }
-    .pricing-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2rem;
-      text-align: center;
-      transition: transform 0.2s, border-color 0.2s;
-    }
-    .pricing-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--primary);
-    }
-    .pricing-card.featured {
-      border-color: var(--primary);
-      background: linear-gradient(180deg, rgba(99,102,241,0.08) 0%, var(--bg-card) 100%);
-    }
-    .badge {
-      display: inline-block;
-      background: rgba(99,102,241,0.15);
-      color: #a78bfa;
-      padding: 0.3rem 0.75rem;
-      border-radius: 100px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-    }
-    .pricing-card h3 { color: #fff; font-size: 1.25rem; margin-bottom: 0.5rem; }
-    .price {
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 0.25rem;
-    }
-    .price span { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
-    .price-note { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem; }
-    
-    .leads-count {
-      background: var(--bg);
-      padding: 1rem;
-      border-radius: 8px;
-      margin-bottom: 1.5rem;
-    }
-    .leads-count .num { font-size: 1.75rem; font-weight: 700; color: var(--primary); }
-    .leads-count .label { font-size: 0.85rem; color: var(--text-muted); }
-    
-    .per-lead {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
-    }
-    
-    .features-list {
-      text-align: left;
-      margin-bottom: 1.5rem;
-      list-style: none;
-    }
-    .features-list li {
-      padding: 0.5rem 0;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .features-list li::before {
-      content: "✓";
-      color: var(--success);
-      font-weight: bold;
-    }
-    
-    .btn {
-      display: block;
-      width: 100%;
-      padding: 14px;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
-      border: none;
-      transition: all 0.2s;
-    }
-    .btn-primary {
-      background: var(--primary);
-      color: #fff;
-    }
-    .btn-primary:hover { background: var(--primary-dark); }
-    .btn-secondary {
-      background: var(--bg);
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-    .btn-secondary:hover { border-color: var(--text-muted); }
-    
-    .guarantee {
-      text-align: center;
-      padding: 2rem;
-      background: var(--bg-secondary);
-      border-radius: 12px;
-      margin: 3rem 0;
-    }
-    .guarantee h3 { color: #fff; margin-bottom: 0.5rem; }
-    .guarantee p { color: var(--text-muted); font-size: 0.9rem; }
-    
-    .faq { padding: 4rem 0; }
-    .faq h2 { 
-      text-align: center; 
-      font-size: 2rem; 
-      color: #fff; 
-      margin-bottom: 2rem; 
-    }
-    .faq-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
-    }
-    .faq-item {
-      background: var(--bg-card);
-      padding: 1.5rem;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-    }
-    .faq-item h4 { color: #fff; margin-bottom: 0.5rem; }
-    .faq-item p { color: var(--text-muted); font-size: 0.9rem; }
-    
-    footer { 
-      padding: 2rem 0; 
-      text-align: center; 
-      color: var(--text-dim); 
-      font-size: 0.85rem; 
-      border-top: 1px solid var(--border);
-    }
-    .email-link { color: var(--primary); text-decoration: none; }
-    
-    @media (max-width: 768px) {
-      h1 { font-size: 2rem; }
-      .pricing-grid, .faq-grid { grid-template-columns: 1fr; }
-      nav { display: none; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Management Pricing | TensorMarketData</title>
+    <meta name="description" content="Simple, predictable pricing for review management. Monitor, respond, generate reviews. Start in 24 hours.">
+    <meta property="og:title" content="Review Management Pricing | TensorMarketData">
+    <meta property="og:description" content="Simple, predictable pricing for review management.">
+    <link rel="canonical" href="https://tensormarketdata.com/pricing">
+    <style>
+        :root {
+            --accent-primary: #0D9488;
+            --accent-hover: #0F766E;
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #64748B;
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F8FAFC;
+            --border-primary: #E2E8F0;
+            --success: #059669;
+            --radius-lg: 12px;
+            --radius-md: 8px;
+            --space-4: 16px;
+            --space-6: 24px;
+            --space-8: 32px;
+            --space-12: 48px;
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; color: var(--text-primary); line-height: 1.6; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 var(--space-6); }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: var(--space-4) 0; border-bottom: 1px solid var(--border-primary); }
+        .nav-logo { font-size: 1.25rem; font-weight: 700; color: var(--text-primary); text-decoration: none; }
+        .nav-links { display: flex; gap: var(--space-6); list-style: none; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+        .nav-cta { background: var(--accent-primary); color: white; padding: 8px 16px; border-radius: var(--radius-md); text-decoration: none; font-weight: 500; }
+        
+        /* Header / Nav */
+        .tm-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 24px;
+            border-bottom: 1px solid #e5e5e5;
+            background: #fff;
+            position: relative;
+            z-index: 9999;
+        }
+        .tm-header__inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .tm-logo { font-size: 1.25rem; font-weight: 700; color: #111; text-decoration: none; }
+        .tm-logo span { color: #0D9488; }
+        .tm-nav--desktop { display: flex; align-items: center; gap: 24px; }
+        .tm-nav__link { text-decoration: none; color: #111; opacity: 0.85; white-space: nowrap; }
+        .tm-header__actions { display: flex; align-items: center; gap: 10px; }
+        .tm-btn { display:inline-flex; align-items:center; justify-content:center; padding:10px 14px; border-radius:10px; text-decoration:none; white-space:nowrap; }
+        .tm-btn--primary { background:#111; color:#fff; }
+        .tm-burger { display: none; width: 44px; height: 44px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.12); background: #fff; padding: 10px; }
+        .tm-burger__bar { display: block; height: 2px; margin: 5px 0; background: #111; border-radius: 2px; }
+        .tm-drawer { position: fixed; inset: 0; z-index: 9998; background: rgba(0,0,0,0.35); }
+        .tm-drawer__panel { position: absolute; top: 72px; left: 12px; right: 12px; background: #fff; border-radius: 14px; padding: 12px; display: grid; gap: 10px; border: 1px solid rgba(0,0,0,0.08); }
+        .tm-drawer__link, .tm-drawer__cta { text-decoration: none; color: #111; padding: 12px 12px; border-radius: 12px; background: rgba(0,0,0,0.04); }
+        .tm-drawer__cta { background: #111; color: #fff; text-align: center; }
+        @media (max-width: 768px) {
+            .tm-nav--desktop { display: none; }
+            .tm-burger { display: inline-flex; align-items: center; justify-content: center; }
+            .tm-btn--primary { padding: 10px 12px; }
+        }
+        
+        .hero { text-align: center; padding: var(--space-12) 0; }
+        .hero h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: var(--space-4); }
+        .hero p { color: var(--text-secondary); max-width: 600px; margin: 0 auto var(--space-6); }
+        .packages { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); margin: var(--space-8) 0; }
+        @media (max-width: 768px) { .packages { grid-template-columns: 1fr; } }
+        .package { padding: var(--space-6); border: 1px solid var(--border-primary); border-radius: var(--radius-lg); }
+        .package.featured { border-color: var(--accent-primary); box-shadow: var(--shadow-md); position: relative; }
+        .package h3 { font-size: 1.25rem; margin-bottom: var(--space-4); }
+        .tier-badge { display: inline-block; background: var(--bg-secondary); padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; }
+        .price { font-size: 2.5rem; font-weight: 700; color: var(--accent-primary); }
+        .price span { font-size: 1rem; font-weight: 400; color: var(--text-muted); }
+        .best-for { color: var(--text-muted); font-size: 0.875rem; margin-bottom: var(--space-4); font-style: italic; }
+        .package ul { list-style: none; margin: var(--space-4) 0; }
+        .package li { padding: 8px 0; color: var(--text-secondary); font-size: 0.9rem; }
+        .package li::before { content: "✓"; color: var(--success); margin-right: 8px; }
+        .btn { display: block; padding: 12px 24px; border-radius: var(--radius-md); text-align: center; text-decoration: none; font-weight: 500; margin-top: var(--space-4); }
+        .btn-primary { background: var(--accent-primary); color: white; }
+        .btn-primary:hover { background: var(--accent-hover); }
+        .btn-secondary { background: transparent; border: 1px solid var(--border-primary); color: var(--text-secondary); }
+        .policy { background: var(--bg-secondary); padding: var(--space-8); border-radius: var(--radius-lg); margin: var(--space-8) 0; }
+        .policy h3 { margin-bottom: var(--space-4); }
+        .policy ul { list-style: none; }
+        .policy li { padding: 8px 0; color: var(--text-secondary); }
+        .policy li::before { content: "•"; color: var(--accent-primary); margin-right: 8px; }
+        .donts { padding: var(--space-8) 0; }
+        .donts h3 { color: #DC2626; margin-bottom: var(--space-4); }
+        .donts li { color: var(--text-secondary); list-style: none; padding: 4px 0; }
+        .timeline { background: var(--bg-secondary); padding: var(--space-6); border-radius: var(--radius-lg); margin: var(--space-8) 0; }
+        .timeline h3 { margin-bottom: var(--space-4); }
+        .timeline ol { margin-left: var(--space-6); color: var(--text-secondary); }
+        .timeline li { padding: 4px 0; }
+        footer { border-top: 1px solid var(--border-primary); padding: var(--space-8) 0; margin-top: var(--space-12); }
+        .footer-content { display: flex; justify-content: space-between; }
+        .footer-links { display: flex; gap: var(--space-6); list-style: none; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.875rem; }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <div class="logo">Tensor<span>MarketData</span></div>
-      <nav>
-        <a href="/">Home</a>
-        <a href="/#features">Features</a>
-        <a href="/#quality">Quality</a>
-        <a href="#contact" class="cta">Get Leads</a>
-      </nav>
-    </div>
-  </header>
+    <!-- Header -->
+    <header class="tm-header" role="banner">
+        <div class="tm-header__inner">
+            <a class="tm-brand" href="/" aria-label="TensorMarketData home">
+                <span class="tm-brand__text">TensorMarketData</span>
+            </a>
+            <nav class="tm-nav tm-nav--desktop" aria-label="Primary navigation">
+                <a class="tm-nav__link" href="/pricing">Pricing</a>
+                <a class="tm-nav__link" href="/how-it-works">How It Works</a>
+                <a class="tm-nav__link" href="/blog">Blog</a>
+                <a class="tm-nav__link" href="/faq">FAQ</a>
+            </nav>
+            <div class="tm-header__actions">
+                <a class="tm-btn tm-btn--primary" href="/get-started">Get Started</a>
+                <button class="tm-burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="tm-drawer">
+                    <span class="tm-burger__bar"></span>
+                    <span class="tm-burger__bar"></span>
+                    <span class="tm-burger__bar"></span>
+                </button>
+            </div>
+        </div>
+        <div id="tm-drawer" class="tm-drawer" hidden>
+            <div class="tm-drawer__panel" role="dialog" aria-label="Site menu">
+                <a class="tm-drawer__link" href="/pricing">Pricing</a>
+                <a class="tm-drawer__link" href="/how-it-works">How It Works</a>
+                <a class="tm-drawer__link" href="/blog">Blog</a>
+                <a class="tm-drawer__link" href="/faq">FAQ</a>
+                <a class="tm-drawer__cta" href="/get-started">Get Started</a>
+            </div>
+        </div>
+    </header>
 
-  <section class="hero">
-    <div class="container">
-      <h1>Simple, Transparent Pricing</h1>
-      <p>No subscriptions required. No long-term contracts. Pay only for the leads you need.</p>
-    </div>
-  </section>
+    <style>
+    html, body { overflow-x: hidden; }
+    .tm-header { position: sticky; top: 0; z-index: 9999; background: #fff; border-bottom: 1px solid rgba(0,0,0,0.08); }
+    .tm-header__inner { max-width: 1120px; margin: 0 auto; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .tm-brand { text-decoration: none; color: #111; white-space: nowrap; }
+    .tm-brand__text { font-weight: 800; letter-spacing: -0.2px; }
+    .tm-nav--desktop { display: flex; gap: 18px; align-items: center; }
+    .tm-nav__link { text-decoration: none; color: #444; font-size: 0.95rem; font-weight: 500; white-space: nowrap; }
+    .tm-nav__link:hover { color: #0D9488; }
+    .tm-header__actions { display: flex; align-items: center; gap: 10px; }
+    .tm-btn { display: inline-flex; align-items: center; justify-content: center; padding: 10px 14px; border-radius: 8px; text-decoration: none; font-weight: 600; white-space: nowrap; }
+    .tm-btn--primary { background: #0D9488; color: #fff; }
+    .tm-btn--primary:hover { background: #0F766E; }
+    .tm-burger { display: none; width: 44px; height: 44px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.1); background: #fff; padding: 12px; cursor: pointer; }
+    .tm-burger__bar { display: block; height: 2px; margin: 4px 0; background: #111; border-radius: 2px; }
+    .tm-drawer { position: fixed; inset: 0; z-index: 9998; background: rgba(0,0,0,0.4); }
+    .tm-drawer__panel { position: absolute; top: 70px; left: 12px; right: 12px; background: #fff; border-radius: 12px; padding: 8px; display: grid; gap: 4px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); }
+    .tm-drawer__link, .tm-drawer__cta { text-decoration: none; color: #111; padding: 14px 16px; border-radius: 8px; font-weight: 500; }
+    .tm-drawer__link:hover { background: rgba(0,0,0,0.04); }
+    .tm-drawer__cta { background: #0D9488; color: #fff; text-align: center; margin-top: 4px; }
+    @media (max-width: 768px) { .tm-nav--desktop { display: none; } .tm-burger { display: block; } .tm-btn--primary { padding: 10px 12px; font-size: 0.9rem; } }
+    </style>
 
-  <section>
-    <div class="container">
-      <div class="pricing-grid">
-        <!-- 100 Leads -->
-        <div class="pricing-card">
-          <span class="badge">Start</span>
-          <h3>100 Leads</h3>
-          <div class="price">$200<span>/one-time</span></div>
-          <div class="leads-count">
-            <div class="num">100</div>
-            <div class="label">Verified Leads</div>
-          </div>
-          <div class="per-lead">$2.00 per lead</div>
-          <ul class="features-list">
-            <li>Validated decision-maker contacts</li>
-            <li>95%+ email deliverability</li>
-            <li>Company research & context</li>
-            <li>30-day replacement guarantee</li>
-            <li>CSV/Excel delivery</li>
-          </ul>
-          <a href="#contact" class="btn btn-secondary">Request Quote</a>
-        </div>
-        
-        <!-- 250 Leads -->
-        <div class="pricing-card featured">
-          <span class="badge">Best Value</span>
-          <h3>250 Leads</h3>
-          <div class="price">$450<span>/one-time</span></div>
-          <div class="leads-count">
-            <div class="num">250</div>
-            <div class="label">Verified Leads</div>
-          </div>
-          <div class="per-lead">$1.80 per lead (10% off)</div>
-          <ul class="features-list">
-            <li>Everything in 100 Leads</li>
-            <li>Priority turnaround</li>
-            <li>Tech stack data</li>
-            <li>Funding & growth signals</li>
-            <li>CRM integration available</li>
-          </ul>
-          <a href="#contact" class="btn btn-primary">Request Quote</a>
-        </div>
-        
-        <!-- 500 Leads -->
-        <div class="pricing-card">
-          <span class="badge">Enterprise</span>
-          <h3>500 Leads</h3>
-          <div class="price">$800<span>/one-time</span></div>
-          <div class="leads-count">
-            <div class="num">500</div>
-            <div class="label">Verified Leads</div>
-          </div>
-          <div class="per-lead">$1.60 per lead (20% off)</div>
-          <ul class="features-list">
-            <li>Everything in 250 Leads</li>
-            <li>Bulk order discount</li>
-            <li>Dedicated account manager</li>
-            <li>Custom research requests</li>
-            <li>API access available</li>
-          </ul>
-          <a href="#contact" class="btn btn-secondary">Request Quote</a>
-        </div>
-      </div>
-      
-      <div class="guarantee" id="contact">
-        <h3>🔒 Quality Guarantee</h3>
-        <p>Every email verified for deliverability. Bad contacts? We'll replace them free within 30 days. No questions asked.</p>
-      </div>
-    </div>
-  </section>
+    <script>
+    (function() {
+        var toggle = document.querySelector('.tm-burger');
+        var drawer = document.getElementById('tm-drawer');
+        if (!toggle || !drawer) return;
+        function openDrawer() { drawer.hidden = false; toggle.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; }
+        function closeDrawer() { drawer.hidden = true; toggle.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }
+        toggle.addEventListener('click', function() { var isOpen = toggle.getAttribute('aria-expanded') === 'true'; isOpen ? closeDrawer() : openDrawer(); });
+        drawer.addEventListener('click', function(e) { if (e.target === drawer) closeDrawer(); });
+        drawer.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeDrawer); });
+        document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeDrawer(); });
+    })();
+    </script>
 
-  <section class="faq">
     <div class="container">
-      <h2>Frequently Asked Questions</h2>
-      <div class="faq-grid">
-        <div class="faq-item">
-          <h4>How do you verify emails?</h4>
-          <p>We use multi-step verification—syntax check, domain validation, and SMTP verification to ensure 95%+ deliverability.</p>
-        </div>
-        <div class="faq-item">
-          <h4>How long does delivery take?</h4>
-          <p>Starter lists ship within 48 hours. Growth and Monthly orders prioritized for 24-hour delivery.</p>
-        </div>
-        <div class="faq-item">
-          <h4>What data do I get per lead?</h4>
-          <p>Each lead includes: name, title, email, phone (when available), company info, funding, and tech stack.</p>
-        </div>
-        <div class="faq-item">
-          <h4>Can I request specific criteria?</h4>
-          <p>Absolutely. Tell us your ideal customer profile and we'll custom-research leads matching your requirements.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+        <section class="hero">
+            <h1>Choose the level of reputation coverage you want.</h1>
+            <p>All packages include monitoring, response drafting, approval gates for negatives, and weekly scorecards. No calls. Async ops only.</p>
+        </section>
 
-  <footer>
-    <div class="container">
-      <p>Questions? <a href="mailto:nova@tensormarketdata.com" class="email-link">nova@tensormarketdata.com</a></p>
-      <p style="margin-top: 0.5rem;">© 2026 TensorMarketData. All rights reserved.</p>
+        <div class="packages">
+            <!-- Tier A: Monitor -->
+            <div class="package">
+                <span class="tier-badge">Package A</span>
+                <h3>Monitor</h3>
+                <div class="price">$99<span>/month</span></div>
+                <p class="best-for">Best for: single-location businesses that need fast, consistent replies.</p>
+                <ul>
+                    <li>Review monitoring + inbox</li>
+                    <li>Draft replies for all reviews</li>
+                    <li>Approval queue for 1-3★ reviews</li>
+                    <li>Optional auto-post for 4-5★ (toggle)</li>
+                    <li>Weekly scorecard</li>
+                    <li>Audit log on every action</li>
+                </ul>
+                <a href="/get-started" class="btn btn-secondary">Get Started — Package A</a>
+            </div>
+
+            <!-- Tier B: Automate -->
+            <div class="package featured">
+                <span class="tier-badge">Package B</span>
+                <h3>Automate</h3>
+                <div class="price">$199<span>/month</span></div>
+                <p class="best-for">Best for: shops that want more 5★ reviews without extra admin work.</p>
+                <ul>
+                    <li>Everything in Monitor</li>
+                    <li>Review request automation (email)</li>
+                    <li>One follow-up max (48-72h)</li>
+                    <li>Monthly insights report</li>
+                    <li>Request templates + suppression rules</li>
+                    <li>Priority support (email)</li>
+                </ul>
+                <a href="/get-started" class="btn btn-primary">Get Started — Package B</a>
+            </div>
+
+            <!-- Tier C: Multi-Location -->
+            <div class="package">
+                <span class="tier-badge">Package C</span>
+                <h3>Multi-Location</h3>
+                <div class="price">$399<span>/month</span></div>
+                <p class="best-for">Best for: multi-branch operators who need location-level control.</p>
+                <ul>
+                    <li>Everything in Automate</li>
+                    <li>Location-level reporting + dashboards</li>
+                    <li>Location-level response templates</li>
+                    <li>Escalation routing per location</li>
+                    <li>Dedicated ops owner (email)</li>
+                    <li>Custom integrations (as scoped)</li>
+                </ul>
+                <a href="/get-started" class="btn btn-secondary">Get Started — Package C</a>
+            </div>
+        </div>
+
+        <div class="policy">
+            <h3>How approvals work</h3>
+            <ul>
+                <li>4-5★ reviews can auto-post (if you enable it)</li>
+                <li>1-3★ reviews always require your approval</li>
+                <li>Legal, medical, safety, or threat content requires approval + escalation</li>
+                <li>Every response is logged in your audit trail</li>
+            </ul>
+        </div>
+
+        <div class="donts">
+            <h3>What we don't do</h3>
+            <ul>
+                <li>✗ No guarantees of star rating increases</li>
+                <li>✗ We don't remove reviews (we help you respond professionally)</li>
+                <li>✗ No phone support (email only)</li>
+                <li>✗ No outcomes promised — we operate the system, you own the brand</li>
+            </ul>
+        </div>
+
+        <!-- Testimonial -->
+        <div style="background: var(--bg-secondary); padding: 32px; border-radius: 12px; margin: 32px 0; border-left: 4px solid var(--accent-primary);">
+            <div style="color: #D97706; font-size: 1.25rem; margin-bottom: 12px;">★★★★★</div>
+            <p style="font-size: 1.1rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 16px;">"Responses went out fast, approvals were painless, and customers noticed. We finally have visibility into what people's saying about us."</p>
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="width: 40px; height: 40px; background: var(--accent-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 0.9rem;">EB</div>
+                <div>
+                    <div style="font-weight: 600; color: var(--text-primary); font-size: 0.9rem;">Example Business (HVAC)</div>
+                    <div style="color: var(--text-muted); font-size: 0.8rem;">Owner (Example)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline">
+            <h3>Start within 24 hours after access</h3>
+            <ol>
+                <li>Checkout → 2. Onboarding form → 3. Access granted → 4. Go live</li>
+            </ol>
+            <p style="margin-top: 16px; color: var(--text-secondary);">What we need: Google Business Profile access (or other platforms), your brand voice guidelines, contact email for approvals.</p>
+        </div>
+
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-links">
+                        <a href="/pricing">Pricing</a>
+                        <a href="/faq">FAQ</a>
+                        <a href="/privacy">Privacy</a>
+                    </div>
+                    <p style="color: var(--text-muted); font-size: 0.875rem;">© TensorMarketData. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
     </div>
-  </footer>
 </body>
 </html>
