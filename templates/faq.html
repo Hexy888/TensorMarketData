@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ | TensorMarketData</title>
+    <meta name="description" content="Frequently asked questions about our review monitoring, response drafting, and approval workflow.">
+    <link rel="canonical" href="https://tensormarketdata.com/faq">
+    <style>
+        :root { --accent-primary: #0D9488; --text-primary: #0F172A; --text-secondary: #475569; --text-muted: #64748B; --bg-primary: #FFFFFF; --bg-secondary: #F8FAFC; --border-primary: #E2E8F0; --radius-lg: 12px; --radius-md: 8px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; color: var(--text-primary); line-height: 1.6; }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 var(--space-6); }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: var(--space-4) 0; border-bottom: 1px solid var(--border-primary); }
+        .nav-logo { font-size: 1.25rem; font-weight: 700; color: var(--text-primary); text-decoration: none; }
+        .nav-links { display: flex; gap: var(--space-6); list-style: none; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+        .hero { text-align: center; padding: var(--space-12) 0; }
+        .hero h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: var(--space-4); }
+        .faq-list { margin: var(--space-8) 0; }
+        .faq-item { border-bottom: 1px solid var(--border-primary); padding: var(--space-6) 0; }
+        .faq-item h3 { margin-bottom: 8px; }
+        .faq-item p { color: var(--text-secondary); }
+        .cta { text-align: center; padding: var(--space-8) 0; }
+        .btn { display: inline-block; padding: 12px 24px; background: var(--accent-primary); color: white; border-radius: var(--radius-md); text-decoration: none; font-weight: 500; }
+        footer { border-top: 1px solid var(--border-primary); padding: var(--space-8) 0; margin-top: var(--space-12); }
+        .footer-content { display: flex; justify-content: space-between; }
+        .footer-links { display: flex; gap: var(--space-6); list-style: none; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.875rem; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="tm-header">
+        <div class="tm-header__inner">
+            <a href="/" class="tm-logo">Tensor<span>MarketData</span></a>
+            <nav class="tm-nav--desktop">
+                <a href="/pricing" class="tm-nav__link">Pricing</a>
+                <a href="/how-it-works" class="tm-nav__link">How It Works</a>
+                <a href="/blog" class="tm-nav__link">Blog</a>
+                <a href="/faq" class="tm-nav__link">FAQ</a>
+            </nav>
+            <div class="tm-header__actions">
+                <a href="/pricing" class="tm-btn tm-btn--primary">Get Started</a>
+                <button class="tm-burger" aria-label="Menu" aria-expanded="false">
+                    <span class="tm-burger__bar"></span>
+                    <span class="tm-burger__bar"></span>
+                    <span class="tm-burger__bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Mobile Drawer -->
+    <div class="tm-drawer" id="tm-drawer" hidden>
+        <div class="tm-drawer__panel">
+            <a href="/pricing" class="tm-drawer__link">Pricing</a>
+            <a href="/how-it-works" class="tm-drawer__link">How It Works</a>
+            <a href="/blog" class="tm-drawer__link">Blog</a>
+            <a href="/faq" class="tm-drawer__link">FAQ</a>
+            <a href="/pricing" class="tm-drawer__cta">Get Started</a>
+        </div>
+    </div>
+    
+    <script>
+    (function () {
+        const toggle = document.querySelector('.tm-burger');
+        const drawer = document.getElementById('tm-drawer');
+        if (!toggle || !drawer) return;
+        function openDrawer() { drawer.hidden = false; toggle.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; }
+        function closeDrawer() { drawer.hidden = true; toggle.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }
+        toggle.addEventListener('click', () => { const isOpen = toggle.getAttribute('aria-expanded') === 'true'; isOpen ? closeDrawer() : openDrawer(); });
+        drawer.addEventListener('click', (e) => { if (e.target === drawer) closeDrawer(); });
+        drawer.querySelectorAll('a').forEach(a => { a.addEventListener('click', closeDrawer); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDrawer(); });
+    })();
+    </script>
+
+    <div class="container">
+        <section class="hero">
+            <h1>Frequently asked questions</h1>
+            <p>Everything you need to know about our reputation operations.</p>
+        </section>
+
+        <div class="faq-list">
+            <div class="faq-item">
+                <h3>Which review platforms do you support?</h3>
+                <p>We start with Google Business Profile — it's the highest-impact platform for local businesses. We can add Yelp, Facebook, TripAdvisor, and other major platforms as needed.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How fast do you respond?</h3>
+                <p>We draft responses within 8 business hours of a new review appearing. That's our SLA. Most reviews are handled same-day.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Do you respond to every review?</h3>
+                <p>Yes. Every new review is classified and a response is drafted. No review gets missed.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Do you post replies automatically?</h3>
+                <p>4-5★ reviews can auto-post if you enable it in settings. 1-3★ reviews always require your approval first.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What requires approval?</h3>
+                <p>1-3★ reviews always need approval. Any review with legal threats, discrimination, safety concerns, or profanity gets escalated immediately.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can you remove bad reviews?</h3>
+                <p>No. We can't remove reviews. What we do is help you respond professionally, which often leads to the reviewer updating their review.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Do you handle multi-location?</h3>
+                <p>Yes, that's Package C. Each location gets separate dashboards, templates, escalation routing, and reporting.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How does review request automation work?</h3>
+                <p>After a customer completes a purchase, we send a request asking for a review. You provide the customer list, we manage timing and templates. One follow-up max.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can we customize brand voice?</h3>
+                <p>Absolutely. During onboarding, you provide brand voice guidelines or we use our professional default. You approve all templates.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What reports do we receive?</h3>
+                <p>Weekly: total reviews, average rating, response time, coverage, top themes. Monthly (Package B/C): insights + recommendations.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How do we contact support?</h3>
+                <p>Email only: nova@tensormarketdata.com. Response within 1 business day. We don't offer phone support.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What if we cancel?</h3>
+                <p>Cancel anytime. You keep access until the end of your billing period. No refunds for partial months.</p>
+            </div>
+        </div>
+
+        <div class="cta">
+            <a href="/pricing" class="btn">Get Started</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p style="color: var(--text-muted); font-size: 0.875rem;">© 2026 TensorMarketData</p>
+                <ul class="footer-links">
+                    <li><a href="/privacy">Privacy</a></li>
+                    <li><a href="/terms">Terms</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
