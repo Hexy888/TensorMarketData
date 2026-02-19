@@ -1,180 +1,144 @@
-{% extends "base_new.html" %}
-
-{% block content %}
-<!-- Hero -->
-<section class="hero" style="padding-top: 120px;">
-    <div class="container">
-        <div class="hero__content">
-            <span class="hero__badge">FAQ</span>
-            <h1 class="hero__title">
-                Frequently Asked <span>Questions</span>
-            </h1>
-            <p class="hero__subtitle">
-                Everything you need to know about TensorMarketData.
-            </p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ | TensorMarketData</title>
+    <meta name="description" content="Frequently asked questions about TensorMarketData's automated reputation management platform.">
+    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f; --bg-secondary: #12121a; --bg-tertiary: #1a1a26; --surface-card: #1e1e2a;
+            --border-primary: #2a2a3a; --border-accent: #3d3d52; --text-primary: #f0f0f5; --text-secondary: #a0a0b0;
+            --text-muted: #6a6a7a; --accent-primary: #6366f1; --accent-hover: #818cf8; --accent-glow: rgba(99, 102, 241, 0.3);
+            --success: #22c55e; --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --radius-sm: 6px; --radius-md: 10px; --radius-lg: 16px; --radius-xl: 24px;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.3); --shadow-md: 0 8px 24px rgba(0,0,0,0.4); --shadow-glow: 0 0 40px var(--accent-glow);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-sans); background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; min-height: 100vh; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-image: linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: -1; }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+        header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(10, 10, 15, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-primary); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+        .logo { display: flex; align-items: center; gap: 10px; font-size: 1.25rem; font-weight: 700; color: var(--text-primary); text-decoration: none; }
+        .logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, var(--accent-primary), #a78bfa); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem; }
+        nav { display: flex; align-items: center; gap: 32px; }
+        nav a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+        nav a:hover { color: var(--text-primary); }
+        .nav-cta { background: var(--accent-primary); color: white !important; padding: 10px 20px; border-radius: var(--radius-md); font-weight: 600; }
+        .menu-toggle { display: none; background: none; border: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; }
+        @media (max-width: 768px) { .menu-toggle { display: block; } nav { display: none; } nav.active { display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; background: var(--bg-secondary); padding: 24px; gap: 16px; border-bottom: 1px solid var(--border-primary); } }
+        .hero { padding: 160px 0 40px; text-align: center; }
+        .hero h1 { font-size: 3rem; font-weight: 800; margin-bottom: 16px; }
+        .hero h1 span { background: linear-gradient(135deg, var(--accent-primary), #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero p { font-size: 1.1rem; color: var(--text-secondary); }
+        @media (max-width: 768px) { .hero { padding: 120px 0 30px; } .hero h1 { font-size: 2rem; } }
+        .faq { padding: 0 0 100px; }
+        .faq-item { background: var(--surface-card); border: 1px solid var(--border-primary); border-radius: var(--radius-md); margin-bottom: 16px; overflow: hidden; }
+        .faq-question { width: 100%; background: none; border: none; padding: 20px 24px; text-align: left; font-size: 1rem; font-weight: 600; color: var(--text-primary); cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-question::after { content: '+'; font-size: 1.5rem; color: var(--text-muted); }
+        .faq-item.open .faq-question::after { content: '-'; }
+        .faq-answer { display: none; padding: 0 24px 20px; color: var(--text-secondary); line-height: 1.7; }
+        .faq-item.open .faq-answer { display: block; }
+        footer { background: var(--bg-secondary); border-top: 1px solid var(--border-primary); padding: 48px 0; }
+        .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
+        .footer-links { display: flex; gap: 24px; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
+        .footer-links a:hover { color: var(--text-primary); }
+        .footer-copy { color: var(--text-muted); font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <a href="/" class="logo"><div class="logo-icon">T</div>TensorMarketData</a>
+                <button class="menu-toggle" onclick="document.querySelector('nav').classList.toggle('active')">☰</button>
+                <nav>
+                    <a href="/how-it-works">How It Works</a>
+                    <a href="/pricing">Pricing</a>
+                    <a href="/faq">FAQ</a>
+                    <a href="/contact" class="nav-cta">Get Started</a>
+                </nav>
+            </div>
         </div>
-    </div>
-</section>
+    </header>
 
-<!-- FAQ Section -->
-<section class="section">
+    <section class="hero">
+        <div class="container">
+            <h1>Frequently asked <span>questions</span></h1>
+            <p>Everything you need to know about TensorMarketData.</p>
+        </div>
+    </section>
+
     <div class="container">
-        <div class="faq-list">
+        <div class="faq">
             <div class="faq-item">
-                <button class="faq-item__question">
-                    Which review platforms do you support?
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
-                </button>
-                <div class="faq-item__answer">
-                    <div class="faq-item__answer-inner">
-                        We start with Google Business Profile — it's the highest-impact platform for local businesses. We can add Yelp, Facebook, TripAdvisor, and other major platforms as needed for Enterprise plans.
-                    </div>
-                </div>
+                <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">What does TensorMarketData do?</button>
+                <div class="faq-answer">TensorMarketData automates your reputation management. We monitor reviews across 50+ platforms, draft AI-powered responses, route negative reviews through approval workflows, and automatically request reviews from happy customers.</div>
             </div>
             
             <div class="faq-item">
-                <button class="faq-item__question">
-                    How fast do you respond?
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
-                </button>
-                <div class="faq-item__answer">
-                    <div class="faq-item__answer-inner">
-                        We draft responses within 8 business hours of a new review appearing. That's our SLA. Most reviews are handled same-day. Professional plan is 4 hours, Enterprise is 2 hours.
-                    </div>
-                </div>
+                <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">Which review platforms do you support?</button>
+                <div class="faq-answer">We support Google Business Profile, Yelp, Facebook, TripAdvisor, Zillow, Healthgrades, and 50+ other platforms. We're constantly adding more.</div>
             </div>
             
             <div class="faq-item">
-                <button class="faq-item__question">
-                    Do you respond to every review?
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
-                </button>
-                <div class="faq-item__answer">
-                    <div class="faq-item__answer-inner">
-                        Yes. Every new review is classified and a response is drafted. No review gets missed. You'll be notified of any that need special attention.
-                    </div>
-                </div>
+                <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">How does the AI response drafting work?</button>
+                <div class="faq-answer">Our AI reads each review and generates a personalized response in your brand voice. For negative reviews, it's routed through your approval workflow before anything goes public. For positive reviews, you can choose to auto-publish or require approval.</div>
             </div>
             
             <div class="faq-item">
-                <button class="faq-item__question">
-                    Do you post replies automatically?
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
-                </button>
-                <div class="faq-item__answer">
-                    <div class="faq-item__answer-inner">
-                        4-5★ reviews can auto-post if you enable it in settings. 1-3★ reviews always require your approval first. You're always in control.
-                    </div>
-                </div>
+                <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">What are approval workflows?</button>
+                <div class="faq-answer">Approval workflows let you control what gets published. Set up rules: for example, all 1-2 star reviews go to your manager, 3-star reviews to team lead, and 4-5 star auto-approved. You decide the workflow.</div>
             </div>
             
             <div class="faq-item">
-                <button class="faq-item__question">
-                    What requires approval?
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
-                </button>
-                <div class="faq-item__answer">
-                    <div class="faq-item__answer-inner">
-                        1-3★ reviews always need approval. Any review with legal threats, discrimination, safety concerns, or profanity gets escalated immediately.
-                    </div>
-                </div>
+                <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">Is there a free trial?</button>
+                <div class="faq-answer">Yes! All plans include a free 14-day trial with full access to all features. No credit card required to start.</div>
             </div>
             
             <div class="faq-item">
-                <button class="faq-item__question">
-                    Can you remove bad reviews?
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
-                </button>
-                <div class="faq-item__answer">
-                    <div class="faq-item__answer-inner">
-                        No. We can't remove reviews. What we do is help you respond professionally, which often leads to the reviewer updating their review or removing it themselves.
-                    </div>
-                </div>
+                <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">Can I cancel anytime?</button>
+                <div class="faq-answer">Absolutely. Cancel anytime from your dashboard with no cancellation fees or long-term commitments.</div>
             </div>
             
             <div class="faq-item">
-                <button class="faq-item__question">
-                    Do you handle multi-location?
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
-                </button>
-                <div class="faq-item__answer">
-                    <div class="faq-item__answer-inner">
-                        Yes! Each location gets separate dashboards, templates, escalation routing, and reporting. Manage all your locations from one dashboard.
-                    </div>
-                </div>
+                <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">Is my data secure?</button>
+                <div class="faq-answer">We use AES-256 encryption (bank-level security) and are SOC 2 Type II compliant. Your data is never shared with third parties.</div>
             </div>
             
             <div class="faq-item">
-                <button class="faq-item__question">
-                    How does review request automation work?
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
-                </button>
-                <div class="faq-item__answer">
-                    <div class="faq-item__answer-inner">
-                        After a customer completes a purchase, we send a request asking for a review. You provide the customer list, we manage timing and templates. One follow-up max.
-                    </div>
-                </div>
+                <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">Do you offer integrations?</button>
+                <div class="faq-answer">Yes! We integrate with Slack, Microsoft Teams, Zapier, and offer a full REST API for custom integrations. Enterprise plans include dedicated integration support.</div>
             </div>
             
             <div class="faq-item">
-                <button class="faq-item__question">
-                    Can we customize brand voice?
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
-                </button>
-                <div class="faq-item__answer">
-                    <div class="faq-item__answer-inner">
-                        Absolutely. During onboarding, you provide brand voice guidelines or we use our professional default. You approve all templates before they go live.
-                    </div>
-                </div>
+                <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">How long does setup take?</button>
+                <div class="faq-answer">Most customers are up and running in under 10 minutes. Just connect your review platforms via OAuth and you're ready to go.</div>
             </div>
             
             <div class="faq-item">
-                <button class="faq-item__question">
-                    What reports do we receive?
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
-                </button>
-                <div class="faq-item__answer">
-                    <div class="faq-item__answer-inner">
-                        Weekly: total reviews, average rating, response time, coverage, top themes. Monthly (Package B/C): insights + recommendations.
-                    </div>
-                </div>
-            </div>
-            
-            <div class="faq-item">
-                <button class="faq-item__question">
-                    How do we contact support?
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
-                </button>
-                <div class="faq-item__answer">
-                    <div class="faq-item__answer-inner">
-                        Email only: nova@tensormarketdata.com. Response within 1 business day. We don't offer phone support.
-                    </div>
-                </div>
-            </div>
-            
-            <div class="faq-item">
-                <button class="faq-item__question">
-                    What if we cancel?
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
-                </button>
-                <div class="faq-item__answer">
-                    <div class="faq-item__answer-inner">
-                        Cancel anytime. You keep access until the end of your billing period. No refunds for partial months.
-                    </div>
-                </div>
+                <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">What happens if I go over my review limit?</button>
+                <div class="faq-answer">We'll notify you when you're approaching your limit. You can upgrade your plan or pay for overage at a standard rate. No service interruption.</div>
             </div>
         </div>
     </div>
-</section>
 
-<!-- CTA -->
-<section class="cta">
-    <div class="container">
-        <h2 class="cta__title">Still Have Questions?</h2>
-        <p class="cta__text">We're here to help. Reach out to our team.</p>
-        <div class="cta__actions">
-            <a href="/contact" class="btn btn--white btn--lg">Contact Us</a>
+    <footer>
+        <div class="container">
+            <div class="footer-inner">
+                <div class="logo"><div class="logo-icon">T</div>TensorMarketData</div>
+                <div class="footer-links">
+                    <a href="/how-it-works">How It Works</a>
+                    <a href="/pricing">Pricing</a>
+                    <a href="/faq">FAQ</a>
+                    <a href="/contact">Contact</a>
+                </div>
+                <p class="footer-copy">© 2026 TensorMarketData. All rights reserved.</p>
+            </div>
         </div>
-    </div>
-</section>
-{% endblock %}
+    </footer>
+</body>
+</html>

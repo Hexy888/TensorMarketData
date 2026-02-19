@@ -1,124 +1,177 @@
-{% extends "base_new.html" %}
-
-{% block content %}
-<!-- Hero -->
-<section class="hero" style="padding-top: 120px;">
-    <div class="container">
-        <div class="hero__content">
-            <span class="hero__badge">How It Works</span>
-            <h1 class="hero__title">
-                Getting Started is <span>Easy</span>
-            </h1>
-            <p class="hero__subtitle">
-                Set up in minutes. We'll handle your reviews from day one.
-            </p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works | TensorMarketData</title>
+    <meta name="description" content="Learn how TensorMarketData automates your reputation management in 4 simple steps.">
+    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f; --bg-secondary: #12121a; --bg-tertiary: #1a1a26; --surface-card: #1e1e2a;
+            --border-primary: #2a2a3a; --border-accent: #3d3d52; --text-primary: #f0f0f5; --text-secondary: #a0a0b0;
+            --text-muted: #6a6a7a; --accent-primary: #6366f1; --accent-hover: #818cf8; --accent-glow: rgba(99, 102, 241, 0.3);
+            --success: #22c55e; --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --radius-sm: 6px; --radius-md: 10px; --radius-lg: 16px; --radius-xl: 24px;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.3); --shadow-md: 0 8px 24px rgba(0,0,0,0.4); --shadow-glow: 0 0 40px var(--accent-glow);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-sans); background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; min-height: 100vh; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-image: linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: -1; }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+        header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(10, 10, 15, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-primary); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+        .logo { display: flex; align-items: center; gap: 10px; font-size: 1.25rem; font-weight: 700; color: var(--text-primary); text-decoration: none; }
+        .logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, var(--accent-primary), #a78bfa); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem; }
+        nav { display: flex; align-items: center; gap: 32px; }
+        nav a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+        nav a:hover { color: var(--text-primary); }
+        .nav-cta { background: var(--accent-primary); color: white !important; padding: 10px 20px; border-radius: var(--radius-md); font-weight: 600; }
+        .menu-toggle { display: none; background: none; border: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; }
+        @media (max-width: 768px) { .menu-toggle { display: block; } nav { display: none; } nav.active { display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; background: var(--bg-secondary); padding: 24px; gap: 16px; } }
+        .hero { padding: 160px 0 60px; text-align: center; }
+        .hero h1 { font-size: 3rem; font-weight: 800; margin-bottom: 16px; }
+        .hero h1 span { background: linear-gradient(135deg, var(--accent-primary), #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: 1.1rem; color: var(--text-secondary); }
+        @media (max-width: 768px) { .hero { padding: 120px 0 40px; } .hero h1 { font-size: 2rem; } }
+        .steps { padding: 40px 0 100px; }
+        .step { display: flex; gap: 24px; margin-bottom: 48px; align-items: flex-start; }
+        .step-num { width: 56px; height: 56px; background: var(--accent-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.5rem; flex-shrink: 0; }
+        .step-content h3 { font-size: 1.5rem; font-weight: 600; margin-bottom: 12px; }
+        .step-content p { color: var(--text-secondary); line-height: 1.7; margin-bottom: 16px; }
+        .step-card { background: var(--surface-card); border: 1px solid var(--border-primary); border-radius: var(--radius-lg); padding: 24px; }
+        .step-card h4 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 12px; }
+        .step-card ul { list-style: none; }
+        .step-card li { display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--text-secondary); border-bottom: 1px solid var(--border-primary); }
+        .step-card li:last-child { border: none; }
+        .step-card svg { width: 18px; height: 18px; color: var(--success); flex-shrink: 0; }
+        .cta { text-align: center; padding: 60px 0; background: var(--bg-secondary); border-radius: var(--radius-xl); margin-bottom: 80px; }
+        .cta h2 { font-size: 2rem; margin-bottom: 12px; }
+        .cta p { color: var(--text-secondary); margin-bottom: 24px; }
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: var(--radius-md); font-size: 1rem; font-weight: 600; text-decoration: none; background: var(--accent-primary); color: white; border: none; cursor: pointer; }
+        .btn:hover { background: var(--accent-hover); }
+        footer { background: var(--bg-secondary); border-top: 1px solid var(--border-primary); padding: 48px 0; }
+        .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
+        .footer-links { display: flex; gap: 24px; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
+        .footer-copy { color: var(--text-muted); font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <a href="/" class="logo"><div class="logo-icon">T</div>TensorMarketData</a>
+                <button class="menu-toggle" onclick="document.querySelector('nav').classList.toggle('active')">☰</button>
+                <nav>
+                    <a href="/how-it-works">How It Works</a>
+                    <a href="/pricing">Pricing</a>
+                    <a href="/faq">FAQ</a>
+                    <a href="/contact" class="nav-cta">Get Started</a>
+                </nav>
+            </div>
         </div>
-    </div>
-</section>
+    </header>
 
-<!-- Steps Section -->
-<section class="section">
+    <section class="hero">
+        <div class="container">
+            <h1>How it <span>works</span></h1>
+            <p>Set up in minutes. Runs autonomously 24/7.</p>
+        </div>
+    </section>
+
     <div class="container">
-        <!-- Step 1 -->
-        <div style="display: grid; gap: 3rem; max-width: 900px; margin: 0 auto 4rem;">
-            <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
-                <div style="flex-shrink: 0; width: 64px; height: 64px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700;">1</div>
-                <div>
-                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--gray-900);">Connect Your Platforms</h3>
-                    <p style="color: var(--gray-600); line-height: 1.7;">Link your Google Business Profile, Yelp, and Facebook Business accounts. We use secure OAuth connections—you never give us your password. We support all major review platforms and can add more for Enterprise customers.</p>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <h3>Connect your platforms</h3>
+                    <p>Link Google Business Profile, Yelp, Facebook, and other review sites in one click. Our secure OAuth flow only requests read/write access to reviews.</p>
+                    <div class="step-card">
+                        <h4>Supported platforms</h4>
+                        <ul>
+                            <li><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> Google Business Profile</li>
+                            <li><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> Yelp</li>
+                            <li><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> Facebook</li>
+                            <li><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> TripAdvisor</li>
+                            <li><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> +50 more</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             
-            <!-- Step 2 -->
-            <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
-                <div style="flex-shrink: 0; width: 64px; height: 64px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700;">2</div>
-                <div>
-                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--gray-900);">Configure Your Preferences</h3>
-                    <p style="color: var(--gray-600); line-height: 1.7;">Choose your brand voice, response templates, and approval workflow. Decide which reviews auto-post and which need your approval. Set response times and escalation rules. We'll walk you through everything.</p>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <h3>AI starts monitoring</h3>
+                    <p>We scan all connected platforms continuously. New reviews hit your dashboard instantly with sentiment analysis and priority scoring.</p>
+                    <div class="step-card">
+                        <h4>What we track</h4>
+                        <ul>
+                            <li><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> New reviews in real-time</li>
+                            <li><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> Star rating trends</li>
+                            <li><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> Competitor benchmarks</li>
+                            <li><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> Response time tracking</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             
-            <!-- Step 3 -->
-            <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
-                <div style="flex-shrink: 0; width: 64px; height: 64px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700;">3</div>
-                <div>
-                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--gray-900);">We Handle Everything</h3>
-                    <p style="color: var(--gray-600); line-height: 1.7;">Every new review gets a professional, personalized response within hours. You'll be notified of any issues that need your attention. Track everything from your dashboard.</p>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <h3>Drafts get approved</h3>
+                    <p>For negative reviews, AI drafts a response and routes it through your approval workflow. Nothing goes public without your sign-off.</p>
+                    <div class="step-card">
+                        <h4>Workflow features</h4>
+                        <ul>
+                            <li><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> Custom approval rules</li>
+                            <li><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> Multi-team routing</li>
+                            <li><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> Slack/email notifications</li>
+                            <li><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> Response templates</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-
-<!-- Features Detail -->
-<section class="section section--alt">
-    <div class="container">
-        <div class="section__header">
-            <span class="section__label">What You Get</span>
-            <h2 class="section__title">Everything You Need to Manage Reviews</h2>
+            
+            <div class="step">
+                <div class="step-num">4</div>
+                <div class="step-content">
+                    <h3>Happy customers get asked</h3>
+                    <p>After positive interactions, AI automatically sends a review request at the perfect moment. More 5-stars, zero extra effort.</p>
+                    <div class="step-card">
+                        <h4>Request automation</h4>
+                        <ul>
+                            <li><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> Smart timing triggers</li>
+                            <li><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> Email & SMS delivery</li>
+                            <li><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> Custom templates</li>
+                            <li><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> A/B testing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
         
-        <div class="features">
-            <div class="feature-card">
-                <div class="feature-card__icon">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-                </div>
-                <h3 class="feature-card__title">Smart Classification</h3>
-                <p class="feature-card__text">AI automatically classifies reviews by sentiment and urgency. Negative reviews with issues get flagged for immediate attention.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-card__icon">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
-                </div>
-                <h3 class="feature-card__title">Review Generation</h3>
-                <p class="feature-card__text">Automatically request reviews from customers after purchase. Turn happy customers into 5-star reviews.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-card__icon">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
-                </div>
-                <h3 class="feature-card__title">Brand Voice</h3>
-                <p class="feature-card__text">Every response matches your brand voice. Custom templates ensure consistency across all locations.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-card__icon">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-                </div>
-                <h3 class="feature-card__title">Detailed Reports</h3>
-                <p class="feature-card__text">Weekly and monthly reports on reviews, ratings, response times, and trends. Know exactly how you're performing.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-card__icon">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                </div>
-                <h3 class="feature-card__title">Multi-Location</h3>
-                <p class="feature-card__text">Manage reviews for all your locations from one dashboard. Each location can have its own templates and settings.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-card__icon">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                </div>
-                <h3 class="feature-card__title">Fast Response</h3>
-                <p class="feature-card__text">Our 8-hour SLA means reviews don't sit unanswered. Most are handled same-day.</p>
-            </div>
+        <div class="cta">
+            <h2>Ready to get started?</h2>
+            <p>Start your free 14-day trial. No credit card required.</p>
+            <a href="/get-started" class="btn">Start Free Trial</a>
         </div>
     </div>
-</section>
 
-<!-- CTA -->
-<section class="cta">
-    <div class="container">
-        <h2 class="cta__title">Ready to Get Started?</h2>
-        <p class="cta__text">Join thousands of businesses that trust us with their reputation.</p>
-        <div class="cta__actions">
-            <a href="/get-started" class="btn btn--white btn--lg">Start Free Trial</a>
-            <a href="/pricing" class="btn btn--outline btn--lg" style="border-color: white; color: white;">View Pricing</a>
+    <footer>
+        <div class="container">
+            <div class="footer-inner">
+                <div class="logo"><div class="logo-icon">T</div>TensorMarketData</div>
+                <div class="footer-links">
+                    <a href="/how-it-works">How It Works</a>
+                    <a href="/pricing">Pricing</a>
+                    <a href="/faq">FAQ</a>
+                    <a href="/contact">Contact</a>
+                </div>
+                <p class="footer-copy">© 2026 TensorMarketData. All rights reserved.</p>
+            </div>
         </div>
-    </div>
-</section>
-{% endblock %}
+    </footer>
+</body>
+</html>

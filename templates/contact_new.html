@@ -1,84 +1,133 @@
-{% extends "base_new.html" %}
-
-{% block content %}
-<!-- Hero -->
-<section class="hero" style="padding-top: 120px;">
-    <div class="container">
-        <div class="hero__content">
-            <span class="hero__badge">Contact</span>
-            <h1 class="hero__title">
-                Get in <span>Touch</span>
-            </h1>
-            <p class="hero__subtitle">
-                We'd love to hear from you. Here's how to reach us.
-            </p>
-        </div>
-    </div>
-</section>
-
-<!-- Contact Section -->
-<section class="section">
-    <div class="container">
-        <div style="display: grid; gap: 3rem; max-width: 800px; margin: 0 auto;">
-            <!-- Contact Form -->
-            <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-xl); padding: 2rem;">
-                <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem;">Send us a message</h3>
-                
-                <form action="/contact" method="POST">
-                    <div style="display: grid; gap: 1.5rem;">
-                        <div>
-                            <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: var(--gray-700);">Name</label>
-                            <input type="text" name="name" required style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--gray-300); border-radius: var(--radius-lg); font-size: 1rem;" placeholder="Your name">
-                        </div>
-                        
-                        <div>
-                            <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: var(--gray-700);">Email</label>
-                            <input type="email" name="email" required style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--gray-300); border-radius: var(--radius-lg); font-size: 1rem;" placeholder="you@company.com">
-                        </div>
-                        
-                        <div>
-                            <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: var(--gray-700);">Subject</label>
-                            <select name="subject" required style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--gray-300); border-radius: var(--radius-lg); font-size: 1rem; background: white;">
-                                <option value="">Select a topic</option>
-                                <option value="sales">Sales Inquiry</option>
-                                <option value="support">Technical Support</option>
-                                <option value="billing">Billing Question</option>
-                                <option value="partnership">Partnership</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        
-                        <div>
-                            <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: var(--gray-700);">Message</label>
-                            <textarea name="message" required rows="5" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--gray-300); border-radius: var(--radius-lg); font-size: 1rem; resize: vertical; font-family: inherit;" placeholder="How can we help?"></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn btn--primary btn--lg" style="width: 100%;">Send Message</button>
-                    </div>
-                </form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | TensorMarketData</title>
+    <meta name="description" content="Get in touch with the TensorMarketData team. We're here to help.">
+    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f; --bg-secondary: #12121a; --bg-tertiary: #1a1a26; --surface-card: #1e1e2a;
+            --border-primary: #2a2a3a; --border-accent: #3d3d52; --text-primary: #f0f0f5; --text-secondary: #a0a0b0;
+            --text-muted: #6a6a7a; --accent-primary: #6366f1; --accent-hover: #818cf8; --accent-glow: rgba(99, 102, 241, 0.3);
+            --success: #22c55e; --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --radius-sm: 6px; --radius-md: 10px; --radius-lg: 16px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-sans); background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; min-height: 100vh; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-image: linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: -1; }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+        header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(10, 10, 15, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-primary); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+        .logo { display: flex; align-items: center; gap: 10px; font-size: 1.25rem; font-weight: 700; color: var(--text-primary); text-decoration: none; }
+        .logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, var(--accent-primary), #a78bfa); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem; }
+        nav { display: flex; align-items: center; gap: 32px; }
+        nav a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+        .nav-cta { background: var(--accent-primary); color: white !important; padding: 10px 20px var(--radius-md; border-radius:); font-weight: 600; }
+        .menu-toggle { display: none; background: none; border: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; }
+        @media (max-width: 768px) { .menu-toggle { display: block; } nav { display: none; } nav.active { display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; background: var(--bg-secondary); padding: 24px; gap: 16px; } }
+        .hero { padding: 160px 0 40px; text-align: center; }
+        .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 12px; }
+        .hero h1 span { background: linear-gradient(135deg, var(--accent-primary), #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { color: var(--text-secondary); }
+        @media (max-width: 768px) { .hero { padding: 120px 0 30px; } .hero h1 { font-size: 1.75rem; } }
+        .content { display: grid; gap: 32px; padding-bottom: 100px; }
+        form { background: var(--surface-card); border: 1px solid var(--border-primary); border-radius: var(--radius-lg); padding: 32px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.9rem; }
+        input, select, textarea { width: 100%; padding: 14px 16px; background: var(--bg-tertiary); border: 1px solid var(--border-primary); border-radius: var(--radius-md); color: var(--text-primary); font-size: 1rem; font-family: inherit; }
+        textarea { min-height: 120px; resize: vertical; }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent-primary); }
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 28px; border-radius: var(--radius-md); font-size: 1rem; font-weight: 600; background: var(--accent-primary); color: white; border: none; cursor: pointer; width: 100%; transition: all 0.2s; }
+        .btn:hover { background: var(--accent-hover); }
+        .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+        @media (max-width: 640px) { .cards { grid-template-columns: 1fr; } }
+        .card { background: var(--surface-card); border: 1px solid var(--border-primary); border-radius: var(--radius-lg); padding: 24px; text-align: center; }
+        .card-icon { width: 48px; height: 48px; background: var(--accent-primary); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+        .card-icon svg { width: 24px; height: 24px; }
+        .card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+        .card p { color: var(--text-secondary); font-size: 0.9rem; }
+        footer { background: var(--bg-secondary); border-top: 1px solid var(--border-primary); padding: 48px 0; }
+        .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
+        .footer-links { display: flex; gap: 24px; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
+        .footer-copy { color: var(--text-muted); font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <a href="/" class="logo"><div class="logo-icon">T</div>TensorMarketData</a>
+                <button class="menu-toggle" onclick="document.querySelector('nav').classList.toggle('active')">☰</button>
+                <nav>
+                    <a href="/how-it-works">How It Works</a>
+                    <a href="/pricing">Pricing</a>
+                    <a href="/faq">FAQ</a>
+                    <a href="/contact" class="nav-cta">Get Started</a>
+                </nav>
             </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Get in <span>touch</span></h1>
+            <p>Questions? We'd love to hear from you.</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="content">
+            <form>
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" placeholder="Your name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="you@company.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea placeholder="How can we help?" required></textarea>
+                </div>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
             
-            <!-- Contact Info -->
-            <div style="display: grid; gap: 2rem;">
-                <div style="text-align: center; padding: 2rem; background: var(--gray-50); border-radius: var(--radius-xl);">
-                    <div style="width: 48px; height: 48px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
-                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-5 0V21a2 2 0 01-2 2H6a2 2 0 01-2-2V8m5 0z"/></svg>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-icon">
+                        <svg fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-5 0V21a2 2 0 01-2 2H6a2 2 0 01-2-2V8m5 0z"/></svg>
                     </div>
-                    <h4 style="font-weight: 700; margin-bottom: 0.5rem;">Email</h4>
-                    <p style="color: var(--gray-600);">nova@tensormarketdata.com</p>
-                    <p style="color: var(--gray-500); font-size: 0.875rem; margin-top: 0.5rem;">We respond within 1 business day</p>
+                    <h3>Email</h3>
+                    <p>nova@tensormarketdata.com</p>
                 </div>
-                
-                <div style="text-align: center; padding: 2rem; background: var(--gray-50); border-radius: var(--radius-xl);">
-                    <div style="width: 48px; height: 48px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
-                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <div class="card">
+                    <div class="card-icon">
+                        <svg fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 18,18"/></svg>
                     </div>
-                    <h4 style="font-weight: 700; margin-bottom: 0.5rem;">Business Hours</h4>
-                    <p style="color: var(--gray-600);">Monday - Friday</p>
-                    <p style="color: var(--gray-500); font-size: 0.875rem;">9 AM - 6 PM CST</p>
+                    <h3>Hours</h3>
+                    <p>Mon-Fri 9am-6pm CST</p>
                 </div>
             </div>
         </div>
     </div>
-</section>
-{% endblock %}
+
+    <footer>
+        <div class="container">
+            <div class="footer-inner">
+                <div class="logo"><div class="logo-icon">T</div>TensorMarketData</div>
+                <div class="footer-links">
+                    <a href="/how-it-works">How It Works</a>
+                    <a href="/pricing">Pricing</a>
+                    <a href="/faq">FAQ</a>
+                    <a href="/contact">Contact</a>
+                </div>
+                <p class="footer-copy">© 2026 TensorMarketData. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
