@@ -124,7 +124,7 @@ app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 @app.get("/", response_class=HTMLResponse)
 async def root():
     """Root endpoint - serve home page"""
-    with open(os.path.join(TEMPLATES_DIR, "index.html"), "r") as f:
+    with open(os.path.join(TEMPLATES_DIR, "index_new.html"), "r") as f:
         return f.read()
 
 
@@ -174,25 +174,25 @@ async def version_test():
 @app.get("/pricing", response_class=HTMLResponse)
 async def pricing():
     """Pricing page - uses template file"""
-    with open(os.path.join(TEMPLATES_DIR, "pricing.html"), "r") as f:
+    with open(os.path.join(TEMPLATES_DIR, "pricing_new.html"), "r") as f:
         return f.read()
 
 @app.get("/faq", response_class=HTMLResponse)
 async def faq():
     """FAQ page"""
-    with open(os.path.join(TEMPLATES_DIR, "faq.html"), "r") as f:
+    with open(os.path.join(TEMPLATES_DIR, "faq_new.html"), "r") as f:
         return f.read()
 
 @app.get("/how-it-works", response_class=HTMLResponse)
 async def how_it_works():
     """How it works page"""
-    with open(os.path.join(TEMPLATES_DIR, "how-it-works.html"), "r") as f:
+    with open(os.path.join(TEMPLATES_DIR, "how-it-works_new.html"), "r") as f:
         return f.read()
 
 @app.get("/get-started", response_class=HTMLResponse)
 async def get_started():
     """Get started page"""
-    with open(os.path.join(TEMPLATES_DIR, "get-started.html"), "r") as f:
+    with open(os.path.join(TEMPLATES_DIR, "get-started_new.html"), "r") as f:
         return f.read()
 
 @app.get("/dashboard", response_class=HTMLResponse)
@@ -212,7 +212,7 @@ async def explorer():
 @app.get("/contact", response_class=HTMLResponse)
 async def contact():
     """Contact sales page"""
-    with open(os.path.join(TEMPLATES_DIR, "contact.html"), "r") as f:
+    with open(os.path.join(TEMPLATES_DIR, "contact_new.html"), "r") as f:
         return f.read()
 
 

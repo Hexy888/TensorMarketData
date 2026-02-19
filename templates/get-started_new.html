@@ -1,0 +1,95 @@
+{% extends "base_new.html" %}
+
+{% block content %}
+<!-- Hero -->
+<section class="hero" style="padding-top: 120px;">
+    <div class="container">
+        <div class="hero__content">
+            <span class="hero__badge">Get Started</span>
+            <h1 class="hero__title">
+                Start Your <span>Free Trial</span>
+            </h1>
+            <p class="hero__subtitle">
+                No credit card required. Set up in minutes.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Form Section -->
+<section class="section">
+    <div class="container">
+        <div style="max-width: 600px; margin: 0 auto;">
+            <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-xl); padding: 2rem;">
+                <form action="/signup" method="POST">
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: var(--gray-700);">Full Name</label>
+                        <input type="text" name="name" required style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--gray-300); border-radius: var(--radius-lg); font-size: 1rem; transition: var(--transition);" placeholder="John Smith">
+                    </div>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: var(--gray-700);">Business Email</label>
+                        <input type="email" name="email" required style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--gray-300); border-radius: var(--radius-lg); font-size: 1rem; transition: var(--transition);" placeholder="john@company.com">
+                    </div>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: var(--gray-700);">Company Name</label>
+                        <input type="text" name="company" required style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--gray-300); border-radius: var(--radius-lg); font-size: 1rem; transition: var(--transition);" placeholder="Your Company">
+                    </div>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: var(--gray-700);">Website (Optional)</label>
+                        <input type="url" name="website" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--gray-300); border-radius: var(--radius-lg); font-size: 1rem; transition: var(--transition);" placeholder="https://company.com">
+                    </div>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: var(--gray-700);">Password</label>
+                        <input type="password" name="password" required style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--gray-300); border-radius: var(--radius-lg); font-size: 1rem; transition: var(--transition);" placeholder="••••••••">
+                    </div>
+                    
+                    <button type="submit" class="btn btn--primary btn--full btn--lg" style="margin-bottom: 1rem;">Create Account</button>
+                    
+                    <p style="text-align: center; font-size: 0.875rem; color: var(--gray-500);">
+                        Already have an account? <a href="/login" style="color: var(--primary); font-weight: 600;">Log in</a>
+                    </p>
+                </form>
+            </div>
+            
+            <!-- What's Included -->
+            <div style="margin-top: 3rem;">
+                <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; text-align: center;">What's Included</h3>
+                
+                <div style="display: grid; gap: 1rem;">
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                        <svg style="width: 20px; height: 20px; color: var(--success); flex-shrink: 0;" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+                        <span>14-day free trial</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                        <svg style="width: 20px; height: 20px; color: var(--success); flex-shrink: 0;" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+                        <span>No credit card required</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                        <svg style="width: 20px; height: 20px; color: var(--success); flex-shrink: 0;" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+                        <span>Cancel anytime</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                        <svg style="width: 20px; height: 20px; color: var(--success); flex-shrink: 0;" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+                        <span>Full access to all features</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+    <div class="container">
+        <h2 class="cta__title">Questions?</h2>
+        <p class="cta__text">Talk to our team before you sign up.</p>
+        <div class="cta__actions">
+            <a href="/contact" class="btn btn--white btn--lg">Contact Sales</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

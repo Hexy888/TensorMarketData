@@ -1,0 +1,124 @@
+{% extends "base_new.html" %}
+
+{% block content %}
+<!-- Hero -->
+<section class="hero" style="padding-top: 120px;">
+    <div class="container">
+        <div class="hero__content">
+            <span class="hero__badge">How It Works</span>
+            <h1 class="hero__title">
+                Getting Started is <span>Easy</span>
+            </h1>
+            <p class="hero__subtitle">
+                Set up in minutes. We'll handle your reviews from day one.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Steps Section -->
+<section class="section">
+    <div class="container">
+        <!-- Step 1 -->
+        <div style="display: grid; gap: 3rem; max-width: 900px; margin: 0 auto 4rem;">
+            <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+                <div style="flex-shrink: 0; width: 64px; height: 64px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700;">1</div>
+                <div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--gray-900);">Connect Your Platforms</h3>
+                    <p style="color: var(--gray-600); line-height: 1.7;">Link your Google Business Profile, Yelp, and Facebook Business accounts. We use secure OAuth connections—you never give us your password. We support all major review platforms and can add more for Enterprise customers.</p>
+                </div>
+            </div>
+            
+            <!-- Step 2 -->
+            <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+                <div style="flex-shrink: 0; width: 64px; height: 64px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700;">2</div>
+                <div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--gray-900);">Configure Your Preferences</h3>
+                    <p style="color: var(--gray-600); line-height: 1.7;">Choose your brand voice, response templates, and approval workflow. Decide which reviews auto-post and which need your approval. Set response times and escalation rules. We'll walk you through everything.</p>
+                </div>
+            </div>
+            
+            <!-- Step 3 -->
+            <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+                <div style="flex-shrink: 0; width: 64px; height: 64px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700;">3</div>
+                <div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--gray-900);">We Handle Everything</h3>
+                    <p style="color: var(--gray-600); line-height: 1.7;">Every new review gets a professional, personalized response within hours. You'll be notified of any issues that need your attention. Track everything from your dashboard.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Detail -->
+<section class="section section--alt">
+    <div class="container">
+        <div class="section__header">
+            <span class="section__label">What You Get</span>
+            <h2 class="section__title">Everything You Need to Manage Reviews</h2>
+        </div>
+        
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-card__icon">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                </div>
+                <h3 class="feature-card__title">Smart Classification</h3>
+                <p class="feature-card__text">AI automatically classifies reviews by sentiment and urgency. Negative reviews with issues get flagged for immediate attention.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-card__icon">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+                </div>
+                <h3 class="feature-card__title">Review Generation</h3>
+                <p class="feature-card__text">Automatically request reviews from customers after purchase. Turn happy customers into 5-star reviews.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-card__icon">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+                </div>
+                <h3 class="feature-card__title">Brand Voice</h3>
+                <p class="feature-card__text">Every response matches your brand voice. Custom templates ensure consistency across all locations.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-card__icon">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                </div>
+                <h3 class="feature-card__title">Detailed Reports</h3>
+                <p class="feature-card__text">Weekly and monthly reports on reviews, ratings, response times, and trends. Know exactly how you're performing.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-card__icon">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                </div>
+                <h3 class="feature-card__title">Multi-Location</h3>
+                <p class="feature-card__text">Manage reviews for all your locations from one dashboard. Each location can have its own templates and settings.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-card__icon">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <h3 class="feature-card__title">Fast Response</h3>
+                <p class="feature-card__text">Our 8-hour SLA means reviews don't sit unanswered. Most are handled same-day.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+    <div class="container">
+        <h2 class="cta__title">Ready to Get Started?</h2>
+        <p class="cta__text">Join thousands of businesses that trust us with their reputation.</p>
+        <div class="cta__actions">
+            <a href="/get-started" class="btn btn--white btn--lg">Start Free Trial</a>
+            <a href="/pricing" class="btn btn--outline btn--lg" style="border-color: white; color: white;">View Pricing</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
