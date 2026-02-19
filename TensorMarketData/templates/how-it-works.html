@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Review Monitoring Works | TensorMarketData</title>
+    <meta name="description" content="See exactly how our review monitoring, response drafting, and approval workflow works. Get started in 24 hours.">
+    <link rel="canonical" href="https://tensormarketdata.com/how-it-works">
+    <style>
+        :root { --accent-primary: #0D9488; --text-primary: #0F172A; --text-secondary: #475569; --text-muted: #64748B; --bg-primary: #FFFFFF; --bg-secondary: #F8FAFC; --border-primary: #E2E8F0; --radius-lg: 12px; --radius-md: 8px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; color: var(--text-primary); line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 var(--space-6); }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: var(--space-4) 0; border-bottom: 1px solid var(--border-primary); }
+        .nav-logo { font-size: 1.25rem; font-weight: 700; color: var(--text-primary); text-decoration: none; }
+        .nav-links { display: flex; gap: var(--space-6); list-style: none; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+        .hero { text-align: center; padding: var(--space-12) 0; }
+        .hero h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: var(--space-4); }
+        .hero p { color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
+        .steps { margin: var(--space-8) 0; }
+        .step { display: flex; gap: var(--space-6); padding: var(--space-6); border-bottom: 1px solid var(--border-primary); }
+        .step:last-child { border-bottom: none; }
+        .step-num { width: 48px; height: 48px; background: var(--accent-primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; }
+        .step h3 { margin-bottom: 8px; }
+        .step p { color: var(--text-secondary); font-size: 0.9rem; }
+        .step .need { margin-top: 12px; padding: 12px; background: var(--bg-secondary); border-radius: var(--radius-md); font-size: 0.85rem; }
+        .step .need strong { display: block; margin-bottom: 4px; }
+        .cta { text-align: center; padding: var(--space-8) 0; }
+        .btn { display: inline-block; padding: 12px 24px; background: var(--accent-primary); color: white; border-radius: var(--radius-md); text-decoration: none; font-weight: 500; }
+        footer { border-top: 1px solid var(--border-primary); padding: var(--space-8) 0; margin-top: var(--space-12); }
+        .footer-content { display: flex; justify-content: space-between; }
+        .footer-links { display: flex; gap: var(--space-6); list-style: none; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.875rem; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="tm-header">
+        <div class="tm-header__inner">
+            <a class="tm-brand" href="/" aria-label="TensorMarketData home"><span class="tm-brand__text">TensorMarketData</span></a>
+            <nav class="tm-nav tm-nav--desktop" aria-label="Primary navigation">
+                <a href="/pricing" class="tm-nav__link">Pricing</a>
+                <a href="/how-it-works" class="tm-nav__link">How It Works</a>
+                <a href="/blog" class="tm-nav__link">Blog</a>
+                <a href="/faq" class="tm-nav__link">FAQ</a>
+            </nav>
+            <div class="tm-header__actions">
+                <a class="tm-btn tm-btn--primary" href="/get-started">Get Started</a>
+                <button class="tm-burger" aria-label="Menu" aria-expanded="false">
+                    <span class="tm-burger__bar"></span>
+                    <span class="tm-burger__bar"></span>
+                    <span class="tm-burger__bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Mobile Drawer -->
+    <div class="tm-drawer" id="tm-drawer" hidden>
+        <div class="tm-drawer__panel">
+            <a href="/pricing" class="tm-drawer__link">Pricing</a>
+            <a href="/how-it-works" class="tm-drawer__link">How It Works</a>
+            <a href="/blog" class="tm-drawer__link">Blog</a>
+            <a href="/faq" class="tm-drawer__link">FAQ</a>
+            <a href="/pricing" class="tm-drawer__cta">Get Started</a>
+        </div>
+    </div>
+    
+    <script>
+    (function () {
+        const toggle = document.querySelector('.tm-burger');
+        const drawer = document.getElementById('tm-drawer');
+        if (!toggle || !drawer) return;
+        function openDrawer() { drawer.hidden = false; toggle.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; }
+        function closeDrawer() { drawer.hidden = true; toggle.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }
+        toggle.addEventListener('click', () => { const isOpen = toggle.getAttribute('aria-expanded') === 'true'; isOpen ? closeDrawer() : openDrawer(); });
+        drawer.addEventListener('click', (e) => { if (e.target === drawer) closeDrawer(); });
+        drawer.querySelectorAll('a').forEach(a => { a.addEventListener('click', closeDrawer); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDrawer(); });
+    })();
+    </script>
+
+    <div class="container">
+        <section class="hero">
+            <h1>Systemized reputation ops — with controls.</h1>
+            <p>We monitor, draft, and report. You approve the negatives. Here's exactly how it works.</p>
+        </section>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div>
+                    <h3>Connect your review platforms</h3>
+                    <p>We link to your Google Business Profile (and other platforms as needed). You grant read/write access, and we start pulling in reviews within hours.</p>
+                    <div class="need">
+                        <strong>What you need:</strong>
+                        Google Business Profile access. We request the minimum access needed. Posting replies requires write access; monitoring can be read-only. Contact email for notifications.
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-num">2</div>
+                <div>
+                    <h3>Review inbox + classification</h3>
+                    <p>Every new review appears in your dashboard with a classification: Positive (4-5★), Neutral (3★), Negative (1-2★), or High-risk.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-num">3</div>
+                <div>
+                    <h3>Draft replies in your brand voice</h3>
+                    <p>We draft responses using your approved templates. Each draft matches your brand tone, references specific details, and includes a clear next step.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-num">4</div>
+                <div>
+                    <h3>You approve negatives</h3>
+                    <p>Positives can auto-post if you enable autopost. Negatives always go to your approval queue first.</p>
+                    <div class="need">
+                        <strong>Approval options:</strong>
+                        Approve → Post / Edit → Tweak and post / Reject → Don't post / Escalate → Flag for special handling.
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-num">5</div>
+                <div>
+                    <h3>Post and audit log</h3>
+                    <p>Once approved (or autoposted for positives), we post the response, log the action in your audit trail, and update the review status.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-num">6</div>
+                <div>
+                    <h3>Weekly scorecards + monthly insights</h3>
+                    <p>Every Monday: total reviews, average rating, response time, coverage, top themes, escalations. Package B/C gets monthly insights.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta">
+            <a href="/pricing" class="btn">Get Started</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p style="color: var(--text-muted); font-size: 0.875rem;">© 2026 TensorMarketData</p>
+                <ul class="footer-links">
+                    <li><a href="/privacy">Privacy</a></li>
+                    <li><a href="/terms">Terms</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
