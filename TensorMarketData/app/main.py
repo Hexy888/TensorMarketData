@@ -184,6 +184,23 @@ async def pricing():
     with open(os.path.join(TEMPLATES_DIR, "pricing.html"), "r") as f:
         return f.read()
 
+@app.get("/faq", response_class=HTMLResponse)
+async def faq():
+    """FAQ page"""
+    with open(os.path.join(TEMPLATES_DIR, "faq.html"), "r") as f:
+        return f.read()
+
+@app.get("/how-it-works", response_class=HTMLResponse)
+async def how_it_works():
+    """How it works page"""
+    with open(os.path.join(TEMPLATES_DIR, "how-it-works.html"), "r") as f:
+        return f.read()
+
+@app.get("/get-started", response_class=HTMLResponse)
+async def get_started():
+    """Get started page"""
+    with open(os.path.join(TEMPLATES_DIR, "get-started.html"), "r") as f:
+        return f.read()
 
 @app.get("/dashboard", response_class=HTMLResponse)
 async def dashboard():
